@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWM", "CWM\CWM.csproj", "{040AB331-7714-4E11-BD75-B20412C8F8FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWM.Model", "CWM.Model\CWM.Model.csproj", "{0DB6492E-D560-4D90-90DC-6D7940E99979}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWM.Services", "CWM.Services\CWM.Services.csproj", "{84AEA6FC-A063-4F56-BAC9-D75A5345461A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{040AB331-7714-4E11-BD75-B20412C8F8FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{040AB331-7714-4E11-BD75-B20412C8F8FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{040AB331-7714-4E11-BD75-B20412C8F8FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{040AB331-7714-4E11-BD75-B20412C8F8FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DB6492E-D560-4D90-90DC-6D7940E99979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DB6492E-D560-4D90-90DC-6D7940E99979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DB6492E-D560-4D90-90DC-6D7940E99979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DB6492E-D560-4D90-90DC-6D7940E99979}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84AEA6FC-A063-4F56-BAC9-D75A5345461A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84AEA6FC-A063-4F56-BAC9-D75A5345461A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84AEA6FC-A063-4F56-BAC9-D75A5345461A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84AEA6FC-A063-4F56-BAC9-D75A5345461A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0DB32145-A177-4A68-B064-7BC8B3451D43}
+	EndGlobalSection
+EndGlobal

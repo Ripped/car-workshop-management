@@ -1,0 +1,6 @@
+@CWM_HostAddress = http://localhost:5183
+
+GET {{CWM_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
