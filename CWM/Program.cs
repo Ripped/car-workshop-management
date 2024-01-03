@@ -1,10 +1,23 @@
-using CWM.Services.Database;
+using CWM.Controllers;
+using CWM.Core.Interfaces.Repositories;
+using CWM.Core.Models;
+using CWM.Database;
+using CWM.Database.Repositories;
+using CWM.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddTransient<ICityRepository, CityRepository>();
+builder.Services.AddTransient<ICountryRepository, CountryRepository>();
+builder.Services.AddTransient<IAppointmentRepository, AppointmentRepository>();
 
+builder.Services.AddAutoMapper(typeof(CityRepository));
+builder.Services.AddAutoMapper(typeof(Program));
+
+
+builder.Services.AddControllersWithViews();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -25,7 +38,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllers();
 

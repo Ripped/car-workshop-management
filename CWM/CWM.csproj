@@ -4,7 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <InvariantGlobalization>true</InvariantGlobalization>
+    <InvariantGlobalization>false</InvariantGlobalization>
     <UserSecretsId>9537d356-a6ce-4e9d-af66-06dc4540c95b</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
@@ -27,12 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CWM.Model\CWM.Model.csproj" />
-    <ProjectReference Include="..\CWM.Services\CWM.Services.csproj" />
+    <ProjectReference Include="..\CWM.Model\CWM.Core.csproj" />
+    <ProjectReference Include="..\CWM.Services\CWM.Database.csproj" />
   </ItemGroup>
 
 </Project>

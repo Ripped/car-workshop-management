@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWM", "CWM\CWM.csproj", "{040AB331-7714-4E11-BD75-B20412C8F8FF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CWM", "CWM\CWM.csproj", "{040AB331-7714-4E11-BD75-B20412C8F8FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWM.Model", "CWM.Model\CWM.Model.csproj", "{0DB6492E-D560-4D90-90DC-6D7940E99979}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CWM.Core", "CWM.Model\CWM.Core.csproj", "{0DB6492E-D560-4D90-90DC-6D7940E99979}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWM.Services", "CWM.Services\CWM.Services.csproj", "{84AEA6FC-A063-4F56-BAC9-D75A5345461A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CWM.Database", "CWM.Services\CWM.Database.csproj", "{84AEA6FC-A063-4F56-BAC9-D75A5345461A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

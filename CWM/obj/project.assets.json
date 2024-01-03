@@ -1601,28 +1601,31 @@
           }
         }
       },
-      "CWM.Model/1.0.0": {
+      "CWM.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "compile": {
-          "bin/placeholder/CWM.Model.dll": {}
+          "bin/placeholder/CWM.Core.dll": {}
         },
         "runtime": {
-          "bin/placeholder/CWM.Model.dll": {}
+          "bin/placeholder/CWM.Core.dll": {}
         }
       },
-      "CWM.Services/1.0.0": {
+      "CWM.Database/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
         "dependencies": {
           "AutoMapper": "12.0.1",
-          "Microsoft.EntityFrameworkCore": "8.0.0"
+          "CWM.Core": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "8.0.0",
+          "Microsoft.EntityFrameworkCore.Relational": "8.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "8.0.0"
         },
         "compile": {
-          "bin/placeholder/CWM.Services.dll": {}
+          "bin/placeholder/CWM.Database.dll": {}
         },
         "runtime": {
-          "bin/placeholder/CWM.Services.dll": {}
+          "bin/placeholder/CWM.Database.dll": {}
         }
       }
     }
@@ -4603,22 +4606,22 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "CWM.Model/1.0.0": {
+    "CWM.Core/1.0.0": {
       "type": "project",
-      "path": "../CWM.Model/CWM.Model.csproj",
-      "msbuildProject": "../CWM.Model/CWM.Model.csproj"
+      "path": "../CWM.Model/CWM.Core.csproj",
+      "msbuildProject": "../CWM.Model/CWM.Core.csproj"
     },
-    "CWM.Services/1.0.0": {
+    "CWM.Database/1.0.0": {
       "type": "project",
-      "path": "../CWM.Services/CWM.Services.csproj",
-      "msbuildProject": "../CWM.Services/CWM.Services.csproj"
+      "path": "../CWM.Services/CWM.Database.csproj",
+      "msbuildProject": "../CWM.Services/CWM.Database.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 12.0.1",
-      "CWM.Model >= 1.0.0",
-      "CWM.Services >= 1.0.0",
+      "CWM.Core >= 1.0.0",
+      "CWM.Database >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 8.0.0",
       "Microsoft.EntityFrameworkCore.Design >= 8.0.0",
       "Microsoft.EntityFrameworkCore.Relational >= 8.0.0",
@@ -4655,11 +4658,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\New folder\\CWM\\CWM.Model\\CWM.Model.csproj": {
-              "projectPath": "E:\\New folder\\CWM\\CWM.Model\\CWM.Model.csproj"
+            "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj": {
+              "projectPath": "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj"
             },
-            "E:\\New folder\\CWM\\CWM.Services\\CWM.Services.csproj": {
-              "projectPath": "E:\\New folder\\CWM\\CWM.Services\\CWM.Services.csproj"
+            "E:\\New folder\\CWM\\CWM.Services\\CWM.Database.csproj": {
+              "projectPath": "E:\\New folder\\CWM\\CWM.Services\\CWM.Database.csproj"
             }
           }
         }

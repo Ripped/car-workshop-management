@@ -4,12 +4,12 @@
     "E:\\New folder\\CWM\\CWM\\CWM.csproj": {}
   },
   "projects": {
-    "E:\\New folder\\CWM\\CWM.Model\\CWM.Model.csproj": {
+    "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\New folder\\CWM\\CWM.Model\\CWM.Model.csproj",
-        "projectName": "CWM.Model",
-        "projectPath": "E:\\New folder\\CWM\\CWM.Model\\CWM.Model.csproj",
+        "projectUniqueName": "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj",
+        "projectName": "CWM.Core",
+        "projectPath": "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj",
         "packagesPath": "C:\\Users\\belmi\\.nuget\\packages\\",
         "outputPath": "E:\\New folder\\CWM\\CWM.Model\\obj\\",
         "projectStyle": "PackageReference",
@@ -59,12 +59,12 @@
         }
       }
     },
-    "E:\\New folder\\CWM\\CWM.Services\\CWM.Services.csproj": {
+    "E:\\New folder\\CWM\\CWM.Services\\CWM.Database.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\New folder\\CWM\\CWM.Services\\CWM.Services.csproj",
-        "projectName": "CWM.Services",
-        "projectPath": "E:\\New folder\\CWM\\CWM.Services\\CWM.Services.csproj",
+        "projectUniqueName": "E:\\New folder\\CWM\\CWM.Services\\CWM.Database.csproj",
+        "projectName": "CWM.Database",
+        "projectPath": "E:\\New folder\\CWM\\CWM.Services\\CWM.Database.csproj",
         "packagesPath": "C:\\Users\\belmi\\.nuget\\packages\\",
         "outputPath": "E:\\New folder\\CWM\\CWM.Services\\obj\\",
         "projectStyle": "PackageReference",
@@ -82,7 +82,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj": {
+                "projectPath": "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -100,6 +104,26 @@
               "version": "[12.0.1, )"
             },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.0, )"
             }
@@ -148,11 +172,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "E:\\New folder\\CWM\\CWM.Model\\CWM.Model.csproj": {
-                "projectPath": "E:\\New folder\\CWM\\CWM.Model\\CWM.Model.csproj"
+              "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj": {
+                "projectPath": "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj"
               },
-              "E:\\New folder\\CWM\\CWM.Services\\CWM.Services.csproj": {
-                "projectPath": "E:\\New folder\\CWM\\CWM.Services\\CWM.Services.csproj"
+              "E:\\New folder\\CWM\\CWM.Services\\CWM.Database.csproj": {
+                "projectPath": "E:\\New folder\\CWM\\CWM.Services\\CWM.Database.csproj"
               }
             }
           }

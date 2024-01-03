@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\New folder\\CWM\\CWM.Model\\CWM.Model.csproj",
-      "projectName": "CWM.Model",
-      "projectPath": "E:\\New folder\\CWM\\CWM.Model\\CWM.Model.csproj",
+      "projectUniqueName": "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj",
+      "projectName": "CWM.Core",
+      "projectPath": "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj",
       "packagesPath": "C:\\Users\\belmi\\.nuget\\packages\\",
       "outputPath": "E:\\New folder\\CWM\\CWM.Model\\obj\\",
       "projectStyle": "PackageReference",

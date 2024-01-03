@@ -1,0 +1,11 @@
+E:\New folder\CWM\CWM.Model\bin\Debug\net8.0\CWM.Core.deps.json
+E:\New folder\CWM\CWM.Model\bin\Debug\net8.0\CWM.Core.dll
+E:\New folder\CWM\CWM.Model\bin\Debug\net8.0\CWM.Core.pdb
+E:\New folder\CWM\CWM.Model\obj\Debug\net8.0\CWM.Core.GeneratedMSBuildEditorConfig.editorconfig
+E:\New folder\CWM\CWM.Model\obj\Debug\net8.0\CWM.Core.AssemblyInfoInputs.cache
+E:\New folder\CWM\CWM.Model\obj\Debug\net8.0\CWM.Core.AssemblyInfo.cs
+E:\New folder\CWM\CWM.Model\obj\Debug\net8.0\CWM.Core.csproj.CoreCompileInputs.cache
+E:\New folder\CWM\CWM.Model\obj\Debug\net8.0\CWM.Core.dll
+E:\New folder\CWM\CWM.Model\obj\Debug\net8.0\refint\CWM.Core.dll
+E:\New folder\CWM\CWM.Model\obj\Debug\net8.0\CWM.Core.pdb
+E:\New folder\CWM\CWM.Model\obj\Debug\net8.0\ref\CWM.Core.dll
