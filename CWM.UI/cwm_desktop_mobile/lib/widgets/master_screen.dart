@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../screens/dashboard_screen.dart';
 import 'responsive.dart';
 import 'side_menu.dart';
 
@@ -21,7 +20,7 @@ class _MasterScreenState extends State<MasterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _key,
-      drawer: SideMenu(),
+      drawer: const SideMenu(),
       body: SafeArea(
         child: Row(
           children: [
@@ -53,7 +52,8 @@ class _MasterScreenState extends State<MasterScreen> {
                   ),
                   Expanded(
                     flex: 10,
-                    child: DashboardScreen(),
+                    child: Padding(
+                        padding: const EdgeInsets.all(20), child: widget.child),
                   ),
                   Expanded(
                     child: Text("© 2024 - CWM"),

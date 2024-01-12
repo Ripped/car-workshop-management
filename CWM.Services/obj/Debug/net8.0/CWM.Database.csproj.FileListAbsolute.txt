@@ -15,3 +15,21 @@ E:\New folder\CWM\CWM.Services\obj\Debug\net8.0\CWM.Database.pdb
 E:\New folder\CWM\CWM.Services\obj\Debug\net8.0\ref\CWM.Database.dll
 E:\New folder\CWM\CWM.Services\bin\Debug\net8.0\CWM.Database.runtimeconfig.json
 E:\New folder\CWM\CWM.Services\obj\Debug\net8.0\CWM.Database.genruntimeconfig.cache
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\bin\Debug\net8.0\CWM.Database.deps.json
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\bin\Debug\net8.0\CWM.Database.runtimeconfig.json
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\bin\Debug\net8.0\CWM.Database.dll
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\bin\Debug\net8.0\CWM.Database.pdb
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\bin\Debug\net8.0\CWM.Core.dll
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\bin\Debug\net8.0\CWM.Core.pdb
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.AssemblyInfoInputs.cache
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.AssemblyInfo.cs
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.sourcelink.json
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.csproj.CopyComplete
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.dll
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\refint\CWM.Database.dll
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.pdb
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.genruntimeconfig.cache
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\ref\CWM.Database.dll

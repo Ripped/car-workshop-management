@@ -1,3 +1,6 @@
+import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
+import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
+import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 
 class SideMenu extends StatelessWidget {
@@ -70,21 +73,15 @@ class SideMenu extends StatelessWidget {
       child: Wrap(
         runSpacing: 16,
         children: [
-          ListTile(
-            leading: const Icon(Icons.dashboard),
-            title: const Text("Početna"),
-            onTap: () {},
-          ),
+          _buildListTile(context, "Početna", Icons.dashboard,
+              const DashboardScreen(), true),
           ListTile(
             leading: const Icon(Icons.content_paste),
             title: const Text("Nalozi"),
             onTap: () {},
           ),
-          ListTile(
-            leading: const Icon(Icons.chat),
-            title: const Text("Dijelovi"),
-            onTap: () {},
-          ),
+          _buildListTile(context, "Dijelovi", Icons.data_array,
+              const PartListScreen(), true),
           ListTile(
             leading: const Icon(Icons.date_range),
             title: const Text("Termini"),
@@ -103,6 +100,24 @@ class SideMenu extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  ListTile _buildListTile(
+    BuildContext context,
+    String title,
+    IconData icon,
+    Widget screen,
+    bool enabled,
+  ) {
+    return ListTile(
+      enabled: enabled,
+      leading: Icon(icon),
+      title: Text(title),
+      onTap: () {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) => MasterScreen(title, screen)));
+      },
     );
   }
 }

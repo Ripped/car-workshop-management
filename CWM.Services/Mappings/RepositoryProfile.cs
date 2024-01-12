@@ -24,6 +24,9 @@ namespace CWM.Database.Mappings
             CreateMap<Core.Models.Appointment, Appointment>()
             .ForMember(x => x.UserId, opt => opt.MapFrom((src, dest) => src.User?.Id))
             .ForMember(x => x.User, opt => opt.Ignore());
+
+            CreateMap<Part, Core.Models.Part>()
+            .ReverseMap();
         }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YufnJF2JfRQs5d+bWOcIpFsNzPQayptkHUoBI/EQSH2wlGREnJYMfGEbSS+gn6YLi1KUfiPpL6FaX4TSNlaHLQ==",
+  "dgSpecHash": "kKnFq4SM67rszqKe395CzkrIjLELcVTUQn+D1CfVtokPgnKQmXlQkQaET/iGHRp5nm2GRJaBVNhdCLDyHkyabg==",
   "success": true,
-  "projectFilePath": "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj",
+  "projectFilePath": "C:\\Users\\Lenovo\\Documents\\GitHub\\car-workshop-management\\CWM.Model\\CWM.Core.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

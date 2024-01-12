@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\belmi\\.nuget\\packages\\": {}
+    "C:\\Users\\Lenovo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj",
+      "projectUniqueName": "C:\\Users\\Lenovo\\Documents\\GitHub\\car-workshop-management\\CWM.Model\\CWM.Core.csproj",
       "projectName": "CWM.Core",
-      "projectPath": "E:\\New folder\\CWM\\CWM.Model\\CWM.Core.csproj",
-      "packagesPath": "C:\\Users\\belmi\\.nuget\\packages\\",
-      "outputPath": "E:\\New folder\\CWM\\CWM.Model\\obj\\",
+      "projectPath": "C:\\Users\\Lenovo\\Documents\\GitHub\\car-workshop-management\\CWM.Model\\CWM.Core.csproj",
+      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Lenovo\\Documents\\GitHub\\car-workshop-management\\CWM.Model\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\belmi\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

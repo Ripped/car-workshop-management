@@ -17,6 +17,8 @@ namespace CWM.Mappings
             CreateMap<AppointmentInsertUpdate, Appointment>()
             .ForMember(x => x.User, opt => opt.MapFrom(y => new User { Id = y.UserId ?? 0 }));
 
+            CreateMap<PartInsertUpdate, Part>();
+
         }
     }
 }
