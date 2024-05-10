@@ -7,8 +7,8 @@ part of 'part_search.dart';
 // **************************************************************************
 
 PartSearch _$PartSearchFromJson(Map<String, dynamic> json) => PartSearch()
-  ..page = json['page'] as int
-  ..pageSize = json['pageSize'] as int
+  ..page = (json['page'] as num).toInt()
+  ..pageSize = (json['pageSize'] as num).toInt()
   ..name = json['name'] as String?;
 
 Map<String, dynamic> _$PartSearchToJson(PartSearch instance) =>

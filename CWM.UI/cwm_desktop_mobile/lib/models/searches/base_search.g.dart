@@ -7,8 +7,8 @@ part of 'base_search.dart';
 // **************************************************************************
 
 BaseSearch _$BaseSearchFromJson(Map<String, dynamic> json) => BaseSearch()
-  ..page = json['page'] as int
-  ..pageSize = json['pageSize'] as int;
+  ..page = (json['page'] as num).toInt()
+  ..pageSize = (json['pageSize'] as num).toInt();
 
 Map<String, dynamic> _$BaseSearchToJson(BaseSearch instance) =>
     <String, dynamic>{

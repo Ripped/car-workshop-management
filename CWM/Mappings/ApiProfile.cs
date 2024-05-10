@@ -15,7 +15,12 @@ namespace CWM.Mappings
             CreateMap<CountryInsertUpdate, Country>();
 
             CreateMap<AppointmentInsertUpdate, Appointment>()
-            .ForMember(x => x.User, opt => opt.MapFrom(y => new User { Id = y.UserId ?? 0 }));
+            .ForMember(x => x.User, opt => opt.MapFrom(y => new User { Id = y.UserId ?? 0 }))
+            .ForMember(x => x.AppointmentType, opt => opt.MapFrom(y => new AppointmentType { Id = y.AppointmentTypeId ?? 0 }));
+
+            CreateMap<AppointmentTypeInsertUpdate, AppointmentType>();
+
+            CreateMap<AppointmentBlockedInsertUpdate, AppointmentBlocked>();
 
             CreateMap<PartInsertUpdate, Part>();
 

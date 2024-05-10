@@ -23,7 +23,15 @@ namespace CWM.Database.Mappings
             CreateMap<Appointment, Core.Models.Appointment>();
             CreateMap<Core.Models.Appointment, Appointment>()
             .ForMember(x => x.UserId, opt => opt.MapFrom((src, dest) => src.User?.Id))
-            .ForMember(x => x.User, opt => opt.Ignore());
+            .ForMember(x => x.User, opt => opt.Ignore())
+            .ForMember(x => x.AppointmentTypeId, opt => opt.MapFrom((src, dest) => src.AppointmentType?.Id))
+            .ForMember(x => x.AppointmentType, opt => opt.Ignore());
+
+           CreateMap<AppointmentType, Core.Models.AppointmentType>()
+            .ReverseMap();
+
+            CreateMap<AppointmentBlocked, Core.Models.AppointmentBlocked>()
+            .ReverseMap();
 
             CreateMap<Part, Core.Models.Part>()
             .ReverseMap();

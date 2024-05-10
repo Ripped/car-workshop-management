@@ -36,6 +36,14 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   Future<PagedResult<T>> getAll({TSearch? search}) async {
     final Map<String, String> queryParameters = {};
 
+    if (search != null) {
+      search.toJson().forEach((key, value) {
+        queryParameters.addAll(<String, String>{key: value.toString()});
+      });
+
+      queryParameters.removeWhere((key, value) => value == "null");
+    }
+
     var uri = Uri.https(baseUrl, endpoint, queryParameters);
 
     var response = await http.get(uri, headers: getHeaders());

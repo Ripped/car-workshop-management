@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace CWM.Core.Interfaces.Repositories
 {
-    public interface IAppointmentRepository : IBaseRepository<Appointment, AppointmentSearch> { }
+    public interface IAppointmentRepository : IBaseRepository<Appointment, AppointmentSearch> { 
+    }
 }
 

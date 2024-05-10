@@ -1,3 +1,4 @@
+import 'package:cwm_desktop_mobile/screens/appointment_screen_syn_calendar.dart';
 import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
@@ -82,6 +83,8 @@ class SideMenu extends StatelessWidget {
           ),
           _buildListTile(context, "Dijelovi", Icons.data_array,
               const PartListScreen(), true),
+          _buildListTile(context, "Rezervacija termina", Icons.date_range,
+              const MyWidget(), true),
           ListTile(
             leading: const Icon(Icons.date_range),
             title: const Text("Termini"),

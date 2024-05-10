@@ -22,6 +22,21 @@ namespace CWM.Database.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("AppointmentAppointmentBlocked", b =>
+                {
+                    b.Property<int>("AppointmentBlockedId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AppointmentsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("AppointmentBlockedId", "AppointmentsId");
+
+                    b.HasIndex("AppointmentsId");
+
+                    b.ToTable("AppointmentAppointmentBlocked");
+                });
+
             modelBuilder.Entity("CWM.Database.Models.Appointment", b =>
                 {
                     b.Property<int>("Id")
@@ -30,24 +45,69 @@ namespace CWM.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("AppointmentDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("AppointmentTypeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("ServicePerformed")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AppointmentTypeId");
+
                     b.HasIndex("UserId");
 
                     b.ToTable("Appointments");
+                });
+
+            modelBuilder.Entity("CWM.Database.Models.AppointmentBlocked", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("BlockedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppointmentBlocked");
+                });
+
+            modelBuilder.Entity("CWM.Database.Models.AppointmentType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppointmentTypes");
                 });
 
             modelBuilder.Entity("CWM.Database.Models.City", b =>
@@ -366,11 +426,32 @@ namespace CWM.Database.Migrations
                     b.ToTable("PartVehicleServiceHistory");
                 });
 
+            modelBuilder.Entity("AppointmentAppointmentBlocked", b =>
+                {
+                    b.HasOne("CWM.Database.Models.AppointmentBlocked", null)
+                        .WithMany()
+                        .HasForeignKey("AppointmentBlockedId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CWM.Database.Models.Appointment", null)
+                        .WithMany()
+                        .HasForeignKey("AppointmentsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("CWM.Database.Models.Appointment", b =>
                 {
+                    b.HasOne("CWM.Database.Models.AppointmentType", "AppointmentType")
+                        .WithMany()
+                        .HasForeignKey("AppointmentTypeId");
+
                     b.HasOne("CWM.Database.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("AppointmentType");
 
                     b.Navigation("User");
                 });

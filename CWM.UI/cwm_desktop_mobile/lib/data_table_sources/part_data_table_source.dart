@@ -20,7 +20,7 @@ class PartDataTableSource extends AdvancedDataTableSource<Part> {
         (pageRequest.offset / pageRequest.pageSize).roundToDouble().ceil();
 
     partSearch.page = page + 1;
-    partSearch.pageSize = pageRequest.pageSize;
+    partSearch.pageSize = 50;
 
     var parts = await _partProvider.getAll(search: partSearch);
 
@@ -36,9 +36,7 @@ class PartDataTableSource extends AdvancedDataTableSource<Part> {
         DataCell(Text(currentRow.serialNumber)),
         DataCell(Text(currentRow.manufacturer)),
         DataCell(Text(currentRow.partName)),
-        //DataCell(Text(currentRow.image)),
         DataCell(Text("${currentRow.price} KM")),
-        //DataCell(Text(currentRow.description)),
       ],
     );
   }

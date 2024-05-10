@@ -9,8 +9,11 @@ namespace CWM.Core.Models.Searches
 {
     public class AppointmentSearch : BaseSearch
     {
-        public string? Name { get; set; }
+        public string? ServiceName { get; set; }
 
         public bool IncludeUser { get; set; }
+
+        public bool IncludeAppointmentType { get; set; }
+
     }
 }

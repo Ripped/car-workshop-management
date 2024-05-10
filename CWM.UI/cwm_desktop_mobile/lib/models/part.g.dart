@@ -7,7 +7,7 @@ part of 'part.dart';
 // **************************************************************************
 
 Part _$PartFromJson(Map<String, dynamic> json) => Part(
-      json['id'] as int,
+      (json['id'] as num).toInt(),
       json['serialNumber'] as String,
       json['manufacturer'] as String,
       json['partName'] as String,

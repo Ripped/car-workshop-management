@@ -11,6 +11,8 @@ namespace CWM.Database
     public class CWMContext : DbContext
     {
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<AppointmentType> AppointmentTypes { get; set; }
+        public DbSet<AppointmentBlocked> AppointmentBlocked { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Part> Parts { get; set; }

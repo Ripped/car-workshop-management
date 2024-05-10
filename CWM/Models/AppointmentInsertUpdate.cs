@@ -7,8 +7,13 @@ namespace CWM.Models
     {
         public Service ServicePerformed { get; set; }
         public string Description { get; set; } = string.Empty;
-        public DateTime? AppointmentDate { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+
         [Required]
         public int? UserId { get; set; }
+        
+        [Required]
+        public int? AppointmentTypeId { get; set; }
     }
 }

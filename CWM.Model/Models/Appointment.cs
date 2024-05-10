@@ -11,7 +11,9 @@ namespace CWM.Core.Models
     {
         public Service ServicePerformed { get; set; }
         public string Description { get; set; } = string.Empty;
-        public DateTime AppointmentDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public User? User { get; set; } = new();
+        public AppointmentType AppointmentType { get; set; } = new();
     }
 }

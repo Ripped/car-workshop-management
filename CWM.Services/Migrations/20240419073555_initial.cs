@@ -6,11 +6,38 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CWM.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCWM : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "AppointmentBlocked",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BlockedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppointmentBlocked", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppointmentTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppointmentTypes", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Countries",
                 columns: table => new
@@ -106,6 +133,8 @@ namespace CWM.Database.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ServicePerformed = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -162,6 +191,54 @@ namespace CWM.Database.Migrations
                         name: "FK_Vehicles_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppointmentAppointmentBlocked",
+                columns: table => new
+                {
+                    AppointmentBlockedId = table.Column<int>(type: "int", nullable: false),
+                    AppointmentsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppointmentAppointmentBlocked", x => new { x.AppointmentBlockedId, x.AppointmentsId });
+                    table.ForeignKey(
+                        name: "FK_AppointmentAppointmentBlocked_AppointmentBlocked_AppointmentBlockedId",
+                        column: x => x.AppointmentBlockedId,
+                        principalTable: "AppointmentBlocked",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppointmentAppointmentBlocked_Appointments_AppointmentsId",
+                        column: x => x.AppointmentsId,
+                        principalTable: "Appointments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppointmentAppointmentType",
+                columns: table => new
+                {
+                    AppointmentTypeId = table.Column<int>(type: "int", nullable: false),
+                    AppointmentsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppointmentAppointmentType", x => new { x.AppointmentTypeId, x.AppointmentsId });
+                    table.ForeignKey(
+                        name: "FK_AppointmentAppointmentType_AppointmentTypes_AppointmentTypeId",
+                        column: x => x.AppointmentTypeId,
+                        principalTable: "AppointmentTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppointmentAppointmentType_Appointments_AppointmentsId",
+                        column: x => x.AppointmentsId,
+                        principalTable: "Appointments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -257,6 +334,16 @@ namespace CWM.Database.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_AppointmentAppointmentBlocked_AppointmentsId",
+                table: "AppointmentAppointmentBlocked",
+                column: "AppointmentsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppointmentAppointmentType_AppointmentsId",
+                table: "AppointmentAppointmentType",
+                column: "AppointmentsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Appointments_UserId",
                 table: "Appointments",
                 column: "UserId");
@@ -287,15 +374,15 @@ namespace CWM.Database.Migrations
                 column: "CityId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Vehicles_UserId",
+                table: "Vehicles",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_VehicleServiceHistory_VehicleId",
                 table: "VehicleServiceHistory",
                 column: "VehicleId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_UserId",
-                table: "Vehicles",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WorkOrders_AppointmentId",
@@ -322,6 +409,12 @@ namespace CWM.Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AppointmentAppointmentBlocked");
+
+            migrationBuilder.DropTable(
+                name: "AppointmentAppointmentType");
+
+            migrationBuilder.DropTable(
                 name: "PartVehicleServiceHistory");
 
             migrationBuilder.DropTable(
@@ -329,6 +422,12 @@ namespace CWM.Database.Migrations
 
             migrationBuilder.DropTable(
                 name: "WorkOrders");
+
+            migrationBuilder.DropTable(
+                name: "AppointmentBlocked");
+
+            migrationBuilder.DropTable(
+                name: "AppointmentTypes");
 
             migrationBuilder.DropTable(
                 name: "Parts");

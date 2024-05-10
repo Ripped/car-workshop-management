@@ -1,13 +1,19 @@
+import 'package:cwm_desktop_mobile/providers/appointment_type_provider.dart';
+import 'package:cwm_desktop_mobile/providers/appointmnet_provider.dart';
 import 'package:cwm_desktop_mobile/providers/part_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/appointment_blocked_provider.dart';
 import 'screens/login_screen.dart';
 
 void main() {
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => PartProvider()),
+      ChangeNotifierProvider(create: (_) => AppointmentProvider()),
+      ChangeNotifierProvider(create: (_) => AppointmentTypeProvider()),
+      ChangeNotifierProvider(create: (_) => AppointmentBlockedProvider()),
     ], child: const MyApp()),
   );
 }
