@@ -1,6 +1,8 @@
+import 'package:cwm_desktop_mobile/screens/appointment_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/appointment_screen_syn_calendar.dart';
 import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
+import 'package:cwm_desktop_mobile/screens/work_order_list_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -76,20 +78,14 @@ class SideMenu extends StatelessWidget {
         children: [
           _buildListTile(context, "Početna", Icons.dashboard,
               const DashboardScreen(), true),
-          ListTile(
-            leading: const Icon(Icons.content_paste),
-            title: const Text("Nalozi"),
-            onTap: () {},
-          ),
+          _buildListTile(context, "Nalozi", Icons.content_paste,
+              const WorkOrderListScreen(), true),
           _buildListTile(context, "Dijelovi", Icons.data_array,
               const PartListScreen(), true),
           _buildListTile(context, "Rezervacija termina", Icons.date_range,
               const MyWidget(), true),
-          ListTile(
-            leading: const Icon(Icons.date_range),
-            title: const Text("Termini"),
-            onTap: () {},
-          ),
+          _buildListTile(context, "Pregled termina", Icons.date_range,
+              const AppointmentListScreen(), true),
           ListTile(
             leading: const Icon(Icons.groups),
             title: const Text("Zaposlenici"),

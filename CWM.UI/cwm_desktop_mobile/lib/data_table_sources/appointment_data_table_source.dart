@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 import '../models/appointment.dart' as appointment;

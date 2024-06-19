@@ -9,10 +9,10 @@ namespace CWM.Core.Models
 {
     public class VehicleServiceHistory : Base
     {
-        public DateTime ServiceDate { get; set; }
+        public DateTime? ServiceDate { get; set; }
         public Service ServiceType { get; set; }
         public string Description { get; set; } = string.Empty;
-        public Vehicle Vehicle { get; set; } = new();
-        public List<Part> Parts { get; set; } = new();
+        public Vehicle? Vehicle { get; set; } = new();
+        //public List<Part> Parts { get; set; } = new();
     }
 }

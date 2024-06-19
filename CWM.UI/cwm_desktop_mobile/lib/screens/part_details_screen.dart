@@ -105,7 +105,7 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
               width: 800,
               height: 30,
               child: Text(
-                "Osnovni podaci",
+                "Radni Nalog",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),

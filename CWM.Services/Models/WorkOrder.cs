@@ -15,8 +15,9 @@ namespace CWM.Database.Models
         [Key]
         public int Id { get; set; }
 
-        public DateTime OrderDate { get; set; }
-        public int OrderNumber { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public String OrderNumber { get; set; } = null!;
+
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public GarageBox GarageBox { get; set; }

@@ -35,6 +35,21 @@ namespace CWM.Database.Mappings
 
             CreateMap<Part, Core.Models.Part>()
             .ReverseMap();
+
+            CreateMap<VehicleServiceHistory, Core.Models.VehicleServiceHistory>();
+            CreateMap<Core.Models.VehicleServiceHistory, VehicleServiceHistory>()
+            .ForMember(x => x.VehicleId, opt => opt.MapFrom((src, dest) => src.Vehicle?.Id))
+            .ForMember(x => x.Vehicle, opt => opt.Ignore());
+
+            CreateMap<WorkOrder, Core.Models.WorkOrder>();
+            CreateMap<Core.Models.WorkOrder, WorkOrder>()
+            .ForMember(x => x.VehicleId, opt => opt.MapFrom((src, dest) => src.Vehicle?.Id))
+            .ForMember(x => x.Vehicle, opt => opt.Ignore())
+            .ForMember(x => x.UserId, opt => opt.MapFrom((src, dest) => src.User?.Id))
+            .ForMember(x => x.User, opt => opt.Ignore())
+            .ForMember(x => x.AppointmentId, opt => opt.MapFrom((src, dest) => src.Appointment?.Id))
+            .ForMember(x => x.Appointment, opt => opt.Ignore());
         }
+
     }
 }

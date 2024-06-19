@@ -24,6 +24,13 @@ namespace CWM.Mappings
 
             CreateMap<PartInsertUpdate, Part>();
 
+            CreateMap<VehicleServiceHistoryInsertUpdate, VehicleServiceHistory>()
+            .ForMember(x => x.Vehicle, opt => opt.MapFrom(y => new Vehicle { Id = y.VehicleId ?? 0 }));
+
+            CreateMap<WorkOrderInsertUpdate, WorkOrder>()
+            .ForMember(x => x.Vehicle, opt => opt.MapFrom(y => y.VehicleId == null ? null : new Vehicle { Id = y.VehicleId ?? 0 }))
+            .ForMember(x => x.User, opt => opt.MapFrom(y => y.UserId == null ? null : new User { Id = y.UserId ?? 0 }))
+            .ForMember(x => x.Appointment, opt => opt.MapFrom(y => y.AppointmentId == null ? null : new Appointment { Id = y.AppointmentId ?? 0 }));
         }
     }
 }

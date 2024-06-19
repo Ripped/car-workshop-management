@@ -20,7 +20,7 @@ namespace CWM.Database.Models
         public string Description { get; set; } = string.Empty;
 
         [ForeignKey("Vehicle")]
-        public int VehicleId { get; set; }
+        public int? VehicleId { get; set; }
         public virtual Vehicle? Vehicle { get; set; }
 
 

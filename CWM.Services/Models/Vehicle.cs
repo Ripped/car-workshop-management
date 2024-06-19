@@ -24,15 +24,12 @@ namespace CWM.Database.Models
         public string Fuel { get; set; } = string.Empty;
 
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public virtual User? User { get; set; }
-
-        [ForeignKey("VehicleServiceHistory")]
-        public int? VehicleServiceHistoryId { get; set; }
-        public virtual VehicleServiceHistory? ServiceHistory { get; set; }
 
 
         // Relations
         public virtual ICollection<WorkOrder> WorkOrders { get; set; } = new List<WorkOrder>();
+        public virtual ICollection<VehicleServiceHistory> VehicleServiceHistory { get; set; } = new List<VehicleServiceHistory>();
     }
 }

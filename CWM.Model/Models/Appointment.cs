@@ -14,6 +14,6 @@ namespace CWM.Core.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public User? User { get; set; } = new();
-        public AppointmentType AppointmentType { get; set; } = new();
+        public AppointmentType? AppointmentType { get; set; } = new();
     }
 }

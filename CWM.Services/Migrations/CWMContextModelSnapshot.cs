@@ -309,10 +309,7 @@ namespace CWM.Database.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("VehicleServiceHistoryId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -340,13 +337,12 @@ namespace CWM.Database.Migrations
                     b.Property<int>("ServiceType")
                         .HasColumnType("int");
 
-                    b.Property<int>("VehicleId")
+                    b.Property<int?>("VehicleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VehicleId")
-                        .IsUnique();
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("VehicleServiceHistory");
                 });
@@ -376,11 +372,10 @@ namespace CWM.Database.Migrations
                     b.Property<int>("GarageBox")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderNumber")
-                        .HasColumnType("int");
+                    b.Property<string>("OrderNumber")
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
@@ -444,7 +439,7 @@ namespace CWM.Database.Migrations
             modelBuilder.Entity("CWM.Database.Models.Appointment", b =>
                 {
                     b.HasOne("CWM.Database.Models.AppointmentType", "AppointmentType")
-                        .WithMany()
+                        .WithMany("Appointments")
                         .HasForeignKey("AppointmentTypeId");
 
                     b.HasOne("CWM.Database.Models.User", "User")
@@ -497,9 +492,7 @@ namespace CWM.Database.Migrations
                 {
                     b.HasOne("CWM.Database.Models.User", "User")
                         .WithMany("Vehicles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("User");
                 });
@@ -507,10 +500,8 @@ namespace CWM.Database.Migrations
             modelBuilder.Entity("CWM.Database.Models.VehicleServiceHistory", b =>
                 {
                     b.HasOne("CWM.Database.Models.Vehicle", "Vehicle")
-                        .WithOne("ServiceHistory")
-                        .HasForeignKey("CWM.Database.Models.VehicleServiceHistory", "VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("VehicleServiceHistory")
+                        .HasForeignKey("VehicleId");
 
                     b.Navigation("Vehicle");
                 });
@@ -518,7 +509,7 @@ namespace CWM.Database.Migrations
             modelBuilder.Entity("CWM.Database.Models.WorkOrder", b =>
                 {
                     b.HasOne("CWM.Database.Models.Appointment", "Appointment")
-                        .WithMany("WorkOrders")
+                        .WithMany()
                         .HasForeignKey("AppointmentId");
 
                     b.HasOne("CWM.Database.Models.User", "User")
@@ -555,9 +546,9 @@ namespace CWM.Database.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("CWM.Database.Models.Appointment", b =>
+            modelBuilder.Entity("CWM.Database.Models.AppointmentType", b =>
                 {
-                    b.Navigation("WorkOrders");
+                    b.Navigation("Appointments");
                 });
 
             modelBuilder.Entity("CWM.Database.Models.Country", b =>
@@ -578,7 +569,7 @@ namespace CWM.Database.Migrations
 
             modelBuilder.Entity("CWM.Database.Models.Vehicle", b =>
                 {
-                    b.Navigation("ServiceHistory");
+                    b.Navigation("VehicleServiceHistory");
 
                     b.Navigation("WorkOrders");
                 });

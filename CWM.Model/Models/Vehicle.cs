@@ -16,6 +16,5 @@ namespace CWM.Core.Models
         public string Transmision { get; set; } = string.Empty;
         public DateTime ProductionDate { get; set; }
         public string Fuel { get; set; } = string.Empty;
-        public VehicleServiceHistory ServiceHistory { get; set; } = new();
     }
 }
