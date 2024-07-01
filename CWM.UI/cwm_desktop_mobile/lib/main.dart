@@ -1,5 +1,6 @@
 import 'package:cwm_desktop_mobile/providers/appointment_type_provider.dart';
 import 'package:cwm_desktop_mobile/providers/appointmnet_provider.dart';
+import 'package:cwm_desktop_mobile/providers/auth_provider.dart';
 import 'package:cwm_desktop_mobile/providers/part_provider.dart';
 import 'package:cwm_desktop_mobile/providers/work_order_provider.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => AppointmentBlockedProvider()),
       ChangeNotifierProvider(create: (_) => WorkOrderProvider()),
       ChangeNotifierProvider(create: (_) => VehicleServiceHistoryProvider()),
+      ChangeNotifierProvider(create: (_) => AuthProvider()),
     ], child: const MyApp()),
   );
 }

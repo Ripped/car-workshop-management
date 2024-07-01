@@ -27,9 +27,9 @@ C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.AssemblyInfo.cs
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.csproj.CoreCompileInputs.cache
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.sourcelink.json
-C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.csproj.CopyComplete
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.dll
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\refint\CWM.Database.dll
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.pdb
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Database.genruntimeconfig.cache
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\ref\CWM.Database.dll
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.Services\obj\Debug\net8.0\CWM.Data.CFA90D2C.Up2Date

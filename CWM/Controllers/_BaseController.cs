@@ -9,7 +9,6 @@ namespace CWM.Controllers
 {
     //[Authorize]
     [ApiController]
-    //[ExceptionFilter]
     [Route("[controller]")]
     public abstract class BaseController<T, TSearch> : ControllerBase
     where T : Base

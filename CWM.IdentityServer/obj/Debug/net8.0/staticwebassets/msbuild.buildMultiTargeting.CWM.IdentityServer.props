@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\CWM.IdentityServer.props" />
+</Project>

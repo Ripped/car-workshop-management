@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "kKnFq4SM67rszqKe395CzkrIjLELcVTUQn+D1CfVtokPgnKQmXlQkQaET/iGHRp5nm2GRJaBVNhdCLDyHkyabg==",
+  "dgSpecHash": "e29HYCJpCDk=",
   "success": true,
   "projectFilePath": "C:\\Users\\Lenovo\\Documents\\GitHub\\car-workshop-management\\CWM.Model\\CWM.Core.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\8.0.0\\microsoft.extensions.caching.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.1\\microsoft.extensions.dependencyinjection.abstractions.8.0.1.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -8,5 +8,7 @@ using System.Threading.Tasks;
 
 namespace CWM.Core.Interfaces.Repositories
 {
-    public interface IUserRepository : IBaseRepository<User, UserSearch> { }
+    public interface IUserRepository : IBaseRepository<User, UserSearch> {
+        Task<User> Login(string email, string password);
+    }
 }
