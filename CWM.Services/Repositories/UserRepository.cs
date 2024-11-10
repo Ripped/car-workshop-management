@@ -47,14 +47,14 @@ namespace CWM.Database.Repositories
             return query;
         }
 
-        public async Task<Core.Models.User> Login(string email, string password)
+        public async Task<Core.Models.User> Login(string username, string password)
         {
             var user = await Context
                 .Users
                 .Include(x => x.Roles)
                 .FirstOrDefaultAsync(x =>
-                    x.Email == email &&
-                    x.Password == EncryptionHelpers.Hash(password)
+                    x.Username == username &&
+                    x.Password == password
                 );
 
             return Mapper.Map<Core.Models.User>(user);

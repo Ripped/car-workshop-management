@@ -9,12 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CWM.Core", "CWM.Model\CWM.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CWM.Database", "CWM.Services\CWM.Database.csproj", "{84AEA6FC-A063-4F56-BAC9-D75A5345461A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CWM.IdentityServer", "CWM.IdentityServer\CWM.IdentityServer.csproj", "{361D1604-9427-4248-9F29-F5D74F8BD406}"
-	ProjectSection(ProjectDependencies) = postProject
-		{040AB331-7714-4E11-BD75-B20412C8F8FF} = {040AB331-7714-4E11-BD75-B20412C8F8FF}
-		{0DB6492E-D560-4D90-90DC-6D7940E99979} = {0DB6492E-D560-4D90-90DC-6D7940E99979}
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A5BBCAA7-98CD-4F00-8A25-6B1056236601}"
 	ProjectSection(SolutionItems) = preProject
 		.env = .env
@@ -40,10 +34,6 @@ Global
 		{84AEA6FC-A063-4F56-BAC9-D75A5345461A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84AEA6FC-A063-4F56-BAC9-D75A5345461A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84AEA6FC-A063-4F56-BAC9-D75A5345461A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{361D1604-9427-4248-9F29-F5D74F8BD406}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{361D1604-9427-4248-9F29-F5D74F8BD406}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{361D1604-9427-4248-9F29-F5D74F8BD406}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{361D1604-9427-4248-9F29-F5D74F8BD406}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
