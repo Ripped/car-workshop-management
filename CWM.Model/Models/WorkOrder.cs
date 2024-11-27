@@ -9,7 +9,7 @@ namespace CWM.Core.Models
 {
     public class WorkOrder : Base
     {
-        public int OrderNumber { get; set; }
+        public string OrderNumber { get; set; } = string.Empty;
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public GarageBox GarageBox { get; set; }

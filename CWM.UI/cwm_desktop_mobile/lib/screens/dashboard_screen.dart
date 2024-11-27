@@ -1,4 +1,8 @@
+import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
+import 'package:cwm_desktop_mobile/screens/work_order_list_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/master_screen.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -38,11 +42,16 @@ class DashboardScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Text("Kartica"),
+                        const Text("Nalozi"),
                         const SizedBox(height: 10),
                         ElevatedButton(
                           child: const Text("OTVORI"),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => const MasterScreen(
+                                        "Nalozi", WorkOrderListScreen())));
+                          },
                         )
                       ],
                     ),
@@ -75,7 +84,12 @@ class DashboardScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         ElevatedButton(
                           child: const Text("OTVORI"),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => const MasterScreen(
+                                        "Dijelovi", PartListScreen())));
+                          },
                         )
                       ],
                     ),
@@ -108,7 +122,12 @@ class DashboardScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         ElevatedButton(
                           child: const Text("OTVORI"),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => const MasterScreen(
+                                        "Dijelovi", PartListScreen())));
+                          },
                         )
                       ],
                     ),
@@ -141,7 +160,12 @@ class DashboardScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         ElevatedButton(
                           child: const Text("OTVORI"),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => const MasterScreen(
+                                        "Dijelovi", PartListScreen())));
+                          },
                         )
                       ],
                     ),
@@ -174,7 +198,12 @@ class DashboardScreen extends StatelessWidget {
                         const SizedBox(height: 10),
                         ElevatedButton(
                           child: const Text("OTVORI"),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => const MasterScreen(
+                                        "Dijelovi", PartListScreen())));
+                          },
                         )
                       ],
                     ),
@@ -203,12 +232,17 @@ class DashboardScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Text("Kartica"),
+                        const Text("Dijelovi"),
                         const SizedBox(height: 10),
                         ElevatedButton(
                           child: const Text("OTVORI"),
-                          onPressed: () {},
-                        )
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => const MasterScreen(
+                                        "Dijelovi", PartListScreen())));
+                          },
+                        ),
                       ],
                     ),
                   )),

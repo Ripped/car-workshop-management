@@ -1,4 +1,3 @@
-import 'package:cwm_desktop_mobile/providers/appointmnet_provider.dart';
 import 'package:cwm_desktop_mobile/providers/work_order_provider.dart';
 import 'package:cwm_desktop_mobile/screens/appointment_list_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
@@ -19,7 +18,6 @@ class WorkOrderClosureScreen extends StatefulWidget {
 }
 
 class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
-  late AppointmentProvider _appointmentProvider;
   late WorkOrderProvider _workOrderProvider;
   late VehicleServiceHistoryProvider _vehicleServiceHistoryProvider;
 
@@ -31,7 +29,6 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
   void initState() {
     super.initState();
 
-    _appointmentProvider = context.read<AppointmentProvider>();
     _workOrderProvider = context.read<WorkOrderProvider>();
     _vehicleServiceHistoryProvider =
         context.read<VehicleServiceHistoryProvider>();

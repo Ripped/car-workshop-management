@@ -12,35 +12,13 @@ namespace CWM.Database.Extensions
                    .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
         );
 
-        /*public static void DatabaseMigrate(this IServiceProvider service)
+        public static void DatabaseMigrate(this IServiceProvider service)
         {
             using var scope = service.CreateScope();
-            var context = scope.ServiceProvider.GetRequiredService<DbContext>();
+            var context = scope.ServiceProvider.GetRequiredService<CWMContext>();
 
             if (!context.Database.CanConnect())
                 context.Database.Migrate();
-        }*/
-
-        public static void AddScopedRepositories(this IServiceCollection serviceCollection)
-        {
-            var repositories = Assembly
-                .GetExecutingAssembly()
-                .GetTypes()
-                .Where(x =>
-                    x.IsClass &&
-                    !x.IsAbstract &&
-                    x.Name.EndsWith("Repository")
-                 );
-
-            foreach (var repository in repositories)
-            {
-                var interfaces = repository
-                    .GetInterfaces()
-                    .Where(x => !x.IsGenericType);
-
-                foreach (var inter in interfaces)
-                    serviceCollection.AddScoped(inter, repository);
-            }
         }
     }
 }

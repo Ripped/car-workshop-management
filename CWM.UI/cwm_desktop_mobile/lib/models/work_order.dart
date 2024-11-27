@@ -8,7 +8,7 @@ part 'work_order.g.dart';
 @JsonSerializable()
 class WorkOrder {
   int id;
-  int orderNumber;
+  String orderNumber;
   DateTime startTime;
   DateTime endTime;
   GarageBox garageBox;

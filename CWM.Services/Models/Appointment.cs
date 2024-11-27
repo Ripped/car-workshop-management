@@ -31,7 +31,6 @@ namespace CWM.Database.Models
 
 
         // Relations
-        //public virtual ICollection<WorkOrder> WorkOrders { get; set; } = new List<WorkOrder>();
         public virtual ICollection<AppointmentBlocked> AppointmentBlocked { get; set; } = new List<AppointmentBlocked>();
 
     }

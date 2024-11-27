@@ -1,5 +1,5 @@
 import 'package:cwm_desktop_mobile/models/enums/garage_box.dart';
-import 'package:cwm_desktop_mobile/providers/appointmnet_provider.dart';
+import 'package:cwm_desktop_mobile/providers/appointment_provider.dart';
 import 'package:cwm_desktop_mobile/providers/work_order_provider.dart';
 import 'package:cwm_desktop_mobile/screens/appointment_list_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';

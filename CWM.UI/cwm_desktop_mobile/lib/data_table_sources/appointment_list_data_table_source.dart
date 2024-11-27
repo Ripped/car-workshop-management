@@ -2,7 +2,7 @@ import 'package:advanced_datatable/advanced_datatable_source.dart';
 import 'package:cwm_desktop_mobile/components/exstension.dart';
 import 'package:cwm_desktop_mobile/models/appointment.dart';
 import 'package:cwm_desktop_mobile/models/searches/appointment_search.dart';
-import 'package:cwm_desktop_mobile/providers/appointmnet_provider.dart';
+import 'package:cwm_desktop_mobile/providers/appointment_provider.dart';
 import 'package:flutter/material.dart';
 
 class AppointmentListDataTableSource

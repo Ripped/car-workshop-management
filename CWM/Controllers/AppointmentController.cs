@@ -4,6 +4,7 @@ using CWM.Core.Models;
 using CWM.Core.Models.Searches;
 using CWM.Database.Repositories;
 using CWM.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 

@@ -12,19 +12,20 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddScoped<ICityRepository, CityRepository>();
-builder.Services.AddScoped<ICountryRepository, CountryRepository>();
-builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
-builder.Services.AddScoped<IPartRepository, PartRepository>();
-builder.Services.AddScoped<IAppointmentTypeRepository, AppointmentTypeRepository>();
-builder.Services.AddScoped<IAppointmentBlockedRepository, AppointmentBlockedRepository>();
-builder.Services.AddScoped<IWorkOrderRepository, WorkOrderRepository>();
-builder.Services.AddScoped<IVehicleServiceHistoryRepository, VehicleServiceHistoryRepository>();
+builder.Services.AddTransient<ICityRepository, CityRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<ICountryRepository, CountryRepository>();
+builder.Services.AddTransient<IAppointmentRepository, AppointmentRepository>();
+builder.Services.AddTransient<IPartRepository, PartRepository>();
+builder.Services.AddTransient<IAppointmentTypeRepository, AppointmentTypeRepository>();
+builder.Services.AddTransient<IAppointmentBlockedRepository, AppointmentBlockedRepository>();
+builder.Services.AddTransient<IWorkOrderRepository, WorkOrderRepository>();
+builder.Services.AddTransient<IVehicleServiceHistoryRepository, VehicleServiceHistoryRepository>();
 
 builder.Services.AddAutoMapper(typeof(CityRepository));
 builder.Services.AddAutoMapper();
 
-builder.Services.AddScopedRepositories();
+//builder.Services.AddScopedRepositories();
 
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
@@ -60,6 +61,8 @@ builder.Services.AddDbContext<CWMContext>(options => options.UseSqlServer(connec
 
 
 var app = builder.Build();
+
+app.Services.DatabaseMigrate();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

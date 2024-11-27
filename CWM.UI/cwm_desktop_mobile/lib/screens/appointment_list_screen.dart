@@ -1,6 +1,6 @@
 import 'package:advanced_datatable/datatable.dart';
 import 'package:cwm_desktop_mobile/data_table_sources/appointment_list_data_table_source.dart';
-import 'package:cwm_desktop_mobile/providers/appointmnet_provider.dart';
+import 'package:cwm_desktop_mobile/providers/appointment_provider.dart';
 import 'package:cwm_desktop_mobile/screens/work_order_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
@@ -56,7 +56,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
               DataColumn(label: Text("Service performed")),
               DataColumn(label: Text("Start date")),
               DataColumn(label: Text("End date")),
-              DataColumn(label: Text("End date")),
+              DataColumn(label: Text("Status")),
             ],
           ),
         )

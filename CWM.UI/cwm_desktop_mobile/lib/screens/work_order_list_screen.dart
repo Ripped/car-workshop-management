@@ -7,6 +7,8 @@ import 'package:cwm_desktop_mobile/widgets/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../widgets/search.dart';
+
 class WorkOrderListScreen extends StatefulWidget {
   const WorkOrderListScreen({super.key});
 
@@ -38,11 +40,11 @@ class _WorkOrderListScreenState extends State<WorkOrderListScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        /*Search(
-          "Dodaj novi dio",
+        Search(
+          "Dodaj novi Nalog",
           () => _openDetails(null),
-          onSearch: (text) => appointmentListDataTableSource.filterData(text),
-        ),*/
+          onSearch: (text) => workOrderListDataTableSource.filterData(text),
+        ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(

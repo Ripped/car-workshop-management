@@ -50,12 +50,19 @@ namespace CWM.Database.Mappings
             .ForMember(x => x.AppointmentId, opt => opt.MapFrom((src, dest) => src.Appointment?.Id))
             .ForMember(x => x.Appointment, opt => opt.Ignore());
 
+            CreateMap<User, Core.Models.User>()
+            .ForMember(x => x.Roles, opt => opt.MapFrom(y => y.Roles.Select(z => z.Role)));
             CreateMap<User, Core.Models.User>();
             CreateMap<Core.Models.User, User>()
             .ForMember(x => x.CitizenshipId, opt => opt.MapFrom((src, dest) => src.Citizenship?.Id))
             .ForMember(x => x.Citizenship, opt => opt.Ignore())
             .ForMember(x => x.CityId, opt => opt.MapFrom((src, dest) => src.City?.Id))
             .ForMember(x => x.City, opt => opt.Ignore());
+
+            CreateMap<UserRole, Core.Models.UserRole>();
+            CreateMap<Core.Models.UserRole, UserRole>()
+                .ForMember(x => x.UserId, opt => opt.MapFrom(y => y.User.Id))
+                .ForMember(x => x.User, opt => opt.Ignore());
         }
 
     }

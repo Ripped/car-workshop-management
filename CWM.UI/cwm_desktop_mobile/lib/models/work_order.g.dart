@@ -8,7 +8,7 @@ part of 'work_order.dart';
 
 WorkOrder _$WorkOrderFromJson(Map<String, dynamic> json) => WorkOrder(
       (json['id'] as num).toInt(),
-      (json['orderNumber'] as num).toInt(),
+      json['orderNumber'] as String,
       DateTime.parse(json['startTime'] as String),
       DateTime.parse(json['endTime'] as String),
       $enumDecode(_$GarageBoxEnumMap, json['garageBox']),

@@ -16,7 +16,7 @@ namespace CWM.Database.Models
         public int Id { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public String OrderNumber { get; set; } = null!;
+        public string OrderNumber { get; set; } = string.Empty;
 
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }

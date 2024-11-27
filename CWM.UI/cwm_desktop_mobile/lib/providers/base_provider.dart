@@ -14,7 +14,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   BaseProvider({String? altEndpoint}) {
     baseUrl = const String.fromEnvironment(
       "ApiUrl",
-      defaultValue: "localhost:7164",
+      defaultValue: "localhost:50443",
     );
 
     endpoint = altEndpoint ?? T.toString();
@@ -23,7 +23,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   Future<T> get(int id) async {
     var uri = Uri.https(baseUrl, '$endpoint/$id');
 
-    var response = await http.get(uri, headers: getHeaders());
+    var response = await http.get(uri, headers: createHeaders());
 
     if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
@@ -46,7 +46,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
 
     var uri = Uri.https(baseUrl, endpoint, queryParameters);
 
-    var response = await http.get(uri, headers: getHeaders());
+    var response = await http.get(uri, headers: createHeaders());
 
     if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
@@ -74,7 +74,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
     var jsonRequest = jsonEncode(request, toEncodable: myDateSerializer);
 
     var response =
-        await http.post(uri, headers: getHeaders(), body: jsonRequest);
+        await http.post(uri, headers: createHeaders(), body: jsonRequest);
 
     if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
@@ -90,7 +90,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
     var jsonRequest = jsonEncode(request, toEncodable: myDateSerializer);
 
     var response =
-        await http.put(uri, headers: getHeaders(), body: jsonRequest);
+        await http.put(uri, headers: createHeaders(), body: jsonRequest);
 
     if (isValidResponse(response)) {
       var data = jsonDecode(response.body);
@@ -103,7 +103,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   Future<bool> delete(int id) async {
     var uri = Uri.https(baseUrl, '$endpoint/$id');
 
-    var response = await http.delete(uri, headers: getHeaders());
+    var response = await http.delete(uri, headers: createHeaders());
 
     if (isValidResponse(response)) {
       return true;
@@ -112,10 +112,22 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
     }
   }
 
-  Map<String, String> getHeaders() => {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer ${UserAuth.token ?? ""}"
-      };
+  Map<String, String> createHeaders() {
+    String username = UserAuth.username ?? "";
+    String password = UserAuth.password ?? "";
+
+    //print("passed creds: $username, $password");
+
+    String basicAuth =
+        "Basic ${base64Encode(utf8.encode('$username:$password'))}";
+
+    var headers = {
+      "Content-Type": "application/json",
+      "Authorization": basicAuth
+    };
+
+    return headers;
+  }
 
   bool isValidResponse(http.Response response) {
     if (response.statusCode < 299) {

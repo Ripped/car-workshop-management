@@ -13,6 +13,5 @@ namespace CWM.Core.Models
         public Service ServiceType { get; set; }
         public string Description { get; set; } = string.Empty;
         public Vehicle? Vehicle { get; set; } = new();
-        //public List<Part> Parts { get; set; } = new();
     }
 }

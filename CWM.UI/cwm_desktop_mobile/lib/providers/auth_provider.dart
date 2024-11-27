@@ -1,74 +1,50 @@
 import 'dart:convert';
-
+import 'package:cwm_desktop_mobile/models/user.dart';
+import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/constants/claim_type.dart';
-import '../models/user_auth.dart';
-
 class AuthProvider with ChangeNotifier {
-  late String _baseUrl;
+  late String? _baseUrl;
+  final String _endpoint = "Login";
 
   AuthProvider() {
     _baseUrl = const String.fromEnvironment(
-      "IdentityServerUrl",
-      defaultValue: "https://localhost:7225/",
+      "ApiUrl",
+      defaultValue: "https://localhost:50443/",
     );
   }
 
-  Future<String> login(String email, String password) async {
-    var uri = Uri.parse('${_baseUrl}login?email=$email&password=$password');
+  Future<dynamic> login() async {
+    var url =
+        "$_baseUrl$_endpoint?Username=${Authorization.username}&Password=${Authorization.password}";
+    var uri = Uri.parse(url);
 
-    var response = await http.get(uri);
+    var headers = createHeaders();
 
-    if (_isValidResponse(response)) {
-      return response.body;
+    var response = await http.get(uri, headers: headers);
+
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+
+      return User.fromJson(data);
     } else {
-      throw Exception("Response is not valid");
+      return null;
     }
   }
 
-  void getUser(String token) {
-    final decodedToken = _decode(token);
+  Map<String, String> createHeaders() {
+    String username = Authorization.username ?? "";
+    String password = Authorization.password ?? "";
 
-    UserAuth.id = int.parse(decodedToken[ClaimType.sid] as String);
-    UserAuth.name = decodedToken[ClaimType.name] as String?;
-    UserAuth.email = decodedToken[ClaimType.email] as String?;
-    UserAuth.token = token;
+    String basicAuth =
+        "Basic ${base64Encode(utf8.encode('$username:$password'))}";
 
-    var role = decodedToken[ClaimType.role];
+    var headers = {
+      "Content-Type": "application/json",
+      "Authorization": basicAuth
+    };
 
-    if (role is List<dynamic>) {
-      UserAuth.roles = List<String>.from(decodedToken[ClaimType.role]);
-    } else {
-      UserAuth.roles.add(role);
-    }
-  }
-
-  bool _isValidResponse(http.Response response) {
-    if (response.statusCode < 299) {
-      return true;
-    } else if (response.statusCode == 401) {
-      throw Exception("Neispravni kredencijali za prijavu.");
-    } else {
-      throw Exception("Serverska greška.");
-    }
-  }
-
-  Map<String, dynamic> _decode(String token) {
-    final splitToken = token.split(".");
-    if (splitToken.length != 3) {
-      throw const FormatException('Invalid token');
-    }
-    try {
-      final payloadBase64 = splitToken[1];
-      final normalizedPayload = base64.normalize(payloadBase64);
-      final payloadString = utf8.decode(base64.decode(normalizedPayload));
-      final decodedPayload = jsonDecode(payloadString);
-
-      return decodedPayload;
-    } catch (error) {
-      throw const FormatException('Invalid payload');
-    }
+    return headers;
   }
 }

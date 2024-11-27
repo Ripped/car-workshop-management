@@ -7,7 +7,6 @@ using CWM.Core.Models.Searches;
 
 namespace CWM.Controllers
 {
-    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public abstract class BaseController<T, TSearch> : ControllerBase

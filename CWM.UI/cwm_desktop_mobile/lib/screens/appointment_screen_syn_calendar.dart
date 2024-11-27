@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 import '../models/searches/appointment_search.dart';
 import '../providers/appointment_blocked_provider.dart';
 import '../providers/appointment_type_provider.dart';
-import '../providers/appointmnet_provider.dart';
+import '../providers/appointment_provider.dart';
 
 class MyWidget extends StatefulWidget {
   const MyWidget({super.key});
