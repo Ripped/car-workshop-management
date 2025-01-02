@@ -22,6 +22,9 @@ namespace CWM.Database.Repositories
             {
                 var entity = await Context
                     .WorkOrders
+                    .Include(x => x.Vehicle)
+                    .Include(x => x.User)
+                    .Include(x => x.Appointment)
                     .SingleOrDefaultAsync(x => x.Id == id);
 
                 return Mapper.Map<Core.Models.WorkOrder>(entity);
@@ -35,7 +38,13 @@ namespace CWM.Database.Repositories
                 return base.AddInclude(query, search);
 
             if (!string.IsNullOrWhiteSpace(search.Name))
-                query = query.Where(x => x.Description.ToLower().Contains(search.Name.ToLower()));
+                query = query.Where(x => x.OrderNumber.ToLower().Contains(search.Name.ToLower()));
+
+            if (search.AppointmentId > 0)
+                query = query.Where(x => x.Appointment!.Id == search.AppointmentId);
+
+            if (search.IncludeVehicle)
+                query = query.Include(x => x.Vehicle);
 
             return query;
         }

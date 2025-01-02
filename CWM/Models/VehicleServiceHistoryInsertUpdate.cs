@@ -11,7 +11,7 @@ namespace CWM.Models
         public string Description { get; set; } = string.Empty;
 
         [Required]
-        public int? VehicleId { get; set; } = new();
+        public int? VehicleId { get; set; }
 
     }
 }

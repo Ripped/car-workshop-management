@@ -22,6 +22,7 @@ namespace CWM.Database.Repositories
             {
                 var entity = await Context
                     .VehicleServiceHistory
+                    .Include(x => x.Vehicle)
                     .SingleOrDefaultAsync(x => x.Id == id);
 
                 return Mapper.Map<Core.Models.VehicleServiceHistory>(entity);

@@ -17,15 +17,17 @@ class WorkOrderListScreen extends StatefulWidget {
 }
 
 class _WorkOrderListScreenState extends State<WorkOrderListScreen> {
+  late WorkOrderProvider _workOrderProvider;
+
   late WorkOrderListDataTableSource workOrderListDataTableSource;
 
   @override
   void initState() {
     super.initState();
 
-    var workOrderProvider = context.read<WorkOrderProvider>();
+    _workOrderProvider = context.read<WorkOrderProvider>();
     workOrderListDataTableSource =
-        WorkOrderListDataTableSource(workOrderProvider, _openDetails);
+        WorkOrderListDataTableSource(_workOrderProvider, _openDetails);
   }
 
   void _openDetails(int? id) {
@@ -52,7 +54,7 @@ class _WorkOrderListScreenState extends State<WorkOrderListScreen> {
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: workOrderListDataTableSource,
-            rowsPerPage: 7,
+            rowsPerPage: 10,
             columns: const [
               DataColumn(label: Text("Serial number")),
               DataColumn(label: Text("Service performed")),

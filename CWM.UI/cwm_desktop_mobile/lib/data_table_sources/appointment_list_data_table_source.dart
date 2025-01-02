@@ -22,7 +22,7 @@ class AppointmentListDataTableSource
         (pageRequest.offset / pageRequest.pageSize).roundToDouble().ceil();
 
     appointmentSearch.page = page + 1;
-    appointmentSearch.pageSize = 50;
+    appointmentSearch.pageSize = pageRequest.pageSize;
     appointmentSearch.includeAppointmentType = true;
 
     var appointment =
@@ -38,7 +38,6 @@ class AppointmentListDataTableSource
       onSelectChanged: (e) => _onSelectChanged(currentRow.id),
       cells: [
         DataCell(Text(currentRow.description)),
-        DataCell(Text(currentRow.servicePerformed.toString())),
         DataCell(Text(currentRow.startDate.toString())),
         DataCell(Text(currentRow.endDate.toString())),
         DataCell(

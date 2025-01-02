@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CWM.Database.Migrations
 {
     [DbContext(typeof(CWMContext))]
-    [Migration("20241125103219_Initial")]
-    partial class Initial
+    [Migration("20241229092038_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,13 +58,13 @@ namespace CWM.Database.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ServicePerformed")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VehicleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -72,6 +72,8 @@ namespace CWM.Database.Migrations
                     b.HasIndex("AppointmentTypeId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("Appointments");
 
@@ -82,9 +84,9 @@ namespace CWM.Database.Migrations
                             AppointmentTypeId = 1,
                             Description = "Pregled auta, mali servis i cudna buka na velikim brzinama",
                             EndDate = new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ServicePerformed = 2,
                             StartDate = new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 1
+                            UserId = 1,
+                            VehicleId = 1
                         },
                         new
                         {
@@ -92,9 +94,9 @@ namespace CWM.Database.Migrations
                             AppointmentTypeId = 2,
                             Description = "Pregled auta, mali servis i cudna buka na velikim brzinama",
                             EndDate = new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ServicePerformed = 2,
                             StartDate = new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 2
+                            UserId = 2,
+                            VehicleId = 2
                         },
                         new
                         {
@@ -102,9 +104,9 @@ namespace CWM.Database.Migrations
                             AppointmentTypeId = 3,
                             Description = "Pregled auta, mali servis i cudna buka na velikim brzinama",
                             EndDate = new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ServicePerformed = 2,
                             StartDate = new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 3
+                            UserId = 3,
+                            VehicleId = 3
                         },
                         new
                         {
@@ -112,9 +114,9 @@ namespace CWM.Database.Migrations
                             AppointmentTypeId = 1,
                             Description = "Pregled auta, mali servis i cudna buka na velikim brzinama",
                             EndDate = new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ServicePerformed = 2,
                             StartDate = new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 4
+                            UserId = 4,
+                            VehicleId = 4
                         },
                         new
                         {
@@ -122,9 +124,9 @@ namespace CWM.Database.Migrations
                             AppointmentTypeId = 2,
                             Description = "Pregled auta, mali servis i cudna buka na velikim brzinama",
                             EndDate = new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ServicePerformed = 2,
                             StartDate = new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 5
+                            UserId = 5,
+                            VehicleId = 5
                         },
                         new
                         {
@@ -132,9 +134,9 @@ namespace CWM.Database.Migrations
                             AppointmentTypeId = 3,
                             Description = "Pregled auta, mali servis i cudna buka na velikim brzinama",
                             EndDate = new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ServicePerformed = 2,
                             StartDate = new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = 6
+                            UserId = 6,
+                            VehicleId = 1
                         });
                 });
 
@@ -506,7 +508,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(2001, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 1,
                             CityId = 1,
-                            CreateDate = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3800),
+                            CreateDate = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4386),
                             Email = "sendić@gmail.com",
                             FirstName = "Amir",
                             Gender = 0,
@@ -522,7 +524,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 2,
                             CityId = 2,
-                            CreateDate = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3862),
+                            CreateDate = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4446),
                             Email = "stufo@gmail.com",
                             FirstName = "Samra",
                             Gender = 1,
@@ -530,7 +532,7 @@ namespace CWM.Database.Migrations
                             Mobile = "062342376",
                             OfficePhone = "38734549",
                             Password = "Admin",
-                            Username = "samra"
+                            Username = "employee"
                         },
                         new
                         {
@@ -538,7 +540,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(1990, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 3,
                             CityId = 3,
-                            CreateDate = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3867),
+                            CreateDate = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4450),
                             Email = "tufo@gmail.com",
                             FirstName = "Omer",
                             Gender = 0,
@@ -546,7 +548,7 @@ namespace CWM.Database.Migrations
                             Mobile = "062342376",
                             OfficePhone = "38734549",
                             Password = "Admin",
-                            Username = "omer"
+                            Username = "user"
                         },
                         new
                         {
@@ -554,7 +556,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(1975, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 4,
                             CityId = 4,
-                            CreateDate = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3871),
+                            CreateDate = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4454),
                             Email = "kremić@gmail.com",
                             FirstName = "Merima",
                             Gender = 1,
@@ -570,7 +572,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(2001, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 5,
                             CityId = 5,
-                            CreateDate = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3874),
+                            CreateDate = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4457),
                             Email = "karić@gmail.com",
                             FirstName = "Dario",
                             Gender = 0,
@@ -586,7 +588,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 6,
                             CityId = 6,
-                            CreateDate = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3877),
+                            CreateDate = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4460),
                             Email = "babić@gmail.com",
                             FirstName = "Selma",
                             Gender = 1,
@@ -641,19 +643,19 @@ namespace CWM.Database.Migrations
                         {
                             Id = 4,
                             Role = 1,
-                            UserId = 1
+                            UserId = 2
                         },
                         new
                         {
                             Id = 5,
-                            Role = 1,
-                            UserId = 1
+                            Role = 2,
+                            UserId = 3
                         },
                         new
                         {
                             Id = 6,
                             Role = 2,
-                            UserId = 1
+                            UserId = 4
                         });
                 });
 
@@ -816,7 +818,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 1,
                             Description = "",
-                            ServiceDate = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3979),
+                            ServiceDate = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4565),
                             ServiceType = 1,
                             VehicleId = 1
                         },
@@ -824,7 +826,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 2,
                             Description = "",
-                            ServiceDate = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3983),
+                            ServiceDate = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4570),
                             ServiceType = 0,
                             VehicleId = 2
                         },
@@ -832,7 +834,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 3,
                             Description = "",
-                            ServiceDate = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3985),
+                            ServiceDate = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4572),
                             ServiceType = 4,
                             VehicleId = 3
                         },
@@ -840,7 +842,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 4,
                             Description = "",
-                            ServiceDate = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3987),
+                            ServiceDate = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4574),
                             ServiceType = 5,
                             VehicleId = 4
                         },
@@ -848,7 +850,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 5,
                             Description = "",
-                            ServiceDate = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3989),
+                            ServiceDate = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4576),
                             ServiceType = 1,
                             VehicleId = 5
                         },
@@ -856,7 +858,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 6,
                             Description = "",
-                            ServiceDate = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3991),
+                            ServiceDate = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4579),
                             ServiceType = 0,
                             VehicleId = 6
                         });
@@ -891,6 +893,9 @@ namespace CWM.Database.Migrations
                         .IsRequired()
                         .ValueGeneratedOnAdd()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ServicePerformed")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
@@ -927,10 +932,11 @@ namespace CWM.Database.Migrations
                             AppointmentId = 1,
                             Concerne = "Paljenje auta",
                             Description = "Potrebno duze vrijeme da upali kada je auto zagrijano",
-                            EndTime = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4018),
+                            EndTime = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4607),
                             GarageBox = 0,
                             OrderNumber = "SGTA252ASF276",
-                            StartTime = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4017),
+                            ServicePerformed = 1,
+                            StartTime = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4605),
                             Sugestions = "Provjeriti dizne i alnaser",
                             UserId = 1,
                             VehicleId = 1
@@ -941,10 +947,11 @@ namespace CWM.Database.Migrations
                             AppointmentId = 2,
                             Concerne = "Paljenje auta",
                             Description = "Potrebno duze vrijeme da upali kada je auto zagrijano",
-                            EndTime = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4026),
+                            EndTime = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4613),
                             GarageBox = 0,
                             OrderNumber = "SGTA252ASF276",
-                            StartTime = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4025),
+                            ServicePerformed = 0,
+                            StartTime = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4612),
                             Sugestions = "Provjeriti dizne i alnaser",
                             UserId = 2,
                             VehicleId = 2
@@ -955,10 +962,11 @@ namespace CWM.Database.Migrations
                             AppointmentId = 3,
                             Concerne = "Paljenje auta",
                             Description = "Potrebno duze vrijeme da upali kada je auto zagrijano",
-                            EndTime = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4030),
+                            EndTime = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4617),
                             GarageBox = 0,
                             OrderNumber = "SGTA252ASF276",
-                            StartTime = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4029),
+                            ServicePerformed = 4,
+                            StartTime = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4616),
                             Sugestions = "Provjeriti dizne i alnaser",
                             UserId = 3,
                             VehicleId = 3
@@ -969,10 +977,11 @@ namespace CWM.Database.Migrations
                             AppointmentId = 4,
                             Concerne = "Paljenje auta",
                             Description = "Potrebno duze vrijeme da upali kada je auto zagrijano",
-                            EndTime = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4034),
+                            EndTime = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4621),
                             GarageBox = 0,
                             OrderNumber = "SGTA252ASF276",
-                            StartTime = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4032),
+                            ServicePerformed = 3,
+                            StartTime = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4620),
                             Sugestions = "Provjeriti dizne i alnaser",
                             UserId = 4,
                             VehicleId = 4
@@ -983,10 +992,11 @@ namespace CWM.Database.Migrations
                             AppointmentId = 5,
                             Concerne = "Paljenje auta",
                             Description = "Potrebno duze vrijeme da upali kada je auto zagrijano",
-                            EndTime = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4037),
+                            EndTime = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4625),
                             GarageBox = 0,
                             OrderNumber = "SGTA252ASF276",
-                            StartTime = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4036),
+                            ServicePerformed = 5,
+                            StartTime = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4623),
                             Sugestions = "Provjeriti dizne i alnaser",
                             UserId = 5,
                             VehicleId = 5
@@ -997,10 +1007,11 @@ namespace CWM.Database.Migrations
                             AppointmentId = 6,
                             Concerne = "Paljenje auta",
                             Description = "Potrebno duze vrijeme da upali kada je auto zagrijano",
-                            EndTime = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4041),
+                            EndTime = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4628),
                             GarageBox = 0,
                             OrderNumber = "SGTA252ASF276",
-                            StartTime = new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4040),
+                            ServicePerformed = 1,
+                            StartTime = new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4627),
                             Sugestions = "Provjeriti dizne i alnaser",
                             UserId = 6,
                             VehicleId = 6
@@ -1047,9 +1058,15 @@ namespace CWM.Database.Migrations
                         .WithMany()
                         .HasForeignKey("UserId");
 
+                    b.HasOne("CWM.Database.Models.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId");
+
                     b.Navigation("AppointmentType");
 
                     b.Navigation("User");
+
+                    b.Navigation("Vehicle");
                 });
 
             modelBuilder.Entity("CWM.Database.Models.City", b =>

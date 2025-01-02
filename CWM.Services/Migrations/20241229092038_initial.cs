@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CWM.Database.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -128,34 +128,6 @@ namespace CWM.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Appointments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ServicePerformed = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AppointmentTypeId = table.Column<int>(type: "int", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Appointments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Appointments_AppointmentTypes_AppointmentTypeId",
-                        column: x => x.AppointmentTypeId,
-                        principalTable: "AppointmentTypes",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Appointments_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "UserRoles",
                 columns: table => new
                 {
@@ -202,27 +174,36 @@ namespace CWM.Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppointmentAppointmentBlocked",
+                name: "Appointments",
                 columns: table => new
                 {
-                    AppointmentBlockedId = table.Column<int>(type: "int", nullable: false),
-                    AppointmentsId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AppointmentTypeId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    VehicleId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppointmentAppointmentBlocked", x => new { x.AppointmentBlockedId, x.AppointmentsId });
+                    table.PrimaryKey("PK_Appointments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AppointmentAppointmentBlocked_AppointmentBlocked_AppointmentBlockedId",
-                        column: x => x.AppointmentBlockedId,
-                        principalTable: "AppointmentBlocked",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Appointments_AppointmentTypes_AppointmentTypeId",
+                        column: x => x.AppointmentTypeId,
+                        principalTable: "AppointmentTypes",
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_AppointmentAppointmentBlocked_Appointments_AppointmentsId",
-                        column: x => x.AppointmentsId,
-                        principalTable: "Appointments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Appointments_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Appointments_Vehicles_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "Vehicles",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -244,6 +225,30 @@ namespace CWM.Database.Migrations
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppointmentAppointmentBlocked",
+                columns: table => new
+                {
+                    AppointmentBlockedId = table.Column<int>(type: "int", nullable: false),
+                    AppointmentsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppointmentAppointmentBlocked", x => new { x.AppointmentBlockedId, x.AppointmentsId });
+                    table.ForeignKey(
+                        name: "FK_AppointmentAppointmentBlocked_AppointmentBlocked_AppointmentBlockedId",
+                        column: x => x.AppointmentBlockedId,
+                        principalTable: "AppointmentBlocked",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppointmentAppointmentBlocked_Appointments_AppointmentsId",
+                        column: x => x.AppointmentsId,
+                        principalTable: "Appointments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -280,6 +285,7 @@ namespace CWM.Database.Migrations
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GarageBox = table.Column<int>(type: "int", nullable: false),
+                    ServicePerformed = table.Column<int>(type: "int", nullable: false),
                     Concerne = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Sugestions = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -380,25 +386,12 @@ namespace CWM.Database.Migrations
                 columns: new[] { "Id", "BirthDate", "CitizenshipId", "CityId", "CreateDate", "Email", "FirstName", "Gender", "Image", "LastName", "Mobile", "OfficePhone", "Password", "Username" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2001, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3800), "sendić@gmail.com", "Amir", 0, null, "Sendić", "062342376", "38734549", "Admin", "Admin" },
-                    { 2, new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3862), "stufo@gmail.com", "Samra", 1, null, "Tufo", "062342376", "38734549", "Admin", "samra" },
-                    { 3, new DateTime(1990, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3867), "tufo@gmail.com", "Omer", 0, null, "Tufo", "062342376", "38734549", "Admin", "omer" },
-                    { 4, new DateTime(1975, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 4, new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3871), "kremić@gmail.com", "Merima", 1, null, "Kremić", "062342376", "38734549", "Admin", "merima" },
-                    { 5, new DateTime(2001, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 5, new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3874), "karić@gmail.com", "Dario", 0, null, "Karić", "062342376", "38734549", "Admin", "dario" },
-                    { 6, new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 6, new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3877), "babić@gmail.com", "Selma", 1, null, "Babić", "062342376", "38734549", "Admin", "selma" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Appointments",
-                columns: new[] { "Id", "AppointmentTypeId", "Description", "EndDate", "ServicePerformed", "StartDate", "UserId" },
-                values: new object[,]
-                {
-                    { 1, 1, "Pregled auta, mali servis i cudna buka na velikim brzinama", new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 1 },
-                    { 2, 2, "Pregled auta, mali servis i cudna buka na velikim brzinama", new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 2 },
-                    { 3, 3, "Pregled auta, mali servis i cudna buka na velikim brzinama", new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 3 },
-                    { 4, 1, "Pregled auta, mali servis i cudna buka na velikim brzinama", new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 4 },
-                    { 5, 2, "Pregled auta, mali servis i cudna buka na velikim brzinama", new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 5 },
-                    { 6, 3, "Pregled auta, mali servis i cudna buka na velikim brzinama", new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 6 }
+                    { 1, new DateTime(2001, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4386), "sendić@gmail.com", "Amir", 0, null, "Sendić", "062342376", "38734549", "Admin", "Admin" },
+                    { 2, new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4446), "stufo@gmail.com", "Samra", 1, null, "Tufo", "062342376", "38734549", "Admin", "employee" },
+                    { 3, new DateTime(1990, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4450), "tufo@gmail.com", "Omer", 0, null, "Tufo", "062342376", "38734549", "Admin", "user" },
+                    { 4, new DateTime(1975, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 4, new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4454), "kremić@gmail.com", "Merima", 1, null, "Kremić", "062342376", "38734549", "Admin", "merima" },
+                    { 5, new DateTime(2001, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 5, new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4457), "karić@gmail.com", "Dario", 0, null, "Karić", "062342376", "38734549", "Admin", "dario" },
+                    { 6, new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 6, new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4460), "babić@gmail.com", "Selma", 1, null, "Babić", "062342376", "38734549", "Admin", "selma" }
                 });
 
             migrationBuilder.InsertData(
@@ -409,9 +402,9 @@ namespace CWM.Database.Migrations
                     { 1, 0, 1 },
                     { 2, 1, 1 },
                     { 3, 2, 1 },
-                    { 4, 1, 1 },
-                    { 5, 1, 1 },
-                    { 6, 2, 1 }
+                    { 4, 1, 2 },
+                    { 5, 2, 3 },
+                    { 6, 2, 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -428,29 +421,42 @@ namespace CWM.Database.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Appointments",
+                columns: new[] { "Id", "AppointmentTypeId", "Description", "EndDate", "StartDate", "UserId", "VehicleId" },
+                values: new object[,]
+                {
+                    { 1, 1, "Pregled auta, mali servis i cudna buka na velikim brzinama", new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1 },
+                    { 2, 2, "Pregled auta, mali servis i cudna buka na velikim brzinama", new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2 },
+                    { 3, 3, "Pregled auta, mali servis i cudna buka na velikim brzinama", new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3 },
+                    { 4, 1, "Pregled auta, mali servis i cudna buka na velikim brzinama", new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 4 },
+                    { 5, 2, "Pregled auta, mali servis i cudna buka na velikim brzinama", new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 5 },
+                    { 6, 3, "Pregled auta, mali servis i cudna buka na velikim brzinama", new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2024, 11, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 1 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "VehicleServiceHistory",
                 columns: new[] { "Id", "Description", "ServiceDate", "ServiceType", "VehicleId" },
                 values: new object[,]
                 {
-                    { 1, "", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3979), 1, 1 },
-                    { 2, "", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3983), 0, 2 },
-                    { 3, "", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3985), 4, 3 },
-                    { 4, "", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3987), 5, 4 },
-                    { 5, "", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3989), 1, 5 },
-                    { 6, "", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(3991), 0, 6 }
+                    { 1, "", new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4565), 1, 1 },
+                    { 2, "", new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4570), 0, 2 },
+                    { 3, "", new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4572), 4, 3 },
+                    { 4, "", new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4574), 5, 4 },
+                    { 5, "", new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4576), 1, 5 },
+                    { 6, "", new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4579), 0, 6 }
                 });
 
             migrationBuilder.InsertData(
                 table: "WorkOrders",
-                columns: new[] { "Id", "AppointmentId", "Concerne", "Description", "EndTime", "GarageBox", "OrderNumber", "StartTime", "Sugestions", "UserId", "VehicleId", "VehicleServiceHistoryId" },
+                columns: new[] { "Id", "AppointmentId", "Concerne", "Description", "EndTime", "GarageBox", "OrderNumber", "ServicePerformed", "StartTime", "Sugestions", "UserId", "VehicleId", "VehicleServiceHistoryId" },
                 values: new object[,]
                 {
-                    { 1, 1, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4018), 0, "SGTA252ASF276", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4017), "Provjeriti dizne i alnaser", 1, 1, null },
-                    { 2, 2, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4026), 0, "SGTA252ASF276", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4025), "Provjeriti dizne i alnaser", 2, 2, null },
-                    { 3, 3, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4030), 0, "SGTA252ASF276", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4029), "Provjeriti dizne i alnaser", 3, 3, null },
-                    { 4, 4, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4034), 0, "SGTA252ASF276", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4032), "Provjeriti dizne i alnaser", 4, 4, null },
-                    { 5, 5, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4037), 0, "SGTA252ASF276", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4036), "Provjeriti dizne i alnaser", 5, 5, null },
-                    { 6, 6, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4041), 0, "SGTA252ASF276", new DateTime(2024, 11, 25, 11, 32, 18, 926, DateTimeKind.Local).AddTicks(4040), "Provjeriti dizne i alnaser", 6, 6, null }
+                    { 1, 1, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4607), 0, "SGTA252ASF276", 1, new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4605), "Provjeriti dizne i alnaser", 1, 1, null },
+                    { 2, 2, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4613), 0, "SGTA252ASF276", 0, new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4612), "Provjeriti dizne i alnaser", 2, 2, null },
+                    { 3, 3, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4617), 0, "SGTA252ASF276", 4, new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4616), "Provjeriti dizne i alnaser", 3, 3, null },
+                    { 4, 4, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4621), 0, "SGTA252ASF276", 3, new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4620), "Provjeriti dizne i alnaser", 4, 4, null },
+                    { 5, 5, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4625), 0, "SGTA252ASF276", 5, new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4623), "Provjeriti dizne i alnaser", 5, 5, null },
+                    { 6, 6, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4628), 0, "SGTA252ASF276", 1, new DateTime(2024, 12, 29, 10, 20, 38, 24, DateTimeKind.Local).AddTicks(4627), "Provjeriti dizne i alnaser", 6, 6, null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -467,6 +473,11 @@ namespace CWM.Database.Migrations
                 name: "IX_Appointments_UserId",
                 table: "Appointments",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_VehicleId",
+                table: "Appointments",
+                column: "VehicleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_CountryId",

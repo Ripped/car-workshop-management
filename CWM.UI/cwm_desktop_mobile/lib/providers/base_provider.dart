@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import '../models/user_auth.dart';
+import 'package:cwm_desktop_mobile/utils/utils.dart';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -113,8 +114,8 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   }
 
   Map<String, String> createHeaders() {
-    String username = UserAuth.username ?? "";
-    String password = UserAuth.password ?? "";
+    String username = Authorization.username ?? "";
+    String password = Authorization.password ?? "";
 
     //print("passed creds: $username, $password");
 

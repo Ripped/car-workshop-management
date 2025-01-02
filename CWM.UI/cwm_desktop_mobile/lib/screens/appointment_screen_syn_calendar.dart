@@ -1,11 +1,12 @@
 import 'package:cwm_desktop_mobile/data_table_sources/appointment_data_table_source.dart';
+import 'package:cwm_desktop_mobile/models/vehicle.dart';
+import 'package:cwm_desktop_mobile/providers/vehicle_provider.dart';
+import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-
-import '../models/enums/service.dart';
 import '../models/paged_result.dart';
 import '../models/appointment.dart' as appointment;
 import '../models/appointment_type.dart' as appointment_type;
@@ -13,6 +14,7 @@ import '../models/appointment_blocked.dart' as appointment_blocked;
 
 import 'package:provider/provider.dart';
 import '../models/searches/appointment_search.dart';
+import '../models/searches/vehicle_search.dart';
 import '../providers/appointment_blocked_provider.dart';
 import '../providers/appointment_type_provider.dart';
 import '../providers/appointment_provider.dart';
@@ -28,12 +30,14 @@ class _MyWidgetState extends State<MyWidget> {
   late AppointmentProvider _appointmentProvider;
   late AppointmentTypeProvider _appointmentTypeProvider;
   late AppointmentBlockedProvider _appointmentBlockedProvider;
+  late VehicleProvider _vehicleProvider;
 
   final _formKey = GlobalKey<FormBuilderState>();
   var _appointmentType = PagedResult<appointment_type.AppointmentType>();
   var _appointmentBlockedDates =
       PagedResult<appointment_blocked.AppointmentBlocked>();
   var _appointmentBlocked = <appointment_blocked.AppointmentBlocked>[];
+  var _vehicle = PagedResult<Vehicle>();
 
   List<DateTime> blockedDates = <DateTime>[];
 
@@ -44,12 +48,18 @@ class _MyWidgetState extends State<MyWidget> {
     _appointmentProvider = context.read<AppointmentProvider>();
     _appointmentTypeProvider = context.read<AppointmentTypeProvider>();
     _appointmentBlockedProvider = context.read<AppointmentBlockedProvider>();
+    _vehicleProvider = context.read<VehicleProvider>();
 
     _loadData(null, null);
   }
 
   Future _loadData(int? id, DateTime? selectedDate) async {
+    var vehicleSearch = VehicleSearch();
+    vehicleSearch.pageSize = 50;
+    vehicleSearch.userId = Authorization.userId;
+
     _appointmentType = await _appointmentTypeProvider.getAll();
+    _vehicle = await _vehicleProvider.getAll(search: vehicleSearch);
     _appointmentBlockedDates = await _appointmentBlockedProvider.getAll();
     _appointmentBlocked = _appointmentBlockedDates.result.cast();
 
@@ -60,16 +70,18 @@ class _MyWidgetState extends State<MyWidget> {
       var event = await _appointmentProvider.get(id);
 
       _formKey.currentState?.patchValue({
-        "servicePerformed": event.servicePerformed,
+        "userId": Authorization.userId.toString(),
         "description": event.description,
         "startDate": event.startDate,
         "endDate": event.endDate,
         "appointmentTypeId": event.appointmentType?.id.toString() ?? "0",
+        "vehicleId": event.vehicle?.id.toString() ?? "0"
       });
     } else {
       _formKey.currentState?.patchValue({
         "startDate": selectedDate,
         "endDate": selectedDate,
+        "userId": Authorization.userId.toString(),
       });
     }
   }
@@ -213,9 +225,9 @@ class _MyWidgetState extends State<MyWidget> {
                       width: 600,
                       child: FormBuilderTextField(
                         name: "userId",
-                        decoration: const InputDecoration(labelText: "Naziv *"),
-                        /*validator: FormBuilderValidators.required(
-                          errorText: "Naziv je obavezan."),*/
+                        enabled: false,
+                        decoration:
+                            const InputDecoration(labelText: "Korisnik *"),
                       ),
                     )
                   ],
@@ -283,13 +295,13 @@ class _MyWidgetState extends State<MyWidget> {
                     SizedBox(
                       width: 290,
                       child: FormBuilderDropdown(
-                        name: "servicePerformed",
-                        decoration:
-                            const InputDecoration(labelText: "Vrsta servisa *"),
-                        items: Service.values
+                        name: "vehicleId",
+                        decoration: const InputDecoration(
+                            labelText: "Odaberi automobil *"),
+                        items: _vehicle.result
                             .map((type) => DropdownMenuItem(
-                                  value: type.index,
-                                  child: Text(type.name),
+                                  value: type.id.toString(),
+                                  child: Text(type.chassis),
                                 ))
                             .toList(),
                       ),

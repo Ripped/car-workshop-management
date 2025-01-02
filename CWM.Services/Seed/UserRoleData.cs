@@ -35,19 +35,19 @@ namespace CWM.Database.Seed
                 new UserRole
                 {
                     Id = 4,
-                    UserId = 1,
+                    UserId = 2,
                     Role = Role.Employee
                 },
                 new UserRole
                 {
                     Id = 5,
-                    UserId = 1,
-                    Role = Role.Employee
+                    UserId = 3,
+                    Role = Role.User
                 },
                 new UserRole
                 {
                     Id = 6,
-                    UserId = 1,
+                    UserId = 4,
                     Role = Role.User
                 }
             );

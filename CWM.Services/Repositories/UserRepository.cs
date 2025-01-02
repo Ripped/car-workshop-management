@@ -17,8 +17,9 @@ namespace CWM.Database.Repositories
             if (!isNew)
             {
                 var entity = await Context
-                    .Appointments
-                    .Include(x => x.AppointmentType)
+                    .Users
+                    .Include(x => x.City)
+                    .Include(x => x.Citizenship)
                     .SingleOrDefaultAsync(x => x.Id == id);
 
                 return Mapper.Map<Core.Models.User>(entity);

@@ -19,9 +19,9 @@ namespace CWM.Models
         public List<Role> Roles { get; set; } = new();
 
         [Required]
-        public int? CityId { get; set; } = new();
+        public int? CityId { get; set; }
 
         [Required]
-        public int? CountryId { get; set; } = new();
+        public int? CountryId { get; set; }
     }
 }

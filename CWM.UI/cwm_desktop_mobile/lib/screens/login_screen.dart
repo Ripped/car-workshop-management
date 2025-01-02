@@ -1,4 +1,4 @@
-import 'package:cwm_desktop_mobile/models/user.dart';
+import 'package:cwm_desktop_mobile/models/user_auth.dart';
 import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,7 @@ class _LoginScreen extends State<LoginScreen> {
   IconData _icon = Icons.visibility_off;
 
   late AuthProvider _authProvider;
-  User? userResponse;
+  UserAuth? userResponse;
 
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -157,6 +157,7 @@ class _LoginScreen extends State<LoginScreen> {
 
           if (userResponse != null) {
             Authorization.userId = userResponse!.id;
+            Authorization.roles = userResponse!.roles;
 
             // ignore: use_build_context_synchronously
             Navigator.pushAndRemoveUntil(

@@ -1,3 +1,4 @@
+import 'package:cwm_desktop_mobile/models/enums/role.dart';
 import 'package:cwm_desktop_mobile/screens/appointment_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/appointment_screen_syn_calendar.dart';
 import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
@@ -5,6 +6,8 @@ import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/work_order_list_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../utils/utils.dart';
 
 class SideMenu extends StatelessWidget {
   const SideMenu({super.key});
@@ -54,9 +57,9 @@ class SideMenu extends StatelessWidget {
             const SizedBox(
               width: 20,
             ),
-            const Text(
-              "Korisnik",
-              style: TextStyle(
+            Text(
+              '${Authorization.username}',
+              style: const TextStyle(
                   fontFamily: "Roboto",
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF3C4858),
@@ -78,14 +81,16 @@ class SideMenu extends StatelessWidget {
         children: [
           _buildListTile(context, "Početna", Icons.dashboard,
               const DashboardScreen(), true),
-          _buildListTile(context, "Nalozi", Icons.content_paste,
-              const WorkOrderListScreen(), true),
+          if (Authorization.roles.contains(Role.employee))
+            _buildListTile(context, "Nalozi", Icons.content_paste,
+                const WorkOrderListScreen(), true),
           _buildListTile(context, "Dijelovi", Icons.data_array,
               const PartListScreen(), true),
           _buildListTile(context, "Rezervacija termina", Icons.date_range,
               const MyWidget(), true),
-          _buildListTile(context, "Pregled termina", Icons.date_range,
-              const AppointmentListScreen(), true),
+          if (Authorization.roles.contains(Role.admin))
+            _buildListTile(context, "Pregled termina", Icons.date_range,
+                const AppointmentListScreen(), true),
           ListTile(
             leading: const Icon(Icons.groups),
             title: const Text("Zaposlenici"),

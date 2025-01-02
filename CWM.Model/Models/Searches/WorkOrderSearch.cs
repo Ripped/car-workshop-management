@@ -11,5 +11,7 @@ namespace CWM.Core.Models.Searches
         public string? Name { get; set; }
 
         public bool IncludeVehicle { get; set; }
+
+        public int? AppointmentId { get; set; }
     }
 }

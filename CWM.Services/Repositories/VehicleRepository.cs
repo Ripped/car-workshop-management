@@ -22,6 +22,7 @@ namespace CWM.Database.Repositories
             {
                 var entity = await Context
                     .Vehicles
+                    .Include(x => x.User)
                     .SingleOrDefaultAsync(x => x.Id == id);
 
                 return Mapper.Map<Core.Models.Vehicle>(entity);
@@ -36,6 +37,9 @@ namespace CWM.Database.Repositories
 
             if (!string.IsNullOrWhiteSpace(search.Name))
                 query = query.Where(x => x.Chassis.ToLower().Contains(search.Name.ToLower()));
+
+            if (search.UserId > 0)
+                query = query.Where(x => x.User!.Id == search.UserId);
 
             return query;
         }

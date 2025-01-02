@@ -8,7 +8,6 @@ part of 'appointment.dart';
 
 Appointment _$AppointmentFromJson(Map<String, dynamic> json) => Appointment(
       (json['id'] as num).toInt(),
-      $enumDecode(_$ServiceEnumMap, json['servicePerformed']),
       json['description'] as String,
       DateTime.parse(json['startDate'] as String),
       DateTime.parse(json['endDate'] as String),
@@ -16,23 +15,21 @@ Appointment _$AppointmentFromJson(Map<String, dynamic> json) => Appointment(
           ? null
           : AppointmentType.fromJson(
               json['appointmentType'] as Map<String, dynamic>),
-    );
+    )
+      ..user = json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>)
+      ..vehicle = json['vehicle'] == null
+          ? null
+          : Vehicle.fromJson(json['vehicle'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$AppointmentToJson(Appointment instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'servicePerformed': _$ServiceEnumMap[instance.servicePerformed]!,
       'description': instance.description,
       'startDate': instance.startDate.toIso8601String(),
       'endDate': instance.endDate.toIso8601String(),
       'appointmentType': instance.appointmentType,
+      'user': instance.user,
+      'vehicle': instance.vehicle,
     };
-
-const _$ServiceEnumMap = {
-  Service.electrical: 0,
-  Service.mechanical: 1,
-  Service.body: 2,
-  Service.suspension: 3,
-  Service.inspection: 4,
-  Service.other: 5,
-};

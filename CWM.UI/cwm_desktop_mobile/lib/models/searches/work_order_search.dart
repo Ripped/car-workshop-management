@@ -8,6 +8,7 @@ part 'work_order_search.g.dart';
 class WorkOrderSearch extends BaseSearch {
   String? name;
   bool includeVehicle = false;
+  int? appointmentId;
 
   WorkOrderSearch();
 

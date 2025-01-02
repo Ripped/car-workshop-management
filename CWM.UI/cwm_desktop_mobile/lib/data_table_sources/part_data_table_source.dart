@@ -20,7 +20,7 @@ class PartDataTableSource extends AdvancedDataTableSource<Part> {
         (pageRequest.offset / pageRequest.pageSize).roundToDouble().ceil();
 
     partSearch.page = page + 1;
-    partSearch.pageSize = 50;
+    partSearch.pageSize = pageRequest.pageSize;
 
     var parts = await _partProvider.getAll(search: partSearch);
 

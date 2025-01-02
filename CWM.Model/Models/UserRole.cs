@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CWM.Core.Models
 {
-    public class UserRole : Base
+    public class UserRole
     {
         public int Id { get; set; }
 

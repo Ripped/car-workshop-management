@@ -1,4 +1,6 @@
 import 'package:cwm_desktop_mobile/models/enums/garage_box.dart';
+import 'package:cwm_desktop_mobile/models/enums/service.dart';
+import 'package:cwm_desktop_mobile/models/searches/work_order_search.dart';
 import 'package:cwm_desktop_mobile/providers/appointment_provider.dart';
 import 'package:cwm_desktop_mobile/providers/work_order_provider.dart';
 import 'package:cwm_desktop_mobile/screens/appointment_list_screen.dart';
@@ -19,6 +21,7 @@ class WorkOrderScreen extends StatefulWidget {
 class _WorkOrderScreen extends State<WorkOrderScreen> {
   late AppointmentProvider _appointmentProvider;
   late WorkOrderProvider _workOrderProvider;
+  late int? workOrderId = null;
 
   bool isLoading = true;
   final _formKey = GlobalKey<FormBuilderState>();
@@ -35,14 +38,21 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
   }
 
   Future _loadData(int? id) async {
+    var workOrderSearch = WorkOrderSearch();
+    workOrderSearch.appointmentId = id;
+
+    var workOrder = await _workOrderProvider.getAll(search: workOrderSearch);
+    if (workOrder.totalCount > 0) workOrderId = workOrder.result.first.id;
+
     if (id != null) {
       var appointment = await _appointmentProvider.get(id);
-
       _initialValue = {
         "description": appointment.description,
         "startTime": appointment.startDate,
         "endTime": appointment.endDate,
-        "appointmentId": appointment.id
+        "appointmentId": appointment.id.toString(),
+        "userId": appointment.user?.id.toString(),
+        "vehicleId": appointment.vehicle?.id.toString()
       };
     } else {
       _initialValue = {"image": "", "description": ""};
@@ -117,6 +127,20 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: FormBuilderTextField(
+                    name: "userId",
+                    decoration: const InputDecoration(labelText: "USER *"),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "vehicleId",
+                    decoration: const InputDecoration(labelText: "VEHICLE *"),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
                     name: "concerne",
                     decoration:
                         const InputDecoration(labelText: "Obrati paznju *"),
@@ -158,6 +182,33 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                         labelText: "Prijedlog za servisera  *"),
                   ),
                 ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "appointmentId",
+                    decoration:
+                        const InputDecoration(labelText: "Appointment *"),
+                  ),
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 290,
+                      child: FormBuilderDropdown(
+                        name: "servicePerformed",
+                        decoration:
+                            const InputDecoration(labelText: "Vrsta servisa *"),
+                        items: Service.values
+                            .map((type) => DropdownMenuItem(
+                                  value: type.index,
+                                  child: Text(type.name),
+                                ))
+                            .toList(),
+                      ),
+                    ),
+                    const SizedBox(width: 20),
+                  ],
+                ),
                 Row(
                   children: [
                     SizedBox(
@@ -197,10 +248,10 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                             var request =
                                 Map.from(_formKey.currentState!.value);
 
-                            widget.id == null
+                            workOrderId == null
                                 ? await _workOrderProvider.insert(request)
                                 : await _workOrderProvider.update(
-                                    widget.id!, request);
+                                    workOrderId!, request);
 
                             if (context.mounted) {
                               Navigator.of(context).pushReplacement(

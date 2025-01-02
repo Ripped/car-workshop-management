@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:cwm_desktop_mobile/models/user.dart';
+import 'package:cwm_desktop_mobile/models/user_auth.dart';
 import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -27,7 +27,7 @@ class AuthProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
 
-      return User.fromJson(data);
+      return UserAuth.fromJson(data);
     } else {
       return null;
     }

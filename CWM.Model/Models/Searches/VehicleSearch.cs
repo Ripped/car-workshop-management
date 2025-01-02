@@ -9,6 +9,7 @@ namespace CWM.Core.Models.Searches
     public class VehicleSearch : BaseSearch
     {
         public string? Name { get; set; }
+        public int? UserId { get; set; }
 
         public bool IncludeServiceHistory { get; set; }
     }

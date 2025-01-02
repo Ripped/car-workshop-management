@@ -27,6 +27,8 @@ namespace CWM.Database.Repositories
                 var entity = await Context
                     .Appointments
                     .Include(x => x.AppointmentType)
+                    .Include(x => x.User)
+                    .Include(x => x.Vehicle)
                     .SingleOrDefaultAsync(x => x.Id == id);
 
                 return Mapper.Map<Core.Models.Appointment>(entity);

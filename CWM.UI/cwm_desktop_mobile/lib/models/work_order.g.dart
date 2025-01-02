@@ -12,6 +12,7 @@ WorkOrder _$WorkOrderFromJson(Map<String, dynamic> json) => WorkOrder(
       DateTime.parse(json['startTime'] as String),
       DateTime.parse(json['endTime'] as String),
       $enumDecode(_$GarageBoxEnumMap, json['garageBox']),
+      $enumDecode(_$ServiceEnumMap, json['servicePerformed']),
       json['concerne'] as String,
       json['description'] as String,
       json['sugestions'] as String,
@@ -29,6 +30,7 @@ Map<String, dynamic> _$WorkOrderToJson(WorkOrder instance) => <String, dynamic>{
       'startTime': instance.startTime.toIso8601String(),
       'endTime': instance.endTime.toIso8601String(),
       'garageBox': _$GarageBoxEnumMap[instance.garageBox]!,
+      'servicePerformed': _$ServiceEnumMap[instance.servicePerformed]!,
       'concerne': instance.concerne,
       'description': instance.description,
       'sugestions': instance.sugestions,
@@ -43,4 +45,13 @@ const _$GarageBoxEnumMap = {
   GarageBox.box_4: 3,
   GarageBox.box_5: 4,
   GarageBox.box_6: 5,
+};
+
+const _$ServiceEnumMap = {
+  Service.electrical: 0,
+  Service.mechanical: 1,
+  Service.body: 2,
+  Service.suspension: 3,
+  Service.inspection: 4,
+  Service.other: 5,
 };

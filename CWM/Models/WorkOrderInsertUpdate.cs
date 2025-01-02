@@ -9,15 +9,16 @@ namespace CWM.Models
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }
         public GarageBox GarageBox { get; set; }
+        public Service ServicePerformed { get; set; }
         public string Concerne { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string Sugestions { get; set; } = string.Empty;
 
         [Required]
-        public int? VehicleId { get; set; } = new();
+        public int? VehicleId { get; set; }
         [Required]
-        public int? AppointmentId { get; set; } = new();
+        public int? AppointmentId { get; set; }
         [Required]
-        public int? UserId { get; set; } = new();
+        public int? UserId { get; set; }
     }
 }

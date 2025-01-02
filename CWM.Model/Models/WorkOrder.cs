@@ -13,6 +13,7 @@ namespace CWM.Core.Models
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public GarageBox GarageBox { get; set; }
+        public Service ServicePerformed { get; set; }
         public string Concerne { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public string Sugestions { get; set; } = string.Empty;

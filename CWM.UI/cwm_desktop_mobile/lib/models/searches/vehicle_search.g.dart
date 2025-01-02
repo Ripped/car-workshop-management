@@ -11,6 +11,7 @@ VehicleSearch _$VehicleSearchFromJson(Map<String, dynamic> json) =>
       ..page = (json['page'] as num).toInt()
       ..pageSize = (json['pageSize'] as num).toInt()
       ..name = json['name'] as String?
+      ..userId = (json['userId'] as num?)?.toInt()
       ..includeServiceHistory = json['includeServiceHistory'] as bool;
 
 Map<String, dynamic> _$VehicleSearchToJson(VehicleSearch instance) =>
@@ -18,5 +19,6 @@ Map<String, dynamic> _$VehicleSearchToJson(VehicleSearch instance) =>
       'page': instance.page,
       'pageSize': instance.pageSize,
       'name': instance.name,
+      'userId': instance.userId,
       'includeServiceHistory': instance.includeServiceHistory,
     };

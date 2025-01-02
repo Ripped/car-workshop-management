@@ -7,6 +7,7 @@ part 'vehicle_search.g.dart';
 @JsonSerializable()
 class VehicleSearch extends BaseSearch {
   String? name;
+  int? userId;
   bool includeServiceHistory = false;
 
   VehicleSearch();

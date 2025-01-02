@@ -25,7 +25,7 @@ class _MasterScreenState extends State<MasterScreen> {
         child: Row(
           children: [
             if (Responsive.isDesktop(context))
-              Expanded(
+              const Expanded(
                 child: SideMenu(),
               ),
             Expanded(
@@ -41,11 +41,11 @@ class _MasterScreenState extends State<MasterScreen> {
                             ElevatedButton(
                                 onPressed: () =>
                                     _key.currentState!.openDrawer(),
-                                child: Text("Open")),
-                          Text("Pocetna"),
-                          Icon(Icons.chat_bubble),
-                          Icon(Icons.notifications),
-                          Icon(Icons.person)
+                                child: const Text("Open")),
+                          const Text("Pocetna"),
+                          const Icon(Icons.chat_bubble),
+                          const Icon(Icons.notifications),
+                          const Icon(Icons.person)
                         ],
                       ),
                     ),
@@ -55,7 +55,7 @@ class _MasterScreenState extends State<MasterScreen> {
                     child: Padding(
                         padding: const EdgeInsets.all(20), child: widget.child),
                   ),
-                  Expanded(
+                  const Expanded(
                     child: Text("© 2024 - CWM"),
                   ),
                 ],

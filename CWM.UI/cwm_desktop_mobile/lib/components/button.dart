@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
   const Button(
-      {Key? key,
+      {super.key,
       required this.width,
       required this.title,
       required this.onPressed,
-      required this.disable})
-      : super(key: key);
+      required this.disable});
 
   final double width;
   final String title;

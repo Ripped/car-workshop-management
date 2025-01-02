@@ -43,7 +43,7 @@ namespace CWM.Database.Seed
                     CitizenshipId = 2,
                     Image = null,
                     Email = "stufo@gmail.com",
-                    Username = "samra",
+                    Username = "employee",
                     Password = "Admin",
                     Mobile = "062342376",
                     OfficePhone = "38734549"
@@ -60,7 +60,7 @@ namespace CWM.Database.Seed
                     CitizenshipId = 3,
                     Image = null,
                     Email = "tufo@gmail.com",
-                    Username = "omer",
+                    Username = "user",
                     Password = "Admin",
                     Mobile = "062342376",
                     OfficePhone = "38734549"

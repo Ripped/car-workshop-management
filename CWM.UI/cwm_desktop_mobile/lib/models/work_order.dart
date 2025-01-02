@@ -1,4 +1,5 @@
 import 'package:cwm_desktop_mobile/models/enums/garage_box.dart';
+import 'package:cwm_desktop_mobile/models/enums/service.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'appointment.dart';
 import 'vehicle.dart';
@@ -12,6 +13,7 @@ class WorkOrder {
   DateTime startTime;
   DateTime endTime;
   GarageBox garageBox;
+  Service servicePerformed;
   String concerne;
   String description;
   String sugestions;
@@ -24,6 +26,7 @@ class WorkOrder {
       this.startTime,
       this.endTime,
       this.garageBox,
+      this.servicePerformed,
       this.concerne,
       this.description,
       this.sugestions,

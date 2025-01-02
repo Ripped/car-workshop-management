@@ -17,10 +17,10 @@ class AppointmentDataTableSource extends CalendarDataSource {
     return appointments![index].endDate;
   }
 
-  @override
+  /*@override
   String getSubject(int index) {
     return appointments![index].servicePerformed.toString();
-  }
+  }*/
 
   /*@override
   Color getColor(int index) {

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/appointment_blocked_provider.dart';
+import 'providers/vehicle_provider.dart';
 import 'providers/vehicle_service_history_provider.dart';
 import 'screens/login_screen.dart';
 
@@ -20,6 +21,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => WorkOrderProvider()),
       ChangeNotifierProvider(create: (_) => VehicleServiceHistoryProvider()),
       ChangeNotifierProvider(create: (_) => AuthProvider()),
+      ChangeNotifierProvider(create: (_) => VehicleProvider()),
     ], child: const MyApp()),
   );
 }

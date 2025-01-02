@@ -15,15 +15,17 @@ class AppointmentListScreen extends StatefulWidget {
 }
 
 class _AppointmentListScreenState extends State<AppointmentListScreen> {
+  late AppointmentProvider _appointmentProvider;
+
   late AppointmentListDataTableSource appointmentListDataTableSource;
 
   @override
   void initState() {
     super.initState();
 
-    var appointmentProvider = context.read<AppointmentProvider>();
+    _appointmentProvider = context.read<AppointmentProvider>();
     appointmentListDataTableSource =
-        AppointmentListDataTableSource(appointmentProvider, _openDetails);
+        AppointmentListDataTableSource(_appointmentProvider, _openDetails);
   }
 
   void _openDetails(int? id) {
@@ -50,10 +52,9 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: appointmentListDataTableSource,
-            rowsPerPage: 7,
+            rowsPerPage: 10,
             columns: const [
               DataColumn(label: Text("Serial number")),
-              DataColumn(label: Text("Service performed")),
               DataColumn(label: Text("Start date")),
               DataColumn(label: Text("End date")),
               DataColumn(label: Text("Status")),

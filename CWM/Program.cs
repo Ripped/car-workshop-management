@@ -21,6 +21,7 @@ builder.Services.AddTransient<IAppointmentTypeRepository, AppointmentTypeReposit
 builder.Services.AddTransient<IAppointmentBlockedRepository, AppointmentBlockedRepository>();
 builder.Services.AddTransient<IWorkOrderRepository, WorkOrderRepository>();
 builder.Services.AddTransient<IVehicleServiceHistoryRepository, VehicleServiceHistoryRepository>();
+builder.Services.AddTransient<IVehicleRepository, VehicleRepository>();
 
 builder.Services.AddAutoMapper(typeof(CityRepository));
 builder.Services.AddAutoMapper();

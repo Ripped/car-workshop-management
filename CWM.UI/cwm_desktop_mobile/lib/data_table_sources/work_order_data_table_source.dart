@@ -19,7 +19,8 @@ class WorkOrderListDataTableSource extends AdvancedDataTableSource<WorkOrder> {
         (pageRequest.offset / pageRequest.pageSize).roundToDouble().ceil();
 
     workOrderSearch.page = page + 1;
-    workOrderSearch.pageSize = 50;
+    workOrderSearch.pageSize = pageRequest.pageSize;
+    workOrderSearch.includeVehicle = true;
 
     var workOrder = await _workOrderProvider.getAll(search: workOrderSearch);
 
@@ -32,7 +33,7 @@ class WorkOrderListDataTableSource extends AdvancedDataTableSource<WorkOrder> {
     return DataRow(
       onSelectChanged: (e) => _onSelectChanged(currentRow.id),
       cells: [
-        DataCell(Text(currentRow.description)),
+        DataCell(Text(currentRow.orderNumber)),
         DataCell(Text(currentRow.concerne)),
         DataCell(Text(currentRow.startTime.toString())),
         DataCell(Text(currentRow.endTime.toString())),
