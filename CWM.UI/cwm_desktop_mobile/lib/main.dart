@@ -7,6 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/appointment_blocked_provider.dart';
+import 'providers/city_provider.dart';
+import 'providers/country_provider.dart';
+import 'providers/employee_provider.dart';
+import 'providers/user_provider.dart';
 import 'providers/vehicle_provider.dart';
 import 'providers/vehicle_service_history_provider.dart';
 import 'screens/login_screen.dart';
@@ -22,6 +26,10 @@ void main() {
       ChangeNotifierProvider(create: (_) => VehicleServiceHistoryProvider()),
       ChangeNotifierProvider(create: (_) => AuthProvider()),
       ChangeNotifierProvider(create: (_) => VehicleProvider()),
+      ChangeNotifierProvider(create: (_) => UserProvider()),
+      ChangeNotifierProvider(create: (_) => EmployeeProvider()),
+      ChangeNotifierProvider(create: (_) => CityProvider()),
+      ChangeNotifierProvider(create: (_) => CountryProvider()),
     ], child: const MyApp()),
   );
 }

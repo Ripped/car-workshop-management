@@ -37,8 +37,12 @@ namespace CWM.Mappings
             .ForMember(x => x.Appointment, opt => opt.MapFrom(y => y.AppointmentId == null ? null : new Appointment { Id = y.AppointmentId ?? 0 }));
 
             CreateMap<UserInsertUpdate, User>()
-            .ForMember(x => x.Citizenship, opt => opt.MapFrom(y => y.CountryId == null ? null : new Vehicle { Id = y.CountryId ?? 0 }))
-            .ForMember(x => x.City, opt => opt.MapFrom(y => y.CityId == null ? null : new User { Id = y.CityId ?? 0 }));
+            .ForMember(x => x.Citizenship, opt => opt.MapFrom(y => y.CountryId == null ? null : new Country { Id = y.CountryId ?? 0 }))
+            .ForMember(x => x.City, opt => opt.MapFrom(y => y.CityId == null ? null : new City { Id = y.CityId ?? 0 }));
+
+            CreateMap<EmployeeInsertUpdate, Employee>()
+            .ForMember(x => x.Citizenship, opt => opt.MapFrom(y => y.CountryId == null ? null : new Country { Id = y.CountryId ?? 0 }))
+            .ForMember(x => x.City, opt => opt.MapFrom(y => y.CityId == null ? null : new City { Id = y.CityId ?? 0 }));
         }
     }
 }

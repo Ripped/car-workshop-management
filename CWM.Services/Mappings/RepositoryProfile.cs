@@ -69,6 +69,13 @@ namespace CWM.Database.Mappings
             CreateMap<Core.Models.UserRole, UserRole>()
                 .ForMember(x => x.UserId, opt => opt.MapFrom(y => y.User.Id))
                 .ForMember(x => x.User, opt => opt.Ignore());
+
+            CreateMap<Employee, Core.Models.Employee>();
+            CreateMap<Core.Models.Employee, Employee>()
+            .ForMember(x => x.CitizenshipId, opt => opt.MapFrom((src, dest) => src.Citizenship?.Id))
+            .ForMember(x => x.Citizenship, opt => opt.Ignore())
+            .ForMember(x => x.CityId, opt => opt.MapFrom((src, dest) => src.City?.Id))
+            .ForMember(x => x.City, opt => opt.Ignore());
         }
 
     }
