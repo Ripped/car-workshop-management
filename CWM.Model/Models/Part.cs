@@ -14,5 +14,8 @@ namespace CWM.Core.Models
         public byte[]? Image { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; } = string.Empty;
+
+        public VehicleServiceHistory VehicleServiceHistory { get; set; } = new();
+        public WorkOrder WorkOrder { get; set; } = new();
     }
 }

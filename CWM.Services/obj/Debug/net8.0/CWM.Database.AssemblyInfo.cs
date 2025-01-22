@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CWM.Database")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e9d5a5cb93de83635ba7336abe72dddd9ec4a7ea")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b4540629235ba9c034497f593b623dccc7f2df6b")]
 [assembly: System.Reflection.AssemblyProductAttribute("CWM.Database")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CWM.Database")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

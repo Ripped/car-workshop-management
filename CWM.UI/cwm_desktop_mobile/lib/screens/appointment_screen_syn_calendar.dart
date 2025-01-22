@@ -82,6 +82,7 @@ class _MyWidgetState extends State<MyWidget> {
         "startDate": selectedDate,
         "endDate": selectedDate,
         "userId": Authorization.userId.toString(),
+        "appointmentTypeId": "1",
       });
     }
   }
@@ -278,6 +279,7 @@ class _MyWidgetState extends State<MyWidget> {
                       child: FormBuilderDropdown(
                         name: "appointmentTypeId",
                         decoration: const InputDecoration(labelText: "Vrsta *"),
+                        enabled: false,
                         items: _appointmentType.result
                             .map((type) => DropdownMenuItem(
                                   value: type.id.toString(),

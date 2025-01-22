@@ -20,5 +20,7 @@ namespace CWM.Models
         public int? AppointmentId { get; set; }
         [Required]
         public int? UserId { get; set; }
+        [Required]
+        public int? EmployeeId { get; set; }
     }
 }

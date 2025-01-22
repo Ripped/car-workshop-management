@@ -11,7 +11,7 @@ VehicleServiceHistory _$VehicleServiceHistoryFromJson(
     VehicleServiceHistory(
       (json['id'] as num).toInt(),
       DateTime.parse(json['serviceDate'] as String),
-      $enumDecode(_$ServiceEnumMap, json['service']),
+      $enumDecode(_$ServiceEnumMap, json['serviceType']),
       json['description'] as String,
       json['vehicle'] == null
           ? null
@@ -23,7 +23,7 @@ Map<String, dynamic> _$VehicleServiceHistoryToJson(
     <String, dynamic>{
       'id': instance.id,
       'serviceDate': instance.serviceDate.toIso8601String(),
-      'service': _$ServiceEnumMap[instance.service]!,
+      'serviceType': _$ServiceEnumMap[instance.serviceType]!,
       'description': instance.description,
       'vehicle': instance.vehicle,
     };

@@ -22,7 +22,9 @@ WorkOrder _$WorkOrderFromJson(Map<String, dynamic> json) => WorkOrder(
       json['appointment'] == null
           ? null
           : Appointment.fromJson(json['appointment'] as Map<String, dynamic>),
-    );
+    )..employee = json['employee'] == null
+        ? null
+        : Employee.fromJson(json['employee'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$WorkOrderToJson(WorkOrder instance) => <String, dynamic>{
       'id': instance.id,
@@ -36,6 +38,7 @@ Map<String, dynamic> _$WorkOrderToJson(WorkOrder instance) => <String, dynamic>{
       'sugestions': instance.sugestions,
       'vehicle': instance.vehicle,
       'appointment': instance.appointment,
+      'employee': instance.employee,
     };
 
 const _$GarageBoxEnumMap = {

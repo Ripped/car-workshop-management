@@ -27,7 +27,8 @@ namespace CWM.Database.Seed
                     Sugestions = "Provjeriti dizne i alnaser",
                     AppointmentId = 1,
                     VehicleId = 1,
-                    UserId = 1
+                    UserId = 1,
+                    EmployeeId = 1,
                 },
                 new WorkOrder
                 {
@@ -42,7 +43,8 @@ namespace CWM.Database.Seed
                     Sugestions = "Provjeriti dizne i alnaser",
                     AppointmentId = 2,
                     VehicleId = 2,
-                    UserId = 2
+                    UserId = 2,
+                    EmployeeId = 2,
                 },
                 new WorkOrder
                 {
@@ -57,7 +59,8 @@ namespace CWM.Database.Seed
                     Sugestions = "Provjeriti dizne i alnaser",
                     AppointmentId = 3,
                     VehicleId = 3,
-                    UserId = 3
+                    UserId = 3,
+                    EmployeeId = 3,
                 },
                 new WorkOrder
                 {
@@ -72,7 +75,8 @@ namespace CWM.Database.Seed
                     Sugestions = "Provjeriti dizne i alnaser",
                     AppointmentId = 4,
                     VehicleId = 4,
-                    UserId = 4
+                    UserId = 4,
+                    EmployeeId = 4,
                 },
                 new WorkOrder
                 {
@@ -87,7 +91,8 @@ namespace CWM.Database.Seed
                     Sugestions = "Provjeriti dizne i alnaser",
                     AppointmentId = 5,
                     VehicleId = 5,
-                    UserId = 5
+                    UserId = 5,
+                    EmployeeId = 5,
                 },
                 new WorkOrder
                 {
@@ -102,7 +107,8 @@ namespace CWM.Database.Seed
                     Sugestions = "Provjeriti dizne i alnaser",
                     AppointmentId = 6,
                     VehicleId = 6,
-                    UserId = 6
+                    UserId = 6,
+                    EmployeeId = 6,
                 }
             );
         }

@@ -17,8 +17,8 @@ namespace CWM.Database.Seed
                 new Employee
                 {
                     Id = 1,
-                    FirstName = "Dario",
-                    LastName = "Karić",
+                    FirstName = "Damir",
+                    LastName = "Kahvic",
                     BirthDate = new DateTime(2001, 6, 5),
                     CityId = 5,
                     CitizenshipId = 5,
@@ -28,8 +28,8 @@ namespace CWM.Database.Seed
                 new Employee
                 {
                     Id = 2,
-                    FirstName = "Dario",
-                    LastName = "Karić",
+                    FirstName = "Samir",
+                    LastName = "Muhlic",
                     BirthDate = new DateTime(2001, 6, 5),
                     CityId = 5,
                     CitizenshipId = 5,
@@ -39,8 +39,8 @@ namespace CWM.Database.Seed
                 new Employee
                 {
                     Id = 3,
-                    FirstName = "Dario",
-                    LastName = "Karić",
+                    FirstName = "Omer",
+                    LastName = "Pavitinovic",
                     BirthDate = new DateTime(2001, 6, 5),
                     CityId = 5,
                     CitizenshipId = 5,
@@ -50,8 +50,8 @@ namespace CWM.Database.Seed
                 new Employee
                 {
                     Id = 4,
-                    FirstName = "Dario",
-                    LastName = "Karić",
+                    FirstName = "Emir",
+                    LastName = "Oleg",
                     BirthDate = new DateTime(2001, 6, 5),
                     CityId = 5,
                     CitizenshipId = 5,
@@ -61,8 +61,8 @@ namespace CWM.Database.Seed
                 new Employee
                 {
                     Id = 5,
-                    FirstName = "Dario",
-                    LastName = "Karić",
+                    FirstName = "Faris",
+                    LastName = "Mahic",
                     BirthDate = new DateTime(2001, 6, 5),
                     CityId = 5,
                     CitizenshipId = 5,
@@ -72,8 +72,8 @@ namespace CWM.Database.Seed
                 new Employee
                 {
                     Id = 6,
-                    FirstName = "Dario",
-                    LastName = "Karić",
+                    FirstName = "Aleksandar",
+                    LastName = "Muftic",
                     BirthDate = new DateTime(2001, 6, 5),
                     CityId = 5,
                     CitizenshipId = 5,

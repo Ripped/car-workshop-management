@@ -8,6 +8,8 @@ part 'vehicle_service_history_search.g.dart';
 class VehicleServiceHistorySearch extends BaseSearch {
   String? name;
   bool includeVehicle = false;
+  int? vehicleId;
+  DateTime? serviceDate;
 
   VehicleServiceHistorySearch();
 

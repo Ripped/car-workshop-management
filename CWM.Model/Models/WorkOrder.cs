@@ -20,5 +20,6 @@ namespace CWM.Core.Models
         public Vehicle? Vehicle { get; set; } = new();
         public User? User { get; set; } = new();
         public Appointment? Appointment { get; set; } = new();
+        public Employee? Employee { get; set; } = new();
     }
 }

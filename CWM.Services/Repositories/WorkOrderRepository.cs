@@ -25,6 +25,7 @@ namespace CWM.Database.Repositories
                     .Include(x => x.Vehicle)
                     .Include(x => x.User)
                     .Include(x => x.Appointment)
+                    .Include(x => x.Employee)
                     .SingleOrDefaultAsync(x => x.Id == id);
 
                 return Mapper.Map<Core.Models.WorkOrder>(entity);

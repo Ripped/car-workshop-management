@@ -34,5 +34,11 @@ namespace CWM.Database.Models
         [ForeignKey("User")]
         public int? UserId { get; set; }
         public virtual User? User { get; set; }
+
+        [ForeignKey("Employee")]
+        public int? EmployeeId { get; set; }
+        public virtual Employee? Employee { get; set; }
+
+        public virtual ICollection<Part> Parts { get; set; } = new List<Part>();
     }
 }

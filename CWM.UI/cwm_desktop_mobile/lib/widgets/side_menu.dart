@@ -4,6 +4,7 @@ import 'package:cwm_desktop_mobile/screens/appointment_screen_syn_calendar.dart'
 import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
 import 'package:cwm_desktop_mobile/screens/employee_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
+import 'package:cwm_desktop_mobile/screens/vehicle_list.dart';
 import 'package:cwm_desktop_mobile/screens/work_order_list_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
@@ -95,6 +96,9 @@ class SideMenu extends StatelessWidget {
           if (Authorization.roles.contains(Role.admin))
             _buildListTile(context, "Zaposlenici", Icons.date_range,
                 const EmployeeListScreen(), true),
+          if (Authorization.roles.contains(Role.admin))
+            _buildListTile(context, "Historija vozila", Icons.date_range,
+                const VehicleListScreen(), true),
           SizedBox(height: spaceHeight),
           ListTile(
             leading: const Icon(Icons.settings),

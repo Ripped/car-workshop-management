@@ -1,3 +1,4 @@
+import 'package:cwm_desktop_mobile/models/employee.dart';
 import 'package:cwm_desktop_mobile/models/enums/garage_box.dart';
 import 'package:cwm_desktop_mobile/models/enums/service.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -19,6 +20,7 @@ class WorkOrder {
   String sugestions;
   Vehicle? vehicle;
   Appointment? appointment;
+  Employee? employee;
 
   WorkOrder(
       this.id,

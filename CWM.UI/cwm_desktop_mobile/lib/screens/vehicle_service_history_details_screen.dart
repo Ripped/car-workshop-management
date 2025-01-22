@@ -1,73 +1,48 @@
-import 'package:cwm_desktop_mobile/models/searches/vehicle_search.dart';
-import 'package:cwm_desktop_mobile/models/searches/vehicle_service_history_search.dart';
-import 'package:cwm_desktop_mobile/providers/work_order_provider.dart';
-import 'package:cwm_desktop_mobile/screens/work_order_list_screen.dart';
+import 'package:cwm_desktop_mobile/screens/vehicle_list.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 
-import '../models/paged_result.dart';
-import '../models/vehicle.dart';
-import '../providers/vehicle_provider.dart';
 import '../providers/vehicle_service_history_provider.dart';
 
-class WorkOrderClosureScreen extends StatefulWidget {
+class VehicleServiceHistoryDetailsScreen extends StatefulWidget {
   final int? id;
-  const WorkOrderClosureScreen(this.id, {super.key});
+  const VehicleServiceHistoryDetailsScreen(this.id, {super.key});
 
   @override
-  State<WorkOrderClosureScreen> createState() => _WorkOrderClosureScreen();
+  State<VehicleServiceHistoryDetailsScreen> createState() =>
+      _VehicleServiceHistoryDetailsScreenScreen();
 }
 
-class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
-  late WorkOrderProvider _workOrderProvider;
+class _VehicleServiceHistoryDetailsScreenScreen
+    extends State<VehicleServiceHistoryDetailsScreen> {
   late VehicleServiceHistoryProvider _vehicleServiceHistoryProvider;
-  late VehicleProvider _vehicleProvider;
 
   bool isLoading = true;
   final _formKey = GlobalKey<FormBuilderState>();
   Map<String, dynamic> _initialValue = {};
 
-  var _vehicles = PagedResult<Vehicle>();
-  late int? _vehicleHistoryId;
-
   @override
   void initState() {
     super.initState();
 
-    _workOrderProvider = context.read<WorkOrderProvider>();
     _vehicleServiceHistoryProvider =
         context.read<VehicleServiceHistoryProvider>();
-    _vehicleProvider = context.read<VehicleProvider>();
-    _vehicleHistoryId = null;
 
     _loadData(widget.id);
   }
 
   Future _loadData(int? id) async {
-    var vehicleServiceHistorySearch = VehicleServiceHistorySearch();
-    var vehicleSearch = VehicleSearch();
-    vehicleSearch.pageSize = 50;
-
-    _vehicles = await _vehicleProvider.getAll(search: vehicleSearch);
-
     if (id != null) {
-      var workOrder = await _workOrderProvider.get(id);
-
-      vehicleServiceHistorySearch.serviceDate = workOrder.startTime;
-      vehicleServiceHistorySearch.vehicleId = workOrder.vehicle?.id;
-      var vehicleServiceHistory = await _vehicleServiceHistoryProvider.getAll(
-          search: vehicleServiceHistorySearch);
-      if (vehicleServiceHistory.result.isNotEmpty) {
-        _vehicleHistoryId = vehicleServiceHistory.result.first.id;
-      }
+      var vehicleServiceHistory = await _vehicleServiceHistoryProvider.get(id);
 
       _initialValue = {
-        "serviceType": workOrder.servicePerformed.index,
-        "serviceDate": workOrder.startTime,
-        "vehicleId": workOrder.vehicle!.id
+        "serviceType": vehicleServiceHistory.serviceType.index,
+        "serviceDate": vehicleServiceHistory.serviceDate,
+        "description": vehicleServiceHistory.description,
+        "vehicleId": vehicleServiceHistory.vehicle?.id.toString()
       };
     } else {
       _initialValue = {"image": "", "description": ""};
@@ -111,7 +86,7 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
               width: 800,
               height: 30,
               child: Text(
-                "Zatvaranje radnog naloga",
+                "Pregled historije vozila",
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
@@ -189,21 +164,13 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                         labelText: "Opis kvara vlasnika vozila  *"),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: FormBuilderDropdown(
-                      name: "vehicleId",
-                      enabled: false,
-                      decoration: const InputDecoration(labelText: "Vozilo *"),
-                      items: _vehicles.result
-                          .map((vehicle) => DropdownMenuItem(
-                                value: vehicle.id,
-                                child: Text(vehicle.chassis),
-                              ))
-                          .toList(),
-                    ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FormBuilderTextField(
+                    name: "vehicleId",
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 3,
+                    decoration: const InputDecoration(labelText: "Vozilo  *"),
                   ),
                 ),
                 if (Responsive.isDesktop(context))
@@ -226,17 +193,18 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                             var request =
                                 Map.from(_formKey.currentState!.value);
 
-                            _vehicleHistoryId == null
+                            widget.id == null
                                 ? await _vehicleServiceHistoryProvider
                                     .insert(request)
                                 : await _vehicleServiceHistoryProvider.update(
-                                    _vehicleHistoryId!, request);
+                                    widget.id!, request);
 
                             if (context.mounted) {
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
                                       builder: (context) => const MasterScreen(
-                                          "Termini", WorkOrderListScreen())));
+                                          "Historija vozila",
+                                          VehicleListScreen())));
                             }
                           }
                         },

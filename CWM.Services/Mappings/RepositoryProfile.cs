@@ -35,8 +35,7 @@ namespace CWM.Database.Mappings
             CreateMap<AppointmentBlocked, Core.Models.AppointmentBlocked>()
             .ReverseMap();
 
-            CreateMap<Part, Core.Models.Part>()
-            .ReverseMap();
+            CreateMap<Part, Core.Models.Part>().ReverseMap();
 
             CreateMap<VehicleServiceHistory, Core.Models.VehicleServiceHistory>();
             CreateMap<Core.Models.VehicleServiceHistory, VehicleServiceHistory>()
@@ -55,7 +54,9 @@ namespace CWM.Database.Mappings
             .ForMember(x => x.UserId, opt => opt.MapFrom((src, dest) => src.User?.Id))
             .ForMember(x => x.User, opt => opt.Ignore())
             .ForMember(x => x.AppointmentId, opt => opt.MapFrom((src, dest) => src.Appointment?.Id))
-            .ForMember(x => x.Appointment, opt => opt.Ignore());
+            .ForMember(x => x.Appointment, opt => opt.Ignore())
+            .ForMember(x => x.EmployeeId, opt => opt.MapFrom((src, dest) => src.Employee?.Id))
+            .ForMember(x => x.Employee, opt => opt.Ignore());
 
             CreateMap<User, Core.Models.User>()
             .ForMember(x => x.Roles, opt => opt.MapFrom(y => y.Roles.Select(z => z.Role)));

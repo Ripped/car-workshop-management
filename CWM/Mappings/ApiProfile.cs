@@ -34,7 +34,8 @@ namespace CWM.Mappings
             CreateMap<WorkOrderInsertUpdate, WorkOrder>()
             .ForMember(x => x.Vehicle, opt => opt.MapFrom(y => y.VehicleId == null ? null : new Vehicle { Id = y.VehicleId ?? 0 }))
             .ForMember(x => x.User, opt => opt.MapFrom(y => y.UserId == null ? null : new User { Id = y.UserId ?? 0 }))
-            .ForMember(x => x.Appointment, opt => opt.MapFrom(y => y.AppointmentId == null ? null : new Appointment { Id = y.AppointmentId ?? 0 }));
+            .ForMember(x => x.Appointment, opt => opt.MapFrom(y => y.AppointmentId == null ? null : new Appointment { Id = y.AppointmentId ?? 0 }))
+            .ForMember(x => x.Employee, opt => opt.MapFrom(y => y.EmployeeId == null ? null : new Employee { Id = y.EmployeeId ?? 0 }));
 
             CreateMap<UserInsertUpdate, User>()
             .ForMember(x => x.Citizenship, opt => opt.MapFrom(y => y.CountryId == null ? null : new Country { Id = y.CountryId ?? 0 }))

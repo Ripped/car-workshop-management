@@ -8,12 +8,12 @@ part 'vehicle_service_history.g.dart';
 class VehicleServiceHistory {
   int id;
   DateTime serviceDate;
-  Service service;
+  Service serviceType;
   String description;
   Vehicle? vehicle;
 
-  VehicleServiceHistory(
-      this.id, this.serviceDate, this.service, this.description, this.vehicle);
+  VehicleServiceHistory(this.id, this.serviceDate, this.serviceType,
+      this.description, this.vehicle);
 
   factory VehicleServiceHistory.fromJson(Map<String, dynamic> json) =>
       _$VehicleServiceHistoryFromJson(json);

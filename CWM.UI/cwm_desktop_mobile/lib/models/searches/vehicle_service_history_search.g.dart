@@ -12,7 +12,11 @@ VehicleServiceHistorySearch _$VehicleServiceHistorySearchFromJson(
       ..page = (json['page'] as num).toInt()
       ..pageSize = (json['pageSize'] as num).toInt()
       ..name = json['name'] as String?
-      ..includeVehicle = json['includeVehicle'] as bool;
+      ..includeVehicle = json['includeVehicle'] as bool
+      ..vehicleId = (json['vehicleId'] as num?)?.toInt()
+      ..serviceDate = json['serviceDate'] == null
+          ? null
+          : DateTime.parse(json['serviceDate'] as String);
 
 Map<String, dynamic> _$VehicleServiceHistorySearchToJson(
         VehicleServiceHistorySearch instance) =>
@@ -21,4 +25,6 @@ Map<String, dynamic> _$VehicleServiceHistorySearchToJson(
       'pageSize': instance.pageSize,
       'name': instance.name,
       'includeVehicle': instance.includeVehicle,
+      'vehicleId': instance.vehicleId,
+      'serviceDate': instance.serviceDate?.toIso8601String(),
     };

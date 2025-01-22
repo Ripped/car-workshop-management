@@ -38,6 +38,15 @@ namespace CWM.Database.Repositories
             if (!string.IsNullOrWhiteSpace(search.Name))
                 query = query.Where(x => x.Description.ToLower().Contains(search.Name.ToLower()));
 
+            if (search.VehicleId > 0)
+                query = query.Where(x => x.Vehicle!.Id == search.VehicleId);
+
+            if (search.ServiceDate != null)
+                query = query.Where(x => x.ServiceDate == search.ServiceDate);
+
+            if (search.IncludeVehicle)
+                query = query.Include(x => x.Vehicle);
+
             return query;
         }
     }

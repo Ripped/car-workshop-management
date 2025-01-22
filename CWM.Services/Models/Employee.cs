@@ -28,5 +28,6 @@ namespace CWM.Database.Models
         public int? CitizenshipId { get; set; }
         public virtual Country? Citizenship { get; set; }
         public virtual ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public virtual ICollection<WorkOrder> WorkOrders { get; set; } = new List<WorkOrder>();
     }
 }

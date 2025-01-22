@@ -21,8 +21,6 @@ namespace CWM.Database.Models
         public decimal Price { get; set; }
         public string Description { get; set; } = string.Empty;
 
-
-        // Relations
-        public virtual ICollection<VehicleServiceHistory> VehicleServiceHistory { get; set; } = new List<VehicleServiceHistory>();
+        public virtual ICollection<WorkOrder> WorkOrders { get; set; } = new List<WorkOrder>();
     }
 }
