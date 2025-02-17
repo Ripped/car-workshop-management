@@ -12,7 +12,8 @@ WorkOrderSearch _$WorkOrderSearchFromJson(Map<String, dynamic> json) =>
       ..pageSize = (json['pageSize'] as num).toInt()
       ..name = json['name'] as String?
       ..includeVehicle = json['includeVehicle'] as bool
-      ..appointmentId = (json['appointmentId'] as num?)?.toInt();
+      ..appointmentId = (json['appointmentId'] as num?)?.toInt()
+      ..employeeUsername = json['employeeUsername'] as String?;
 
 Map<String, dynamic> _$WorkOrderSearchToJson(WorkOrderSearch instance) =>
     <String, dynamic>{
@@ -21,4 +22,5 @@ Map<String, dynamic> _$WorkOrderSearchToJson(WorkOrderSearch instance) =>
       'name': instance.name,
       'includeVehicle': instance.includeVehicle,
       'appointmentId': instance.appointmentId,
+      'employeeUsername': instance.employeeUsername,
     };

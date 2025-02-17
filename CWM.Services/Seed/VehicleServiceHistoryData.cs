@@ -20,7 +20,10 @@ namespace CWM.Database.Seed
                     ServiceDate = DateTime.Now,
                     ServiceType = Service.Mechanical,
                     Description = "",
-                    VehicleId = 1
+                    Sugestions = "",
+                    VehicleId = 1,
+                    EmployeeId = 1,
+                    UserId = 1,
                 },
                 new VehicleServiceHistory
                 {
@@ -28,7 +31,10 @@ namespace CWM.Database.Seed
                     ServiceDate = DateTime.Now,
                     ServiceType = Service.Electrical,
                     Description = "",
-                    VehicleId = 2
+                    Sugestions = "",
+                    VehicleId = 2,
+                    EmployeeId = 2,
+                    UserId = 2,
                 },
                 new VehicleServiceHistory
                 {
@@ -36,7 +42,10 @@ namespace CWM.Database.Seed
                     ServiceDate = DateTime.Now,
                     ServiceType = Service.Inspection,
                     Description = "",
-                    VehicleId = 3
+                    Sugestions = "",
+                    VehicleId = 3,
+                    EmployeeId = 3,
+                    UserId = 3,
                 },
                 new VehicleServiceHistory
                 {
@@ -44,7 +53,10 @@ namespace CWM.Database.Seed
                     ServiceDate = DateTime.Now,
                     ServiceType = Service.Other,
                     Description = "",
-                    VehicleId = 4
+                    Sugestions = "",
+                    VehicleId = 4,
+                    EmployeeId = 4,
+                    UserId = 4,
                 },
                 new VehicleServiceHistory
                 {
@@ -52,7 +64,10 @@ namespace CWM.Database.Seed
                     ServiceDate = DateTime.Now,
                     ServiceType = Service.Mechanical,
                     Description = "",
-                    VehicleId = 5
+                    Sugestions = "",
+                    VehicleId = 5,
+                    EmployeeId = 5,
+                    UserId = 5,
                 },
                 new VehicleServiceHistory
                 {
@@ -60,7 +75,10 @@ namespace CWM.Database.Seed
                     ServiceDate = DateTime.Now,
                     ServiceType = Service.Electrical,
                     Description = "",
-                    VehicleId = 6
+                    Sugestions = "",
+                    VehicleId = 6,
+                    EmployeeId = 6,
+                    UserId = 6,
                 }
             );
         }

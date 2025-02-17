@@ -17,6 +17,7 @@ namespace CWM.Database.Models
         public string LastName { get; set; } = string.Empty;
         public string Mobile { get; set; } = string.Empty;
         public DateTime BirthDate { get; set; }
+        public string Username { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Adress { get; set; } = string.Empty;
 

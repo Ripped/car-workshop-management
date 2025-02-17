@@ -39,6 +39,7 @@ namespace CWM.Database.Models
         public int? EmployeeId { get; set; }
         public virtual Employee? Employee { get; set; }
 
-        public virtual ICollection<Part> Parts { get; set; } = new List<Part>();
+
+        public virtual ICollection<PartWorkOrder> PartWorkOrder { get; set; } = new List<PartWorkOrder>();
     }
 }

@@ -60,7 +60,7 @@ namespace CWM.Database.Seed
                     CitizenshipId = 3,
                     Image = null,
                     Email = "tufo@gmail.com",
-                    Username = "user",
+                    Username = "omer",
                     Password = "Admin",
                     Mobile = "062342376",
                     OfficePhone = "38734549"
@@ -85,8 +85,8 @@ namespace CWM.Database.Seed
                 new User
                 {
                     Id = 5,
-                    FirstName = "Dario",
-                    LastName = "Karić",
+                    FirstName = "Damir",
+                    LastName = "Kahvic",
                     Gender = Gender.Male,
                     BirthDate = new DateTime(2001, 6, 5),
                     CreateDate = DateTime.Now,
@@ -102,7 +102,7 @@ namespace CWM.Database.Seed
                 new User
                 {
                     Id = 6,
-                    FirstName = "Selma",
+                    FirstName = "Selmir",
                     LastName = "Babić",
                     Gender = Gender.Female,
                     BirthDate = new DateTime(1994, 6, 5),
@@ -111,7 +111,7 @@ namespace CWM.Database.Seed
                     CitizenshipId = 6,
                     Image = null,
                     Email = "babić@gmail.com",
-                    Username = "selma",
+                    Username = "selmir",
                     Password = "Admin",
                     Mobile = "062342376",
                     OfficePhone = "38734549"

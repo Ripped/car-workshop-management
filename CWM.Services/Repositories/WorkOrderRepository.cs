@@ -41,6 +41,9 @@ namespace CWM.Database.Repositories
             if (!string.IsNullOrWhiteSpace(search.Name))
                 query = query.Where(x => x.OrderNumber.ToLower().Contains(search.Name.ToLower()));
 
+            if (!string.IsNullOrWhiteSpace(search.EmployeeUsername))
+                query = query.Where(x => x.Employee!.Username.ToLower().Contains(search.EmployeeUsername.ToLower()));
+
             if (search.AppointmentId > 0)
                 query = query.Where(x => x.Appointment!.Id == search.AppointmentId);
 

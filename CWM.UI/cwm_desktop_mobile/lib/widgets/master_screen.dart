@@ -53,11 +53,11 @@ class _MasterScreenState extends State<MasterScreen> {
                   Expanded(
                     flex: 10,
                     child: Padding(
-                        padding: const EdgeInsets.all(20), child: widget.child),
+                        padding: const EdgeInsets.all(10), child: widget.child),
                   ),
-                  const Expanded(
+                  /*const Expanded(
                     child: Text("© 2024 - CWM"),
-                  ),
+                  ),*/
                 ],
               ),
             )

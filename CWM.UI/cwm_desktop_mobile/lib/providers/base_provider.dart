@@ -1,8 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cwm_desktop_mobile/utils/utils.dart';
+import 'package:flutter/foundation.dart';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/paged_result.dart';
@@ -17,6 +18,18 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
       "ApiUrl",
       defaultValue: "localhost:50443",
     );
+
+    /*if (Platform.isWindows || Platform.isMacOS) {
+      baseUrl = const String.fromEnvironment(
+        "ApiUrl",
+        defaultValue: "localhost:50443",
+      );
+    } else if (Platform.isAndroid || Platform.isIOS) {
+      baseUrl = const String.fromEnvironment(
+        "ApiUrl",
+        defaultValue: "10.0.2.2:50443",
+      );
+    }*/
 
     endpoint = altEndpoint ?? T.toString();
   }
@@ -116,8 +129,6 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   Map<String, String> createHeaders() {
     String username = Authorization.username ?? "";
     String password = Authorization.password ?? "";
-
-    //print("passed creds: $username, $password");
 
     String basicAuth =
         "Basic ${base64Encode(utf8.encode('$username:$password'))}";

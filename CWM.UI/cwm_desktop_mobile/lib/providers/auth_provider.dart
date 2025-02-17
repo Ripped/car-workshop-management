@@ -1,7 +1,8 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:cwm_desktop_mobile/models/user_auth.dart';
 import 'package:cwm_desktop_mobile/utils/utils.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class AuthProvider with ChangeNotifier {
@@ -13,6 +14,19 @@ class AuthProvider with ChangeNotifier {
       "ApiUrl",
       defaultValue: "https://localhost:50443/",
     );
+
+    /*if (Platform.isWindows || Platform.isMacOS) {
+      _baseUrl = const String.fromEnvironment(
+        "ApiUrl",
+        defaultValue: "https://localhost:50443/",
+      );
+    }
+    if (Platform.isAndroid || Platform.isIOS) {
+      _baseUrl = const String.fromEnvironment(
+        "ApiUrl",
+        defaultValue: "https://10.0.2.2:50443/",
+      );
+    }*/
   }
 
   Future<dynamic> login() async {

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cwm_desktop_mobile/providers/appointment_type_provider.dart';
 import 'package:cwm_desktop_mobile/providers/appointment_provider.dart';
 import 'package:cwm_desktop_mobile/providers/auth_provider.dart';
@@ -10,12 +12,14 @@ import 'providers/appointment_blocked_provider.dart';
 import 'providers/city_provider.dart';
 import 'providers/country_provider.dart';
 import 'providers/employee_provider.dart';
+import 'providers/part_work_order_provider.dart';
 import 'providers/user_provider.dart';
 import 'providers/vehicle_provider.dart';
 import 'providers/vehicle_service_history_provider.dart';
 import 'screens/login_screen.dart';
 
-void main() {
+void main() async {
+  HttpOverrides.global = MyHttpOverrides();
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => PartProvider()),
@@ -30,6 +34,7 @@ void main() {
       ChangeNotifierProvider(create: (_) => EmployeeProvider()),
       ChangeNotifierProvider(create: (_) => CityProvider()),
       ChangeNotifierProvider(create: (_) => CountryProvider()),
+      ChangeNotifierProvider(create: (_) => PartWorkOrderProvider()),
     ], child: const MyApp()),
   );
 }
@@ -48,5 +53,14 @@ class MyApp extends StatelessWidget {
       ),
       home: const LoginScreen(),
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

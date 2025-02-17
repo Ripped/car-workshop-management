@@ -25,6 +25,7 @@ namespace CWM.Database
         public DbSet<VehicleServiceHistory> VehicleServiceHistory { get; set; }
         public DbSet<WorkOrder> WorkOrders { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<PartWorkOrder> PartWorkOrder { get; set; }
 
         public CWMContext() { }
 
@@ -33,7 +34,7 @@ namespace CWM.Database
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseSqlServer("Server=localhost; Database=190011; Trusted_Connection=False; Encrypt=False; User ID=sa; Password=sakromont;");
+                optionsBuilder.UseSqlServer("Server=localhost; Database=190011; Trusted_Connection=False; Encrypt=False; User ID=sa; Password=QWElkj132!;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

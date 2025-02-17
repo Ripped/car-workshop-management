@@ -30,7 +30,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
   }
 
   void _openDetails(int? id) {
-    if (Responsive.isMobile(context)) return;
+    //if (Responsive.isMobile(context)) return;
 
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>

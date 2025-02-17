@@ -7,6 +7,8 @@ part 'appointment_search.g.dart';
 @JsonSerializable()
 class AppointmentSearch extends BaseSearch {
   String? serviceName;
+  String? appointmentId;
+  int? userId;
   bool includeUser = false;
   bool includeAppointmentType = false;
 

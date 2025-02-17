@@ -13,5 +13,6 @@ namespace CWM.Core.Models.Searches
         public bool IncludeVehicle { get; set; }
 
         public int? AppointmentId { get; set; }
+        public string? EmployeeUsername { get; set; }
     }
 }

@@ -9,6 +9,7 @@ class WorkOrderSearch extends BaseSearch {
   String? name;
   bool includeVehicle = false;
   int? appointmentId;
+  String? employeeUsername;
 
   WorkOrderSearch();
 

@@ -1,5 +1,4 @@
-﻿using CWM.Core.Models.Enums;
-using CWM.Database.Models;
+﻿using CWM.Database.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -20,6 +19,7 @@ namespace CWM.Database.Seed
                     FirstName = "Damir",
                     LastName = "Kahvic",
                     BirthDate = new DateTime(2001, 6, 5),
+                    Username = "dario",
                     CityId = 5,
                     CitizenshipId = 5,
                     Email = "karić@gmail.com",
@@ -28,23 +28,25 @@ namespace CWM.Database.Seed
                 new Employee
                 {
                     Id = 2,
-                    FirstName = "Samir",
-                    LastName = "Muhlic",
+                    FirstName = "Selmir",
+                    LastName = "Babić",
                     BirthDate = new DateTime(2001, 6, 5),
+                    Username = "selmir",
                     CityId = 5,
                     CitizenshipId = 5,
-                    Email = "karić@gmail.com",
+                    Email = "babić@gmail.com",
                     Mobile = "062342376",
                 },
                 new Employee
                 {
                     Id = 3,
                     FirstName = "Omer",
-                    LastName = "Pavitinovic",
+                    LastName = "Tufo",
                     BirthDate = new DateTime(2001, 6, 5),
+                    Username = "omer",
                     CityId = 5,
                     CitizenshipId = 5,
-                    Email = "karić@gmail.com",
+                    Email = "tufo@gmail.com",
                     Mobile = "062342376",
                 },
                 new Employee
@@ -53,6 +55,7 @@ namespace CWM.Database.Seed
                     FirstName = "Emir",
                     LastName = "Oleg",
                     BirthDate = new DateTime(2001, 6, 5),
+                    Username = "employee",
                     CityId = 5,
                     CitizenshipId = 5,
                     Email = "karić@gmail.com",
@@ -64,6 +67,7 @@ namespace CWM.Database.Seed
                     FirstName = "Faris",
                     LastName = "Mahic",
                     BirthDate = new DateTime(2001, 6, 5),
+                    Username = "employee",
                     CityId = 5,
                     CitizenshipId = 5,
                     Email = "karić@gmail.com",

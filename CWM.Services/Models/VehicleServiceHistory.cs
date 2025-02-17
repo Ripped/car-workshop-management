@@ -18,14 +18,18 @@ namespace CWM.Database.Models
         public DateTime ServiceDate { get; set; }
         public Service ServiceType { get; set; }
         public string Description { get; set; } = string.Empty;
+        public string Sugestions { get; set; } = string.Empty;
 
         [ForeignKey("Vehicle")]
         public int? VehicleId { get; set; }
         public virtual Vehicle? Vehicle { get; set; }
 
+        [ForeignKey("User")]
+        public int? UserId { get; set; }
+        public virtual User? User { get; set; }
 
-        // Relations
-        public virtual ICollection<WorkOrder> WorkOrders { get; set; } = new List<WorkOrder>();
-        public virtual ICollection<Part> Parts { get; set; } = new List<Part>();
+        [ForeignKey("Employee")]
+        public int? EmployeeId { get; set; }
+        public virtual Employee? Employee { get; set; }
     }
 }

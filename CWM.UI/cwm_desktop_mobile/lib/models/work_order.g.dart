@@ -19,6 +19,9 @@ WorkOrder _$WorkOrderFromJson(Map<String, dynamic> json) => WorkOrder(
       json['vehicle'] == null
           ? null
           : Vehicle.fromJson(json['vehicle'] as Map<String, dynamic>),
+      json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
       json['appointment'] == null
           ? null
           : Appointment.fromJson(json['appointment'] as Map<String, dynamic>),
@@ -37,6 +40,7 @@ Map<String, dynamic> _$WorkOrderToJson(WorkOrder instance) => <String, dynamic>{
       'description': instance.description,
       'sugestions': instance.sugestions,
       'vehicle': instance.vehicle,
+      'user': instance.user,
       'appointment': instance.appointment,
       'employee': instance.employee,
     };

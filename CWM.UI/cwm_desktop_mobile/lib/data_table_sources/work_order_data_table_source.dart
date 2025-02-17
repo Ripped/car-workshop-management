@@ -2,7 +2,9 @@ import 'package:advanced_datatable/advanced_datatable_source.dart';
 import 'package:cwm_desktop_mobile/models/searches/work_order_search.dart';
 import 'package:cwm_desktop_mobile/models/work_order.dart';
 import 'package:flutter/material.dart';
+import '../models/enums/role.dart';
 import '../providers/work_order_provider.dart';
+import '../utils/utils.dart';
 
 class WorkOrderListDataTableSource extends AdvancedDataTableSource<WorkOrder> {
   final WorkOrderProvider _workOrderProvider;
@@ -21,6 +23,10 @@ class WorkOrderListDataTableSource extends AdvancedDataTableSource<WorkOrder> {
     workOrderSearch.page = page + 1;
     workOrderSearch.pageSize = pageRequest.pageSize;
     workOrderSearch.includeVehicle = true;
+
+    if (Authorization.roles.contains(Role.employee)) {
+      workOrderSearch.employeeUsername = Authorization.username;
+    }
 
     var workOrder = await _workOrderProvider.getAll(search: workOrderSearch);
 

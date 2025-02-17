@@ -29,7 +29,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
   }
 
   void _openDetails(int? id) {
-    if (Responsive.isMobile(context)) return;
+    //if (Responsive.isMobile(context)) return;
 
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CWM.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,6 +22,6 @@ namespace CWM.Database.Models
         public decimal Price { get; set; }
         public string Description { get; set; } = string.Empty;
 
-        public virtual ICollection<WorkOrder> WorkOrders { get; set; } = new List<WorkOrder>();
+        public virtual ICollection<PartWorkOrder> PartWorkOrder { get; set; } = new List<PartWorkOrder>();
     }
 }

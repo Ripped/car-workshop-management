@@ -23,6 +23,7 @@ builder.Services.AddTransient<IWorkOrderRepository, WorkOrderRepository>();
 builder.Services.AddTransient<IVehicleServiceHistoryRepository, VehicleServiceHistoryRepository>();
 builder.Services.AddTransient<IVehicleRepository, VehicleRepository>();
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddTransient<IPartWorkOrderRepository, PartWorkOrderRepository>();
 
 builder.Services.AddAutoMapper(typeof(CityRepository));
 builder.Services.AddAutoMapper();

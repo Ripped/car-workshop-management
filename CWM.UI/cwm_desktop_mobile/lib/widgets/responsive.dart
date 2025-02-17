@@ -35,3 +35,20 @@ class Responsive extends StatelessWidget {
     }
   }
 }
+
+class SizeConfig {
+  static double screenWidth = 1;
+  static double screenHeight = 1;
+  static double blockSizeHorizontal = 1;
+  static double blockSizeVertical = 1;
+  static void init(BuildContext context) {
+    screenWidth = MediaQuery.of(context).size.width;
+    screenHeight = MediaQuery.of(context).size.height;
+    blockSizeHorizontal = screenWidth / 100;
+    blockSizeVertical = screenHeight / 100;
+  }
+
+  static double scale(double size) {
+    return size * blockSizeHorizontal; // Scaling based on width
+  }
+}

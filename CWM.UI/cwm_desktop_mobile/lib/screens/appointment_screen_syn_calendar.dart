@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import '../models/enums/role.dart';
 import '../models/paged_result.dart';
 import '../models/appointment.dart' as appointment;
 import '../models/appointment_type.dart' as appointment_type;
@@ -40,6 +41,9 @@ class _MyWidgetState extends State<MyWidget> {
   var _vehicle = PagedResult<Vehicle>();
 
   List<DateTime> blockedDates = <DateTime>[];
+  DateTime startDate = DateTime.utc(2000, 12, 1);
+  DateTime today = DateTime.now();
+  DateTime endDate = DateTime.utc(2100, 12, 1);
 
   @override
   void initState() {
@@ -63,6 +67,7 @@ class _MyWidgetState extends State<MyWidget> {
     _appointmentBlockedDates = await _appointmentBlockedProvider.getAll();
     _appointmentBlocked = _appointmentBlockedDates.result.cast();
 
+    _blockDates();
     for (appointment_blocked.AppointmentBlocked i in _appointmentBlocked) {
       blockedDates.add(i.blockedDate);
     }
@@ -88,15 +93,43 @@ class _MyWidgetState extends State<MyWidget> {
   }
 
   void _openDialog(int? id, DateTime? selectedDate) {
-    if (Responsive.isMobile(context)) return;
+    if (Responsive.isMobile(context)) {
+      _loadData(id, selectedDate).then((data) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              _datesBuildDialogMobile(context, id, selectedDate),
+        );
+      });
+    } else {
+      _loadData(id, selectedDate).then((data) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              _buildDialog(context, id, selectedDate),
+        );
+      });
+    }
+  }
 
-    _loadData(id, selectedDate).then((data) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) =>
-            _buildDialog(context, id, selectedDate),
-      );
-    });
+  _blockDates() {
+    DateTime date;
+    for (date = startDate;
+        date.isBefore(endDate) || date == endDate;
+        date = date.add(const Duration(days: 1))) {
+      if (date.weekday != DateTime.sunday &&
+          date.weekday != DateTime.saturday) {
+        continue;
+      }
+
+      blockedDates.add(date);
+    }
+    final yesterday = today.subtract(const Duration(days: 1));
+    for (date = startDate;
+        date.isBefore(yesterday) || date == yesterday;
+        date = date.add(const Duration(days: 1))) {
+      blockedDates.add(date);
+    }
   }
 
   @override
@@ -105,52 +138,92 @@ class _MyWidgetState extends State<MyWidget> {
 
     eventSearch.includeAppointmentType = true;
     eventSearch.pageSize = 50;
+    if (Authorization.roles.contains(Role.employee) ||
+        Authorization.roles.contains(Role.user)) {
+      eventSearch.userId = Authorization.userId;
+    }
 
     _loadData(null, null);
 
     return FutureBuilder<PagedResult<appointment.Appointment>>(
-        future: _appointmentProvider.getAll(search: eventSearch),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            return Text("Error: ${snapshot.error}");
-          } else if (!snapshot.hasData || snapshot.data?.result == null) {
-            return const Text("Podaci nisu dostupni.");
-          } else {
-            return FutureBuilder<PagedResult<appointment_type.AppointmentType>>(
-                future: _appointmentTypeProvider.getAll(),
-                builder: (context, snapshotEventTypes) {
-                  if (snapshotEventTypes.connectionState ==
-                      ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
-                  } else if (snapshotEventTypes.hasError) {
-                    return Text("Error: ${snapshotEventTypes.error}");
-                  } else if (!snapshotEventTypes.hasData ||
-                      snapshotEventTypes.data?.result == null) {
-                    return const Text("Podaci nisu dostupni");
-                  } else {
-                    if (Responsive.isMobile(context)) {
-                      return SingleChildScrollView(
-                          child: Column(children: [
-                        SizedBox(
-                            width: 900,
-                            height: 500,
-                            child: SfCalendar(
-                              view: CalendarView.month,
-                              dataSource: AppointmentDataTableSource(
-                                  snapshot.data!.result),
-                              monthViewSettings: const MonthViewSettings(
-                                  appointmentDisplayMode:
-                                      MonthAppointmentDisplayMode.appointment,
-                                  showAgenda: true),
-                            ))
-                      ]));
-                    } else {
-                      return SingleChildScrollView(
-                          child: Column(children: [
-                        SizedBox(
-                            height: 500,
+      future: _appointmentProvider.getAll(search: eventSearch),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text("Error: ${snapshot.error}");
+        } else if (!snapshot.hasData || snapshot.data?.result == null) {
+          return const Text("Podaci nisu dostupni.");
+        } else {
+          return FutureBuilder<PagedResult<appointment_type.AppointmentType>>(
+            future: _appointmentTypeProvider.getAll(),
+            builder: (context, snapshotEventTypes) {
+              if (snapshotEventTypes.connectionState ==
+                  ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshotEventTypes.hasError) {
+                return Text("Error: ${snapshotEventTypes.error}");
+              } else if (!snapshotEventTypes.hasData ||
+                  snapshotEventTypes.data?.result == null) {
+                return const Text("Podaci nisu dostupni");
+              } else {
+                if (Responsive.isMobile(context)) {
+                  return SingleChildScrollView(
+                      child: Column(children: [
+                    SizedBox(
+                        width: 900,
+                        height: 500,
+                        child: SfCalendar(
+                          blackoutDates: blockedDates,
+                          blackoutDatesTextStyle: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                              color: Colors.red),
+                          view: CalendarView.month,
+                          firstDayOfWeek: 1,
+                          onTap: (CalendarTapDetails details) {
+                            if (details.targetElement ==
+                                CalendarElement.calendarCell) {
+                              var selectedDate = details.date!;
+                              _openDialog(null, selectedDate);
+                            }
+                            if (details.targetElement ==
+                                CalendarElement.appointment) {
+                              int id = details.appointments?[0].id;
+                              _openDialog(id, null);
+                            }
+                          },
+                          dataSource:
+                              AppointmentDataTableSource(snapshot.data!.result),
+                          monthViewSettings: const MonthViewSettings(
+                              showTrailingAndLeadingDates: false,
+                              monthCellStyle: MonthCellStyle(
+                                textStyle: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.green,
+                                ),
+                              ),
+                              appointmentDisplayMode:
+                                  MonthAppointmentDisplayMode.appointment,
+                              showAgenda: true,
+                              dayFormat: 'EEE',
+                              agendaStyle: AgendaStyle(
+                                dayTextStyle: TextStyle(
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.green),
+                              )),
+                        ))
+                  ]));
+                } else {
+                  return Row(
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: SizedBox(
+                            height: 800,
                             child: SfCalendar(
                               blackoutDates: blockedDates,
                               blackoutDatesTextStyle: const TextStyle(
@@ -158,6 +231,7 @@ class _MyWidgetState extends State<MyWidget> {
                                   fontSize: 18,
                                   color: Colors.red),
                               view: CalendarView.month,
+                              firstDayOfWeek: 1,
                               onTap: (CalendarTapDetails details) {
                                 if (details.targetElement ==
                                     CalendarElement.calendarCell) {
@@ -173,6 +247,7 @@ class _MyWidgetState extends State<MyWidget> {
                               dataSource: AppointmentDataTableSource(
                                   snapshot.data!.result),
                               monthViewSettings: const MonthViewSettings(
+                                  showTrailingAndLeadingDates: false,
                                   monthCellStyle: MonthCellStyle(
                                     textStyle: TextStyle(
                                       fontWeight: FontWeight.bold,
@@ -183,6 +258,7 @@ class _MyWidgetState extends State<MyWidget> {
                                   appointmentDisplayMode:
                                       MonthAppointmentDisplayMode.appointment,
                                   showAgenda: true,
+                                  dayFormat: 'EEE',
                                   agendaStyle: AgendaStyle(
                                     dayTextStyle: TextStyle(
                                         fontStyle: FontStyle.normal,
@@ -190,13 +266,17 @@ class _MyWidgetState extends State<MyWidget> {
                                         fontWeight: FontWeight.w700,
                                         color: Colors.green),
                                   )),
-                            ))
-                      ]));
-                    }
-                  }
-                });
-          }
-        });
+                            )),
+                      ),
+                    ],
+                  );
+                }
+              }
+            },
+          );
+        }
+      },
+    );
   }
 
   Widget _buildDialog(BuildContext context, int? id, DateTime? selectedDate) {
@@ -220,41 +300,32 @@ class _MyWidgetState extends State<MyWidget> {
             height: 450,
             child: Column(
               children: [
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 600,
-                      child: FormBuilderTextField(
-                        name: "userId",
-                        enabled: false,
-                        decoration:
-                            const InputDecoration(labelText: "Korisnik *"),
-                      ),
-                    )
-                  ],
+                SizedBox(
+                  width: 600,
+                  child: FormBuilderTextField(
+                    name: "userId",
+                    enabled: false,
+                    decoration: const InputDecoration(labelText: "Korisnik *"),
+                  ),
                 ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    SizedBox(
-                        width: 600,
-                        child: FormBuilderTextField(
-                            name: "description",
-                            keyboardType: TextInputType.multiline,
-                            maxLines: null,
-                            decoration:
-                                const InputDecoration(labelText: "Opis"))),
-                  ],
-                ),
-                const SizedBox(height: 20),
+                const SizedBox(width: 20),
+                SizedBox(
+                    width: 600,
+                    child: FormBuilderTextField(
+                        name: "description",
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: const InputDecoration(labelText: "Opis"))),
+                const SizedBox(width: 20),
                 Row(
                   children: [
                     SizedBox(
                         width: 290,
                         child: FormBuilderDateTimePicker(
+                          enabled: false,
                           name: "startDate",
                           inputType: InputType.date,
-                          format: DateFormat('dd.MM.yyyy.'),
+                          format: DateFormat('dd.MM.yyyy'),
                           decoration: const InputDecoration(
                               labelText: "Datum početka *"),
                         )),
@@ -262,9 +333,10 @@ class _MyWidgetState extends State<MyWidget> {
                     SizedBox(
                       width: 290,
                       child: FormBuilderDateTimePicker(
+                        enabled: false,
                         name: "endDate",
                         inputType: InputType.date,
-                        format: DateFormat('dd.MM.yyyy.'),
+                        format: DateFormat('dd.MM.yyyy'),
                         decoration:
                             const InputDecoration(labelText: "Datum kraja *"),
                       ),
@@ -374,5 +446,178 @@ class _MyWidgetState extends State<MyWidget> {
             ],
           ),
         ]);
+  }
+
+  Widget _datesBuildDialogMobile(
+      BuildContext context, int? id, DateTime? selectedDate) {
+    _loadData(id, selectedDate);
+
+    return AlertDialog(
+      title: Align(
+        alignment: Alignment.center,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(id == null ? Icons.add : Icons.edit),
+            const SizedBox(width: 10),
+            Text(id == null ? "Dodaj termin" : "Uredi termin"),
+          ],
+        ),
+      ),
+      content: SizedBox(
+        child: SingleChildScrollView(
+          child: FormBuilder(
+            key: _formKey,
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: FormBuilderTextField(
+                      name: "userId",
+                      enabled: false,
+                      decoration:
+                          const InputDecoration(labelText: "Korisnik *"),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: FormBuilderTextField(
+                          name: "description",
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 4,
+                          decoration:
+                              const InputDecoration(labelText: "Opis"))),
+                  const SizedBox(width: 20),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: FormBuilderDateTimePicker(
+                        enabled: false,
+                        name: "startDate",
+                        inputType: InputType.date,
+                        format: DateFormat('dd.MM.yyyy'),
+                        decoration:
+                            const InputDecoration(labelText: "Datum početka *"),
+                      )),
+                  const SizedBox(width: 20),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: FormBuilderDateTimePicker(
+                      enabled: false,
+                      name: "endDate",
+                      inputType: InputType.date,
+                      format: DateFormat('dd.MM.yyyy'),
+                      decoration:
+                          const InputDecoration(labelText: "Datum kraja *"),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: 300,
+                    child: FormBuilderDropdown(
+                      name: "appointmentTypeId",
+                      decoration: const InputDecoration(labelText: "Vrsta *"),
+                      enabled: false,
+                      items: _appointmentType.result
+                          .map((type) => DropdownMenuItem(
+                                value: type.id.toString(),
+                                child: Text(type.name),
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: 300,
+                    child: FormBuilderDropdown(
+                      alignment: Alignment.center,
+                      name: "vehicleId",
+                      decoration: const InputDecoration(
+                          labelText: "Odaberi automobil *"),
+                      items: _vehicle.result
+                          .map((type) => DropdownMenuItem(
+                                value: type.id.toString(),
+                                child: Text(type.chassis),
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: const ButtonStyle(
+                          minimumSize:
+                              MaterialStatePropertyAll(Size.fromHeight(50))),
+                      child: const Text(
+                        "NAZAD",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          minimumSize: const MaterialStatePropertyAll(
+                              Size.fromHeight(50)),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.red)),
+                      child: const Text(
+                        "OBRIŠI",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      ),
+                      onPressed: () async {
+                        await _appointmentProvider.delete(id!);
+                        await _loadData(null, null);
+                        setState(() {});
+                        if (context.mounted) Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          minimumSize: const MaterialStatePropertyAll(
+                              Size.fromHeight(50)),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.green)),
+                      child: const Text(
+                        "SPREMI",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      ),
+                      onPressed: () async {
+                        var isValid = _formKey.currentState?.saveAndValidate();
+
+                        if (isValid!) {
+                          var request = Map.from(_formKey.currentState!.value);
+
+                          id == null
+                              ? await _appointmentProvider.insert(request)
+                              : await _appointmentProvider.update(id, request);
+
+                          await _loadData(null, null);
+                          setState(() {});
+                          if (context.mounted) Navigator.pop(context);
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

@@ -13,6 +13,7 @@ namespace CWM.Core.Models
         public string LastName { get; set; } = string.Empty;
         public string Mobile { get; set; } = string.Empty;
         public DateTime BirthDate { get; set; }
+        public string Username {  get; set; } = string.Empty;
         public City City { get; set; } = new();
         public Country Citizenship { get; set; } = new();
         public string Email { get; set; } = string.Empty;

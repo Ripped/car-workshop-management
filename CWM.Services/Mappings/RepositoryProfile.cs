@@ -35,12 +35,26 @@ namespace CWM.Database.Mappings
             CreateMap<AppointmentBlocked, Core.Models.AppointmentBlocked>()
             .ReverseMap();
 
-            CreateMap<Part, Core.Models.Part>().ReverseMap();
+            CreateMap<Part, Core.Models.Part>()
+            .ReverseMap();
+
+            CreateMap<PartWorkOrder, Core.Models.PartWorkOrder>().ReverseMap();
+            CreateMap<Core.Models.PartWorkOrder, PartWorkOrder>()
+                .ForMember(x => x.VehicleId, opt => opt.MapFrom((src, dest) => src.Vehicle?.Id))
+            .ForMember(x => x.Vehicle, opt => opt.Ignore())
+            .ForMember(x => x.PartId, opt => opt.MapFrom((src, dest) => src.Part?.Id))
+            .ForMember(x => x.Part, opt => opt.Ignore())
+            .ForMember(x => x.WorkOrderId, opt => opt.MapFrom((src, dest) => src.WorkOrder?.Id))
+            .ForMember(x => x.WorkOrder, opt => opt.Ignore());
 
             CreateMap<VehicleServiceHistory, Core.Models.VehicleServiceHistory>();
             CreateMap<Core.Models.VehicleServiceHistory, VehicleServiceHistory>()
             .ForMember(x => x.VehicleId, opt => opt.MapFrom((src, dest) => src.Vehicle?.Id))
-            .ForMember(x => x.Vehicle, opt => opt.Ignore());
+            .ForMember(x => x.Vehicle, opt => opt.Ignore())
+            .ForMember(x => x.EmployeeId, opt => opt.MapFrom((src, dest) => src.Employee?.Id))
+            .ForMember(x => x.Employee, opt => opt.Ignore())
+            .ForMember(x => x.UserId, opt => opt.MapFrom((src, dest) => src.User?.Id))
+            .ForMember(x => x.User, opt => opt.Ignore());
 
             CreateMap<Vehicle, Core.Models.Vehicle>();
             CreateMap<Core.Models.Vehicle, Vehicle>()

@@ -83,7 +83,8 @@ class SideMenu extends StatelessWidget {
         children: [
           _buildListTile(context, "Početna", Icons.dashboard,
               const DashboardScreen(), true),
-          if (Authorization.roles.contains(Role.employee))
+          if (Authorization.roles.contains(Role.employee) ||
+              Authorization.roles.contains(Role.admin))
             _buildListTile(context, "Nalozi", Icons.content_paste,
                 const WorkOrderListScreen(), true),
           _buildListTile(context, "Dijelovi", Icons.data_array,

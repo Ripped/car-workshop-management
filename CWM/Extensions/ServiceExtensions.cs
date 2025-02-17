@@ -7,7 +7,7 @@ using System.Text;
 
 public static class ServiceExtensions
 {
-    public static void AddAuthentication(this IServiceCollection serviceCollection, IConfiguration configuration)
+    /*public static void AddAuthentication(this IServiceCollection serviceCollection, IConfiguration configuration)
     {
         serviceCollection.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                          .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
@@ -24,7 +24,7 @@ public static class ServiceExtensions
                              options.TokenValidationParameters.ValidateIssuerSigningKey = true;
                              options.TokenValidationParameters.IssuerSigningKey = secretKey;
                          });
-    }
+    }*/
 
     public static void AddAutoMapper(this IServiceCollection serviceCollection)
     {

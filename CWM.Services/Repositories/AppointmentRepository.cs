@@ -44,8 +44,15 @@ namespace CWM.Database.Repositories
             if (!string.IsNullOrWhiteSpace(search.ServiceName))
                 query = query.Where(x => x.Description.ToLower().Contains(search.ServiceName.ToLower()));
 
+            if (!string.IsNullOrWhiteSpace(search.AppointmentId))
+                query = query.Where(x => x.Id.ToString().ToLower().Contains(search.AppointmentId.ToLower()));
+
+            if (search.UserId > 0)
+                query = query.Where(x => x.User!.Id == search.UserId);
+
             if (search.IncludeAppointmentType)
                 query = query.Include(x => x.AppointmentType);
+
 
             return query;
         }

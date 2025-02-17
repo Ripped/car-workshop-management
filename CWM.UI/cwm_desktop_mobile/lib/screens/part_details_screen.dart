@@ -68,7 +68,7 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return Container(
         child: isLoading
             ? Container()
             : FormBuilder(
@@ -78,15 +78,286 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                     child: Row(
                   children: [
                     Expanded(
-                        child: Column(
-                      children: [
-                        _basicInfo(context),
-                        if (!Responsive.isMobile(context))
+                        child: Card(
+                      elevation: 2,
+                      child: Column(
+                        children: [
+                          Card(
+                            margin: const EdgeInsets.all(10),
+                            color: Theme.of(context).primaryColor,
+                            child: const SizedBox(
+                              width: 800,
+                              height: 30,
+                              child: Text(
+                                "Podaci o dijelu",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            ),
+                          ),
+                          if (Responsive.isDesktop(context))
+                            SizedBox(
+                                child: Column(children: [
+                              Padding(
+                                padding: const EdgeInsets.all(20),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(150),
+                                  child: SizedBox.fromSize(
+                                    size: const Size.fromRadius(150),
+                                    child: _initialValue["image"] != ""
+                                        ? Image.memory(
+                                            base64Decode(
+                                                _initialValue["image"]),
+                                            width: 250,
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.asset(
+                                            "assets/images/default-avatar.png",
+                                            width: 250,
+                                            height: 250,
+                                          ),
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                margin: const EdgeInsets.all(10),
+                                color: Theme.of(context).primaryColor,
+                                child: const SizedBox(
+                                  width: 200,
+                                  height: 30,
+                                  child: Text(
+                                    "Slika dijela",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                ),
+                              ),
+                            ])),
                           SizedBox(
-                            //width: 300,
-                            child: _partImage(context),
-                          )
-                      ],
+                            height: Responsive.isDesktop(context)
+                                ? (MediaQuery.of(context).size.width / 6)
+                                : (MediaQuery.of(context).size.height / 1.4),
+                            child: GridView.count(
+                              crossAxisCount: Responsive.isDesktop(context)
+                                  ? 3
+                                  : Responsive.isTablet(context)
+                                      ? 2
+                                      : 1,
+                              childAspectRatio: 4,
+                              crossAxisSpacing: 20,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: FormBuilderTextField(
+                                      name: "serialNumber",
+                                      decoration: const InputDecoration(
+                                          labelText: "Serijski broj *"),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: FormBuilderTextField(
+                                      name: "manufacturer",
+                                      decoration: const InputDecoration(
+                                          labelText: "Proizvodjac *"),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: FormBuilderTextField(
+                                      name: "partName",
+                                      decoration: const InputDecoration(
+                                          labelText: "Ime dijela *"),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: FormBuilderTextField(
+                                      name: "price",
+                                      decoration: const InputDecoration(
+                                          labelText: "Cijena *"),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: FormBuilderTextField(
+                                      name: "description",
+                                      keyboardType: TextInputType.multiline,
+                                      maxLines: 3,
+                                      decoration: const InputDecoration(
+                                          labelText: "Opis dijela  *"),
+                                    ),
+                                  ),
+                                ),
+                                if (Responsive.isDesktop(context) ||
+                                    Responsive.isTablet(context))
+                                  Padding(
+                                      padding: const EdgeInsets.all(0),
+                                      child: Column(children: <Widget>[
+                                        ElevatedButton(
+                                          style: ButtonStyle(
+                                            minimumSize:
+                                                const MaterialStatePropertyAll(
+                                                    Size.fromHeight(50)),
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                    Color>(Colors.green),
+                                            foregroundColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.white),
+                                          ),
+                                          child: const Text("SPREMI",
+                                              textAlign: TextAlign.center),
+                                          onPressed: () async {
+                                            var isValid = _formKey.currentState
+                                                ?.saveAndValidate();
+
+                                            if (isValid!) {
+                                              var request = Map.from(
+                                                  _formKey.currentState!.value);
+
+                                              widget.id == null
+                                                  ? await _partProvider
+                                                      .insert(request)
+                                                  : await _partProvider.update(
+                                                      widget.id!, request);
+
+                                              if (context.mounted) {
+                                                Navigator.of(context).pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const MasterScreen(
+                                                                "Uspolenici",
+                                                                PartListScreen())));
+                                              }
+                                            }
+                                          },
+                                        ),
+                                        const SizedBox(height: 10),
+                                        ElevatedButton(
+                                          style: ButtonStyle(
+                                            minimumSize:
+                                                const MaterialStatePropertyAll(
+                                                    Size.fromHeight(50)),
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                    Color>(Colors.red),
+                                            foregroundColor:
+                                                MaterialStateProperty.all(
+                                                    Colors.white),
+                                          ),
+                                          child: const Text("OBRIŠI"),
+                                          onPressed: () async {
+                                            await _partProvider
+                                                .delete(widget.id!);
+                                            await _loadData(null);
+                                            setState(() {});
+                                            if (context.mounted) {
+                                              Navigator.pop(context);
+                                            }
+                                          },
+                                        ),
+                                      ])),
+                                if (Responsive.isMobile(context))
+                                  Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          40, 0, 0, 20),
+                                      child: Row(children: <Widget>[
+                                        SizedBox(
+                                          width: 150,
+                                          height: 90,
+                                          child: ElevatedButton(
+                                            style: ButtonStyle(
+                                              minimumSize:
+                                                  const MaterialStatePropertyAll(
+                                                      Size.fromHeight(50)),
+                                              backgroundColor:
+                                                  MaterialStateProperty.all<
+                                                      Color>(Colors.green),
+                                              foregroundColor:
+                                                  MaterialStateProperty.all(
+                                                      Colors.white),
+                                            ),
+                                            child: const Text("SPREMI",
+                                                textAlign: TextAlign.center),
+                                            onPressed: () async {
+                                              var isValid = _formKey
+                                                  .currentState
+                                                  ?.saveAndValidate();
+
+                                              if (isValid!) {
+                                                var request = Map.from(_formKey
+                                                    .currentState!.value);
+
+                                                widget.id == null
+                                                    ? await _partProvider
+                                                        .insert(request)
+                                                    : await _partProvider
+                                                        .update(widget.id!,
+                                                            request);
+
+                                                if (context.mounted) {
+                                                  Navigator.of(context).pushReplacement(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              const MasterScreen(
+                                                                  "Uspolenici",
+                                                                  PartListScreen())));
+                                                }
+                                              }
+                                            },
+                                          ),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        SizedBox(
+                                          width: 150,
+                                          height: 90,
+                                          child: ElevatedButton(
+                                            style: ButtonStyle(
+                                              minimumSize:
+                                                  const MaterialStatePropertyAll(
+                                                      Size.fromHeight(40)),
+                                              backgroundColor:
+                                                  MaterialStateProperty.all<
+                                                      Color>(Colors.red),
+                                              foregroundColor:
+                                                  MaterialStateProperty.all(
+                                                      Colors.white),
+                                            ),
+                                            child: const Text("OBRIŠI"),
+                                            onPressed: () async {
+                                              await _partProvider
+                                                  .delete(widget.id!);
+                                              await _loadData(null);
+                                              setState(() {});
+                                              if (context.mounted) {
+                                                Navigator.pop(context);
+                                              }
+                                            },
+                                          ),
+                                        )
+                                      ])),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ))
                   ],
                 )),
@@ -125,48 +396,119 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
               childAspectRatio: 4,
               crossAxisSpacing: 20,
               children: [
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: FormBuilderTextField(
-                    name: "serialNumber",
-                    decoration:
-                        const InputDecoration(labelText: "Serijski broj *"),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: FormBuilderTextField(
+                      name: "serialNumber",
+                      decoration:
+                          const InputDecoration(labelText: "Serijski broj *"),
+                    ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: FormBuilderTextField(
-                    name: "manufacturer",
-                    decoration:
-                        const InputDecoration(labelText: "Proizvodjac *"),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: FormBuilderTextField(
+                      name: "manufacturer",
+                      decoration:
+                          const InputDecoration(labelText: "Proizvodjac *"),
+                    ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: FormBuilderTextField(
-                    name: "partName",
-                    decoration:
-                        const InputDecoration(labelText: "Ime dijela *"),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: FormBuilderTextField(
+                      name: "partName",
+                      decoration:
+                          const InputDecoration(labelText: "Ime dijela *"),
+                    ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: FormBuilderTextField(
-                    name: "price",
-                    decoration: const InputDecoration(labelText: "Cijena *"),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: FormBuilderTextField(
+                      name: "price",
+                      decoration: const InputDecoration(labelText: "Cijena *"),
+                    ),
                   ),
                 ),
-                //if (Responsive.isDesktop(context)) const SizedBox(),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: FormBuilderTextField(
-                    name: "description",
-                    keyboardType: TextInputType.multiline,
-                    maxLines: 3,
-                    decoration:
-                        const InputDecoration(labelText: "Opis dijela  *"),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: FormBuilderTextField(
+                      name: "description",
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 3,
+                      decoration:
+                          const InputDecoration(labelText: "Opis dijela  *"),
+                    ),
                   ),
                 ),
+                Padding(
+                    padding: const EdgeInsets.all(0),
+                    child: Column(children: <Widget>[
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          minimumSize: const MaterialStatePropertyAll(
+                              Size.fromHeight(50)),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.green),
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                        ),
+                        child:
+                            const Text("SPREMI", textAlign: TextAlign.center),
+                        onPressed: () async {
+                          var isValid =
+                              _formKey.currentState?.saveAndValidate();
+
+                          if (isValid!) {
+                            var request =
+                                Map.from(_formKey.currentState!.value);
+
+                            widget.id == null
+                                ? await _partProvider.insert(request)
+                                : await _partProvider.update(
+                                    widget.id!, request);
+
+                            if (context.mounted) {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (context) => const MasterScreen(
+                                          "Uspolenici", PartListScreen())));
+                            }
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          minimumSize: const MaterialStatePropertyAll(
+                              Size.fromHeight(50)),
+                          backgroundColor:
+                              MaterialStateProperty.all<Color>(Colors.red),
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                        ),
+                        child: const Text("OBRIŠI"),
+                        onPressed: () async {
+                          await _partProvider.delete(widget.id!);
+                          await _loadData(null);
+                          setState(() {});
+                          if (context.mounted) {
+                            Navigator.pop(context);
+                          }
+                        },
+                      ),
+                    ])),
               ],
             ),
           ),
