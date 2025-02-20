@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CWM.RabbitMQ": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
