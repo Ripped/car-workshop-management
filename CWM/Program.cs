@@ -4,6 +4,7 @@ using CWM.Core.Models.Enums;
 using CWM.Database;
 using CWM.Database.Extensions;
 using CWM.Database.Repositories;
+using CWM.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,8 @@ builder.Services.AddTransient<IPartWorkOrderRepository, PartWorkOrderRepository>
 
 builder.Services.AddAutoMapper(typeof(CityRepository));
 builder.Services.AddAutoMapper();
+
+builder.UseSerilog();
 
 //builder.Services.AddScopedRepositories();
 
