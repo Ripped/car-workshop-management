@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CWM", "CWM\CWM.csproj", "{040AB331-7714-4E11-BD75-B20412C8F8FF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{218A774B-C988-4360-8E80-F03D5D65195E} = {218A774B-C988-4360-8E80-F03D5D65195E}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CWM.Core", "CWM.Model\CWM.Core.csproj", "{0DB6492E-D560-4D90-90DC-6D7940E99979}"
 EndProject
@@ -16,7 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Dockerfile = Dockerfile
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CWM.RabbitMQ", "CWM.RabbitMQ\CWM.RabbitMQ.csproj", "{218A774B-C988-4360-8E80-F03D5D65195E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CWM.RabbitMQ", "CWM.RabbitMQ\CWM.RabbitMQ.csproj", "{218A774B-C988-4360-8E80-F03D5D65195E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CWM.SMTP", "CWM.SMTP\CWM.SMTP.csproj", "{F75256EB-9354-4250-A456-C5DB8F8B0128}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +45,10 @@ Global
 		{218A774B-C988-4360-8E80-F03D5D65195E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{218A774B-C988-4360-8E80-F03D5D65195E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{218A774B-C988-4360-8E80-F03D5D65195E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F75256EB-9354-4250-A456-C5DB8F8B0128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F75256EB-9354-4250-A456-C5DB8F8B0128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F75256EB-9354-4250-A456-C5DB8F8B0128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F75256EB-9354-4250-A456-C5DB8F8B0128}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

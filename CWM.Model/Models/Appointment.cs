@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace CWM.Core.Models
@@ -15,5 +16,9 @@ namespace CWM.Core.Models
         public User? User { get; set; } = new();
         public AppointmentType? AppointmentType { get; set; } = new();
         public Vehicle? Vehicle { get; set; } = new();
+
+
+        public string ToJson()
+        => JsonSerializer.Serialize(this, new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
     }
 }

@@ -15,5 +15,7 @@ namespace CWM.Core.Models.Configurations
         public string User { get; set; } = string.Empty;
 
         public string Password { get; set; } = string.Empty;
+
+        public string Virtualhost { get; set; } = string.Empty;
     }
 }

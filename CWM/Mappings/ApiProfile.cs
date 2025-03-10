@@ -19,6 +19,10 @@ namespace CWM.Mappings
             .ForMember(x => x.AppointmentType, opt => opt.MapFrom(y => new AppointmentType { Id = y.AppointmentTypeId ?? 0 }))
             .ForMember(x => x.Vehicle, opt => opt.MapFrom(y => new Vehicle { Id = y.VehicleId ?? 0 }));
 
+            CreateMap<AppointmentInsertUpdate, AppointmentNotifier>()
+            .ForMember(x => x.User, opt => opt.MapFrom(y => new User { Id = y.UserId ?? 0 }))
+            .ForMember(x => x.Vehicle, opt => opt.MapFrom(y => new Vehicle { Id = y.VehicleId ?? 0 }));
+
             CreateMap<AppointmentTypeInsertUpdate, AppointmentType>();
 
             CreateMap<AppointmentBlockedInsertUpdate, AppointmentBlocked>();

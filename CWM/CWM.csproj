@@ -37,6 +37,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CWM.Model\CWM.Core.csproj" />
     <ProjectReference Include="..\CWM.Services\CWM.Database.csproj" />
+	  <ProjectReference Include="..\CWM.RabbitMQ\CWM.RabbitMQ.csproj" />
   </ItemGroup>
 	
 </Project>

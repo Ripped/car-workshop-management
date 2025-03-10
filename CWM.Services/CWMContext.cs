@@ -34,7 +34,7 @@ namespace CWM.Database
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseSqlServer("Server=localhost; Database=190011; Trusted_Connection=False; Encrypt=False; User ID=sa; Password=QWElkj132!;");
+                optionsBuilder.UseSqlServer("Server=localhost; Database=190011; Trusted_Connection=True; Encrypt=False; User ID=sa; Password=QWElkj132!;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

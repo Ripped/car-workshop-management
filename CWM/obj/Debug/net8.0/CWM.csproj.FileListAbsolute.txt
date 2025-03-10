@@ -309,3 +309,11 @@ C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\Sy
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\System.Text.Encodings.Web.dll
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\System.Text.Json.dll
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\MailKit.dll
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\MimeKit.dll
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\NETCore.MailKit.dll
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\RabbitMQ.Client.dll
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\CWM.RabbitMQ.dll
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\CWM.RabbitMQ.pdb
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\EasyNetQ.dll

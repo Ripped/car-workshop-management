@@ -1,10 +1,11 @@
 ﻿using CWM.Core.Interfaces.Services;
+using CWM.Core.Models;
 using CWM.Core.Models.Configurations;
+using EasyNetQ;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using System.Text;
-using Task = System.Threading.Tasks.Task;
 
 namespace CWM.RabbitMQ
 {
@@ -14,13 +15,22 @@ namespace CWM.RabbitMQ
     : IEmailService
     {
     private readonly RabbitMQConfiguration RabbitMQConfiguration = rabbitMQConfiguration.Value;
-        private readonly ILogger<EmailService> Logger = logger;
-
-        public Task SendErrorMailAsync(string message)
+    private readonly ILogger<EmailService> Logger = logger;
+    private IConnection? Connection;
+        public async Task<Appointment> SendEmailMessage(Appointment message)
         {
+            var notification = new AppointmentNotifier
+            {
+                Description = message.Description,
+                StartDate = message.StartDate,
+                EndDate = message.EndDate,
+                Vehicle = message.Vehicle?.ToString(),
+                User = message.User?.ToString()
+            };
+
             try
             {
-                var factory = new ConnectionFactory
+                ConnectionFactory factory = new ConnectionFactory
                 {
                     HostName = RabbitMQConfiguration.Host,
                     Port = RabbitMQConfiguration.Port,
@@ -36,16 +46,17 @@ namespace CWM.RabbitMQ
                 channel.BasicPublish(
                     exchange: "Email",
                     routingKey: string.Empty,
-                    basicProperties: null,
-                    body: Encoding.UTF8.GetBytes(message)
+                    body: Encoding.UTF8.GetBytes(message.ToJson())
                 );
+                var bus = RabbitHutch.CreateBus("host=localhost");
+                await bus.PubSub.PublishAsync(message);
             }
             catch (Exception ex)
             {
-                Logger.LogError(ex, "SendErrorMailAsync");
+                Logger.LogError(ex, "SendMailAsync");
             }
-
-            return Task.CompletedTask;
+            return message;
         }
+        
     }
 }

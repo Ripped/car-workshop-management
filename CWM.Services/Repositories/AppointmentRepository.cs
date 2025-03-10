@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Formats.Asn1.AsnWriter;
@@ -56,5 +57,83 @@ namespace CWM.Database.Repositories
 
             return query;
         }
+
+        /*public async override Task<Appointment> InsertAsync(Appointment model)
+        {
+            var entity = Mapper.Map<Appointment>(model);
+
+            var addedEntity = await Context
+                .Set<Appointment>()
+                .AddAsync(entity);
+
+            await Context.SaveChangesAsync();
+
+            AppointmentNotifier reservationNotifier = new AppointmentNotifier()
+            {
+                Id = model.Id,
+                Description = model.Description,
+                StartDate = model.StartDate,
+                EndDate = model.EndDate,
+                Vehicle = model.Vehicle?.Chassis.ToString(),
+                User = model.User?.ToString()
+            };
+
+            return Mapper.Map<Appointment>(addedEntity.Entity);
+        }*/
+
+        /*public async override Task<Appointment> InsertAsync(Appointment insert)
+        {
+            var korisnik = await _korisniciService.GetById(insert.KorisnikId);
+
+            if (korisnik == null)
+                return null;
+
+            var usluga = await _uslugaService.GetById(insert.UslugaId);
+
+            if (usluga == null)
+                return null;
+
+            var uposlenik = await _uposlenikService.GetById(insert.UposlenikId);
+
+            if (uposlenik == null)
+                return null;
+
+            bool isUposlenikDostupan = await IsUposlenikDostupan(uposlenik.UposlenikId, insert.Datum, insert.Vrijeme);
+
+            if (!isUposlenikDostupan)
+                throw new UserException("Odabrani uposlenik " + uposlenik.Ime + uposlenik.Prezime + " nije dostupan.Molimo odaberite drugog uposlenika ili drugi termin.");
+
+            var rezervacija = new Appointment()
+            {
+                d
+                Datum = insert.Datum,
+                Vrijeme = insert.Vrijeme,
+                Status = insert.Status,
+                KorisnikId = korisnik.KorisniciId,
+                UposlenikId = uposlenik.UposlenikId,
+                UslugaId = usluga.UslugaId
+            };
+
+            await _dbContext.Rezervacija.AddAsync(rezervacija);
+
+            await _dbContext.SaveChangesAsync();
+
+            Model.ReservationNotifier reservationNotifier = new ReservationNotifier()
+            {
+                Id = rezervacija.RezervacijaId,
+                UposlenikIme = uposlenik.Ime,
+                UposlenikPrezime = uposlenik.Prezime,
+                UslugaNaziv = usluga.Naziv,
+                KorisnikIme = korisnik.Ime,
+                CijenaUsluge = usluga.Cijena,
+                Email = korisnik.Email,
+                Datum = rezervacija.Datum,
+                Vrijeme = rezervacija.Vrijeme
+            };
+
+            _messageProducer.SendingObject(reservationNotifier);
+
+            return _mapper.Map<Model.Rezervacija>(rezervacija);
+        }*/
     }
 }

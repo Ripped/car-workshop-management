@@ -1,17 +1,22 @@
 using CWM;
 using CWM.Core.Interfaces.Repositories;
+using CWM.Core.Interfaces.Services;
+using CWM.Core.Models.Configurations;
 using CWM.Core.Models.Enums;
 using CWM.Database;
 using CWM.Database.Extensions;
 using CWM.Database.Repositories;
 using CWM.Extensions;
+using CWM.RabbitMQ;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<RabbitMQConfiguration>(builder.Configuration.GetSection("RabbitMQ"));
 // Add services to the container.
 builder.Services.AddTransient<ICityRepository, CityRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
@@ -25,6 +30,7 @@ builder.Services.AddTransient<IVehicleServiceHistoryRepository, VehicleServiceHi
 builder.Services.AddTransient<IVehicleRepository, VehicleRepository>();
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<IPartWorkOrderRepository, PartWorkOrderRepository>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddAutoMapper(typeof(CityRepository));
 builder.Services.AddAutoMapper();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CWM.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace CWM.Core.Interfaces.Services
 {
     public interface IEmailService
     {
-        Task SendErrorMailAsync(string message);
+        Task<Appointment> SendEmailMessage(Appointment notifier);
     }
 }
