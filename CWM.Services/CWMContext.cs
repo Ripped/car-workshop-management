@@ -26,6 +26,7 @@ namespace CWM.Database
         public DbSet<WorkOrder> WorkOrders { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<PartWorkOrder> PartWorkOrder { get; set; }
+        public DbSet<UserRating> UserRatings { get; set; }
 
         public CWMContext() { }
 
@@ -53,6 +54,8 @@ namespace CWM.Database
             modelBuilder.Entity<VehicleServiceHistory>().SeedData();
             modelBuilder.Entity<WorkOrder>().SeedData();
             modelBuilder.Entity<Employee>().SeedData();
+            modelBuilder.Entity<PartWorkOrder>().SeedData();
+            modelBuilder.Entity<UserRating>().SeedData();
         }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CWM.Database.Migrations
 {
     [DbContext(typeof(CWMContext))]
-    [Migration("20250216095746_initial")]
-    partial class initial
+    [Migration("20250318185236_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -571,6 +571,60 @@ namespace CWM.Database.Migrations
                             PartName = "Kompresor klime",
                             Price = 39m,
                             SerialNumber = "RT245GFSW26GFS"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Description = "Lezaj tocka",
+                            Manufacturer = "BOSCH",
+                            PartName = "Lezaj tocka",
+                            Price = 39m,
+                            SerialNumber = "RH245GFSU26GFS"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Description = "Filter klime",
+                            Manufacturer = "BOSCH",
+                            PartName = "Filter klime",
+                            Price = 39m,
+                            SerialNumber = "RT295TFSW76ZFS"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Description = "Senzor pritiska",
+                            Manufacturer = "BOSCH",
+                            PartName = "Senzor pritiska",
+                            Price = 39m,
+                            SerialNumber = "RW238TFSW76GFS"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Description = "Disk plocice",
+                            Manufacturer = "Ferodo",
+                            PartName = "Disk plocice",
+                            Price = 39m,
+                            SerialNumber = "RT135TFSW74GFS"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Description = "Disk plocice",
+                            Manufacturer = "Trusting",
+                            PartName = "Disk plocice",
+                            Price = 39m,
+                            SerialNumber = "RT235HFSW76GES"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Description = "Diskovi zadnji",
+                            Manufacturer = "SWD",
+                            PartName = "Diskovi zadnji",
+                            Price = 39m,
+                            SerialNumber = "RT255TFRW76GFS"
                         });
                 });
 
@@ -603,6 +657,56 @@ namespace CWM.Database.Migrations
                     b.HasIndex("WorkOrderId");
 
                     b.ToTable("PartWorkOrder");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PartId = 1,
+                            ServiceDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6960),
+                            VehicleId = 1,
+                            WorkOrderId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PartId = 2,
+                            ServiceDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6965),
+                            VehicleId = 2,
+                            WorkOrderId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            PartId = 3,
+                            ServiceDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6967),
+                            VehicleId = 3,
+                            WorkOrderId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            PartId = 4,
+                            ServiceDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6969),
+                            VehicleId = 4,
+                            WorkOrderId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            PartId = 5,
+                            ServiceDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6971),
+                            VehicleId = 5,
+                            WorkOrderId = 5
+                        },
+                        new
+                        {
+                            Id = 6,
+                            PartId = 6,
+                            ServiceDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6973),
+                            VehicleId = 6,
+                            WorkOrderId = 6
+                        });
                 });
 
             modelBuilder.Entity("CWM.Database.Models.User", b =>
@@ -674,7 +778,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(2001, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 1,
                             CityId = 1,
-                            CreateDate = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2140),
+                            CreateDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6641),
                             Email = "sendić@gmail.com",
                             FirstName = "Amir",
                             Gender = 0,
@@ -690,7 +794,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 2,
                             CityId = 2,
-                            CreateDate = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2194),
+                            CreateDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6693),
                             Email = "stufo@gmail.com",
                             FirstName = "Samra",
                             Gender = 1,
@@ -706,7 +810,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(1990, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 3,
                             CityId = 3,
-                            CreateDate = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2198),
+                            CreateDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6702),
                             Email = "tufo@gmail.com",
                             FirstName = "Omer",
                             Gender = 0,
@@ -722,7 +826,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(1975, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 4,
                             CityId = 4,
-                            CreateDate = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2201),
+                            CreateDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6706),
                             Email = "kremić@gmail.com",
                             FirstName = "Merima",
                             Gender = 1,
@@ -738,7 +842,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(2001, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 5,
                             CityId = 5,
-                            CreateDate = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2204),
+                            CreateDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6709),
                             Email = "karić@gmail.com",
                             FirstName = "Damir",
                             Gender = 0,
@@ -754,7 +858,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 6,
                             CityId = 6,
-                            CreateDate = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2208),
+                            CreateDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6712),
                             Email = "babić@gmail.com",
                             FirstName = "Selmir",
                             Gender = 1,
@@ -763,6 +867,111 @@ namespace CWM.Database.Migrations
                             OfficePhone = "38734549",
                             Password = "Admin",
                             Username = "selmir"
+                        });
+                });
+
+            modelBuilder.Entity("CWM.Database.Models.UserRating", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("PartId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("ProductRating")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PartId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserRatings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            PartId = 1,
+                            ProductRating = 4.0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            PartId = 6,
+                            ProductRating = 2.0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            PartId = 2,
+                            ProductRating = 5.0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            PartId = 3,
+                            ProductRating = 1.0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            PartId = 5,
+                            ProductRating = 5.0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            PartId = 4,
+                            ProductRating = 2.0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            PartId = 1,
+                            ProductRating = 4.0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            PartId = 1,
+                            ProductRating = 4.0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            PartId = 1,
+                            ProductRating = 4.0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 10,
+                            PartId = 1,
+                            ProductRating = 4.0,
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            PartId = 1,
+                            ProductRating = 4.0,
+                            UserId = 1
                         });
                 });
 
@@ -999,7 +1208,7 @@ namespace CWM.Database.Migrations
                             Id = 1,
                             Description = "",
                             EmployeeId = 1,
-                            ServiceDate = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2310),
+                            ServiceDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6829),
                             ServiceType = 1,
                             Sugestions = "",
                             UserId = 1,
@@ -1010,7 +1219,7 @@ namespace CWM.Database.Migrations
                             Id = 2,
                             Description = "",
                             EmployeeId = 2,
-                            ServiceDate = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2316),
+                            ServiceDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6835),
                             ServiceType = 0,
                             Sugestions = "",
                             UserId = 2,
@@ -1021,7 +1230,7 @@ namespace CWM.Database.Migrations
                             Id = 3,
                             Description = "",
                             EmployeeId = 3,
-                            ServiceDate = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2318),
+                            ServiceDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6838),
                             ServiceType = 4,
                             Sugestions = "",
                             UserId = 3,
@@ -1032,7 +1241,7 @@ namespace CWM.Database.Migrations
                             Id = 4,
                             Description = "",
                             EmployeeId = 4,
-                            ServiceDate = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2321),
+                            ServiceDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6840),
                             ServiceType = 5,
                             Sugestions = "",
                             UserId = 4,
@@ -1043,7 +1252,7 @@ namespace CWM.Database.Migrations
                             Id = 5,
                             Description = "",
                             EmployeeId = 5,
-                            ServiceDate = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2323),
+                            ServiceDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6843),
                             ServiceType = 1,
                             Sugestions = "",
                             UserId = 5,
@@ -1054,7 +1263,7 @@ namespace CWM.Database.Migrations
                             Id = 6,
                             Description = "",
                             EmployeeId = 6,
-                            ServiceDate = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2325),
+                            ServiceDate = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6845),
                             ServiceType = 0,
                             Sugestions = "",
                             UserId = 6,
@@ -1130,11 +1339,11 @@ namespace CWM.Database.Migrations
                             Concerne = "Paljenje auta",
                             Description = "Potrebno duze vrijeme da upali kada je auto zagrijano",
                             EmployeeId = 1,
-                            EndTime = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2355),
+                            EndTime = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6876),
                             GarageBox = 0,
                             OrderNumber = "SGTA252ASF276",
                             ServicePerformed = 1,
-                            StartTime = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2352),
+                            StartTime = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6874),
                             Sugestions = "Provjeriti dizne i alnaser",
                             UserId = 1,
                             VehicleId = 1
@@ -1146,11 +1355,11 @@ namespace CWM.Database.Migrations
                             Concerne = "Paljenje auta",
                             Description = "Potrebno duze vrijeme da upali kada je auto zagrijano",
                             EmployeeId = 2,
-                            EndTime = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2361),
+                            EndTime = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6882),
                             GarageBox = 0,
                             OrderNumber = "SGTA252ASF276",
                             ServicePerformed = 0,
-                            StartTime = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2360),
+                            StartTime = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6881),
                             Sugestions = "Provjeriti dizne i alnaser",
                             UserId = 2,
                             VehicleId = 2
@@ -1162,11 +1371,11 @@ namespace CWM.Database.Migrations
                             Concerne = "Paljenje auta",
                             Description = "Potrebno duze vrijeme da upali kada je auto zagrijano",
                             EmployeeId = 3,
-                            EndTime = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2373),
+                            EndTime = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6887),
                             GarageBox = 0,
                             OrderNumber = "SGTA252ASF276",
                             ServicePerformed = 4,
-                            StartTime = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2372),
+                            StartTime = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6885),
                             Sugestions = "Provjeriti dizne i alnaser",
                             UserId = 3,
                             VehicleId = 3
@@ -1178,11 +1387,11 @@ namespace CWM.Database.Migrations
                             Concerne = "Paljenje auta",
                             Description = "Potrebno duze vrijeme da upali kada je auto zagrijano",
                             EmployeeId = 4,
-                            EndTime = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2377),
+                            EndTime = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6891),
                             GarageBox = 0,
                             OrderNumber = "SGTA252ASF276",
                             ServicePerformed = 3,
-                            StartTime = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2376),
+                            StartTime = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6889),
                             Sugestions = "Provjeriti dizne i alnaser",
                             UserId = 4,
                             VehicleId = 4
@@ -1194,11 +1403,11 @@ namespace CWM.Database.Migrations
                             Concerne = "Paljenje auta",
                             Description = "Potrebno duze vrijeme da upali kada je auto zagrijano",
                             EmployeeId = 5,
-                            EndTime = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2381),
+                            EndTime = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6895),
                             GarageBox = 0,
                             OrderNumber = "SGTA252ASF276",
                             ServicePerformed = 5,
-                            StartTime = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2380),
+                            StartTime = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6894),
                             Sugestions = "Provjeriti dizne i alnaser",
                             UserId = 5,
                             VehicleId = 5
@@ -1210,11 +1419,11 @@ namespace CWM.Database.Migrations
                             Concerne = "Paljenje auta",
                             Description = "Potrebno duze vrijeme da upali kada je auto zagrijano",
                             EmployeeId = 6,
-                            EndTime = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2385),
+                            EndTime = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6899),
                             GarageBox = 0,
                             OrderNumber = "SGTA252ASF276",
                             ServicePerformed = 1,
-                            StartTime = new DateTime(2025, 2, 16, 10, 57, 45, 945, DateTimeKind.Local).AddTicks(2384),
+                            StartTime = new DateTime(2025, 3, 18, 19, 52, 35, 808, DateTimeKind.Local).AddTicks(6897),
                             Sugestions = "Provjeriti dizne i alnaser",
                             UserId = 6,
                             VehicleId = 6
@@ -1321,6 +1530,21 @@ namespace CWM.Database.Migrations
                     b.Navigation("Citizenship");
 
                     b.Navigation("City");
+                });
+
+            modelBuilder.Entity("CWM.Database.Models.UserRating", b =>
+                {
+                    b.HasOne("CWM.Database.Models.Part", "Part")
+                        .WithMany()
+                        .HasForeignKey("PartId");
+
+                    b.HasOne("CWM.Database.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Part");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("CWM.Database.Models.UserRole", b =>

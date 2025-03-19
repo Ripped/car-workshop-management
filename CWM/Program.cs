@@ -8,6 +8,7 @@ using CWM.Database.Extensions;
 using CWM.Database.Repositories;
 using CWM.Extensions;
 using CWM.RabbitMQ;
+using CWM.Recommender;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Razor.TagHelpers;
@@ -30,7 +31,9 @@ builder.Services.AddTransient<IVehicleServiceHistoryRepository, VehicleServiceHi
 builder.Services.AddTransient<IVehicleRepository, VehicleRepository>();
 builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<IPartWorkOrderRepository, PartWorkOrderRepository>();
+builder.Services.AddScoped<IUserRatingRepository, UserRatingRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IRecommendService, RecommendService>();
 
 builder.Services.AddAutoMapper(typeof(CityRepository));
 builder.Services.AddAutoMapper();
