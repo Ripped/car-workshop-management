@@ -46,14 +46,6 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "EasyNetQ": {
-              "target": "Package",
-              "version": "[7.8.0, )"
-            },
-            "EasyNetQ.Serialization.NewtonsoftJson": {
-              "target": "Package",
-              "version": "[7.8.0, )"
-            },
             "Microsoft.Extensions.Caching.Abstractions": {
               "target": "Package",
               "version": "[8.0.0, )"

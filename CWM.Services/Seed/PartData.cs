@@ -72,6 +72,66 @@ namespace CWM.Database.Seed
                     Price = 39,
                     Image = null,
                     Description = "Kompresor klime"
+                },
+                new Part
+                {
+                    Id = 8,
+                    SerialNumber = "RH245GFSU26GFS",
+                    Manufacturer = "BOSCH",
+                    PartName = "Lezaj tocka",
+                    Price = 39,
+                    Image = null,
+                    Description = "Lezaj tocka"
+                },
+                new Part
+                {
+                    Id = 9,
+                    SerialNumber = "RT295TFSW76ZFS",
+                    Manufacturer = "BOSCH",
+                    PartName = "Filter klime",
+                    Price = 39,
+                    Image = null,
+                    Description = "Filter klime"
+                },
+                new Part
+                {
+                    Id = 10,
+                    SerialNumber = "RW238TFSW76GFS",
+                    Manufacturer = "BOSCH",
+                    PartName = "Senzor pritiska",
+                    Price = 39,
+                    Image = null,
+                    Description = "Senzor pritiska"
+                },
+                new Part
+                {
+                    Id = 11,
+                    SerialNumber = "RT135TFSW74GFS",
+                    Manufacturer = "Ferodo",
+                    PartName = "Disk plocice",
+                    Price = 39,
+                    Image = null,
+                    Description = "Disk plocice"
+                },
+                new Part
+                {
+                    Id = 12,
+                    SerialNumber = "RT235HFSW76GES",
+                    Manufacturer = "Trusting",
+                    PartName = "Disk plocice",
+                    Price = 39,
+                    Image = null,
+                    Description = "Disk plocice"
+                },
+                new Part
+                {
+                    Id = 13,
+                    SerialNumber = "RT255TFRW76GFS",
+                    Manufacturer = "SWD",
+                    PartName = "Diskovi zadnji",
+                    Price = 39,
+                    Image = null,
+                    Description = "Diskovi zadnji"
                 }
             );
         }

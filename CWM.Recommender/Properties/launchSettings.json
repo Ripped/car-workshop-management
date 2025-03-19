@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CWM.Recommender": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

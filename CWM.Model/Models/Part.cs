@@ -14,5 +14,6 @@ namespace CWM.Core.Models
         public byte[]? Image { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; } = string.Empty;
+        public float Score { get; set; }
     }
 }
