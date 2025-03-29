@@ -395,8 +395,8 @@ class _MyWidgetState extends State<MyWidget> {
             children: [
               OutlinedButton(
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(Colors.red),
-                  padding: MaterialStateProperty.all(
+                  foregroundColor: WidgetStateProperty.all(Colors.red),
+                  padding: WidgetStateProperty.all(
                     const EdgeInsets.only(
                         left: 40, top: 20, right: 40, bottom: 20),
                   ),
@@ -411,7 +411,7 @@ class _MyWidgetState extends State<MyWidget> {
               ),
               OutlinedButton(
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
+                  padding: WidgetStateProperty.all(
                     const EdgeInsets.only(
                         left: 40, top: 20, right: 40, bottom: 20),
                   ),
@@ -421,7 +421,7 @@ class _MyWidgetState extends State<MyWidget> {
               ),
               OutlinedButton(
                 style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
+                  padding: WidgetStateProperty.all(
                     const EdgeInsets.only(
                         left: 40, top: 20, right: 40, bottom: 20),
                   ),
@@ -552,7 +552,7 @@ class _MyWidgetState extends State<MyWidget> {
                     child: ElevatedButton(
                       style: const ButtonStyle(
                           minimumSize:
-                              MaterialStatePropertyAll(Size.fromHeight(50))),
+                              WidgetStatePropertyAll(Size.fromHeight(50))),
                       child: const Text(
                         "NAZAD",
                         textAlign: TextAlign.center,
@@ -565,10 +565,10 @@ class _MyWidgetState extends State<MyWidget> {
                     padding: const EdgeInsets.all(10),
                     child: ElevatedButton(
                       style: ButtonStyle(
-                          minimumSize: const MaterialStatePropertyAll(
+                          minimumSize: const WidgetStatePropertyAll(
                               Size.fromHeight(50)),
                           backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.red)),
+                              WidgetStateProperty.all<Color>(Colors.red)),
                       child: const Text(
                         "OBRIŠI",
                         textAlign: TextAlign.center,
@@ -586,10 +586,10 @@ class _MyWidgetState extends State<MyWidget> {
                     padding: const EdgeInsets.all(10),
                     child: ElevatedButton(
                       style: ButtonStyle(
-                          minimumSize: const MaterialStatePropertyAll(
+                          minimumSize: const WidgetStatePropertyAll(
                               Size.fromHeight(50)),
                           backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.green)),
+                              WidgetStateProperty.all<Color>(Colors.green)),
                       child: const Text(
                         "SPREMI",
                         textAlign: TextAlign.center,

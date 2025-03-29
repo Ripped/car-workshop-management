@@ -35,7 +35,7 @@ class Search extends StatelessWidget {
           ElevatedButton.icon(
             icon: const Icon(Icons.add),
             style: const ButtonStyle(
-              padding: MaterialStatePropertyAll(
+              padding: WidgetStatePropertyAll(
                   EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20)),
             ),
             label: Text(buttonText),

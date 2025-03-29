@@ -288,13 +288,13 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                               ElevatedButton(
                                                 style: ButtonStyle(
                                                   minimumSize:
-                                                      const MaterialStatePropertyAll(
+                                                      const WidgetStatePropertyAll(
                                                           Size.fromHeight(50)),
                                                   backgroundColor:
-                                                      MaterialStateProperty.all<
+                                                      WidgetStateProperty.all<
                                                           Color>(Colors.green),
                                                   foregroundColor:
-                                                      MaterialStateProperty.all(
+                                                      WidgetStateProperty.all(
                                                           Colors.white),
                                                 ),
                                                 child: const Text("SPREMI",
@@ -332,13 +332,13 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                               ElevatedButton(
                                                 style: ButtonStyle(
                                                   minimumSize:
-                                                      const MaterialStatePropertyAll(
+                                                      const WidgetStatePropertyAll(
                                                           Size.fromHeight(50)),
                                                   backgroundColor:
-                                                      MaterialStateProperty.all<
+                                                      WidgetStateProperty.all<
                                                           Color>(Colors.red),
                                                   foregroundColor:
-                                                      MaterialStateProperty.all(
+                                                      WidgetStateProperty.all(
                                                           Colors.white),
                                                 ),
                                                 child: const Text("OBRIŠI"),
@@ -364,15 +364,15 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                                 child: ElevatedButton(
                                                   style: ButtonStyle(
                                                     minimumSize:
-                                                        const MaterialStatePropertyAll(
+                                                        const WidgetStatePropertyAll(
                                                             Size.fromHeight(
                                                                 50)),
                                                     backgroundColor:
-                                                        MaterialStateProperty
+                                                        WidgetStateProperty
                                                             .all<Color>(
                                                                 Colors.green),
                                                     foregroundColor:
-                                                        MaterialStateProperty
+                                                        WidgetStateProperty
                                                             .all(Colors.white),
                                                   ),
                                                   child: const Text("SPREMI",
@@ -415,15 +415,15 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                                 child: ElevatedButton(
                                                   style: ButtonStyle(
                                                     minimumSize:
-                                                        const MaterialStatePropertyAll(
+                                                        const WidgetStatePropertyAll(
                                                             Size.fromHeight(
                                                                 40)),
                                                     backgroundColor:
-                                                        MaterialStateProperty
+                                                        WidgetStateProperty
                                                             .all<Color>(
                                                                 Colors.red),
                                                     foregroundColor:
-                                                        MaterialStateProperty
+                                                        WidgetStateProperty
                                                             .all(Colors.white),
                                                   ),
                                                   child: const Text("OBRIŠI"),

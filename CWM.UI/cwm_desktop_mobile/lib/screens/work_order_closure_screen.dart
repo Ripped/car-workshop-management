@@ -21,7 +21,6 @@ import '../models/paged_result.dart';
 import '../models/vehicle.dart';
 import '../providers/user_provider.dart';
 import '../providers/vehicle_provider.dart';
-import '../providers/vehicle_service_history_provider.dart';
 
 class WorkOrderClosureScreen extends StatefulWidget {
   final int? id;
@@ -605,12 +604,12 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                         child: Column(children: <Widget>[
                           ElevatedButton(
                             style: ButtonStyle(
-                              minimumSize: const MaterialStatePropertyAll(
+                              minimumSize: const WidgetStatePropertyAll(
                                   Size.fromHeight(45)),
-                              backgroundColor: MaterialStateProperty.all<Color>(
+                              backgroundColor: WidgetStateProperty.all<Color>(
                                   Colors.green),
                               foregroundColor:
-                                  MaterialStateProperty.all(Colors.white),
+                                  WidgetStateProperty.all(Colors.white),
                             ),
                             child: const Text("SPREMI",
                                 textAlign: TextAlign.center),
@@ -640,12 +639,12 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                           const SizedBox(height: 5),
                           ElevatedButton(
                             style: ButtonStyle(
-                              minimumSize: const MaterialStatePropertyAll(
+                              minimumSize: const WidgetStatePropertyAll(
                                   Size.fromHeight(45)),
                               backgroundColor:
-                                  MaterialStateProperty.all<Color>(Colors.red),
+                                  WidgetStateProperty.all<Color>(Colors.red),
                               foregroundColor:
-                                  MaterialStateProperty.all(Colors.white),
+                                  WidgetStateProperty.all(Colors.white),
                             ),
                             child: const Text("OBRIŠI"),
                             onPressed: () async {

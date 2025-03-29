@@ -182,7 +182,7 @@ class _VehicleServiceHistoryDetailsScreenScreen
                       ElevatedButton(
                         style: const ButtonStyle(
                             minimumSize:
-                                MaterialStatePropertyAll(Size.fromHeight(50))),
+                                WidgetStatePropertyAll(Size.fromHeight(50))),
                         child:
                             const Text("SPREMI", textAlign: TextAlign.center),
                         onPressed: () async {

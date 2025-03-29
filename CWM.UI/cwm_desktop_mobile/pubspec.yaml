@@ -39,11 +39,11 @@ dependencies:
   json_annotation: ^4.9.0
   advanced_datatable: ^0.0.8
   provider: ^6.1.1
-  flutter_form_builder: ^9.1.1
-  file_picker: ^6.1.1
+  flutter_form_builder: ^10.0.1
+  file_picker: ^9.2.3
   table_calendar: ^3.0.9
-  intl: ^0.18.1
-  syncfusion_flutter_calendar: ^24.1.47
+  intl: ^0.20.2
+  syncfusion_flutter_calendar: ^29.1.33
 
 dev_dependencies:
   flutter_test:
@@ -54,7 +54,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.1
+  flutter_lints: ^5.0.0
   build_runner: ^2.4.9
   json_serializable: ^6.8.0
 

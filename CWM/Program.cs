@@ -14,8 +14,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-
 var builder = WebApplication.CreateBuilder(args);
+/*var stripeSecretKey = Environment.GetEnvironmentVariable("STRIPE_SECRET_KEY");
+var stripePublishableKey = Environment.GetEnvironmentVariable("STRIPE_PUBLISHABLE_KEY");*/
+
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
 builder.Services.Configure<RabbitMQConfiguration>(builder.Configuration.GetSection("RabbitMQ"));
 // Add services to the container.
@@ -34,6 +37,7 @@ builder.Services.AddTransient<IPartWorkOrderRepository, PartWorkOrderRepository>
 builder.Services.AddScoped<IUserRatingRepository, UserRatingRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IRecommendService, RecommendService>();
+builder.Services.AddScoped<IPaymentService, PaymentRepository>();
 
 builder.Services.AddAutoMapper(typeof(CityRepository));
 builder.Services.AddAutoMapper();
@@ -42,8 +46,21 @@ builder.UseSerilog();
 
 //builder.Services.AddScopedRepositories();
 
-builder.Services.AddAuthentication("BasicAuthentication")
+/*builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
+if (!string.IsNullOrEmpty(stripeSecretKey) && !string.IsNullOrEmpty(stripePublishableKey))
+{
+    builder.Services.Configure<StripeSettings>(options =>
+    {
+        options.SecretKey = stripeSecretKey;
+        options.PublishableKey = stripePublishableKey;
+    });
+}
+else
+{
+    builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+}*/
 
 builder.Services.AddMemoryCache();
 

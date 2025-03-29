@@ -149,7 +149,7 @@ class _LoginScreen extends State<LoginScreen> {
           ),
           OutlinedButton(
             style: const ButtonStyle(
-                padding: MaterialStatePropertyAll(
+                padding: WidgetStatePropertyAll(
                     EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20))),
             onPressed: _loginSubmit,
             child: const Text("PRIJAVA"),

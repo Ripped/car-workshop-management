@@ -213,13 +213,13 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                         ElevatedButton(
                                           style: ButtonStyle(
                                             minimumSize:
-                                                const MaterialStatePropertyAll(
+                                                const WidgetStatePropertyAll(
                                                     Size.fromHeight(50)),
                                             backgroundColor:
-                                                MaterialStateProperty.all<
+                                                WidgetStateProperty.all<
                                                     Color>(Colors.green),
                                             foregroundColor:
-                                                MaterialStateProperty.all(
+                                                WidgetStateProperty.all(
                                                     Colors.white),
                                           ),
                                           child: const Text("SPREMI",
@@ -253,13 +253,13 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                         ElevatedButton(
                                           style: ButtonStyle(
                                             minimumSize:
-                                                const MaterialStatePropertyAll(
+                                                const WidgetStatePropertyAll(
                                                     Size.fromHeight(50)),
                                             backgroundColor:
-                                                MaterialStateProperty.all<
+                                                WidgetStateProperty.all<
                                                     Color>(Colors.red),
                                             foregroundColor:
-                                                MaterialStateProperty.all(
+                                                WidgetStateProperty.all(
                                                     Colors.white),
                                           ),
                                           child: const Text("OBRIŠI"),
@@ -285,13 +285,13 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                           child: ElevatedButton(
                                             style: ButtonStyle(
                                               minimumSize:
-                                                  const MaterialStatePropertyAll(
+                                                  const WidgetStatePropertyAll(
                                                       Size.fromHeight(50)),
                                               backgroundColor:
-                                                  MaterialStateProperty.all<
+                                                  WidgetStateProperty.all<
                                                       Color>(Colors.green),
                                               foregroundColor:
-                                                  MaterialStateProperty.all(
+                                                  WidgetStateProperty.all(
                                                       Colors.white),
                                             ),
                                             child: const Text("SPREMI",
@@ -331,13 +331,13 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                           child: ElevatedButton(
                                             style: ButtonStyle(
                                               minimumSize:
-                                                  const MaterialStatePropertyAll(
+                                                  const WidgetStatePropertyAll(
                                                       Size.fromHeight(40)),
                                               backgroundColor:
-                                                  MaterialStateProperty.all<
+                                                  WidgetStateProperty.all<
                                                       Color>(Colors.red),
                                               foregroundColor:
-                                                  MaterialStateProperty.all(
+                                                  WidgetStateProperty.all(
                                                       Colors.white),
                                             ),
                                             child: const Text("OBRIŠI"),
@@ -457,12 +457,12 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                     child: Column(children: <Widget>[
                       ElevatedButton(
                         style: ButtonStyle(
-                          minimumSize: const MaterialStatePropertyAll(
+                          minimumSize: const WidgetStatePropertyAll(
                               Size.fromHeight(50)),
                           backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.green),
+                              WidgetStateProperty.all<Color>(Colors.green),
                           foregroundColor:
-                              MaterialStateProperty.all(Colors.white),
+                              WidgetStateProperty.all(Colors.white),
                         ),
                         child:
                             const Text("SPREMI", textAlign: TextAlign.center),
@@ -491,12 +491,12 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                       const SizedBox(height: 10),
                       ElevatedButton(
                         style: ButtonStyle(
-                          minimumSize: const MaterialStatePropertyAll(
+                          minimumSize: const WidgetStatePropertyAll(
                               Size.fromHeight(50)),
                           backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.red),
+                              WidgetStateProperty.all<Color>(Colors.red),
                           foregroundColor:
-                              MaterialStateProperty.all(Colors.white),
+                              WidgetStateProperty.all(Colors.white),
                         ),
                         child: const Text("OBRIŠI"),
                         onPressed: () async {
@@ -577,7 +577,7 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                 ElevatedButton(
                   style: const ButtonStyle(
                       minimumSize:
-                          MaterialStatePropertyAll(Size.fromHeight(50))),
+                          WidgetStatePropertyAll(Size.fromHeight(50))),
                   child: const Text("SPREMI", textAlign: TextAlign.center),
                   onPressed: () async {
                     var isValid = _formKey.currentState?.saveAndValidate();
