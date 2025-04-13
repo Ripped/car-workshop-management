@@ -6,6 +6,7 @@ import 'package:cwm_desktop_mobile/providers/auth_provider.dart';
 import 'package:cwm_desktop_mobile/providers/part_provider.dart';
 import 'package:cwm_desktop_mobile/providers/work_order_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/appointment_blocked_provider.dart';
@@ -17,9 +18,18 @@ import 'providers/user_provider.dart';
 import 'providers/vehicle_provider.dart';
 import 'providers/vehicle_service_history_provider.dart';
 import 'screens/login_screen.dart';
+import '.env';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   HttpOverrides.global = MyHttpOverrides();
+
+  Stripe.publishableKey = stripePublishableKey;
+  Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
+  Stripe.urlScheme = 'flutterstripe';
+
+  await Stripe.instance.applySettings();
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => PartProvider()),

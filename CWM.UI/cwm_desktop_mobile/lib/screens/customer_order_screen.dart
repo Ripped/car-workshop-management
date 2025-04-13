@@ -1,58 +1,48 @@
-import 'package:cwm_desktop_mobile/models/appointment.dart';
-import 'package:cwm_desktop_mobile/models/employee.dart';
-import 'package:cwm_desktop_mobile/models/part.dart';
-import 'package:cwm_desktop_mobile/models/searches/part_search.dart';
+import 'package:cwm_desktop_mobile/models/paged_result.dart';
 import 'package:cwm_desktop_mobile/models/searches/part_work_order_search.dart';
-import 'package:cwm_desktop_mobile/models/searches/vehicle_search.dart';
-import 'package:cwm_desktop_mobile/models/user.dart';
-import 'package:cwm_desktop_mobile/providers/appointment_provider.dart';
-import 'package:cwm_desktop_mobile/providers/employee_provider.dart';
-import 'package:cwm_desktop_mobile/providers/part_provider.dart';
 import 'package:cwm_desktop_mobile/providers/part_work_order_provider.dart';
-import 'package:cwm_desktop_mobile/providers/work_order_provider.dart';
-import 'package:cwm_desktop_mobile/screens/work_order_list_screen.dart';
-import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
-import 'package:cwm_desktop_mobile/widgets/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 
-import '../models/paged_result.dart';
+import '../models/appointment.dart';
+import '../models/employee.dart';
+import '../models/user.dart';
 import '../models/vehicle.dart';
+import '../providers/appointment_provider.dart';
+import '../providers/employee_provider.dart';
 import '../providers/user_provider.dart';
 import '../providers/vehicle_provider.dart';
+import '../providers/work_order_provider.dart';
+import '../widgets/responsive.dart';
+import 'package:flutter_stripe/flutter_stripe.dart' as stripe;
 
-class WorkOrderClosureScreen extends StatefulWidget {
+class CustomerOrderScreen extends StatefulWidget {
   final int? id;
-  const WorkOrderClosureScreen(this.id, {super.key});
+  const CustomerOrderScreen(this.id, {super.key});
 
   @override
-  State<WorkOrderClosureScreen> createState() => _WorkOrderClosureScreen();
+  State<CustomerOrderScreen> createState() => _CustomerOrderScreenState();
 }
 
-class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
-  late WorkOrderProvider _workOrderProvider;
+class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
   late PartWorkOrderProvider _partWorkOrderProvider;
   late AppointmentProvider _appointmentProvider;
   late VehicleProvider _vehicleProvider;
   late UserProvider _userProvider;
   late EmployeeProvider _employeeProvider;
-  late PartProvider _partProvider;
+  late WorkOrderProvider _workOrderProvider;
 
   bool isLoading = true;
   final _formKey = GlobalKey<FormBuilderState>();
   Map<String, dynamic> _initialValue = {};
 
-  var _parts = PagedResult<Part>();
   var _appointments = PagedResult<Appointment>();
   var _vehicles = PagedResult<Vehicle>();
   var _employees = PagedResult<Employee>();
   var _users = PagedResult<User>();
-  late int? _partWorkOrderId;
-  var parts = <Part>[];
-  Map<Part, bool> partsList = {};
-  Map<dynamic, dynamic> mapOfPartWorkOrder = {};
-  List<Map<dynamic, dynamic>> tempPartsWorkOrderList = [];
+  var workOrder;
+  double totalAmount = 2;
 
   @override
   void initState() {
@@ -61,102 +51,44 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
     _workOrderProvider = context.read<WorkOrderProvider>();
     _appointmentProvider = context.read<AppointmentProvider>();
     _partWorkOrderProvider = context.read<PartWorkOrderProvider>();
-    _partProvider = context.read<PartProvider>();
     _userProvider = context.read<UserProvider>();
     _employeeProvider = context.read<EmployeeProvider>();
     _vehicleProvider = context.read<VehicleProvider>();
-    _partWorkOrderId = null;
+
     _loadData(widget.id);
   }
 
-  void searchParts(PartSearch partSearch) async {
-    _parts = await _partProvider.getAll(search: partSearch);
-    parts = _parts.result;
-
-    partsList.clear();
-    if (parts.isNotEmpty) {
-      for (var part in parts) {
-        for (var p in partsList.keys) {
-          if (p.id == part.id) return;
-        }
-        partsList[part] = false;
-      }
+  Future _totalAmount(int? id) async {
+    var partWorkOrderSearch = PartWorkOrderSearch();
+    var partWorkOrder =
+        await _partWorkOrderProvider.getAll(search: partWorkOrderSearch);
+    var parts = partWorkOrder.result;
+    for (var part in parts) {
+      totalAmount += part.part!.price;
     }
-  }
-
-  void _addParts() async {
-    var workOrder = await _workOrderProvider.get(widget.id!);
-    for (var i in partsList.entries) {
-      if (i.value) {
-        Map<dynamic, dynamic> temp = {
-          "serviceDate": workOrder.startTime,
-          "vehicleId": workOrder.vehicle!.id,
-          "workOrderId": workOrder.id,
-          "partId": i.key.id
-        };
-        tempPartsWorkOrderList.add(temp);
-      }
-    }
-    for (var i in tempPartsWorkOrderList) {
-      _partWorkOrderId == null
-          ? await _partWorkOrderProvider.insert(i)
-          : await _partWorkOrderProvider.update(_partWorkOrderId!, i);
-    }
-  }
-
-  void _openDialog(int? id) {
-    _loadData(id).then((data) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) => _buildDialog(context),
-      );
-    });
   }
 
   Future _loadData(int? id) async {
-    var partWorkOrderSearch = PartWorkOrderSearch();
-    var vehicleSearch = VehicleSearch();
-    vehicleSearch.pageSize = 50;
-
-    _vehicles = await _vehicleProvider.getAll(search: vehicleSearch);
+    _totalAmount(id);
+    _vehicles = await _vehicleProvider.getAll();
     _appointments = await _appointmentProvider.getAll();
     _users = await _userProvider.getAll();
     _employees = await _employeeProvider.getAll();
-    _parts = await _partProvider.getAll();
-    parts = _parts.result;
-
-    for (var part in parts) {
-      for (var p in partsList.keys) {
-        if (p.id == part.id) return;
-      }
-      partsList[part] = false;
-    }
 
     if (id != null) {
-      var workOrder = await _workOrderProvider.get(id);
-
-      partWorkOrderSearch.serviceDate = workOrder.startTime;
-      partWorkOrderSearch.vehicleId = workOrder.vehicle?.id;
-      var partWorkorder =
-          await _partWorkOrderProvider.getAll(search: partWorkOrderSearch);
-      if (partWorkorder.result.isNotEmpty) {
-        _partWorkOrderId = partWorkorder.result.first.id;
-      }
+      workOrder = await _workOrderProvider.get(id);
 
       _initialValue = {
         "orderNumber": workOrder.orderNumber,
-        "serviceType": workOrder.servicePerformed.index,
+        "description": workOrder.description,
         "startTime": workOrder.startTime,
         "endTime": workOrder.endTime,
-        "description": workOrder.description,
-        "concerne": workOrder.concerne,
-        "sugestions": workOrder.sugestions,
-        "appointmentId": workOrder.appointment!.id,
-        "vehicleId": workOrder.vehicle!.id,
+        "appointmentId": workOrder.appointment?.id,
         "userId": workOrder.user?.id,
+        "vehicleId": workOrder.vehicle?.id,
         "employeeId": workOrder.employee?.id,
         "servicePerformed": workOrder.servicePerformed.index,
-        "garageBox": workOrder.garageBox.index
+        "garageBox": workOrder.garageBox.index,
       };
     } else {
       _initialValue = {"image": "", "description": ""};
@@ -189,6 +121,8 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
   }
 
   Widget _basicInfo(BuildContext context) {
+    bool isCardValid = false;
+    bool cardError = false;
     return Card(
         elevation: 2,
         child: Column(children: [
@@ -238,6 +172,7 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: FormBuilderDateTimePicker(
+                          enabled: false,
                           name: "startTime",
                           decoration: const InputDecoration(
                               labelText: "Pocetak termina *"),
@@ -249,6 +184,7 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: FormBuilderDateTimePicker(
+                          enabled: false,
                           name: "endTime",
                           decoration: const InputDecoration(
                               labelText: "Kraj termina *"),
@@ -260,6 +196,7 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: FormBuilderTextField(
+                          enabled: false,
                           name: "concerne",
                           keyboardType: TextInputType.multiline,
                           maxLines: 5,
@@ -274,6 +211,7 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: FormBuilderTextField(
+                          enabled: false,
                           name: "description",
                           keyboardType: TextInputType.multiline,
                           maxLines: 3,
@@ -287,6 +225,7 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                       child: Align(
                         alignment: Alignment.bottomCenter,
                         child: FormBuilderTextField(
+                          enabled: false,
                           name: "sugestions",
                           keyboardType: TextInputType.multiline,
                           maxLines: 3,
@@ -300,6 +239,7 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                       child: SizedBox(
                         width: 290,
                         child: FormBuilderDropdown(
+                          enabled: false,
                           name: "employeeId",
                           decoration:
                               const InputDecoration(labelText: "Uposlenik *"),
@@ -318,6 +258,7 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                       child: SizedBox(
                         width: 300,
                         child: FormBuilderDropdown(
+                          enabled: false,
                           name: "servicePerformed",
                           decoration: const InputDecoration(
                               labelText: "Vrsta servisa *"),
@@ -355,6 +296,7 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                       child: SizedBox(
                         width: 300,
                         child: FormBuilderDropdown(
+                          enabled: false,
                           name: "garageBox",
                           decoration:
                               const InputDecoration(labelText: "Broj Garaze *"),
@@ -443,129 +385,70 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                       ),
                     ),
                     Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Text("TOTAL AMOUNT: $totalAmount")),
+                    Padding(
                       padding: const EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        child: const Text("Dodaj dijelove"),
-                        onPressed: () {
-                          _openDialog(widget.id);
-                        },
+                      child: FocusScope(
+                        child: Focus(
+                          onFocusChange: (hasFocus) {
+                            if (hasFocus) {
+                              Scrollable.ensureVisible(
+                                context,
+                                duration: const Duration(milliseconds: 300),
+                                alignment: 1.0, // Align to bottom
+                              );
+                            }
+                          },
+                          child: stripe.CardField(
+                            onCardChanged: (card) {
+                              setState(() {
+                                isCardValid = card!.complete;
+                                if (card.complete) {
+                                  cardError = false;
+                                }
+                              });
+                            },
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                    Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: Column(children: <Widget>[
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              minimumSize: const WidgetStatePropertyAll(
-                                  Size.fromHeight(45)),
-                              backgroundColor:
-                                  WidgetStateProperty.all<Color>(Colors.green),
-                              foregroundColor:
-                                  WidgetStateProperty.all(Colors.white),
-                            ),
-                            child: const Text("SPREMI",
-                                textAlign: TextAlign.center),
-                            onPressed: () async {
-                              var isValid =
-                                  _formKey.currentState?.saveAndValidate();
-
-                              if (isValid!) {
-                                var request =
-                                    Map.from(_formKey.currentState!.value);
-                                _addParts();
-                                if (widget.id != null) {
-                                  await _workOrderProvider.update(
-                                      widget.id!, request);
-                                }
-
-                                if (context.mounted) {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const MasterScreen("Nalozi",
-                                                  WorkOrderListScreen())));
-                                }
-                              }
-                            },
-                          ),
-                          const SizedBox(height: 5),
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              minimumSize: const WidgetStatePropertyAll(
-                                  Size.fromHeight(45)),
-                              backgroundColor:
-                                  WidgetStateProperty.all<Color>(Colors.red),
-                              foregroundColor:
-                                  WidgetStateProperty.all(Colors.white),
-                            ),
-                            child: const Text("OBRIŠI"),
-                            onPressed: () async {
-                              await _workOrderProvider.delete(widget.id!);
-                              await _loadData(null);
-                              setState(() {});
-                              if (context.mounted) {
-                                Navigator.pop(context);
-                              }
-                            },
-                          ),
-                        ])),
+                    if (!isCardValid && cardError) ...[
+                      const SizedBox(height: 5.0),
+                      Text(
+                        "Please insert card details",
+                        style: TextStyle(
+                            color: Theme.of(context).colorScheme.error),
+                      ),
+                    ],
+                    const SizedBox(height: 5),
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        minimumSize:
+                            const WidgetStatePropertyAll(Size.fromHeight(45)),
+                        backgroundColor:
+                            WidgetStateProperty.all<Color>(Colors.red),
+                        foregroundColor: WidgetStateProperty.all(Colors.white),
+                      ),
+                      child: const Text("PLATI"),
+                      onPressed: () async {
+                        await _workOrderProvider.insertReservation(
+                            workOrder, totalAmount);
+                        await _loadData(null);
+                        setState(() {});
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
             ],
           ),
         ]));
-  }
-
-  Widget _buildDialog(BuildContext context) {
-    return StatefulBuilder(builder: (context, setState) {
-      return Dialog(
-          child: SizedBox(
-              width: 600,
-              height: 600,
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: 300,
-                    child: TextField(
-                        decoration: const InputDecoration(
-                          labelText: "Pretraga",
-                          prefixIcon: Icon(Icons.search),
-                        ),
-                        onChanged: (String value) {
-                          var partsSearch = PartSearch();
-                          partsSearch.name = value;
-                          searchParts(partsSearch);
-                          setState(() {
-                            return;
-                          });
-                        }),
-                  ),
-                  Expanded(
-                    child: Container(),
-                  ),
-                  SizedBox(
-                      height: 400,
-                      width: 600,
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: partsList.keys.map((Part key) {
-                          return CheckboxListTile(
-                            title: Text(key.serialNumber),
-                            autofocus: false,
-                            activeColor: Colors.green,
-                            checkColor: Colors.white,
-                            value: partsList[key],
-                            onChanged: (value) {
-                              setState(() {
-                                partsList[key] = value!;
-                              });
-                            },
-                          );
-                        }).toList(),
-                      )),
-                ],
-              )));
-    });
   }
 }

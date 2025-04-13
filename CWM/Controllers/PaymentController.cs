@@ -5,6 +5,8 @@ using System.Security.Claims;
 
 namespace CWM.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class PaymentController : ControllerBase
     {
         private readonly IPaymentService _paymentService;

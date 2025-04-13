@@ -1,6 +1,7 @@
 import 'package:cwm_desktop_mobile/models/enums/role.dart';
 import 'package:cwm_desktop_mobile/screens/appointment_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/appointment_screen_syn_calendar.dart';
+import 'package:cwm_desktop_mobile/screens/customer_order_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
 import 'package:cwm_desktop_mobile/screens/employee_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
@@ -94,6 +95,9 @@ class SideMenu extends StatelessWidget {
           if (Authorization.roles.contains(Role.admin))
             _buildListTile(context, "Pregled termina", Icons.date_range,
                 const AppointmentListScreen(), true),
+          //if (Authorization.roles.contains(Role.admin))
+          _buildListTile(context, "Pregled narudzbi", Icons.date_range,
+              const CustomerOrderListScreen(), true),
           if (Authorization.roles.contains(Role.admin))
             _buildListTile(context, "Zaposlenici", Icons.date_range,
                 const EmployeeListScreen(), true),

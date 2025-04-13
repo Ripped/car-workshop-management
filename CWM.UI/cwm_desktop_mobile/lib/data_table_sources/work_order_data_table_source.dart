@@ -27,6 +27,9 @@ class WorkOrderListDataTableSource extends AdvancedDataTableSource<WorkOrder> {
     if (Authorization.roles.contains(Role.employee)) {
       workOrderSearch.employeeUsername = Authorization.username;
     }
+    if (Authorization.roles.contains(Role.user)) {
+      workOrderSearch.employeeUsername = Authorization.username;
+    }
 
     var workOrder = await _workOrderProvider.getAll(search: workOrderSearch);
 

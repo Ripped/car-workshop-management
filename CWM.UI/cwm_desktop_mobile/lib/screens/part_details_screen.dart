@@ -216,8 +216,8 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                                 const WidgetStatePropertyAll(
                                                     Size.fromHeight(50)),
                                             backgroundColor:
-                                                WidgetStateProperty.all<
-                                                    Color>(Colors.green),
+                                                WidgetStateProperty.all<Color>(
+                                                    Colors.green),
                                             foregroundColor:
                                                 WidgetStateProperty.all(
                                                     Colors.white),
@@ -256,8 +256,8 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                                 const WidgetStatePropertyAll(
                                                     Size.fromHeight(50)),
                                             backgroundColor:
-                                                WidgetStateProperty.all<
-                                                    Color>(Colors.red),
+                                                WidgetStateProperty.all<Color>(
+                                                    Colors.red),
                                             foregroundColor:
                                                 WidgetStateProperty.all(
                                                     Colors.white),
@@ -457,8 +457,8 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                     child: Column(children: <Widget>[
                       ElevatedButton(
                         style: ButtonStyle(
-                          minimumSize: const WidgetStatePropertyAll(
-                              Size.fromHeight(50)),
+                          minimumSize:
+                              const WidgetStatePropertyAll(Size.fromHeight(50)),
                           backgroundColor:
                               WidgetStateProperty.all<Color>(Colors.green),
                           foregroundColor:
@@ -491,8 +491,8 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                       const SizedBox(height: 10),
                       ElevatedButton(
                         style: ButtonStyle(
-                          minimumSize: const WidgetStatePropertyAll(
-                              Size.fromHeight(50)),
+                          minimumSize:
+                              const WidgetStatePropertyAll(Size.fromHeight(50)),
                           backgroundColor:
                               WidgetStateProperty.all<Color>(Colors.red),
                           foregroundColor:
@@ -576,8 +576,7 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
               child: Column(children: <Widget>[
                 ElevatedButton(
                   style: const ButtonStyle(
-                      minimumSize:
-                          WidgetStatePropertyAll(Size.fromHeight(50))),
+                      minimumSize: WidgetStatePropertyAll(Size.fromHeight(50))),
                   child: const Text("SPREMI", textAlign: TextAlign.center),
                   onPressed: () async {
                     var isValid = _formKey.currentState?.saveAndValidate();
