@@ -13,6 +13,7 @@ namespace CWM.Database.Models
     {
         [Key]
         public int Id { get; set; }
+        public decimal TotalAmount { get; set; }
         public DateTime ServiceDate { get; set; }
 
         [ForeignKey("Vehicle")]

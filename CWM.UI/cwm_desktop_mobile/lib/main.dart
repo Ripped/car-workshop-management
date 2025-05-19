@@ -29,7 +29,7 @@ void main() async {
   Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
   Stripe.urlScheme = 'flutterstripe';
 
-  await Stripe.instance.applySettings();
+  //await Stripe.instance.applySettings();
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => PartProvider()),

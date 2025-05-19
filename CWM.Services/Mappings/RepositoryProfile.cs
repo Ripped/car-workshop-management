@@ -91,7 +91,11 @@ namespace CWM.Database.Mappings
             .ForMember(x => x.Citizenship, opt => opt.Ignore())
             .ForMember(x => x.CityId, opt => opt.MapFrom((src, dest) => src.City?.Id))
             .ForMember(x => x.City, opt => opt.Ignore());
-        }
 
+            CreateMap<Expenses, Core.Models.Expenses>();
+            CreateMap<Core.Models.Expenses, Expenses>()
+            .ForMember(x => x.EmployeeId, opt => opt.MapFrom((src, dest) => src.Employee?.Id))
+            .ForMember(x => x.Employee, opt => opt.Ignore());
+        }
     }
 }

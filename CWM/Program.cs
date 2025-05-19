@@ -36,6 +36,7 @@ builder.Services.AddScoped<IUserRatingRepository, UserRatingRepository>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IRecommendService, RecommendService>();
 builder.Services.AddScoped<IPaymentService, PaymentRepository>();
+builder.Services.AddTransient<IExpensesRepository, ExpensesRepository>();
 
 builder.Services.AddAutoMapper(typeof(CityRepository));
 builder.Services.AddAutoMapper();

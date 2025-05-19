@@ -55,6 +55,9 @@ namespace CWM.Mappings
             CreateMap<EmployeeInsertUpdate, Employee>()
             .ForMember(x => x.Citizenship, opt => opt.MapFrom(y => y.CountryId == null ? null : new Country { Id = y.CountryId ?? 0 }))
             .ForMember(x => x.City, opt => opt.MapFrom(y => y.CityId == null ? null : new City { Id = y.CityId ?? 0 }));
+
+            CreateMap<ExpensesInsertUpdate, Expenses>()
+            .ForMember(x => x.Employee, opt => opt.MapFrom(y => y.EmployeeId == null ? null : new Vehicle { Id = y.EmployeeId ?? 0 }));
         }
     }
 }

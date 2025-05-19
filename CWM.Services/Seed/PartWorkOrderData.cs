@@ -17,6 +17,7 @@ namespace CWM.Database.Seed
                 new PartWorkOrder
                 {
                     Id = 1,
+                    TotalAmount = 10,
                     ServiceDate = DateTime.Now,
                     VehicleId = 1,
                     PartId = 1,
@@ -25,6 +26,7 @@ namespace CWM.Database.Seed
                 new PartWorkOrder
                 {
                     Id = 2,
+                    TotalAmount = 10,
                     ServiceDate = DateTime.Now,
                     VehicleId = 2,
                     PartId = 2,
@@ -33,6 +35,7 @@ namespace CWM.Database.Seed
                 new PartWorkOrder
                 {
                     Id = 3,
+                    TotalAmount = 10,
                     ServiceDate = DateTime.Now,
                     VehicleId = 3,
                     PartId = 3,
@@ -41,6 +44,7 @@ namespace CWM.Database.Seed
                 new PartWorkOrder
                 {
                     Id = 4,
+                    TotalAmount = 10,
                     ServiceDate = DateTime.Now,
                     VehicleId = 4,
                     PartId = 4,
@@ -49,6 +53,7 @@ namespace CWM.Database.Seed
                 new PartWorkOrder
                 {
                     Id = 5,
+                    TotalAmount = 10,
                     ServiceDate = DateTime.Now,
                     VehicleId = 5,
                     PartId = 5,
@@ -57,6 +62,7 @@ namespace CWM.Database.Seed
                 new PartWorkOrder
                 {
                     Id = 6,
+                    TotalAmount = 10,
                     ServiceDate = DateTime.Now,
                     VehicleId = 6,
                     PartId = 6,
