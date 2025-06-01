@@ -9,6 +9,7 @@ class PartWorkOrderSearch extends BaseSearch {
   bool includeWorkOrder = false;
   bool includePart = false;
   int? vehicleId;
+  int? workOrderId;
   DateTime? serviceDate;
 
   PartWorkOrderSearch();

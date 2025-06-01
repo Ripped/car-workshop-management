@@ -12,6 +12,7 @@ part 'work_order.g.dart';
 class WorkOrder {
   int id;
   String orderNumber;
+  double total;
   DateTime startTime;
   DateTime endTime;
   GarageBox garageBox;
@@ -27,6 +28,7 @@ class WorkOrder {
   WorkOrder(
       this.id,
       this.orderNumber,
+      this.total,
       this.startTime,
       this.endTime,
       this.garageBox,

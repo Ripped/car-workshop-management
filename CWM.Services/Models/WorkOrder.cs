@@ -16,6 +16,7 @@ namespace CWM.Database.Models
         public int Id { get; set; }
         public string OrderNumber { get; set; } = string.Empty;
         public decimal Total { get; set; }
+        public bool Payment {  get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public GarageBox GarageBox { get; set; }

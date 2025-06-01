@@ -11,6 +11,7 @@ namespace CWM.Core.Models.Searches
         public bool IncludeWorkOrder { get; set; }
         public bool IncludePart { get; set; }
         public int? VehicleId { get; set; }
+        public int? WorkOrderId { get; set; }
         public DateTime? ServiceDate { get; set; }
 
     }

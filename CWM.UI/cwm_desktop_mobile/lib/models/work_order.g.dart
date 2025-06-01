@@ -9,6 +9,7 @@ part of 'work_order.dart';
 WorkOrder _$WorkOrderFromJson(Map<String, dynamic> json) => WorkOrder(
       (json['id'] as num).toInt(),
       json['orderNumber'] as String,
+      (json['total'] as num).toDouble(),
       DateTime.parse(json['startTime'] as String),
       DateTime.parse(json['endTime'] as String),
       $enumDecode(_$GarageBoxEnumMap, json['garageBox']),
@@ -32,6 +33,7 @@ WorkOrder _$WorkOrderFromJson(Map<String, dynamic> json) => WorkOrder(
 Map<String, dynamic> _$WorkOrderToJson(WorkOrder instance) => <String, dynamic>{
       'id': instance.id,
       'orderNumber': instance.orderNumber,
+      'total': instance.total,
       'startTime': instance.startTime.toIso8601String(),
       'endTime': instance.endTime.toIso8601String(),
       'garageBox': _$GarageBoxEnumMap[instance.garageBox]!,

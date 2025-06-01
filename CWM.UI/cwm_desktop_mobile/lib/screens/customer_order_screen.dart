@@ -42,7 +42,7 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
   var _employees = PagedResult<Employee>();
   var _users = PagedResult<User>();
   var workOrder;
-  double totalAmount = 2;
+  double totalAmount = 0;
 
   @override
   void initState() {
@@ -60,12 +60,17 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
 
   Future _totalAmount(int? id) async {
     var partWorkOrderSearch = PartWorkOrderSearch();
+    partWorkOrderSearch.includePart = true;
+    partWorkOrderSearch.includeWorkOrder = true;
+    partWorkOrderSearch.workOrderId = id;
     var partWorkOrder =
         await _partWorkOrderProvider.getAll(search: partWorkOrderSearch);
     var parts = partWorkOrder.result;
     for (var part in parts) {
       totalAmount += part.part!.price;
     }
+    var totalWorkOrder = await _workOrderProvider.get(id!);
+    totalAmount += totalWorkOrder.total;
   }
 
   Future _loadData(int? id) async {
@@ -386,7 +391,10 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                     ),
                     Padding(
                         padding: const EdgeInsets.all(10),
-                        child: Text("TOTAL AMOUNT: $totalAmount")),
+                        child: Text(
+                          "UKUPNA SUMA: $totalAmount KM",
+                          style: TextStyle(fontSize: 25),
+                        )),
                     Padding(
                       padding: const EdgeInsets.all(10),
                       child: FocusScope(
@@ -424,11 +432,11 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                             color: Theme.of(context).colorScheme.error),
                       ),
                     ],
-                    const SizedBox(height: 5),
+                    //const SizedBox(height: 5),
                     ElevatedButton(
                       style: ButtonStyle(
                         minimumSize:
-                            const WidgetStatePropertyAll(Size.fromHeight(45)),
+                            const WidgetStatePropertyAll(Size.fromHeight(40)),
                         backgroundColor:
                             WidgetStateProperty.all<Color>(Colors.red),
                         foregroundColor: WidgetStateProperty.all(Colors.white),

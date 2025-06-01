@@ -13,6 +13,7 @@ PartWorkOrderSearch _$PartWorkOrderSearchFromJson(Map<String, dynamic> json) =>
       ..includeWorkOrder = json['includeWorkOrder'] as bool
       ..includePart = json['includePart'] as bool
       ..vehicleId = (json['vehicleId'] as num?)?.toInt()
+      ..workOrderId = (json['workOrderId'] as num?)?.toInt()
       ..serviceDate = json['serviceDate'] == null
           ? null
           : DateTime.parse(json['serviceDate'] as String);
@@ -25,5 +26,6 @@ Map<String, dynamic> _$PartWorkOrderSearchToJson(
       'includeWorkOrder': instance.includeWorkOrder,
       'includePart': instance.includePart,
       'vehicleId': instance.vehicleId,
+      'workOrderId': instance.workOrderId,
       'serviceDate': instance.serviceDate?.toIso8601String(),
     };

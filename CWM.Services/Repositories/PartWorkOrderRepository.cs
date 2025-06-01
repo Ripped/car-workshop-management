@@ -47,6 +47,9 @@ namespace CWM.Database.Repositories
             if (search.VehicleId > 0)
                 query = query.Where(x => x.Vehicle!.Id == search.VehicleId);
 
+            if (search.WorkOrderId > 0)
+                query = query.Where(x => x.WorkOrder!.Id == search.WorkOrderId);
+
             if (search.ServiceDate != null)
                 query = query.Where(x => x.ServiceDate == search.ServiceDate);
 
