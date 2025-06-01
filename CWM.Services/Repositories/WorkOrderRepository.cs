@@ -56,6 +56,7 @@ namespace CWM.Database.Repositories
 
             return query;
         }
+
         public async Task<Core.Models.ReportWorkOrder> GetServiceReport(ReportWorkOrderSearch search)
         {
             var query = Context.WorkOrders.Include(x => x.Employee).Include(x => x.User).AsQueryable();
@@ -89,33 +90,40 @@ namespace CWM.Database.Repositories
             
             var list = new List<Core.Models.ListOfServiceReport>();
 
+
             foreach (var item in groupServices)
             {
                 var employees = Context.Employees;
                 
                 foreach (var e in employees)
                 {
-                    var listServiceTime = new List<Core.Models.ServiceTime>();
+                    //var listServiceTime = new List<Core.Models.ServiceTime>();
                     var t = item.ServiceReports.Where(x => x.Employee!.Id == e.Id).Select(y => y.ServicePerformed).Distinct().ToList();
                     foreach (var w in t)
                     {
                         double time = 0;
+                        DateTime startTime = DateTime.Now;
                         var r = item.ServiceReports.Where(x => x.Employee!.Id == e.Id).Where(y=>y.ServicePerformed == w);
-
                         foreach (var x in r)
                         {
                             time += x.Time;
-
+                            startTime = x.StartTime;
                         }
 
                         list.Add(new Core.Models.ListOfServiceReport()
                         {
                             TotalTime = time,
+                            StartTime = startTime,
                             Employee = Mapper.Map<Core.Models.Employee>(e),
                             ServicePerformed = w,
                         });
                     }
                 }
+            }
+            var listWorkOrder = new List<Core.Models.ListOfWorkOrder>();
+            foreach (var item in groupServices)
+            {
+
             }
             var groupServicesFinal = listOfOrders
                 .GroupBy(group => group.StartTime.Date)
@@ -144,5 +152,99 @@ namespace CWM.Database.Repositories
 
                 return createReport;
             }
+
+        public async Task<Core.Models.ReportWorkOrder> GetOrderReport(ReportWorkOrderSearch search)
+        {
+            var query = Context.WorkOrders.Include(x => x.User).AsQueryable();
+
+
+            if (search?.DateFrom.HasValue == true && search.DateTo.HasValue == true)
+            {
+                if (search.DateFrom.Value.Date >= search.DateTo.Value.Date)
+                    throw new Exception("Date DATE_FROM must be lower than DATE_TO");
+
+                query = query.Where(x => x.StartTime.Date >= search.DateFrom.Value.Date && x.StartTime.Date <= search.DateTo.Value.Date);
+            }
+            var listOfOrders = await query.ToListAsync();
+
+            var groupServices = listOfOrders
+                .GroupBy(group => group.StartTime.Date)
+                .Select(y => new Core.Models.WorkOrderInfo()
+                {
+                    WorkOrderDate = y.Key,
+                    WorkOrders = y.Select(n => new Core.Models.ListOfWorkOrder()
+                    {
+                        WorkOrderId = n.Id,
+                        OrderNumber = n.OrderNumber,
+                        StartTime = n.StartTime,
+                        EndTime = n.EndTime,
+                        TotalSum = n.Total,
+                        ServicePerformed = n.ServicePerformed,
+                        User = Mapper.Map<Core.Models.User>(n.User),
+                    }).ToList(),
+                })
+                .OrderBy(z => z.WorkOrders.OrderBy(x => x.TotalTime))
+                .ToList();
+
+            var list = new List<Core.Models.ListOfWorkOrder>();
+
+
+            foreach (var item in groupServices)
+            {
+                var workOrders = item.WorkOrders.Distinct().ToList();
+               
+                foreach (var w in workOrders)
+                {
+                    double total = 0;
+
+                    var r = Context.PartWorkOrder.Where(x => x.WorkOrder!.Id == w.WorkOrderId).Include(x => x.Part);
+                    foreach (var x in r)
+                    {
+                        total += (double)x.Part!.Price;
+                    }
+                    total += (double)w.TotalSum;
+
+                    list.Add(new Core.Models.ListOfWorkOrder()
+                    {
+                        OrderNumber = w.OrderNumber,
+                        TotalSum = (decimal)total,
+                        StartTime = w.StartTime,
+                        User = Mapper.Map<Core.Models.User>(w.User),
+                        ServicePerformed = w.ServicePerformed,
+                    });
+                    total = 0;
+                    
+                }
+            }
+            
+            var groupServicesFinal = listOfOrders
+                .GroupBy(group => group.StartTime.Date)
+                .Select(y => new Core.Models.WorkOrderInfo()
+                {
+                    WorkOrderDate = y.Key,
+                    WorkOrders = list,
+                })
+                .OrderBy(z => z.WorkOrders.OrderBy(x => x.TotalTime))
+                .ToList();
+
+            double totalSpent = 0;
+
+            foreach (var item in groupServicesFinal)
+            {
+                foreach (var s in item.WorkOrders)
+                {
+                    totalSpent += (double)s.TotalSum;
+                }
+            }
+
+            var createReport = new Core.Models.ReportWorkOrder()
+            {
+
+                WorkOrderInfo = groupServicesFinal,
+                Total = (decimal)totalSpent
+            };
+
+            return createReport;
         }
+    }
 }

@@ -24,6 +24,7 @@ namespace CWM.Core.Models
 
     public class ListOfWorkOrder
     {
+        public int WorkOrderId { get; set; }
         public string OrderNumber { get; set; } = string.Empty;
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }

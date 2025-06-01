@@ -10,5 +10,6 @@ namespace CWM.Core.Interfaces.Repositories
 {
     public interface IWorkOrderRepository : IBaseRepository<WorkOrder, WorkOrderSearch> {
         Task<ReportWorkOrder> GetServiceReport(ReportWorkOrderSearch search);
+        Task<ReportWorkOrder> GetOrderReport(ReportWorkOrderSearch search);
     }
 }

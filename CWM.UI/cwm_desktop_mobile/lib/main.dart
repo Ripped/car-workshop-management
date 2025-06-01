@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cwm_desktop_mobile/providers/appointment_type_provider.dart';
 import 'package:cwm_desktop_mobile/providers/appointment_provider.dart';
 import 'package:cwm_desktop_mobile/providers/auth_provider.dart';
+import 'package:cwm_desktop_mobile/providers/expenses_provider.dart';
 import 'package:cwm_desktop_mobile/providers/part_provider.dart';
 import 'package:cwm_desktop_mobile/providers/work_order_provider.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => CityProvider()),
       ChangeNotifierProvider(create: (_) => CountryProvider()),
       ChangeNotifierProvider(create: (_) => PartWorkOrderProvider()),
+      ChangeNotifierProvider(create: (_) => ExpensesProvider()),
     ], child: const MyApp()),
   );
 }

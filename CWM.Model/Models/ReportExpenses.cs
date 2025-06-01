@@ -10,8 +10,8 @@ namespace CWM.Core.Models
     public class ReportExpenses
     {
         public int Total { get; set; }
-        public Employee? Employee { get; set; }
+        //public Employee? Employee { get; set; }
         public ExpensesType ExpensesType { get; set; }
-        public DateTime Date { get; set; }
+        //public DateTime Date { get; set; }
     }
 }

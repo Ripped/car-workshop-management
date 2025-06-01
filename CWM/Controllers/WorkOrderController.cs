@@ -16,5 +16,9 @@ namespace CWM.Controllers
         [HttpGet("GetServiceReport")]
         public async Task<ReportWorkOrder> GetServiceReport([FromQuery] ReportWorkOrderSearch search)
             =>  await WorkOrderRepository.GetServiceReport(search);
+
+        [HttpGet("GetOrderReport")]
+        public async Task<ReportWorkOrder> GetOrderReport([FromQuery] ReportWorkOrderSearch search)
+            => await WorkOrderRepository.GetOrderReport(search);
     }
 }

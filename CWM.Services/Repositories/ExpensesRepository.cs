@@ -55,7 +55,7 @@ namespace CWM.Database.Repositories
             return query;
         }
 
-        public async Task<List<Core.Models.ReportExpenses>> GetFinanceReport(ReportWorkOrderSearch search)
+        /*public async Task<List<Core.Models.ReportExpenses>> GetFinanceReport(ReportWorkOrderSearch search)
         {
             var query = Context.Expenses.Include(x => x.Employee).AsQueryable();
 
@@ -102,7 +102,68 @@ namespace CWM.Database.Repositories
                     }
                 }
             }
+            
             return list;
+        }*/
+        public async Task<Core.Models.ReportExpensesTotal> GetFinanceReport(ReportWorkOrderSearch search)
+        {
+            var query = Context.Expenses.Include(x => x.Employee).AsQueryable();
+
+
+            if (search?.DateFrom.HasValue == true && search.DateTo.HasValue == true)
+            {
+                if (search.DateFrom.Value.Date >= search.DateTo.Value.Date)
+                    throw new Exception("Date DATE_FROM must be lower than DATE_TO");
+
+                query = query.Where(x => x.Date.Date >= search.DateFrom.Value.Date && x.Date.Date <= search.DateTo.Value.Date);
+            }
+            var listOfOrders = await query.ToListAsync();
+
+            var list = new List<Core.Models.ReportExpenses>();
+
+            var employees = Context.Employees;
+
+            var r = listOfOrders.Select(x => x.ExpensesType).Distinct().ToList();
+
+            foreach (var item in r)
+            {
+                var e = listOfOrders.Where(x => x.ExpensesType == item).ToList();
+                int totalExpenses = 0;
+
+                foreach (var q in r)
+                {
+                    foreach (var x in e)
+                    {
+
+                        if (x.ExpensesType == q)
+                        {
+                            totalExpenses += x.TotalAmount;
+                        }
+                    }
+                    if (totalExpenses > 0)
+                    {
+                        list.Add(new Core.Models.ReportExpenses()
+                        {
+                            Total = totalExpenses,
+                            //Employee = Mapper.Map<Core.Models.Employee>(item),
+                            ExpensesType = q,
+                        });
+                        totalExpenses = 0;
+                    }
+                }
+            }
+            int total = 0;
+            foreach (var item in list)
+            {
+                total += item.Total;
+            }
+            var createReport = new Core.Models.ReportExpensesTotal()
+            {
+                Total = total,
+                ReportExpenses = list,
+            };
+
+            return createReport;
         }
     }
 }

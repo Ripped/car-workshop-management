@@ -14,7 +14,7 @@ namespace CWM.Controllers
     {
         private readonly IExpensesRepository ExpensesRepository = expensesRepository;
         [HttpGet("GetFinanceReport")]
-        public async Task<List<Core.Models.ReportExpenses>> GetFinanceReport([FromQuery] ReportWorkOrderSearch search)
+        public async Task<Core.Models.ReportExpensesTotal> GetFinanceReport([FromQuery] ReportWorkOrderSearch search)
             => await ExpensesRepository.GetFinanceReport(search);
     }
 }

@@ -14,7 +14,7 @@ class ListOfWorkOrder {
   double totalSum;
   Service servicePerformed;
   User user;
-  Employee employee;
+  Employee? employee;
 
   ListOfWorkOrder(
       this.orderNumber,

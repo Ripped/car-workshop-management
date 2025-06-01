@@ -9,6 +9,6 @@ using System.Threading.Tasks;
 namespace CWM.Core.Interfaces.Repositories
 {
     public interface IExpensesRepository : IBaseRepository<Expenses, ExpensesSearch> {
-        Task<List<Core.Models.ReportExpenses>> GetFinanceReport(ReportWorkOrderSearch search);
+        Task<Core.Models.ReportExpensesTotal> GetFinanceReport(ReportWorkOrderSearch search);
     }
 }

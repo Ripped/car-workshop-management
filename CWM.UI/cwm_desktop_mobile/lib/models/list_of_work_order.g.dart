@@ -15,7 +15,9 @@ ListOfWorkOrder _$ListOfWorkOrderFromJson(Map<String, dynamic> json) =>
       (json['totalSum'] as num).toDouble(),
       $enumDecode(_$ServiceEnumMap, json['servicePerformed']),
       User.fromJson(json['user'] as Map<String, dynamic>),
-      Employee.fromJson(json['employee'] as Map<String, dynamic>),
+      json['employee'] == null
+          ? null
+          : Employee.fromJson(json['employee'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ListOfWorkOrderToJson(ListOfWorkOrder instance) =>

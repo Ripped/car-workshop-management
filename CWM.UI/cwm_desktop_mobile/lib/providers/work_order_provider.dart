@@ -46,6 +46,41 @@ class WorkOrderProvider extends BaseProvider<WorkOrder, WorkOrderSearch> {
     }
   }
 
+  Future<ReportWorkOrder> getOrderReport(ReportWorkOrderSearch search) async {
+    final Map<String, String> queryParameters = {};
+    String endpointIzvjestajNarudzbe = "GetOrderReport";
+
+    var url = "https://$baseUrl/WorkOrder/$endpointIzvjestajNarudzbe";
+
+    if (search != null) {
+      search.toJson().forEach((key, value) {
+        queryParameters.addAll(<String, String>{key: value});
+      });
+
+      queryParameters.removeWhere((key, value) => value == "null");
+    }
+
+    var uri = Uri.https(
+        baseUrl, 'WorkOrder/$endpointIzvjestajNarudzbe', queryParameters);
+
+    var response = await http.get(uri, headers: createHeaders());
+
+    if (isValidResponse(response)) {
+      var data = jsonDecode(response.body);
+
+      if (data == null || data is! Map<String, dynamic>) {
+        print("Neispravan format odgovora!");
+        throw Exception('Neispravan format odgovora!');
+      }
+
+      //ReportWorkOrder izvjestajNarudzbe = ReportWorkOrder.fromJson(data);
+
+      return ReportWorkOrder.fromJson(data);
+    } else {
+      throw Exception("Nepoznata greška!");
+    }
+  }
+
   Future<void> insertReservation(WorkOrder workOrder, double amount) async {
     final reservationResponseBody = workOrder;
 

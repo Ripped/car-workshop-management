@@ -368,12 +368,12 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                                             Size.fromHeight(
                                                                 50)),
                                                     backgroundColor:
-                                                        WidgetStateProperty
-                                                            .all<Color>(
-                                                                Colors.green),
+                                                        WidgetStateProperty.all<
+                                                                Color>(
+                                                            Colors.green),
                                                     foregroundColor:
-                                                        WidgetStateProperty
-                                                            .all(Colors.white),
+                                                        WidgetStateProperty.all(
+                                                            Colors.white),
                                                   ),
                                                   child: const Text("SPREMI",
                                                       textAlign:
@@ -419,12 +419,11 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                                             Size.fromHeight(
                                                                 40)),
                                                     backgroundColor:
-                                                        WidgetStateProperty
-                                                            .all<Color>(
-                                                                Colors.red),
+                                                        WidgetStateProperty.all<
+                                                            Color>(Colors.red),
                                                     foregroundColor:
-                                                        WidgetStateProperty
-                                                            .all(Colors.white),
+                                                        WidgetStateProperty.all(
+                                                            Colors.white),
                                                   ),
                                                   child: const Text("OBRIŠI"),
                                                   onPressed: () async {

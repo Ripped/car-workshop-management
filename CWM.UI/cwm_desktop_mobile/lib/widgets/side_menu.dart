@@ -5,6 +5,9 @@ import 'package:cwm_desktop_mobile/screens/customer_order_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
 import 'package:cwm_desktop_mobile/screens/employee_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
+import 'package:cwm_desktop_mobile/screens/report_employee_screen.dart';
+import 'package:cwm_desktop_mobile/screens/report_finance_screen.dart';
+import 'package:cwm_desktop_mobile/screens/report_order_screen.dart';
 import 'package:cwm_desktop_mobile/screens/report_screen.dart';
 import 'package:cwm_desktop_mobile/screens/vehicle_list.dart';
 import 'package:cwm_desktop_mobile/screens/work_order_list_screen.dart';
@@ -91,14 +94,13 @@ class SideMenu extends StatelessWidget {
                 const WorkOrderListScreen(), true),
           _buildListTile(context, "Dijelovi", Icons.data_array,
               const PartListScreen(), true),
-          _buildListTile(context, "Report", Icons.data_array,
-              const IzvjestajScreen(), true),
+          _buildListTile(
+              context, "Report", Icons.data_array, const ReportScreen(), true),
           _buildListTile(context, "Rezervacija termina", Icons.date_range,
               const MyWidget(), true),
           if (Authorization.roles.contains(Role.admin))
             _buildListTile(context, "Pregled termina", Icons.date_range,
                 const AppointmentListScreen(), true),
-          //if (Authorization.roles.contains(Role.admin))
           _buildListTile(context, "Pregled narudzbi", Icons.date_range,
               const CustomerOrderListScreen(), true),
           if (Authorization.roles.contains(Role.admin))

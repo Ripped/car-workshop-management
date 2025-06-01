@@ -356,6 +356,7 @@ namespace CWM.Database.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     OrderNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     GarageBox = table.Column<int>(type: "int", nullable: false),
@@ -399,7 +400,6 @@ namespace CWM.Database.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     ServiceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     VehicleId = table.Column<int>(type: "int", nullable: true),
                     PartId = table.Column<int>(type: "int", nullable: true),
@@ -511,12 +511,12 @@ namespace CWM.Database.Migrations
                 columns: new[] { "Id", "BirthDate", "CitizenshipId", "CityId", "CreateDate", "Email", "FirstName", "Gender", "Image", "LastName", "Mobile", "OfficePhone", "Password", "Username" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2001, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8356), "sendić@gmail.com", "Amir", 0, null, "Sendić", "062342376", "38734549", "Admin", "Admin" },
-                    { 2, new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8414), "stufo@gmail.com", "Samra", 1, null, "Tufo", "062342376", "38734549", "Admin", "employee" },
-                    { 3, new DateTime(1990, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8418), "tufo@gmail.com", "Omer", 0, null, "Tufo", "062342376", "38734549", "Admin", "omer" },
-                    { 4, new DateTime(1975, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 4, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8422), "kremić@gmail.com", "Merima", 1, null, "Kremić", "062342376", "38734549", "Admin", "merima" },
-                    { 5, new DateTime(2001, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 5, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8425), "karić@gmail.com", "Damir", 0, null, "Kahvic", "062342376", "38734549", "Admin", "dario" },
-                    { 6, new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 6, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8428), "babić@gmail.com", "Selmir", 1, null, "Babić", "062342376", "38734549", "Admin", "selmir" }
+                    { 1, new DateTime(2001, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5618), "sendić@gmail.com", "Amir", 0, null, "Sendić", "062342376", "38734549", "Admin", "Admin" },
+                    { 2, new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5670), "stufo@gmail.com", "Samra", 1, null, "Tufo", "062342376", "38734549", "Admin", "employee" },
+                    { 3, new DateTime(1990, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5674), "tufo@gmail.com", "Omer", 0, null, "Tufo", "062342376", "38734549", "Admin", "omer" },
+                    { 4, new DateTime(1975, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 4, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5678), "kremić@gmail.com", "Merima", 1, null, "Kremić", "062342376", "38734549", "Admin", "merima" },
+                    { 5, new DateTime(2001, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 5, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5681), "karić@gmail.com", "Damir", 0, null, "Kahvic", "062342376", "38734549", "Admin", "dario" },
+                    { 6, new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 6, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5684), "babić@gmail.com", "Selmir", 1, null, "Babić", "062342376", "38734549", "Admin", "selmir" }
                 });
 
             migrationBuilder.InsertData(
@@ -600,42 +600,42 @@ namespace CWM.Database.Migrations
                 columns: new[] { "Id", "Description", "EmployeeId", "ServiceDate", "ServiceType", "Sugestions", "UserId", "VehicleId" },
                 values: new object[,]
                 {
-                    { 1, "", 1, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8549), 1, "", 1, 1 },
-                    { 2, "", 2, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8553), 0, "", 2, 2 },
-                    { 3, "", 3, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8556), 4, "", 3, 3 },
-                    { 4, "", 4, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8558), 5, "", 4, 4 },
-                    { 5, "", 5, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8561), 1, "", 5, 5 },
-                    { 6, "", 6, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8563), 0, "", 6, 6 }
+                    { 1, "", 1, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5798), 1, "", 1, 1 },
+                    { 2, "", 2, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5803), 0, "", 2, 2 },
+                    { 3, "", 3, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5806), 4, "", 3, 3 },
+                    { 4, "", 4, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5808), 5, "", 4, 4 },
+                    { 5, "", 5, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5811), 1, "", 5, 5 },
+                    { 6, "", 6, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5813), 0, "", 6, 6 }
                 });
 
             migrationBuilder.InsertData(
                 table: "WorkOrders",
-                columns: new[] { "Id", "AppointmentId", "Concerne", "Description", "EmployeeId", "EndTime", "GarageBox", "OrderNumber", "ServicePerformed", "StartTime", "Sugestions", "UserId", "VehicleId" },
+                columns: new[] { "Id", "AppointmentId", "Concerne", "Description", "EmployeeId", "EndTime", "GarageBox", "OrderNumber", "ServicePerformed", "StartTime", "Sugestions", "Total", "UserId", "VehicleId" },
                 values: new object[,]
                 {
-                    { 1, 1, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 1, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA252ASF276", 1, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 1, 1 },
-                    { 2, 2, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 2, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA252ASF276", 0, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 2, 2 },
-                    { 3, 3, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 3, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA252ASF276", 4, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 3, 3 },
-                    { 4, 4, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 4, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA252ASF276", 3, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 4, 4 },
-                    { 5, 5, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 5, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA252ASF276", 5, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 5, 5 },
-                    { 6, 6, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 6, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA252ASF276", 1, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 6, 6 },
-                    { 7, 6, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 6, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA252ASF276", 0, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 6, 6 },
-                    { 8, 6, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 6, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA252ASF276", 2, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 6, 6 },
-                    { 9, 6, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 6, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA252ASF276", 5, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 6, 6 },
-                    { 10, 6, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 6, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA252ASF276", 1, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 6, 6 }
+                    { 1, 1, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 1, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA152ASF276", 1, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 30m, 1, 1 },
+                    { 2, 2, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 2, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA252ASF276", 0, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 40m, 2, 2 },
+                    { 3, 3, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 3, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA352ASF276", 4, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 20m, 3, 3 },
+                    { 4, 4, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 4, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA452ASF276", 3, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 40m, 4, 4 },
+                    { 5, 5, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 5, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA552ASF276", 5, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 60m, 5, 5 },
+                    { 6, 6, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 6, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA652ASF276", 1, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 40m, 6, 6 },
+                    { 7, 6, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 6, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA752ASF276", 0, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 50m, 6, 6 },
+                    { 8, 6, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 6, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA852ASF276", 2, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 10m, 6, 6 },
+                    { 9, 6, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 6, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA952ASF276", 5, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 40m, 6, 6 },
+                    { 10, 6, "Paljenje auta", "Potrebno duze vrijeme da upali kada je auto zagrijano", 6, new DateTime(2024, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 0, "SGTA102ASF276", 1, new DateTime(2024, 5, 4, 0, 0, 0, 0, DateTimeKind.Unspecified), "Provjeriti dizne i alnaser", 70m, 6, 6 }
                 });
 
             migrationBuilder.InsertData(
                 table: "PartWorkOrder",
-                columns: new[] { "Id", "PartId", "ServiceDate", "TotalAmount", "VehicleId", "WorkOrderId" },
+                columns: new[] { "Id", "PartId", "ServiceDate", "VehicleId", "WorkOrderId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8692), 10m, 1, 1 },
-                    { 2, 2, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8697), 10m, 2, 2 },
-                    { 3, 3, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8700), 10m, 3, 3 },
-                    { 4, 4, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8702), 10m, 4, 4 },
-                    { 5, 5, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8704), 10m, 5, 5 },
-                    { 6, 6, new DateTime(2025, 5, 19, 15, 26, 41, 826, DateTimeKind.Local).AddTicks(8706), 10m, 6, 6 }
+                    { 1, 1, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5940), 1, 1 },
+                    { 2, 2, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5944), 2, 2 },
+                    { 3, 3, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5951), 3, 3 },
+                    { 4, 4, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5953), 4, 4 },
+                    { 5, 5, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5955), 5, 5 },
+                    { 6, 6, new DateTime(2025, 5, 30, 19, 48, 47, 250, DateTimeKind.Local).AddTicks(5957), 6, 6 }
                 });
 
             migrationBuilder.CreateIndex(

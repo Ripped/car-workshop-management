@@ -17,7 +17,8 @@ namespace CWM.Database.Seed
                 new WorkOrder
                 {
                     Id = 1,
-                    OrderNumber = "SGTA252ASF276",
+                    OrderNumber = "SGTA152ASF276",
+                    Total = 30,
                     StartTime = new DateTime(2024, 5, 4),
                     EndTime = new DateTime(2024, 5, 5),
                     GarageBox = GarageBox.Box1,
@@ -34,6 +35,7 @@ namespace CWM.Database.Seed
                 {
                     Id = 2,
                     OrderNumber = "SGTA252ASF276",
+                    Total = 40,
                     StartTime = new DateTime(2024, 5, 4),
                     EndTime = new DateTime(2024, 5, 5),
                     GarageBox = GarageBox.Box1,
@@ -49,7 +51,8 @@ namespace CWM.Database.Seed
                 new WorkOrder
                 {
                     Id = 3,
-                    OrderNumber = "SGTA252ASF276",
+                    OrderNumber = "SGTA352ASF276",
+                    Total = 20,
                     StartTime = new DateTime(2024, 5, 4),
                     EndTime = new DateTime(2024, 5, 5),
                     GarageBox = GarageBox.Box1,
@@ -65,7 +68,8 @@ namespace CWM.Database.Seed
                 new WorkOrder
                 {
                     Id = 4,
-                    OrderNumber = "SGTA252ASF276",
+                    OrderNumber = "SGTA452ASF276",
+                    Total = 40,
                     StartTime = new DateTime(2024, 5, 4),
                     EndTime = new DateTime(2024, 5, 5),
                     GarageBox = GarageBox.Box1,
@@ -81,7 +85,8 @@ namespace CWM.Database.Seed
                 new WorkOrder
                 {
                     Id = 5,
-                    OrderNumber = "SGTA252ASF276",
+                    OrderNumber = "SGTA552ASF276",
+                    Total = 60,
                     StartTime = new DateTime(2024, 5, 4),
                     EndTime = new DateTime(2024, 5, 5),
                     GarageBox = GarageBox.Box1,
@@ -97,7 +102,8 @@ namespace CWM.Database.Seed
                 new WorkOrder
                 {
                     Id = 6,
-                    OrderNumber = "SGTA252ASF276",
+                    OrderNumber = "SGTA652ASF276",
+                    Total = 40,
                     StartTime = new DateTime(2024, 5, 4),
                     EndTime = new DateTime(2024, 5, 5),
                     GarageBox = GarageBox.Box1,
@@ -113,7 +119,8 @@ namespace CWM.Database.Seed
                 new WorkOrder
                 {
                     Id = 7,
-                    OrderNumber = "SGTA252ASF276",
+                    OrderNumber = "SGTA752ASF276",
+                    Total = 50,
                     StartTime = new DateTime(2024, 5, 4),
                     EndTime = new DateTime(2024, 5, 5),
                     GarageBox = GarageBox.Box1,
@@ -129,7 +136,8 @@ namespace CWM.Database.Seed
                 new WorkOrder
                 {
                     Id = 8,
-                    OrderNumber = "SGTA252ASF276",
+                    OrderNumber = "SGTA852ASF276",
+                    Total = 10,
                     StartTime = new DateTime(2024, 5, 4),
                     EndTime = new DateTime(2024, 5, 5),
                     GarageBox = GarageBox.Box1,
@@ -145,7 +153,8 @@ namespace CWM.Database.Seed
                 new WorkOrder
                 {
                     Id = 9,
-                    OrderNumber = "SGTA252ASF276",
+                    OrderNumber = "SGTA952ASF276",
+                    Total = 40,
                     StartTime = new DateTime(2024, 5, 4),
                     EndTime = new DateTime(2024, 5, 5),
                     GarageBox = GarageBox.Box1,
@@ -161,7 +170,8 @@ namespace CWM.Database.Seed
                 new WorkOrder
                 {
                     Id = 10,
-                    OrderNumber = "SGTA252ASF276",
+                    OrderNumber = "SGTA102ASF276",
+                    Total = 70,
                     StartTime = new DateTime(2024, 5, 4),
                     EndTime = new DateTime(2024, 5, 5),
                     GarageBox = GarageBox.Box1,
