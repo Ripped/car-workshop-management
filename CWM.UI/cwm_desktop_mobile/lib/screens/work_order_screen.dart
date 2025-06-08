@@ -401,8 +401,8 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                                 const WidgetStatePropertyAll(
                                                     Size.fromHeight(50)),
                                             backgroundColor:
-                                                WidgetStateProperty.all<
-                                                    Color>(Colors.green)),
+                                                WidgetStateProperty.all<Color>(
+                                                    Colors.green)),
                                         child: const Text(
                                           "POTVRDI TERMIN",
                                           textAlign: TextAlign.center,
@@ -448,9 +448,8 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                       padding: const EdgeInsets.all(10),
                                       child: ElevatedButton(
                                         style: const ButtonStyle(
-                                            minimumSize:
-                                                WidgetStatePropertyAll(
-                                                    Size.fromHeight(50))),
+                                            minimumSize: WidgetStatePropertyAll(
+                                                Size.fromHeight(50))),
                                         child: const Text(
                                           "ODBIJ TERMIN",
                                           textAlign: TextAlign.center,
@@ -486,8 +485,8 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                                 const WidgetStatePropertyAll(
                                                     Size.fromHeight(50)),
                                             backgroundColor:
-                                                WidgetStateProperty.all<
-                                                    Color>(Colors.red)),
+                                                WidgetStateProperty.all<Color>(
+                                                    Colors.red)),
                                         child: const Text("OBRISI TERMIN",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(

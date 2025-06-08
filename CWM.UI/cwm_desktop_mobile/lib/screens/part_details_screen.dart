@@ -113,7 +113,7 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                             fit: BoxFit.cover,
                                           )
                                         : Image.asset(
-                                            "assets/images/default-avatar.png",
+                                            "assets/images/image_not_available.png",
                                             width: 250,
                                             height: 250,
                                           ),

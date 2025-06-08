@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using CWM.Core.Interfaces.Services;
 using CWM.Database;
+using CWM.Database.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.ML;
 using Microsoft.ML.Data;
 using System.Data;
+using System.Linq;
 
 namespace CWM.Recommender
 {
@@ -82,52 +85,62 @@ namespace CWM.Recommender
 
         public List<Core.Models.Part> RecommendProizvodi(int id)
         {
-            TrainModel(id); 
+            var result = new List<Core.Models.Part>();
+            var isNull = false;
 
-            var items = new List<Item>();
-
-            var parts = new List<Core.Models.Part>();        
-            
-            var userRatings = context.Parts.ToList();
-           
-            foreach (var userRating in userRatings) {
-                items.Add(new Item()
-                {
-                    Id = userRating.Id,
-                    Price = (float)userRating.Price,
-                    Image = userRating.Image,
-                    SerialNumber = userRating.SerialNumber,
-                    Description = userRating.Description,
-                    PartName = userRating.PartName,
-                    Manufacturer = userRating.Manufacturer,
-                });
-            }
-
-            var itemVector = transformedData.GetColumn<float[]>("Features").ToArray()[0];
-
-            var recommendations = items
-            .Select(i => new
+            var user = context.UserRatings.Where(x => x.UserId == id);
+            foreach (var item in user) { isNull = true; }
+            if (isNull)
             {
-                Item = i,
-                Similarity = ComputeSimilarity(itemVector, predictionEnigne.Predict(i).Features)
-            })
-            .OrderByDescending(x => x.Similarity)
-            .Take(5);
+                TrainModel(id);
 
-            foreach (var userRating in recommendations)
-            {
-                parts.Add(new Core.Models.Part()
+                var items = new List<Item>();
+
+                var parts = new List<Core.Models.Part>();
+
+                var userRatings = context.Parts.ToList();
+
+                foreach (var userRating in userRatings)
                 {
-                    Id = userRating.Item.Id,
-                    Price = (decimal)userRating.Item.Price,
-                    SerialNumber = userRating.Item.SerialNumber,
-                    Description = userRating.Item.Description,
-                    PartName = userRating.Item.PartName,
-                    Manufacturer = userRating.Item.Manufacturer,
-                });
-            }
+                    items.Add(new Item()
+                    {
+                        Id = userRating.Id,
+                        Price = (float)userRating.Price,
+                        Image = userRating.Image,
+                        SerialNumber = userRating.SerialNumber,
+                        Description = userRating.Description,
+                        PartName = userRating.PartName,
+                        Manufacturer = userRating.Manufacturer,
+                    });
+                }
 
-            return mapper.Map<List<Core.Models.Part>>(parts);
+                var itemVector = transformedData.GetColumn<float[]>("Features").ToArray()[0];
+
+                var recommendations = items
+                .Select(i => new
+                {
+                    Item = i,
+                    Similarity = ComputeSimilarity(itemVector, predictionEnigne.Predict(i).Features)
+                })
+                .OrderByDescending(x => x.Similarity)
+                .Take(5);
+
+                foreach (var userRating in recommendations)
+                {
+                    parts.Add(new Core.Models.Part()
+                    {
+                        Id = userRating.Item.Id,
+                        Price = (decimal)userRating.Item.Price,
+                        SerialNumber = userRating.Item.SerialNumber,
+                        Description = userRating.Item.Description,
+                        PartName = userRating.Item.PartName,
+                        Manufacturer = userRating.Item.Manufacturer,
+                    });
+                }
+                result = mapper.Map<List<Core.Models.Part>>(parts);
+                return result;
+            }
+            else return result;
         }
 
         public class Item

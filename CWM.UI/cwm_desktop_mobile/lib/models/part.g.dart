@@ -11,7 +11,7 @@ Part _$PartFromJson(Map<String, dynamic> json) => Part(
       json['serialNumber'] as String,
       json['manufacturer'] as String,
       json['partName'] as String,
-      json['image'] as String,
+      json['image'] as String?,
       (json['price'] as num).toDouble(),
       json['description'] as String,
     );

@@ -8,7 +8,7 @@ class Part {
   String serialNumber;
   String manufacturer;
   String partName;
-  String image;
+  String? image;
   double price;
   String description;
 

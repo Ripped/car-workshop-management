@@ -1,5 +1,6 @@
 import 'package:cwm_desktop_mobile/models/user_auth.dart';
 import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
+import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -71,7 +72,9 @@ class _LoginScreen extends State<LoginScreen> {
         // ignore: use_build_context_synchronously
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => const DashboardScreen()),
+          MaterialPageRoute(
+              builder: (context) =>
+                  const MasterScreen("Dashboard", DashboardScreen())),
           (route) => false,
         );
       } else {
@@ -284,7 +287,9 @@ class _LoginScreen extends State<LoginScreen> {
             // ignore: use_build_context_synchronously
             Navigator.pushAndRemoveUntil(
               context,
-              MaterialPageRoute(builder: (context) => const DashboardScreen()),
+              MaterialPageRoute(
+                  builder: (context) =>
+                      const MasterScreen("Dashboard", DashboardScreen())),
               (route) => false,
             );
           } else {

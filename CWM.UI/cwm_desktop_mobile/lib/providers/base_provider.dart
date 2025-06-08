@@ -14,12 +14,12 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   late String endpoint;
 
   BaseProvider({String? altEndpoint}) {
-    /*baseUrl = const String.fromEnvironment(
+    baseUrl = const String.fromEnvironment(
       "ApiUrl",
       defaultValue: "localhost:50443",
-    );*/
+    );
 
-    if (Platform.isWindows || Platform.isMacOS) {
+    /*if (Platform.isWindows || Platform.isMacOS) {
       baseUrl = const String.fromEnvironment(
         "ApiUrl",
         defaultValue: "localhost:50443",
@@ -29,7 +29,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
         "ApiUrl",
         defaultValue: "10.0.2.2:50443",
       );
-    }
+    }*/
 
     endpoint = altEndpoint ?? T.toString();
   }
