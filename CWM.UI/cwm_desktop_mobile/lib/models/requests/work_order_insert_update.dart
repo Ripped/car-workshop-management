@@ -1,16 +1,11 @@
-import 'package:cwm_desktop_mobile/models/employee.dart';
 import 'package:cwm_desktop_mobile/models/enums/garage_box.dart';
 import 'package:cwm_desktop_mobile/models/enums/service.dart';
-import 'package:cwm_desktop_mobile/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'appointment.dart';
-import 'vehicle.dart';
 
-part 'work_order.g.dart';
+part 'work_order_insert_update.g.dart';
 
 @JsonSerializable()
-class WorkOrder {
-  int id;
+class WorkOrderInsertUpdate {
   String orderNumber;
   double total;
   bool payment;
@@ -21,13 +16,12 @@ class WorkOrder {
   String concerne;
   String description;
   String sugestions;
-  Vehicle? vehicle;
-  User? user;
-  Appointment? appointment;
-  Employee? employee;
+  String? vehicleId;
+  String? userId;
+  String? appointmentId;
+  String? employeeId;
 
-  WorkOrder(
-      this.id,
+  WorkOrderInsertUpdate(
       this.orderNumber,
       this.total,
       this.payment,
@@ -38,12 +32,13 @@ class WorkOrder {
       this.concerne,
       this.description,
       this.sugestions,
-      this.vehicle,
-      this.user,
-      this.appointment);
+      this.vehicleId,
+      this.userId,
+      this.appointmentId,
+      this.employeeId);
 
-  factory WorkOrder.fromJson(Map<String, dynamic> json) =>
-      _$WorkOrderFromJson(json);
+  factory WorkOrderInsertUpdate.fromJson(Map<String, dynamic> json) =>
+      _$WorkOrderInsertUpdateFromJson(json);
 
-  Map<String, dynamic> toJson() => _$WorkOrderToJson(this);
+  Map<String, dynamic> toJson() => _$WorkOrderInsertUpdateToJson(this);
 }

@@ -1,6 +1,10 @@
 import 'package:cwm_desktop_mobile/models/paged_result.dart';
+import 'package:cwm_desktop_mobile/models/requests/work_order_insert_update.dart';
 import 'package:cwm_desktop_mobile/models/searches/part_work_order_search.dart';
+import 'package:cwm_desktop_mobile/models/work_order.dart';
 import 'package:cwm_desktop_mobile/providers/part_work_order_provider.dart';
+import 'package:cwm_desktop_mobile/screens/customer_order_list_screen.dart';
+import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
@@ -36,12 +40,13 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
   bool isLoading = true;
   final _formKey = GlobalKey<FormBuilderState>();
   Map<String, dynamic> _initialValue = {};
+  late WorkOrderInsertUpdate _updateWorkOrderValue;
 
   var _appointments = PagedResult<Appointment>();
   var _vehicles = PagedResult<Vehicle>();
   var _employees = PagedResult<Employee>();
   var _users = PagedResult<User>();
-  var workOrder;
+  late WorkOrder workOrder;
   double totalAmount = 0;
 
   @override
@@ -56,6 +61,29 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
     _vehicleProvider = context.read<VehicleProvider>();
 
     _loadData(widget.id);
+  }
+
+  Future _updateValue(int id, bool payment) async {
+    if (id != null) {
+      workOrder = await _workOrderProvider.get(id);
+      workOrder.payment = payment;
+      _updateWorkOrderValue = WorkOrderInsertUpdate(
+          workOrder.orderNumber,
+          workOrder.total,
+          payment,
+          workOrder.startTime,
+          workOrder.endTime,
+          workOrder.garageBox,
+          workOrder.servicePerformed,
+          workOrder.concerne,
+          workOrder.description,
+          workOrder.sugestions,
+          workOrder.vehicle?.id.toString(),
+          workOrder.user?.id.toString(),
+          workOrder.appointment?.id.toString(),
+          workOrder.employee?.id.toString());
+    }
+    return _updateWorkOrderValue.toJson();
   }
 
   Future _totalAmount(int? id) async {
@@ -432,7 +460,6 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                             color: Theme.of(context).colorScheme.error),
                       ),
                     ],
-                    //const SizedBox(height: 5),
                     ElevatedButton(
                       style: ButtonStyle(
                         minimumSize:
@@ -442,15 +469,25 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                         foregroundColor: WidgetStateProperty.all(Colors.white),
                       ),
                       child: const Text("PLATI"),
-                      onPressed: () async {
-                        await _workOrderProvider.insertReservation(
-                            workOrder, totalAmount);
-                        await _loadData(null);
-                        setState(() {});
-                        if (context.mounted) {
-                          Navigator.pop(context);
-                        }
-                      },
+                      onPressed: workOrder.payment
+                          ? null
+                          : () async {
+                              var workOrderValue =
+                                  await _updateValue(workOrder.id, true);
+                              await _workOrderProvider.update(
+                                  workOrder.id, workOrderValue);
+                              await _workOrderProvider.insertReservation(
+                                  workOrder, totalAmount);
+                              await _loadData(null);
+                              setState(() {});
+                              if (context.mounted) {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MasterScreen("Termini",
+                                                CustomerOrderListScreen())));
+                              }
+                            },
                     ),
                   ],
                 ),

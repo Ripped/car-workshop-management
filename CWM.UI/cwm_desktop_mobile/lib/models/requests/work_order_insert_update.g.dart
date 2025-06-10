@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'work_order.dart';
+part of 'work_order_insert_update.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-WorkOrder _$WorkOrderFromJson(Map<String, dynamic> json) => WorkOrder(
-      (json['id'] as num).toInt(),
+WorkOrderInsertUpdate _$WorkOrderInsertUpdateFromJson(
+        Map<String, dynamic> json) =>
+    WorkOrderInsertUpdate(
       json['orderNumber'] as String,
       (json['total'] as num).toDouble(),
       json['payment'] as bool,
@@ -18,21 +19,15 @@ WorkOrder _$WorkOrderFromJson(Map<String, dynamic> json) => WorkOrder(
       json['concerne'] as String,
       json['description'] as String,
       json['sugestions'] as String,
-      json['vehicle'] == null
-          ? null
-          : Vehicle.fromJson(json['vehicle'] as Map<String, dynamic>),
-      json['user'] == null
-          ? null
-          : User.fromJson(json['user'] as Map<String, dynamic>),
-      json['appointment'] == null
-          ? null
-          : Appointment.fromJson(json['appointment'] as Map<String, dynamic>),
-    )..employee = json['employee'] == null
-        ? null
-        : Employee.fromJson(json['employee'] as Map<String, dynamic>);
+      json['vehicleId'] as String?,
+      json['userId'] as String?,
+      json['appointmentId'] as String?,
+      json['employeeId'] as String?,
+    );
 
-Map<String, dynamic> _$WorkOrderToJson(WorkOrder instance) => <String, dynamic>{
-      'id': instance.id,
+Map<String, dynamic> _$WorkOrderInsertUpdateToJson(
+        WorkOrderInsertUpdate instance) =>
+    <String, dynamic>{
       'orderNumber': instance.orderNumber,
       'total': instance.total,
       'payment': instance.payment,
@@ -43,10 +38,10 @@ Map<String, dynamic> _$WorkOrderToJson(WorkOrder instance) => <String, dynamic>{
       'concerne': instance.concerne,
       'description': instance.description,
       'sugestions': instance.sugestions,
-      'vehicle': instance.vehicle,
-      'user': instance.user,
-      'appointment': instance.appointment,
-      'employee': instance.employee,
+      'vehicleId': instance.vehicleId,
+      'userId': instance.userId,
+      'appointmentId': instance.appointmentId,
+      'employeeId': instance.employeeId,
     };
 
 const _$GarageBoxEnumMap = {
