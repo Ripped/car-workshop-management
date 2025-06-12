@@ -23,6 +23,7 @@ namespace CWM.Database.Repositories
                 var entity = await Context
                     .VehicleServiceHistory
                     .Include(x => x.Vehicle)
+                    .Include(x => x.Employee)
                     .SingleOrDefaultAsync(x => x.Id == id);
 
                 return Mapper.Map<Core.Models.VehicleServiceHistory>(entity);
@@ -46,6 +47,9 @@ namespace CWM.Database.Repositories
 
             if (search.IncludeVehicle)
                 query = query.Include(x => x.Vehicle);
+
+            if (search.IncludeEmployee)
+                query = query.Include(x => x.Employee);
 
             return query;
         }

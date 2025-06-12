@@ -37,8 +37,6 @@ class _VehicleHistoryListScreenState extends State<VehicleHistoryListScreen> {
   }
 
   void _openDetails(int? id) {
-    //if (Responsive.isMobile(context)) return;
-
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => MasterScreen(
             "Detalji o dijelu", VehicleServiceHistoryDetailsScreen(id))));
@@ -48,12 +46,6 @@ class _VehicleHistoryListScreenState extends State<VehicleHistoryListScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Search(
-          "Dodaj novi Nalog",
-          () => _openDetails(null),
-          onSearch: (text) =>
-              vehicleServiceHistoryDataTableSource.filterData(text),
-        ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(

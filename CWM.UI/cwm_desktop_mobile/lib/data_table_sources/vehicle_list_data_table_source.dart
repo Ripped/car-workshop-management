@@ -1,6 +1,8 @@
 import 'package:advanced_datatable/advanced_datatable_source.dart';
+import 'package:cwm_desktop_mobile/models/enums/role.dart';
 import 'package:cwm_desktop_mobile/models/vehicle.dart';
 import 'package:cwm_desktop_mobile/providers/vehicle_provider.dart';
+import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:flutter/material.dart';
 import '../models/searches/vehicle_search.dart';
 
@@ -21,6 +23,10 @@ class VehicleListDataTableSource extends AdvancedDataTableSource<Vehicle> {
     vehicleSearch.page = page + 1;
     vehicleSearch.pageSize = pageRequest.pageSize;
     vehicleSearch.includeServiceHistory = true;
+    if (Authorization.roles.contains(Role.user) ||
+        Authorization.roles.contains(Role.employee)) {
+      vehicleSearch.userId = Authorization.userId;
+    }
 
     var vehicle = await _vehicleOrderProvider.getAll(search: vehicleSearch);
 

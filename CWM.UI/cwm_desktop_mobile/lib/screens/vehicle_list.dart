@@ -42,11 +42,6 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Search(
-          "Dodaj novi Nalog",
-          () => _openDetails(null),
-          onSearch: (text) => vehicleListDataTableSource.filterData(text),
-        ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(

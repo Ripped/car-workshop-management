@@ -12,5 +12,6 @@ namespace CWM.Core.Models.Searches
         public int? VehicleId { get; set; }
         public DateTime? ServiceDate { get; set; }
         public bool IncludeVehicle {  get; set; }
+        public bool IncludeEmployee { get; set; }
     }
 }

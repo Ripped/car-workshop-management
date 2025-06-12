@@ -103,9 +103,9 @@ class SideMenu extends StatelessWidget {
           if (Authorization.roles.contains(Role.admin))
             _buildListTile(context, "Zaposlenici", Icons.date_range,
                 const EmployeeListScreen(), true),
-          if (Authorization.roles.contains(Role.admin))
-            _buildListTile(context, "Historija vozila", Icons.date_range,
-                const VehicleListScreen(), true),
+          //if (Authorization.roles.contains(Role.admin))
+          _buildListTile(context, "Historija vozila", Icons.date_range,
+              const VehicleListScreen(), true),
           SizedBox(height: spaceHeight),
           ListTile(
             leading: const Icon(Icons.settings),
