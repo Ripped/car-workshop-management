@@ -1,5 +1,6 @@
 import 'package:cwm_desktop_mobile/models/user_auth.dart';
 import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
+import 'package:cwm_desktop_mobile/screens/registration_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -107,7 +108,7 @@ class _LoginScreen extends State<LoginScreen> {
         child: Container(
           constraints: BoxConstraints(
               maxWidth: 400,
-              maxHeight: (Responsive.isMobile(context) ? 600 : 400)),
+              maxHeight: (Responsive.isMobile(context) ? 600 : 450)),
           child: !Responsive.isMobile(context)
               ? Card(
                   elevation: 2,
@@ -156,6 +157,25 @@ class _LoginScreen extends State<LoginScreen> {
                     EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20))),
             onPressed: _loginSubmit,
             child: const Text("PRIJAVA"),
+          ),
+          SizedBox(height: 20.0),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) =>
+                          const RegistrationScreen()));
+            },
+            style: ElevatedButton.styleFrom(
+                elevation: 0.0, backgroundColor: Colors.transparent),
+            child: const Text(
+              'Nemate račun? Registruj se!',
+              style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black54),
+            ),
           )
         ],
       ),

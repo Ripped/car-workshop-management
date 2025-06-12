@@ -21,7 +21,6 @@ namespace CWM.Database.Seed
                     LastName = "Sendić",
                     Gender = Gender.Male,
                     BirthDate = new DateTime(2001, 4, 5),
-                    CreateDate = DateTime.Now,
                     CityId = 1,
                     CitizenshipId = 1,
                     Image = null,
@@ -29,7 +28,6 @@ namespace CWM.Database.Seed
                     Username = "Admin",
                     Password = "Admin",
                     Mobile = "062342376",
-                    OfficePhone = "38734549"
                 },
                 new User
                 {
@@ -38,7 +36,6 @@ namespace CWM.Database.Seed
                     LastName = "Tufo",
                     Gender = Gender.Female,
                     BirthDate = new DateTime(2000, 6, 5),
-                    CreateDate = DateTime.Now,
                     CityId = 2,
                     CitizenshipId = 2,
                     Image = null,
@@ -46,7 +43,6 @@ namespace CWM.Database.Seed
                     Username = "employee",
                     Password = "Admin",
                     Mobile = "062342376",
-                    OfficePhone = "38734549"
                 },
                 new User
                 {
@@ -55,7 +51,6 @@ namespace CWM.Database.Seed
                     LastName = "Tufo",
                     Gender = Gender.Male,
                     BirthDate = new DateTime(1990, 6, 5),
-                    CreateDate = DateTime.Now,
                     CityId = 3,
                     CitizenshipId = 3,
                     Image = null,
@@ -63,7 +58,6 @@ namespace CWM.Database.Seed
                     Username = "omer",
                     Password = "Admin",
                     Mobile = "062342376",
-                    OfficePhone = "38734549"
                 },
                 new User
                 {
@@ -72,7 +66,6 @@ namespace CWM.Database.Seed
                     LastName = "Kremić",
                     Gender = Gender.Female,
                     BirthDate = new DateTime(1975, 6, 5),
-                    CreateDate = DateTime.Now,
                     CityId = 4,
                     CitizenshipId = 4,
                     Image = null,
@@ -80,7 +73,6 @@ namespace CWM.Database.Seed
                     Username = "merima",
                     Password = "Admin",
                     Mobile = "062342376",
-                    OfficePhone = "38734549"
                 },
                 new User
                 {
@@ -89,7 +81,6 @@ namespace CWM.Database.Seed
                     LastName = "Kahvic",
                     Gender = Gender.Male,
                     BirthDate = new DateTime(2001, 6, 5),
-                    CreateDate = DateTime.Now,
                     CityId = 5,
                     CitizenshipId = 5,
                     Image = null,
@@ -97,7 +88,6 @@ namespace CWM.Database.Seed
                     Username = "dario",
                     Password = "Admin",
                     Mobile = "062342376",
-                    OfficePhone = "38734549"
                 },
                 new User
                 {
@@ -106,7 +96,6 @@ namespace CWM.Database.Seed
                     LastName = "Babić",
                     Gender = Gender.Female,
                     BirthDate = new DateTime(1994, 6, 5),
-                    CreateDate = DateTime.Now,
                     CityId = 6,
                     CitizenshipId = 6,
                     Image = null,
@@ -114,7 +103,6 @@ namespace CWM.Database.Seed
                     Username = "selmir",
                     Password = "Admin",
                     Mobile = "062342376",
-                    OfficePhone = "38734549"
                 }
             );
         }

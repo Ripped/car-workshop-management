@@ -21,7 +21,6 @@ namespace CWM.Database.Models
         public string LastName { get; set; } = string.Empty;
         public Gender Gender { get; set; }
         public DateTime BirthDate { get; set; }
-        public DateTime CreateDate { get; set; }
 
         [ForeignKey("City")]
         public int? CityId { get; set; }
@@ -36,7 +35,6 @@ namespace CWM.Database.Models
         public string Username { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string Mobile { get; set; } = string.Empty;
-        public string OfficePhone { get; set; } = string.Empty;
 
 
         // Relations

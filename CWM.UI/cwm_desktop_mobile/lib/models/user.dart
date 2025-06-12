@@ -11,26 +11,23 @@ class User {
   String firstName;
   String lastName;
   DateTime birthDate;
-  DateTime createDate;
   City? city;
   Country? citizenship;
   String image;
   String email;
   String mobile;
-  String officePhone;
 
   User(
-      this.id,
-      this.firstName,
-      this.lastName,
-      this.birthDate,
-      this.createDate,
-      this.city,
-      this.citizenship,
-      this.image,
-      this.email,
-      this.mobile,
-      this.officePhone);
+    this.id,
+    this.firstName,
+    this.lastName,
+    this.birthDate,
+    this.city,
+    this.citizenship,
+    this.image,
+    this.email,
+    this.mobile,
+  );
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
