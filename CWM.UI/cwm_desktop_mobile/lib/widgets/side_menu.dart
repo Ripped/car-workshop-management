@@ -6,6 +6,7 @@ import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
 import 'package:cwm_desktop_mobile/screens/employee_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/report_screen.dart';
+import 'package:cwm_desktop_mobile/screens/settings_screen.dart';
 import 'package:cwm_desktop_mobile/screens/vehicle_list.dart';
 import 'package:cwm_desktop_mobile/screens/work_order_list_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
@@ -107,11 +108,14 @@ class SideMenu extends StatelessWidget {
           _buildListTile(context, "Historija vozila", Icons.date_range,
               const VehicleListScreen(), true),
           SizedBox(height: spaceHeight),
-          ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text("Postavke"),
-            onTap: () {},
-          )
+          if (Authorization.roles.contains(Role.admin))
+            _buildListTile(
+              context,
+              "Postavke",
+              Icons.settings,
+              const SettingsScreen(),
+              true,
+            ),
         ],
       ),
     );

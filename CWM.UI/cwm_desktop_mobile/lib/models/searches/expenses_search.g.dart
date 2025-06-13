@@ -11,7 +11,8 @@ ExpensesSearch _$ExpensesSearchFromJson(Map<String, dynamic> json) =>
       ..page = (json['page'] as num).toInt()
       ..pageSize = (json['pageSize'] as num).toInt()
       ..dateFrom = json['dateFrom'] as String?
-      ..dateTo = json['dateTo'] as String?;
+      ..dateTo = json['dateTo'] as String?
+      ..description = json['description'] as String?;
 
 Map<String, dynamic> _$ExpensesSearchToJson(ExpensesSearch instance) =>
     <String, dynamic>{
@@ -19,4 +20,5 @@ Map<String, dynamic> _$ExpensesSearchToJson(ExpensesSearch instance) =>
       'pageSize': instance.pageSize,
       'dateFrom': instance.dateFrom,
       'dateTo': instance.dateTo,
+      'description': instance.description,
     };

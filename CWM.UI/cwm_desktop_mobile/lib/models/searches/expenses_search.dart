@@ -8,6 +8,7 @@ part 'expenses_search.g.dart';
 class ExpensesSearch extends BaseSearch {
   String? dateFrom;
   String? dateTo;
+  String? description;
 
   ExpensesSearch();
 

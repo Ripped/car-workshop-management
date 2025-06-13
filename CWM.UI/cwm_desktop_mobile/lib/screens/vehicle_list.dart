@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 
 import '../data_table_sources/vehicle_list_data_table_source.dart';
 import '../providers/vehicle_provider.dart';
-import '../widgets/search.dart';
 import 'vehicle_history_list_screen.dart';
 
 class VehicleListScreen extends StatefulWidget {
