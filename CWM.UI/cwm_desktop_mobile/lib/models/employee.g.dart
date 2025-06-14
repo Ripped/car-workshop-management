@@ -17,6 +17,7 @@ Employee _$EmployeeFromJson(Map<String, dynamic> json) => Employee(
       json['citizenship'] == null
           ? null
           : Country.fromJson(json['citizenship'] as Map<String, dynamic>),
+      json['image'] as String?,
       json['email'] as String,
       json['mobile'] as String,
       json['adress'] as String,
@@ -29,6 +30,7 @@ Map<String, dynamic> _$EmployeeToJson(Employee instance) => <String, dynamic>{
       'birthDate': instance.birthDate.toIso8601String(),
       'city': instance.city,
       'citizenship': instance.citizenship,
+      'image': instance.image,
       'email': instance.email,
       'mobile': instance.mobile,
       'adress': instance.adress,

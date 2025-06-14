@@ -9,6 +9,7 @@ namespace CWM.Models
         public string LastName { get; set; } = string.Empty;
         public string Mobile { get; set; } = string.Empty;
         public DateTime? BirthDate { get; set; }
+        public byte[]? Image { get; set; }
         public string Email { get; set; } = string.Empty;
         public string Adress { get; set; } = string.Empty;
 

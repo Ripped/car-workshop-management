@@ -17,7 +17,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       json['citizenship'] == null
           ? null
           : Country.fromJson(json['citizenship'] as Map<String, dynamic>),
-      json['image'] as String,
+      json['image'] as String?,
       json['email'] as String,
       json['mobile'] as String,
     );

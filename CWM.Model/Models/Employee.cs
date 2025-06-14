@@ -14,6 +14,7 @@ namespace CWM.Core.Models
         public string Mobile { get; set; } = string.Empty;
         public DateTime BirthDate { get; set; }
         public string Username {  get; set; } = string.Empty;
+        public byte[]? Image { get; set; }
         public City City { get; set; } = new();
         public Country Citizenship { get; set; } = new();
         public string Email { get; set; } = string.Empty;

@@ -61,7 +61,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
         "countryId": employee.citizenship?.id,
         "email": employee.email,
         "mobile": employee.mobile,
-        "image": ""
+        "image": employee.image ?? ""
       };
     } else {
       _initialValue = {"image": "", "description": ""};

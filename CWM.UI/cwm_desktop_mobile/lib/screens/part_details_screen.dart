@@ -205,6 +205,29 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                     ),
                                   ),
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: FormBuilderField(
+                                      name: 'image',
+                                      builder: ((field) {
+                                        return InputDecorator(
+                                          decoration: InputDecoration(
+                                              errorText: field.errorText),
+                                          child: ListTile(
+                                            leading: const Icon(Icons.photo),
+                                            title:
+                                                const Text("Odaberite sliku"),
+                                            trailing:
+                                                const Icon(Icons.file_upload),
+                                            onTap: _uploadImage,
+                                          ),
+                                        );
+                                      }),
+                                    ),
+                                  ),
+                                ),
                                 if (Responsive.isDesktop(context) ||
                                     Responsive.isTablet(context))
                                   Padding(

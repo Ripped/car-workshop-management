@@ -13,7 +13,7 @@ class User {
   DateTime birthDate;
   City? city;
   Country? citizenship;
-  String image;
+  String? image;
   String email;
   String mobile;
 
