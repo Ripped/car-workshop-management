@@ -42,10 +42,10 @@ class _MasterScreenState extends State<MasterScreen> {
                                 onPressed: () =>
                                     _key.currentState!.openDrawer(),
                                 child: const Text("Open")),
-                          const Text("Pocetna"),
+                          /*const Text("Pocetna"),
                           const Icon(Icons.chat_bubble),
                           const Icon(Icons.notifications),
-                          const Icon(Icons.person)
+                          const Icon(Icons.person)*/
                         ],
                       ),
                     ),

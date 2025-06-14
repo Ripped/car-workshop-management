@@ -6,6 +6,7 @@ import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
 import 'package:cwm_desktop_mobile/screens/employee_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/part_rating_screen.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
+import 'package:cwm_desktop_mobile/screens/profile_screen.dart';
 import 'package:cwm_desktop_mobile/screens/report_screen.dart';
 import 'package:cwm_desktop_mobile/screens/settings_screen.dart';
 import 'package:cwm_desktop_mobile/screens/vehicle_list.dart';
@@ -54,23 +55,41 @@ class SideMenu extends StatelessWidget {
   Widget buildUser(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.all(20),
-        child: Row(
+        child: Column(
           children: [
-            ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child:
-                    Image.asset("assets/images/default-avatar.png", width: 50)),
-            const SizedBox(
-              width: 20,
-            ),
-            Text(
-              '${Authorization.username}',
-              style: const TextStyle(
-                  fontFamily: "Roboto",
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF3C4858),
-                  fontSize: 16),
-            )
+            Row(children: [
+              ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Image.asset("assets/images/default-avatar.png",
+                      width: 50)),
+              const SizedBox(
+                width: 20,
+              ),
+              Text(
+                '${Authorization.username}',
+                style: const TextStyle(
+                    fontFamily: "Roboto",
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF3C4858),
+                    fontSize: 16),
+              ),
+            ]),
+            Padding(
+                padding: const EdgeInsets.all(10),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        WidgetStateProperty.all<Color>(Colors.green),
+                    foregroundColor: WidgetStateProperty.all(Colors.white),
+                  ),
+                  onPressed: () async {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) =>
+                            const MasterScreen("Profil", ProfileScreen())));
+                  },
+                  child:
+                      const Text("Uredi profil", textAlign: TextAlign.center),
+                )),
           ],
         ));
   }
