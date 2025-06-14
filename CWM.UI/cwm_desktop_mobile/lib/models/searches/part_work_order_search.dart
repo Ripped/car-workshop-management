@@ -8,6 +8,7 @@ part 'part_work_order_search.g.dart';
 class PartWorkOrderSearch extends BaseSearch {
   bool includeWorkOrder = false;
   bool includePart = false;
+  int? userId;
   int? vehicleId;
   int? workOrderId;
   DateTime? serviceDate;

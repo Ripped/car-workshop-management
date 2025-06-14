@@ -8,6 +8,8 @@ namespace CWM.Core.Models.Searches
 {
     public class UserRatingSearch : BaseSearch
     {
-        public string? Name { get; set; }
+        public int? PartId { get; set; }
+        public bool IncludePart { get; set; }
+        public bool IncludeUser { get; set; }
     }
 }

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CWM.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f2efc17bdee641e8542b357d9bd5e8fe7af4be03")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a5f385f034290710d4d8572c30ea8ed61a56902")]
 [assembly: System.Reflection.AssemblyProductAttribute("CWM.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CWM.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

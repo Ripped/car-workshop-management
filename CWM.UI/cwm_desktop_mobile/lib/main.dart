@@ -6,6 +6,7 @@ import 'package:cwm_desktop_mobile/providers/auth_provider.dart';
 import 'package:cwm_desktop_mobile/providers/expenses_provider.dart';
 import 'package:cwm_desktop_mobile/providers/part_provider.dart';
 import 'package:cwm_desktop_mobile/providers/recommender_provider.dart';
+import 'package:cwm_desktop_mobile/providers/user_rating_provider.dart';
 import 'package:cwm_desktop_mobile/providers/user_role_provider.dart';
 import 'package:cwm_desktop_mobile/providers/work_order_provider.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => PartWorkOrderProvider()),
       ChangeNotifierProvider(create: (_) => ExpensesProvider()),
       ChangeNotifierProvider(create: (_) => RecommenderProvider()),
+      ChangeNotifierProvider(create: (_) => UserRatingProvider()),
       ChangeNotifierProvider(create: (_) => UserRoleProvider()),
     ], child: const MyApp()),
   );

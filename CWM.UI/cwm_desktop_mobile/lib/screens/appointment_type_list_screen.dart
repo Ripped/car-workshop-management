@@ -1,12 +1,10 @@
 import 'package:advanced_datatable/datatable.dart';
 import 'package:cwm_desktop_mobile/data_table_sources/appointment_type_data_table_source.dart';
-import 'package:cwm_desktop_mobile/models/appointment_type.dart';
 import 'package:cwm_desktop_mobile/providers/appointment_type_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 
-import '../models/paged_result.dart';
 import '../widgets/responsive.dart';
 import '../widgets/search.dart';
 
@@ -24,7 +22,6 @@ class _AppointmentTypeListScreenState extends State<AppointmentTypeListScreen> {
   late AppointmentTypeDataTableSource appointmentTypeDataTableSource;
 
   final _formKey = GlobalKey<FormBuilderState>();
-  var _appointmentTypes = PagedResult<AppointmentType>();
 
   @override
   void initState() {
@@ -39,8 +36,6 @@ class _AppointmentTypeListScreenState extends State<AppointmentTypeListScreen> {
   }
 
   Future _loadData(int? id) async {
-    _appointmentTypes = await _appointmentTypeProvider.getAll();
-
     if (id != null) {
       var appointmentType = await _appointmentTypeProvider.get(id);
 

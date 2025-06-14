@@ -4,6 +4,7 @@ import 'package:cwm_desktop_mobile/screens/appointment_screen_syn_calendar.dart'
 import 'package:cwm_desktop_mobile/screens/customer_order_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
 import 'package:cwm_desktop_mobile/screens/employee_list_screen.dart';
+import 'package:cwm_desktop_mobile/screens/part_rating_screen.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/report_screen.dart';
 import 'package:cwm_desktop_mobile/screens/settings_screen.dart';
@@ -107,6 +108,8 @@ class SideMenu extends StatelessWidget {
           //if (Authorization.roles.contains(Role.admin))
           _buildListTile(context, "Historija vozila", Icons.date_range,
               const VehicleListScreen(), true),
+          _buildListTile(context, "Recenzije dijelova", Icons.date_range,
+              const PartRatingScreen(), true),
           SizedBox(height: spaceHeight),
           if (Authorization.roles.contains(Role.admin))
             _buildListTile(

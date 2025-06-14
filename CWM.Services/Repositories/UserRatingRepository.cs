@@ -31,5 +31,21 @@ namespace CWM.Database.Repositories
 
             return new Core.Models.UserRating();
         }
+        protected override IQueryable<UserRating> AddInclude(IQueryable<UserRating> query, UserRatingSearch? search = null)
+        {
+            if (search is null)
+                return base.AddInclude(query, search);
+
+            if (search.IncludeUser)
+                query = query.Include(x => x.User);
+
+            if (search.IncludePart)
+                query = query.Include(x => x.Part);
+
+            if (search.PartId > 0)
+                query = query.Where(x => x.Part!.Id == search.PartId);
+
+            return query;
+        }
     }
 }

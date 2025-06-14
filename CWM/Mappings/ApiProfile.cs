@@ -34,6 +34,10 @@ namespace CWM.Mappings
             .ForMember(x => x.Part, opt => opt.MapFrom(y => new Part { Id = y.PartId ?? 0 }))
             .ForMember(x => x.WorkOrder, opt => opt.MapFrom(y => new WorkOrder { Id = y.WorkOrderId ?? 0 }));
 
+            CreateMap<UserRatingInsertUpdate, UserRating>()
+           .ForMember(x => x.User, opt => opt.MapFrom(y => new Vehicle { Id = y.UserId ?? 0 }))
+           .ForMember(x => x.Part, opt => opt.MapFrom(y => new Part { Id = y.PartId ?? 0 }));
+
             CreateMap<VehicleServiceHistoryInsertUpdate, VehicleServiceHistory>()
             .ForMember(x => x.Vehicle, opt => opt.MapFrom(y => new Vehicle { Id = y.VehicleId ?? 0 }))
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => new Employee { Id = y.EmployeeId ?? 0 }))

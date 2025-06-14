@@ -25,6 +25,7 @@ namespace CWM.Database.Repositories
                     .PartWorkOrder
                     .Include(x => x.Part)
                     .Include(x => x.WorkOrder)
+                    .Include(x => x.Vehicle)
                     .SingleOrDefaultAsync(x => x.Id == id);
 
                 return Mapper.Map<Core.Models.PartWorkOrder>(entity);
@@ -46,6 +47,9 @@ namespace CWM.Database.Repositories
 
             if (search.VehicleId > 0)
                 query = query.Where(x => x.Vehicle!.Id == search.VehicleId);
+
+            if (search.UserId > 0)
+                query = query.Where(x => x.Vehicle!.UserId == search.UserId);
 
             if (search.WorkOrderId > 0)
                 query = query.Where(x => x.WorkOrder!.Id == search.WorkOrderId);

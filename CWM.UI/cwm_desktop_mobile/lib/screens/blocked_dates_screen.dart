@@ -1,12 +1,10 @@
 import 'package:advanced_datatable/datatable.dart';
 import 'package:cwm_desktop_mobile/data_table_sources/blocked_dates_data_table_source.dart';
-import 'package:cwm_desktop_mobile/models/appointment_blocked.dart';
 import 'package:cwm_desktop_mobile/providers/appointment_blocked_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
 
-import '../models/paged_result.dart';
 import '../widgets/responsive.dart';
 import '../widgets/search.dart';
 
@@ -23,7 +21,6 @@ class _BlockedDatesScreenState extends State<BlockedDatesScreen> {
   late BlockedDatesDataTableSource appointmentBlockedDataTableSource;
 
   final _formKey = GlobalKey<FormBuilderState>();
-  var _appointmentBlocked = PagedResult<AppointmentBlocked>();
 
   @override
   void initState() {
@@ -38,8 +35,6 @@ class _BlockedDatesScreenState extends State<BlockedDatesScreen> {
   }
 
   Future _loadData(int? id) async {
-    _appointmentBlocked = await _appointmentBlockedProvider.getAll();
-
     if (id != null) {
       var appointmentType = await _appointmentBlockedProvider.get(id);
 
