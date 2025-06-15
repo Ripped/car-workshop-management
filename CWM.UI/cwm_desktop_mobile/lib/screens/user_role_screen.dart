@@ -5,6 +5,7 @@ import 'package:cwm_desktop_mobile/providers/user_provider.dart';
 import 'package:cwm_desktop_mobile/providers/user_role_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../models/paged_result.dart';
@@ -47,8 +48,8 @@ class _UserRoleScreenState extends State<UserRoleScreen> {
       var userRole = await _userRoleProvider.get(id);
 
       _formKey.currentState?.patchValue({
-        "role": userRole.role.name,
-        "userId": userRole.user?.id.toString() ?? "0"
+        "role": userRole.role.index,
+        "userId": userRole.user?.id.toString() ?? "0",
       });
     }
   }
@@ -114,6 +115,8 @@ class _UserRoleScreenState extends State<UserRoleScreen> {
                   child: FormBuilderDropdown(
                     name: "role",
                     decoration: const InputDecoration(labelText: "Uloga *"),
+                    validator: FormBuilderValidators.required(
+                        errorText: "Uloga je obavezna."),
                     items: const [
                       DropdownMenuItem(
                         value: 0,
@@ -140,6 +143,8 @@ class _UserRoleScreenState extends State<UserRoleScreen> {
                       name: "userId",
                       decoration:
                           const InputDecoration(labelText: "Korisnik *"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Korisnik je obavezan."),
                       items: _users.result
                           .map((user) => DropdownMenuItem(
                                 value: user.id.toString(),

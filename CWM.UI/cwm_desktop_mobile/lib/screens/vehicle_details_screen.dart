@@ -3,8 +3,10 @@ import 'package:cwm_desktop_mobile/models/user.dart';
 import 'package:cwm_desktop_mobile/providers/user_provider.dart';
 import 'package:cwm_desktop_mobile/providers/vehicle_provider.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
+import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/master_screen.dart';
@@ -55,7 +57,10 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
         "userId": vehicle.user!.id
       };
     } else {
-      _initialValue = {"chassis": "", "model": ""};
+      _initialValue = {
+        "userId": Authorization.userId,
+        "model": "",
+      };
     }
     setState(() {
       isLoading = false;
@@ -92,45 +97,6 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                               ),
                             ),
                           ),
-                          /*if (Responsive.isDesktop(context))
-                            SizedBox(
-                                child: Column(children: [
-                              Padding(
-                                padding: const EdgeInsets.all(20),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(150),
-                                  child: SizedBox.fromSize(
-                                    size: const Size.fromRadius(150),
-                                    child: _initialValue["image"] != ""
-                                        ? Image.memory(
-                                            base64Decode(
-                                                _initialValue["image"]),
-                                            width: 250,
-                                            fit: BoxFit.cover,
-                                          )
-                                        : Image.asset(
-                                            "assets/images/image_not_available.png",
-                                            width: 250,
-                                            height: 250,
-                                          ),
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                margin: const EdgeInsets.all(10),
-                                color: Theme.of(context).primaryColor,
-                                child: const SizedBox(
-                                  width: 200,
-                                  height: 30,
-                                  child: Text(
-                                    "Slika dijela",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 20),
-                                  ),
-                                ),
-                              ),
-                            ])),*/
                           SizedBox(
                             height: Responsive.isDesktop(context)
                                 ? (MediaQuery.of(context).size.width / 3)
@@ -152,6 +118,8 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                       name: "chassis",
                                       decoration: const InputDecoration(
                                           labelText: "Sasija *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText: "Sasija je obavezna."),
                                     ),
                                   ),
                                 ),
@@ -163,6 +131,8 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                       name: "brand",
                                       decoration: const InputDecoration(
                                           labelText: "Brend vozila *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText: "Brend je obavezan."),
                                     ),
                                   ),
                                 ),
@@ -174,6 +144,8 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                       name: "model",
                                       decoration: const InputDecoration(
                                           labelText: "Model vozila *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText: "Model je obavezan."),
                                     ),
                                   ),
                                 ),
@@ -185,6 +157,8 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                       name: "cubicCapacity",
                                       decoration: const InputDecoration(
                                           labelText: "Kubikaza *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText: "Kubikaza je obavezna."),
                                     ),
                                   ),
                                 ),
@@ -196,6 +170,8 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                       name: "kilowatts",
                                       decoration: const InputDecoration(
                                           labelText: "Kilovati  *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText: "Kilovati je obavezni."),
                                     ),
                                   ),
                                 ),
@@ -207,6 +183,8 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                       name: "transmision",
                                       decoration: const InputDecoration(
                                           labelText: "Mjenjac  *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText: "Mjenjac je obavezan."),
                                     ),
                                   ),
                                 ),
@@ -218,6 +196,9 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                       name: "productionDate",
                                       decoration: const InputDecoration(
                                           labelText: "Datum proizvodnje *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText:
+                                              "Datum proizvodnje je obavezan."),
                                     ),
                                   ),
                                 ),
@@ -229,17 +210,22 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                       name: "fuel",
                                       decoration: const InputDecoration(
                                           labelText: "Gorivo  *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText: "Gorivo je obavezno."),
                                     ),
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Align(
-                                    alignment: Alignment.center,
+                                    alignment: Alignment.bottomCenter,
                                     child: FormBuilderDropdown(
+                                      enabled: false,
                                       name: "userId",
                                       decoration: const InputDecoration(
                                           labelText: "Korisnik"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText: "Korisnik je obavezan."),
                                       items: _users.result
                                           .map((user) => DropdownMenuItem(
                                                 value: user.id,

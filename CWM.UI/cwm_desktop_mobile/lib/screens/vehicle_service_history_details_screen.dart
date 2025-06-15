@@ -12,6 +12,7 @@ import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/vehicle_service_history_provider.dart';
@@ -132,6 +133,10 @@ class _VehicleServiceHistoryDetailsScreenScreen
                                         name: "serviceType",
                                         decoration: const InputDecoration(
                                             labelText: "Vrsta servisa *"),
+                                        validator:
+                                            FormBuilderValidators.required(
+                                                errorText:
+                                                    "Vrsta je obavezna."),
                                         items: const [
                                           DropdownMenuItem(
                                             value: 0,
@@ -173,6 +178,10 @@ class _VehicleServiceHistoryDetailsScreenScreen
                                         name: "employeeId",
                                         decoration: const InputDecoration(
                                             labelText: "Uposlenik *"),
+                                        validator:
+                                            FormBuilderValidators.required(
+                                                errorText:
+                                                    "Uposlenik je obavezan."),
                                         items: _employees.result
                                             .map((type) => DropdownMenuItem(
                                                   value: type.id,
@@ -195,6 +204,10 @@ class _VehicleServiceHistoryDetailsScreenScreen
                                         name: "vehicleId",
                                         decoration: const InputDecoration(
                                             labelText: "Vozilo *"),
+                                        validator:
+                                            FormBuilderValidators.required(
+                                                errorText:
+                                                    "Vozilo je obavezno."),
                                         items: _vehicles.result
                                             .map((type) => DropdownMenuItem(
                                                   value: type.id,
@@ -217,6 +230,10 @@ class _VehicleServiceHistoryDetailsScreenScreen
                                         decoration: const InputDecoration(
                                             labelText:
                                                 "Datum rada na vozilu *"),
+                                        validator:
+                                            FormBuilderValidators.required(
+                                                errorText:
+                                                    "Datum je obavezan."),
                                       ),
                                     ),
                                   ),
@@ -235,6 +252,10 @@ class _VehicleServiceHistoryDetailsScreenScreen
                                         decoration: const InputDecoration(
                                             labelText:
                                                 "Opis kvara vlasnika vozila  *"),
+                                        validator:
+                                            FormBuilderValidators.required(
+                                                errorText:
+                                                    "Opis kvara je obavezan."),
                                       ),
                                     ),
                                   ),
@@ -253,6 +274,10 @@ class _VehicleServiceHistoryDetailsScreenScreen
                                         decoration: const InputDecoration(
                                             labelText:
                                                 "Prijedlog za vlasnika *"),
+                                        validator:
+                                            FormBuilderValidators.required(
+                                                errorText:
+                                                    "Prijedlog je obavezan."),
                                       ),
                                     ),
                                   ),

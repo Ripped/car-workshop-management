@@ -3,6 +3,7 @@ import 'package:cwm_desktop_mobile/data_table_sources/appointment_type_data_tabl
 import 'package:cwm_desktop_mobile/providers/appointment_type_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/responsive.dart';
@@ -108,8 +109,8 @@ class _AppointmentTypeListScreenState extends State<AppointmentTypeListScreen> {
                     child: FormBuilderTextField(
                       name: "name",
                       decoration: const InputDecoration(labelText: "Naziv *"),
-                      /*validator: FormBuilderValidators.required(
-                          errorText: "Naziv je obavezan."),*/
+                      validator: FormBuilderValidators.required(
+                          errorText: "Naziv je obavezan."),
                     ),
                   )
                 ],
@@ -124,6 +125,8 @@ class _AppointmentTypeListScreenState extends State<AppointmentTypeListScreen> {
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       decoration: const InputDecoration(labelText: "Boja"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Boja je obavezna."),
                     ),
                   ),
                 ],

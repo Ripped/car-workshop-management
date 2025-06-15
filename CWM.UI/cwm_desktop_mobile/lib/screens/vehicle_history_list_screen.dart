@@ -38,7 +38,7 @@ class _VehicleHistoryListScreenState extends State<VehicleHistoryListScreen> {
   void _openDetails(int? id) {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => MasterScreen(
-            "Detalji o dijelu", VehicleServiceHistoryDetailsScreen(id))));
+            "Detalji o vozilu", VehicleServiceHistoryDetailsScreen(id))));
   }
 
   @override

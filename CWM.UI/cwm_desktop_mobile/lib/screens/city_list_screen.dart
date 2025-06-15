@@ -1,6 +1,7 @@
 import 'package:advanced_datatable/datatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../data_table_sources/city_data_table_source.dart';
@@ -115,8 +116,8 @@ class _CityListScreenState extends State<CityListScreen> {
                     child: FormBuilderTextField(
                       name: "name",
                       decoration: const InputDecoration(labelText: "Naziv *"),
-                      /*validator: FormBuilderValidators.required(
-                          errorText: "Naziv je obavezan."),*/
+                      validator: FormBuilderValidators.required(
+                          errorText: "Naziv je obavezan."),
                     ),
                   )
                 ],
@@ -132,6 +133,8 @@ class _CityListScreenState extends State<CityListScreen> {
                       maxLines: null,
                       decoration:
                           const InputDecoration(labelText: "Poštanski broj"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Poštanski broj je obavezan."),
                     ),
                   ),
                 ],
@@ -144,8 +147,8 @@ class _CityListScreenState extends State<CityListScreen> {
                     child: FormBuilderDropdown(
                       name: "countryId",
                       decoration: const InputDecoration(labelText: "Država *"),
-                      /*validator: FormBuilderValidators.required(
-                          errorText: "Država je obavezna."),*/
+                      validator: FormBuilderValidators.required(
+                          errorText: "Država je obavezna."),
                       items: _countries.result
                           .map((country) => DropdownMenuItem(
                                 value: country.id.toString(),

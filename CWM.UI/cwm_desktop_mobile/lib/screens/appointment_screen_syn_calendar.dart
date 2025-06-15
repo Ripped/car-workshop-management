@@ -5,6 +5,7 @@ import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import '../models/enums/role.dart';
@@ -504,6 +505,8 @@ class _MyWidgetState extends State<MyWidget> {
                       child: FormBuilderTextField(
                           name: "description",
                           keyboardType: TextInputType.multiline,
+                          validator: FormBuilderValidators.required(
+                              errorText: "Opis je obavezan."),
                           maxLines: 4,
                           decoration:
                               const InputDecoration(labelText: "Opis"))),
@@ -554,6 +557,8 @@ class _MyWidgetState extends State<MyWidget> {
                       name: "vehicleId",
                       decoration: const InputDecoration(
                           labelText: "Odaberi automobil *"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Automobil je obavezan."),
                       items: _vehicle.result
                           .map((type) => DropdownMenuItem(
                                 value: type.id.toString(),

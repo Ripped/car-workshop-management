@@ -5,6 +5,7 @@ import 'package:cwm_desktop_mobile/providers/employee_provider.dart';
 import 'package:cwm_desktop_mobile/providers/expenses_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../models/paged_result.dart';
@@ -49,7 +50,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
         "date": expenses.date,
         "employeeId": expenses.employee?.id.toString() ?? "0",
         "totalAmount": expenses.totalAmount.toString(),
-        "expensesType": expenses.expensesType.name
+        "expensesType": expenses.expensesType.index
       });
     }
   }
@@ -78,7 +79,6 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
             source: expensesDataTableSource,
             rowsPerPage: 7,
             columns: const [
-              DataColumn(label: Text("Opis")),
               DataColumn(label: Text("Datum")),
               DataColumn(label: Text("Total")),
               DataColumn(label: Text("Vrsta utroska"))
@@ -117,8 +117,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                     child: FormBuilderTextField(
                       name: "description",
                       decoration: const InputDecoration(labelText: "Opis *"),
-                      /*validator: FormBuilderValidators.required(
-                          errorText: "Naziv je obavezan."),*/
+                      validator: FormBuilderValidators.required(
+                          errorText: "Opis je obavezan."),
                     ),
                   )
                 ],
@@ -130,8 +130,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                     child: FormBuilderTextField(
                       name: "totalAmount",
                       decoration: const InputDecoration(labelText: "Cijena *"),
-                      /*validator: FormBuilderValidators.required(
-                          errorText: "Naziv je obavezan."),*/
+                      validator: FormBuilderValidators.required(
+                          errorText: "Cijena je obavezna."),
                     ),
                   )
                 ],
@@ -144,6 +144,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                     child: FormBuilderDateTimePicker(
                       name: "date",
                       decoration: const InputDecoration(labelText: "Datum *"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Datum je obavezan."),
                     ),
                   ),
                 ],
@@ -155,6 +157,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                     name: "expensesType",
                     decoration:
                         const InputDecoration(labelText: "Vrsta servisa *"),
+                    validator: FormBuilderValidators.required(
+                        errorText: "Vrsta je obavezna."),
                     items: const [
                       DropdownMenuItem(
                         value: 0,
@@ -185,6 +189,8 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                       name: "employeeId",
                       decoration:
                           const InputDecoration(labelText: "Uposlenik *"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Uposlenik je obavezan."),
                       items: _employees.result
                           .map((employee) => DropdownMenuItem(
                                 value: employee.id.toString(),

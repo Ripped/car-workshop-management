@@ -6,6 +6,7 @@ import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/master_screen.dart';
@@ -156,6 +157,9 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                       name: "serialNumber",
                                       decoration: const InputDecoration(
                                           labelText: "Serijski broj *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText:
+                                              "Serijski broj je obavezan."),
                                     ),
                                   ),
                                 ),
@@ -167,6 +171,9 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                       name: "manufacturer",
                                       decoration: const InputDecoration(
                                           labelText: "Proizvodjac *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText:
+                                              "Proizvodjac je obavezan."),
                                     ),
                                   ),
                                 ),
@@ -178,6 +185,8 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                       name: "partName",
                                       decoration: const InputDecoration(
                                           labelText: "Ime dijela *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText: "Ime je obavezno."),
                                     ),
                                   ),
                                 ),
@@ -189,6 +198,8 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                       name: "price",
                                       decoration: const InputDecoration(
                                           labelText: "Cijena *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText: "Cijena je obavezna."),
                                     ),
                                   ),
                                 ),
@@ -202,6 +213,8 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                       maxLines: 3,
                                       decoration: const InputDecoration(
                                           labelText: "Opis dijela  *"),
+                                      validator: FormBuilderValidators.required(
+                                          errorText: "Opis je obavezan."),
                                     ),
                                   ),
                                 ),

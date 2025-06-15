@@ -3,6 +3,7 @@ import 'package:cwm_desktop_mobile/data_table_sources/blocked_dates_data_table_s
 import 'package:cwm_desktop_mobile/providers/appointment_blocked_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/responsive.dart';
@@ -129,12 +130,12 @@ class _BlockedDatesScreenState extends State<BlockedDatesScreen> {
                 children: [
                   SizedBox(
                     width: 500,
-                    child: FormBuilderTextField(
+                    child: FormBuilderDateTimePicker(
                       name: "blockedDate",
                       decoration:
                           const InputDecoration(labelText: "Datum blokiran *"),
-                      /*validator: FormBuilderValidators.required(
-                          errorText: "Naziv je obavezan."),*/
+                      validator: FormBuilderValidators.required(
+                          errorText: "Datum je obavezan."),
                     ),
                   )
                 ],

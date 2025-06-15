@@ -4,6 +4,7 @@ import 'package:cwm_desktop_mobile/screens/employee_list_screen.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../models/city.dart';
@@ -174,6 +175,10 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                             name: "firstName",
                                             decoration: const InputDecoration(
                                                 labelText: "Ime *"),
+                                            validator:
+                                                FormBuilderValidators.required(
+                                                    errorText:
+                                                        "Ime je obavezno."),
                                           ),
                                         ),
                                       ),
@@ -185,6 +190,10 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                             name: "birthDate",
                                             decoration: const InputDecoration(
                                                 labelText: "Datum rodjenja *"),
+                                            validator:
+                                                FormBuilderValidators.required(
+                                                    errorText:
+                                                        "Datum je obavezan."),
                                           ),
                                         ),
                                       ),
@@ -196,6 +205,10 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                             name: "lastName",
                                             decoration: const InputDecoration(
                                                 labelText: "Prezime *"),
+                                            validator:
+                                                FormBuilderValidators.required(
+                                                    errorText:
+                                                        "Prezime je obavezno."),
                                           ),
                                         ),
                                       ),
@@ -207,6 +220,10 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                             name: "cityId",
                                             decoration: const InputDecoration(
                                                 labelText: "Grad"),
+                                            validator:
+                                                FormBuilderValidators.required(
+                                                    errorText:
+                                                        "Grad je obavezan."),
                                             items: _cities.result
                                                 .map((city) => DropdownMenuItem(
                                                       value: city.id,
@@ -224,6 +241,10 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                             name: "countryId",
                                             decoration: const InputDecoration(
                                                 labelText: "Drzava"),
+                                            validator:
+                                                FormBuilderValidators.required(
+                                                    errorText:
+                                                        "Drzava je obavezna."),
                                             items: _countries.result
                                                 .map((country) =>
                                                     DropdownMenuItem(
@@ -242,6 +263,10 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                             name: "email",
                                             decoration: const InputDecoration(
                                                 labelText: "Email *"),
+                                            validator:
+                                                FormBuilderValidators.required(
+                                                    errorText:
+                                                        "Email je obavezan."),
                                           ),
                                         ),
                                       ),
@@ -253,6 +278,10 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                             name: "mobile",
                                             decoration: const InputDecoration(
                                                 labelText: "Mobitel *"),
+                                            validator:
+                                                FormBuilderValidators.required(
+                                                    errorText:
+                                                        "Mobitel je obavezan."),
                                           ),
                                         ),
                                       ),

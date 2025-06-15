@@ -7,6 +7,7 @@ import 'package:cwm_desktop_mobile/screens/customer_order_list_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../models/appointment.dart';
@@ -197,6 +198,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           name: "orderNumber",
                           decoration:
                               const InputDecoration(labelText: "Broj naloga *"),
+                          validator: FormBuilderValidators.required(
+                              errorText: "Broj naloga je obavezan."),
                         ),
                       ),
                     ),
@@ -209,6 +212,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           name: "startTime",
                           decoration: const InputDecoration(
                               labelText: "Pocetak termina *"),
+                          validator: FormBuilderValidators.required(
+                              errorText: "Datum je obavezan."),
                         ),
                       ),
                     ),
@@ -221,6 +226,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           name: "endTime",
                           decoration: const InputDecoration(
                               labelText: "Kraj termina *"),
+                          validator: FormBuilderValidators.required(
+                              errorText: "Datum je obavezan."),
                         ),
                       ),
                     ),
@@ -236,6 +243,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           decoration: const InputDecoration(
                             labelText: "Obrati paznju *",
                           ),
+                          validator: FormBuilderValidators.required(
+                              errorText: "Obrati paznju je obavezan."),
                         ),
                       ),
                     ),
@@ -250,6 +259,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           maxLines: 3,
                           decoration: const InputDecoration(
                               labelText: "Opis kvara vlasnika vozila  *"),
+                          validator: FormBuilderValidators.required(
+                              errorText: "Opis je obavezan."),
                         ),
                       ),
                     ),
@@ -264,6 +275,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           maxLines: 3,
                           decoration: const InputDecoration(
                               labelText: "Prijedlog za servisera  *"),
+                          validator: FormBuilderValidators.required(
+                              errorText: "Prijedlog je obavezan."),
                         ),
                       ),
                     ),
@@ -276,6 +289,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           name: "employeeId",
                           decoration:
                               const InputDecoration(labelText: "Uposlenik *"),
+                          validator: FormBuilderValidators.required(
+                              errorText: "Uposlenik je obavezan."),
                           items: _employees.result
                               .map((type) => DropdownMenuItem(
                                     value: type.id,
@@ -295,6 +310,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           name: "servicePerformed",
                           decoration: const InputDecoration(
                               labelText: "Vrsta servisa *"),
+                          validator: FormBuilderValidators.required(
+                              errorText: "Vrsta servisa je obavezna."),
                           items: const [
                             DropdownMenuItem(
                               value: 0,
@@ -333,6 +350,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           name: "garageBox",
                           decoration:
                               const InputDecoration(labelText: "Broj Garaze *"),
+                          validator: FormBuilderValidators.required(
+                              errorText: "Garaza je obavezna."),
                           items: const [
                             DropdownMenuItem(
                               value: 0,
@@ -371,6 +390,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           name: "appointmentId",
                           decoration:
                               const InputDecoration(labelText: "Appointment *"),
+                          validator: FormBuilderValidators.required(
+                              errorText: "Termin je obavezan."),
                           items: _appointments.result
                               .map((type) => DropdownMenuItem(
                                     value: type.id,
@@ -389,6 +410,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           name: "vehicleId",
                           decoration:
                               const InputDecoration(labelText: "Vozilo *"),
+                          validator: FormBuilderValidators.required(
+                              errorText: "Vozilo je obavezno."),
                           items: _vehicles.result
                               .map((type) => DropdownMenuItem(
                                     value: type.id,
@@ -407,6 +430,8 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                           name: "userId",
                           decoration:
                               const InputDecoration(labelText: "Klijent *"),
+                          validator: FormBuilderValidators.required(
+                              errorText: "Klijent je obavezan."),
                           items: _users.result
                               .map((type) => DropdownMenuItem(
                                     value: type.id,

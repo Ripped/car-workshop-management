@@ -16,6 +16,7 @@ import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../models/paged_result.dart';
@@ -175,6 +176,10 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                           name: "orderNumber",
                                           decoration: const InputDecoration(
                                               labelText: "Broj naloga *"),
+                                          validator:
+                                              FormBuilderValidators.required(
+                                                  errorText:
+                                                      "Broj je obavezan."),
                                         ),
                                       ),
                                     ),
@@ -186,6 +191,10 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                           name: "startTime",
                                           decoration: const InputDecoration(
                                               labelText: "Pocetak termina *"),
+                                          validator:
+                                              FormBuilderValidators.required(
+                                                  errorText:
+                                                      "Datum je obavezan."),
                                         ),
                                       ),
                                     ),
@@ -197,6 +206,10 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                           name: "endTime",
                                           decoration: const InputDecoration(
                                               labelText: "Kraj termina *"),
+                                          validator:
+                                              FormBuilderValidators.required(
+                                                  errorText:
+                                                      "Datum je obavezan."),
                                         ),
                                       ),
                                     ),
@@ -211,6 +224,9 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                           decoration: const InputDecoration(
                                             labelText: "Obrati paznju *",
                                           ),
+                                          validator: FormBuilderValidators.required(
+                                              errorText:
+                                                  "Obrati paznju je obavezno."),
                                         ),
                                       ),
                                     ),
@@ -225,6 +241,10 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                           decoration: const InputDecoration(
                                               labelText:
                                                   "Opis kvara vlasnika vozila  *"),
+                                          validator:
+                                              FormBuilderValidators.required(
+                                                  errorText:
+                                                      "Opis je obavezan."),
                                         ),
                                       ),
                                     ),
@@ -239,6 +259,10 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                           decoration: const InputDecoration(
                                               labelText:
                                                   "Prijedlog za servisera  *"),
+                                          validator:
+                                              FormBuilderValidators.required(
+                                                  errorText:
+                                                      "Prijedlog je obavezan."),
                                         ),
                                       ),
                                     ),
@@ -251,6 +275,10 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                           name: "employeeId",
                                           decoration: const InputDecoration(
                                               labelText: "Uposlenik *"),
+                                          validator:
+                                              FormBuilderValidators.required(
+                                                  errorText:
+                                                      "Uposlenik je obavezan."),
                                           items: _employees.result
                                               .map((type) => DropdownMenuItem(
                                                     value: type.id,
@@ -270,6 +298,10 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                           name: "servicePerformed",
                                           decoration: const InputDecoration(
                                               labelText: "Vrsta servisa *"),
+                                          validator:
+                                              FormBuilderValidators.required(
+                                                  errorText:
+                                                      "Vrsta je obavezna."),
                                           items: const [
                                             DropdownMenuItem(
                                               value: 0,
@@ -308,6 +340,10 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                           name: "garageBox",
                                           decoration: const InputDecoration(
                                               labelText: "Broj Garaze *"),
+                                          validator:
+                                              FormBuilderValidators.required(
+                                                  errorText:
+                                                      "Garaza je obavezna."),
                                           items: const [
                                             DropdownMenuItem(
                                               value: 0,
@@ -346,6 +382,10 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                           name: "appointmentId",
                                           decoration: const InputDecoration(
                                               labelText: "Appointment *"),
+                                          validator:
+                                              FormBuilderValidators.required(
+                                                  errorText:
+                                                      "Termin je obavezan."),
                                           items: _appointments.result
                                               .map((type) => DropdownMenuItem(
                                                     value: type.id,
@@ -365,6 +405,10 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                           name: "vehicleId",
                                           decoration: const InputDecoration(
                                               labelText: "Vozilo *"),
+                                          validator:
+                                              FormBuilderValidators.required(
+                                                  errorText:
+                                                      "Vozilo je obavezno."),
                                           items: _vehicles.result
                                               .map((type) => DropdownMenuItem(
                                                     value: type.id,
@@ -383,6 +427,10 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                           name: "userId",
                                           decoration: const InputDecoration(
                                               labelText: "Klijent *"),
+                                          validator:
+                                              FormBuilderValidators.required(
+                                                  errorText:
+                                                      "Klijent je obavezan."),
                                           items: _users.result
                                               .map((type) => DropdownMenuItem(
                                                     value: type.id,

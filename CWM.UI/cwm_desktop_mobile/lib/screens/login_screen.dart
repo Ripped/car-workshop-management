@@ -1,6 +1,7 @@
 import 'package:cwm_desktop_mobile/models/user_auth.dart';
 import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
 import 'package:cwm_desktop_mobile/screens/registration_screen.dart';
+import 'package:cwm_desktop_mobile/utils/validator.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,8 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreen extends State<LoginScreen> {
   late AuthProvider _authProvider;
   UserAuth? userResponse;
+  bool isKorisnickoImeValid = true;
+  bool isLozinkaValid = true;
 
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -132,20 +135,41 @@ class _LoginScreen extends State<LoginScreen> {
             child: Column(
               children: [
                 TextField(
-                  decoration: const InputDecoration(
-                      labelText: "Korisnicko ime*",
-                      prefixIcon: Icon(Icons.email),
-                      border: OutlineInputBorder()),
-                  controller: _usernameController,
-                ),
+                    decoration: InputDecoration(
+                        labelText: "Korisnicko ime*",
+                        prefixIcon: Icon(Icons.email),
+                        border: OutlineInputBorder(),
+                        errorText: isKorisnickoImeValid
+                            ? null
+                            : "Unesite ispravno korisnicko ime"),
+                    controller: _usernameController,
+                    onChanged: (value) {
+                      bool isValid = Validators.validirajKorisnickoIme(value);
+                      setState(() {
+                        isKorisnickoImeValid = isValid;
+                      });
+                    }),
                 const SizedBox(height: 20),
                 TextField(
-                  decoration: const InputDecoration(
-                      labelText: "Password*",
-                      prefixIcon: Icon(Icons.password),
-                      border: OutlineInputBorder()),
+                  decoration: InputDecoration(
+                    labelText: "Password*",
+                    prefixIcon: const Icon(Icons.password),
+                    border: const OutlineInputBorder(),
+                    errorText: isLozinkaValid
+                        ? null
+                        : 'Lozinka mora sadržavati minimalno 4 znaka!',
+                  ),
                   controller: _passwordController,
                   obscureText: true,
+                  onChanged: (value) {
+                    setState(() {
+                      if (value.length >= 4 && value.isNotEmpty) {
+                        isLozinkaValid = true;
+                      } else {
+                        isLozinkaValid = false;
+                      }
+                    });
+                  },
                   onSubmitted: (value) => _loginSubmit(),
                 ),
               ],
@@ -181,92 +205,6 @@ class _LoginScreen extends State<LoginScreen> {
       ),
     );
   }
-
-  /*Scaffold(
-      backgroundColor: Colors.grey[50],
-      body: Center(
-        child: SizedBox(
-          width: 500,
-          height: 600,
-          child: Card(
-            color: Colors.grey[200],
-            elevation: 0.0,
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                children: [
-                  const Image(
-                      width: 180,
-                      height: 180,
-                      image: AssetImage('assets/images/logo.png')),
-                  Divider(
-                    height: 80.0,
-                    color: Colors.grey[400],
-                  ),
-                  TextField(
-                    controller: _usernameController,
-                    decoration: const InputDecoration(
-                        labelText: 'Korisnicko ime',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.email)),
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  TextField(
-                    controller: _passwordController,
-                    obscureText: _isObscured,
-                    decoration: InputDecoration(
-                      labelText: 'Lozinka',
-                      suffixIcon: IconButton(
-                        icon: Icon(_icon),
-                        onPressed: () {
-                          setState(() {
-                            _isObscured = !_isObscured;
-                            _icon = _isObscured
-                                ? Icons.visibility_off
-                                : Icons.visibility;
-                          });
-                        },
-                      ),
-                      border: const OutlineInputBorder(),
-                      prefixIcon: const Icon(Icons.password),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  buildLogin(),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) =>
-                                  const DashboardScreen()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0.0,
-                      backgroundColor: Colors.transparent,
-                    ),
-                    child: Text(
-                      'Nemate račun? Registruj se!',
-                      style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.blue.shade900),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );*/
 
   ElevatedButton buildLogin() {
     return ElevatedButton(

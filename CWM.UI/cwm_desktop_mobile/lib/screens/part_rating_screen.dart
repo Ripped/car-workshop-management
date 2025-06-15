@@ -11,6 +11,7 @@ import 'package:cwm_desktop_mobile/providers/user_rating_provider.dart';
 import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:provider/provider.dart';
 
 import '../models/paged_result.dart';
@@ -126,16 +127,17 @@ class _PartRatingScreenState extends State<PartRatingScreen> {
                   SizedBox(
                     width: 500,
                     child: FormBuilderTextField(
-                        name: "productRating",
-                        decoration: const InputDecoration(
-                            labelText: "Ocjena proizvoda *"),
-                        validator: (value) {
-                          if (int.parse(value!) > 5 || int.parse(value) <= 0) {
-                            return 'Ocjena mora biti izmedju 0 i 5';
-                          } else {
-                            return null;
-                          }
-                        }),
+                      name: "productRating",
+                      decoration: const InputDecoration(
+                          labelText: "Ocjena proizvoda *"),
+                      validator: (value) {
+                        if (int.parse(value!) > 5 || int.parse(value) <= 0) {
+                          return 'Ocjena mora biti izmedju 0 i 5';
+                        } else {
+                          return null;
+                        }
+                      },
+                    ),
                   )
                 ],
               ),
@@ -149,6 +151,8 @@ class _PartRatingScreenState extends State<PartRatingScreen> {
                       name: "userId",
                       decoration:
                           const InputDecoration(labelText: "Korisnik *"),
+                      validator: FormBuilderValidators.required(
+                          errorText: "Korisnik je obavezan."),
                       items: _users.result
                           .map((user) => DropdownMenuItem(
                                 value: user.id.toString(),
@@ -170,8 +174,8 @@ class _PartRatingScreenState extends State<PartRatingScreen> {
                       name: "partId",
                       decoration:
                           const InputDecoration(labelText: "Dijelovi *"),
-                      /*validator: FormBuilderValidators.required(
-                          errorText: "Država je obavezna."),*/
+                      validator: FormBuilderValidators.required(
+                          errorText: "Dio je obavezan."),
                       items: _parts.result
                           .map((part) => DropdownMenuItem(
                                 value: part.id.toString(),

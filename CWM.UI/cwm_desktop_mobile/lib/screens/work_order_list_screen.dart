@@ -35,18 +35,13 @@ class _WorkOrderListScreenState extends State<WorkOrderListScreen> {
 
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
-            MasterScreen("Detalji o dijelu", WorkOrderClosureScreen(id))));
+            MasterScreen("Detalji o nalogu", WorkOrderClosureScreen(id))));
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Search(
-          "Dodaj novi Nalog",
-          () => _openDetails(null),
-          onSearch: (text) => workOrderListDataTableSource.filterData(text),
-        ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(

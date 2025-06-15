@@ -32,7 +32,6 @@ class ExpensesDataTableSource extends AdvancedDataTableSource<Expenses> {
     return DataRow(
       onSelectChanged: (e) => _onSelectChanged(currentRow.id),
       cells: [
-        DataCell(Text(currentRow.description)),
         DataCell(Text(currentRow.date.toString())),
         DataCell(Text(currentRow.totalAmount.toString())),
         DataCell(Text(currentRow.expensesType.name)),
