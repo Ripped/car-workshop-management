@@ -130,7 +130,7 @@ class _PartRatingScreenState extends State<PartRatingScreen> {
                         decoration: const InputDecoration(
                             labelText: "Ocjena proizvoda *"),
                         validator: (value) {
-                          if (int.parse(value!) > 5 || int.parse(value!) <= 0) {
+                          if (int.parse(value!) > 5 || int.parse(value) <= 0) {
                             return 'Ocjena mora biti izmedju 0 i 5';
                           } else {
                             return null;
@@ -191,7 +191,7 @@ class _PartRatingScreenState extends State<PartRatingScreen> {
       actions: [
         OutlinedButton(
           style: const ButtonStyle(
-            padding: MaterialStatePropertyAll(
+            padding: WidgetStatePropertyAll(
               EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
             ),
           ),
@@ -200,7 +200,7 @@ class _PartRatingScreenState extends State<PartRatingScreen> {
         ),
         OutlinedButton(
           style: const ButtonStyle(
-            padding: MaterialStatePropertyAll(
+            padding: WidgetStatePropertyAll(
               EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
             ),
           ),

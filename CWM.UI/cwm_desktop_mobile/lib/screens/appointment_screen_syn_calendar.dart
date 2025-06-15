@@ -62,10 +62,10 @@ class _MyWidgetState extends State<MyWidget> {
     vehicleSearch.pageSize = 50;
     vehicleSearch.userId = Authorization.userId;
 
-    _appointmentType = await _appointmentTypeProvider.getAll();
-    _vehicle = await _vehicleProvider.getAll(search: vehicleSearch);
     _appointmentBlockedDates = await _appointmentBlockedProvider.getAll();
     _appointmentBlocked = _appointmentBlockedDates.result.cast();
+    _appointmentType = await _appointmentTypeProvider.getAll();
+    _vehicle = await _vehicleProvider.getAll(search: vehicleSearch);
 
     _blockDates();
     for (appointment_blocked.AppointmentBlocked i in _appointmentBlocked) {
@@ -145,132 +145,148 @@ class _MyWidgetState extends State<MyWidget> {
 
     _loadData(null, null);
 
-    return FutureBuilder<PagedResult<appointment.Appointment>>(
-      future: _appointmentProvider.getAll(search: eventSearch),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+    return FutureBuilder<PagedResult<appointment_blocked.AppointmentBlocked>>(
+      future: _appointmentBlockedProvider.getAll(),
+      builder: (context, snapshotBlockedDates) {
+        if (snapshotBlockedDates.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
-        } else if (snapshot.hasError) {
-          return Text("Error: ${snapshot.error}");
-        } else if (!snapshot.hasData || snapshot.data?.result == null) {
+        } else if (snapshotBlockedDates.hasError) {
+          return Text("Error: ${snapshotBlockedDates.error}");
+        } else if (!snapshotBlockedDates.hasData ||
+            snapshotBlockedDates.data?.result == null) {
           return const Text("Podaci nisu dostupni.");
         } else {
-          return FutureBuilder<PagedResult<appointment_type.AppointmentType>>(
-            future: _appointmentTypeProvider.getAll(),
-            builder: (context, snapshotEventTypes) {
-              if (snapshotEventTypes.connectionState ==
-                  ConnectionState.waiting) {
+          return FutureBuilder<PagedResult<appointment.Appointment>>(
+            future: _appointmentProvider.getAll(search: eventSearch),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
-              } else if (snapshotEventTypes.hasError) {
-                return Text("Error: ${snapshotEventTypes.error}");
-              } else if (!snapshotEventTypes.hasData ||
-                  snapshotEventTypes.data?.result == null) {
-                return const Text("Podaci nisu dostupni");
+              } else if (snapshot.hasError) {
+                return Text("Error: ${snapshot.error}");
+              } else if (!snapshot.hasData || snapshot.data?.result == null) {
+                return const Text("Podaci nisu dostupni.");
               } else {
-                if (Responsive.isMobile(context)) {
-                  return SingleChildScrollView(
-                      child: Column(children: [
-                    SizedBox(
-                        width: 900,
-                        height: 500,
-                        child: SfCalendar(
-                          blackoutDates: blockedDates,
-                          blackoutDatesTextStyle: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                              color: Colors.red),
-                          view: CalendarView.month,
-                          firstDayOfWeek: 1,
-                          onTap: (CalendarTapDetails details) {
-                            if (details.targetElement ==
-                                CalendarElement.calendarCell) {
-                              var selectedDate = details.date!;
-                              _openDialog(null, selectedDate);
-                            }
-                            if (details.targetElement ==
-                                CalendarElement.appointment) {
-                              int id = details.appointments?[0].id;
-                              _openDialog(id, null);
-                            }
-                          },
-                          dataSource:
-                              AppointmentDataTableSource(snapshot.data!.result),
-                          monthViewSettings: const MonthViewSettings(
-                              showTrailingAndLeadingDates: false,
-                              monthCellStyle: MonthCellStyle(
-                                textStyle: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.green,
-                                ),
-                              ),
-                              appointmentDisplayMode:
-                                  MonthAppointmentDisplayMode.appointment,
-                              showAgenda: true,
-                              dayFormat: 'EEE',
-                              agendaStyle: AgendaStyle(
-                                dayTextStyle: TextStyle(
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.green),
-                              )),
-                        ))
-                  ]));
-                } else {
-                  return Row(
-                    children: [
-                      Expanded(
-                        flex: 4,
-                        child: SizedBox(
-                            height: 800,
-                            child: SfCalendar(
-                              blackoutDates: blockedDates,
-                              blackoutDatesTextStyle: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.red),
-                              view: CalendarView.month,
-                              firstDayOfWeek: 1,
-                              onTap: (CalendarTapDetails details) {
-                                if (details.targetElement ==
-                                    CalendarElement.calendarCell) {
-                                  var selectedDate = details.date!;
-                                  _openDialog(null, selectedDate);
-                                }
-                                if (details.targetElement ==
-                                    CalendarElement.appointment) {
-                                  int id = details.appointments?[0].id;
-                                  _openDialog(id, null);
-                                }
-                              },
-                              dataSource: AppointmentDataTableSource(
-                                  snapshot.data!.result),
-                              monthViewSettings: const MonthViewSettings(
-                                  showTrailingAndLeadingDates: false,
-                                  monthCellStyle: MonthCellStyle(
-                                    textStyle: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: Colors.green,
+                return FutureBuilder<
+                    PagedResult<appointment_type.AppointmentType>>(
+                  future: _appointmentTypeProvider.getAll(),
+                  builder: (context, snapshotEventTypes) {
+                    if (snapshotEventTypes.connectionState ==
+                        ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshotEventTypes.hasError) {
+                      return Text("Error: ${snapshotEventTypes.error}");
+                    } else if (!snapshotEventTypes.hasData ||
+                        snapshotEventTypes.data?.result == null) {
+                      return const Text("Podaci nisu dostupni");
+                    } else {
+                      if (Responsive.isMobile(context)) {
+                        return SingleChildScrollView(
+                            child: Column(children: [
+                          SizedBox(
+                              width: 900,
+                              height: 500,
+                              child: SfCalendar(
+                                blackoutDates: blockedDates,
+                                blackoutDatesTextStyle: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.red),
+                                view: CalendarView.month,
+                                firstDayOfWeek: 1,
+                                onTap: (CalendarTapDetails details) {
+                                  if (details.targetElement ==
+                                      CalendarElement.calendarCell) {
+                                    var selectedDate = details.date!;
+                                    _openDialog(null, selectedDate);
+                                  }
+                                  if (details.targetElement ==
+                                      CalendarElement.appointment) {
+                                    int id = details.appointments?[0].id;
+                                    _openDialog(id, null);
+                                  }
+                                },
+                                dataSource: AppointmentDataTableSource(
+                                    snapshot.data!.result),
+                                monthViewSettings: const MonthViewSettings(
+                                    showTrailingAndLeadingDates: false,
+                                    monthCellStyle: MonthCellStyle(
+                                      textStyle: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: Colors.green,
+                                      ),
                                     ),
-                                  ),
-                                  appointmentDisplayMode:
-                                      MonthAppointmentDisplayMode.appointment,
-                                  showAgenda: true,
-                                  dayFormat: 'EEE',
-                                  agendaStyle: AgendaStyle(
-                                    dayTextStyle: TextStyle(
-                                        fontStyle: FontStyle.normal,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        color: Colors.green),
+                                    appointmentDisplayMode:
+                                        MonthAppointmentDisplayMode.appointment,
+                                    showAgenda: true,
+                                    dayFormat: 'EEE',
+                                    agendaStyle: AgendaStyle(
+                                      dayTextStyle: TextStyle(
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.green),
+                                    )),
+                              ))
+                        ]));
+                      } else {
+                        return Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: SizedBox(
+                                  height: 800,
+                                  child: SfCalendar(
+                                    blackoutDates: blockedDates,
+                                    blackoutDatesTextStyle: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        color: Colors.red),
+                                    view: CalendarView.month,
+                                    firstDayOfWeek: 1,
+                                    onTap: (CalendarTapDetails details) {
+                                      if (details.targetElement ==
+                                          CalendarElement.calendarCell) {
+                                        var selectedDate = details.date!;
+                                        _openDialog(null, selectedDate);
+                                      }
+                                      if (details.targetElement ==
+                                          CalendarElement.appointment) {
+                                        int id = details.appointments?[0].id;
+                                        _openDialog(id, null);
+                                      }
+                                    },
+                                    dataSource: AppointmentDataTableSource(
+                                        snapshot.data!.result),
+                                    monthViewSettings: const MonthViewSettings(
+                                        showTrailingAndLeadingDates: false,
+                                        monthCellStyle: MonthCellStyle(
+                                          textStyle: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 18,
+                                            color: Colors.green,
+                                          ),
+                                        ),
+                                        appointmentDisplayMode:
+                                            MonthAppointmentDisplayMode
+                                                .appointment,
+                                        showAgenda: true,
+                                        dayFormat: 'EEE',
+                                        agendaStyle: AgendaStyle(
+                                          dayTextStyle: TextStyle(
+                                              fontStyle: FontStyle.normal,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.green),
+                                        )),
                                   )),
-                            )),
-                      ),
-                    ],
-                  );
-                }
+                            ),
+                          ],
+                        );
+                      }
+                    }
+                  },
+                );
               }
             },
           );
@@ -565,8 +581,8 @@ class _MyWidgetState extends State<MyWidget> {
                     padding: const EdgeInsets.all(10),
                     child: ElevatedButton(
                       style: ButtonStyle(
-                          minimumSize: const WidgetStatePropertyAll(
-                              Size.fromHeight(50)),
+                          minimumSize:
+                              const WidgetStatePropertyAll(Size.fromHeight(50)),
                           backgroundColor:
                               WidgetStateProperty.all<Color>(Colors.red)),
                       child: const Text(
@@ -586,8 +602,8 @@ class _MyWidgetState extends State<MyWidget> {
                     padding: const EdgeInsets.all(10),
                     child: ElevatedButton(
                       style: ButtonStyle(
-                          minimumSize: const WidgetStatePropertyAll(
-                              Size.fromHeight(50)),
+                          minimumSize:
+                              const WidgetStatePropertyAll(Size.fromHeight(50)),
                           backgroundColor:
                               WidgetStateProperty.all<Color>(Colors.green)),
                       child: const Text(

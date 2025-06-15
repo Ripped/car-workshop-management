@@ -63,7 +63,7 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
     _loadData(widget.id);
   }
 
-  Future _updateValue(int id, bool payment) async {
+  Future _updateValue(int? id, bool payment) async {
     if (id != null) {
       workOrder = await _workOrderProvider.get(id);
       workOrder.payment = payment;
@@ -468,7 +468,6 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                             WidgetStateProperty.all<Color>(Colors.red),
                         foregroundColor: WidgetStateProperty.all(Colors.white),
                       ),
-                      child: const Text("PLATI"),
                       onPressed: workOrder.payment
                           ? null
                           : () async {
@@ -488,6 +487,7 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                                                 CustomerOrderListScreen())));
                               }
                             },
+                      child: const Text("PLATI"),
                     ),
                   ],
                 ),

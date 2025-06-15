@@ -8,7 +8,6 @@ import 'package:cwm_desktop_mobile/screens/appointment_screen_syn_calendar.dart'
 import 'package:cwm_desktop_mobile/screens/employee_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/part_details_screen.dart';
 import 'package:cwm_desktop_mobile/screens/vehicle_list.dart';
-import 'package:cwm_desktop_mobile/screens/work_order_list_screen.dart';
 import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
 import 'package:flutter/material.dart';

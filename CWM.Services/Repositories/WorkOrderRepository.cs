@@ -54,6 +54,9 @@ namespace CWM.Database.Repositories
             if (search.IncludeVehicle)
                 query = query.Include(x => x.Vehicle);
 
+            if (search.IncludePayment)
+                query = query.Where(x=>x.Payment == false);
+
             return query;
         }
 

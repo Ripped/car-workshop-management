@@ -1,9 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
-
-import 'package:cwm_desktop_mobile/providers/part_provider.dart';
+import 'package:cwm_desktop_mobile/models/paged_result.dart';
+import 'package:cwm_desktop_mobile/models/user.dart';
+import 'package:cwm_desktop_mobile/providers/user_provider.dart';
+import 'package:cwm_desktop_mobile/providers/vehicle_provider.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:provider/provider.dart';
@@ -11,59 +10,56 @@ import 'package:provider/provider.dart';
 import '../widgets/master_screen.dart';
 import '../widgets/responsive.dart';
 
-class PartDetailsScreen extends StatefulWidget {
+class VehicleDetailsScreen extends StatefulWidget {
   final int? id;
-  const PartDetailsScreen(this.id, {super.key});
+  const VehicleDetailsScreen(this.id, {super.key});
 
   @override
-  State<PartDetailsScreen> createState() => _PartDetailsScreenState();
+  State<VehicleDetailsScreen> createState() => _VehicleDetailsScreenState();
 }
 
-class _PartDetailsScreenState extends State<PartDetailsScreen> {
-  late PartProvider _partProvider;
+class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
+  late VehicleProvider _vehicleProvider;
+  late UserProvider _userProvider;
 
   bool isLoading = true;
   final _formKey = GlobalKey<FormBuilderState>();
   Map<String, dynamic> _initialValue = {};
+  var _users = PagedResult<User>();
 
   @override
   void initState() {
     super.initState();
 
-    _partProvider = context.read<PartProvider>();
+    _vehicleProvider = context.read<VehicleProvider>();
+    _userProvider = context.read<UserProvider>();
 
     _loadData(widget.id);
   }
 
   Future _loadData(int? id) async {
+    _users = await _userProvider.getAll();
+
     if (id != null) {
-      var part = await _partProvider.get(id);
+      var vehicle = await _vehicleProvider.get(id);
 
       _initialValue = {
-        "serialNumber": part.serialNumber,
-        "manufacturer": part.manufacturer,
-        "partName": part.partName,
-        "image": part.image,
-        "price": part.price.toString(),
-        "description": part.description
+        "chassis": vehicle.chassis,
+        "brand": vehicle.brand,
+        "model": vehicle.model,
+        "cubicCapacity": vehicle.cubicCapacity.toString(),
+        "kilowatts": vehicle.kilowatts.toString(),
+        "transmision": vehicle.transmision,
+        "productionDate": vehicle.productionDate,
+        "fuel": vehicle.fuel,
+        "userId": vehicle.user!.id
       };
     } else {
-      _initialValue = {"image": "", "description": ""};
+      _initialValue = {"chassis": "", "model": ""};
     }
     setState(() {
       isLoading = false;
     });
-  }
-
-  Future _uploadImage() async {
-    var result = await FilePicker.platform.pickFiles(type: FileType.image);
-
-    if (result != null && result.files.single.path != null) {
-      var image = File(result.files.single.path!);
-      _initialValue["image"] = base64Encode(image.readAsBytesSync());
-      _formKey.currentState!.fields["image"]!.didChange(_initialValue["image"]);
-      setState(() {});
-    }
   }
 
   @override
@@ -89,14 +85,14 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                               width: 800,
                               height: 30,
                               child: Text(
-                                "Podaci o dijelu",
+                                "Podaci o vozilu",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.white, fontSize: 20),
                               ),
                             ),
                           ),
-                          if (Responsive.isDesktop(context))
+                          /*if (Responsive.isDesktop(context))
                             SizedBox(
                                 child: Column(children: [
                               Padding(
@@ -134,10 +130,10 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                   ),
                                 ),
                               ),
-                            ])),
+                            ])),*/
                           SizedBox(
                             height: Responsive.isDesktop(context)
-                                ? (MediaQuery.of(context).size.width / 6)
+                                ? (MediaQuery.of(context).size.width / 3)
                                 : (MediaQuery.of(context).size.height / 1.4),
                             child: GridView.count(
                               crossAxisCount: Responsive.isDesktop(context)
@@ -153,9 +149,9 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                   child: Align(
                                     alignment: Alignment.bottomCenter,
                                     child: FormBuilderTextField(
-                                      name: "serialNumber",
+                                      name: "chassis",
                                       decoration: const InputDecoration(
-                                          labelText: "Serijski broj *"),
+                                          labelText: "Sasija *"),
                                     ),
                                   ),
                                 ),
@@ -164,9 +160,9 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                   child: Align(
                                     alignment: Alignment.bottomCenter,
                                     child: FormBuilderTextField(
-                                      name: "manufacturer",
+                                      name: "brand",
                                       decoration: const InputDecoration(
-                                          labelText: "Proizvodjac *"),
+                                          labelText: "Brend vozila *"),
                                     ),
                                   ),
                                 ),
@@ -175,9 +171,9 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                   child: Align(
                                     alignment: Alignment.bottomCenter,
                                     child: FormBuilderTextField(
-                                      name: "partName",
+                                      name: "model",
                                       decoration: const InputDecoration(
-                                          labelText: "Ime dijela *"),
+                                          labelText: "Model vozila *"),
                                     ),
                                   ),
                                 ),
@@ -186,9 +182,9 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                   child: Align(
                                     alignment: Alignment.bottomCenter,
                                     child: FormBuilderTextField(
-                                      name: "price",
+                                      name: "cubicCapacity",
                                       decoration: const InputDecoration(
-                                          labelText: "Cijena *"),
+                                          labelText: "Kubikaza *"),
                                     ),
                                   ),
                                 ),
@@ -197,11 +193,9 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                   child: Align(
                                     alignment: Alignment.bottomCenter,
                                     child: FormBuilderTextField(
-                                      name: "description",
-                                      keyboardType: TextInputType.multiline,
-                                      maxLines: 3,
+                                      name: "kilowatts",
                                       decoration: const InputDecoration(
-                                          labelText: "Opis dijela  *"),
+                                          labelText: "Kilovati  *"),
                                     ),
                                   ),
                                 ),
@@ -209,22 +203,50 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                   padding: const EdgeInsets.all(10),
                                   child: Align(
                                     alignment: Alignment.bottomCenter,
-                                    child: FormBuilderField(
-                                      name: 'image',
-                                      builder: ((field) {
-                                        return InputDecorator(
-                                          decoration: InputDecoration(
-                                              errorText: field.errorText),
-                                          child: ListTile(
-                                            leading: const Icon(Icons.photo),
-                                            title:
-                                                const Text("Odaberite sliku"),
-                                            trailing:
-                                                const Icon(Icons.file_upload),
-                                            onTap: _uploadImage,
-                                          ),
-                                        );
-                                      }),
+                                    child: FormBuilderTextField(
+                                      name: "transmision",
+                                      decoration: const InputDecoration(
+                                          labelText: "Mjenjac  *"),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: FormBuilderDateTimePicker(
+                                      name: "productionDate",
+                                      decoration: const InputDecoration(
+                                          labelText: "Datum proizvodnje *"),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: FormBuilderTextField(
+                                      name: "fuel",
+                                      decoration: const InputDecoration(
+                                          labelText: "Gorivo  *"),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: FormBuilderDropdown(
+                                      name: "userId",
+                                      decoration: const InputDecoration(
+                                          labelText: "Korisnik"),
+                                      items: _users.result
+                                          .map((user) => DropdownMenuItem(
+                                                value: user.id,
+                                                child: Text(
+                                                    "${user.firstName} ${user.lastName}"),
+                                              ))
+                                          .toList(),
                                     ),
                                   ),
                                 ),
@@ -256,10 +278,11 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                                   _formKey.currentState!.value);
 
                                               widget.id == null
-                                                  ? await _partProvider
+                                                  ? await _vehicleProvider
                                                       .insert(request)
-                                                  : await _partProvider.update(
-                                                      widget.id!, request);
+                                                  : await _vehicleProvider
+                                                      .update(
+                                                          widget.id!, request);
 
                                               if (context.mounted) {
                                                 Navigator.of(context).pushReplacement(
@@ -287,7 +310,7 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                           ),
                                           child: const Text("OBRIŠI"),
                                           onPressed: () async {
-                                            await _partProvider
+                                            await _vehicleProvider
                                                 .delete(widget.id!);
                                             await _loadData(null);
                                             setState(() {});
@@ -329,9 +352,9 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                                     .currentState!.value);
 
                                                 widget.id == null
-                                                    ? await _partProvider
+                                                    ? await _vehicleProvider
                                                         .insert(request)
-                                                    : await _partProvider
+                                                    : await _vehicleProvider
                                                         .update(widget.id!,
                                                             request);
 
@@ -365,7 +388,7 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                             ),
                                             child: const Text("OBRIŠI"),
                                             onPressed: () async {
-                                              await _partProvider
+                                              await _vehicleProvider
                                                   .delete(widget.id!);
                                               await _loadData(null);
                                               setState(() {});

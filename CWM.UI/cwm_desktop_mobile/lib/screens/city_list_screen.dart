@@ -166,8 +166,8 @@ class _CityListScreenState extends State<CityListScreen> {
         if (id != null)
           OutlinedButton(
             style: ButtonStyle(
-              foregroundColor: MaterialStateProperty.all(Colors.red),
-              padding: const MaterialStatePropertyAll(
+              foregroundColor: WidgetStateProperty.all(Colors.red),
+              padding: const WidgetStatePropertyAll(
                 EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
               ),
             ),
@@ -212,7 +212,7 @@ class _CityListScreenState extends State<CityListScreen> {
         const SizedBox(width: 185),
         OutlinedButton(
           style: const ButtonStyle(
-            padding: MaterialStatePropertyAll(
+            padding: WidgetStatePropertyAll(
               EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
             ),
           ),
@@ -221,7 +221,7 @@ class _CityListScreenState extends State<CityListScreen> {
         ),
         OutlinedButton(
           style: const ButtonStyle(
-            padding: MaterialStatePropertyAll(
+            padding: WidgetStatePropertyAll(
               EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
             ),
           ),

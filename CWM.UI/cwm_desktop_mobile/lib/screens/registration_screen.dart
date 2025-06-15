@@ -238,7 +238,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                           });
                         },
                       ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
                       ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor:
+                                WidgetStateProperty.all<Color>(Colors.green),
+                            foregroundColor:
+                                WidgetStateProperty.all(Colors.white),
+                          ),
                           onPressed: () {
                             _selectedDate();
                           },

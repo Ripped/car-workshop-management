@@ -16,13 +16,11 @@ class ExpensesProvider extends BaseProvider<Expenses, ExpensesSearch> {
     final Map<String, String> queryParameters = {};
     String endpointIzvjestajNarudzbe = "GetFinanceReport";
 
-    if (search != null) {
-      search.toJson().forEach((key, value) {
-        queryParameters.addAll(<String, String>{key: value});
-      });
+    search.toJson().forEach((key, value) {
+      queryParameters.addAll(<String, String>{key: value});
+    });
 
-      queryParameters.removeWhere((key, value) => value == "null");
-    }
+    queryParameters.removeWhere((key, value) => value == "null");
 
     var uri = Uri.https(
         baseUrl, 'Expenses/$endpointIzvjestajNarudzbe', queryParameters);
@@ -63,13 +61,11 @@ class ExpensesProvider extends BaseProvider<Expenses, ExpensesSearch> {
 
     var url = "https://$baseUrl/WorkOrder/$endpointIzvjestajNarudzbe";
 
-    if (search != null) {
-      search.toJson().forEach((key, value) {
-        queryParameters.addAll(<String, String>{key: value});
-      });
+    search.toJson().forEach((key, value) {
+      queryParameters.addAll(<String, String>{key: value});
+    });
 
-      queryParameters.removeWhere((key, value) => value == "null");
-    }
+    queryParameters.removeWhere((key, value) => value == "null");
 
     var uri = Uri.https(
         baseUrl, 'Expenses/$endpointIzvjestajNarudzbe', queryParameters);

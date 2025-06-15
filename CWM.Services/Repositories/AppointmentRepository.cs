@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CWM.Core.Interfaces.Repositories;
+using CWM.Core.Interfaces.Services;
 using CWM.Core.Models;
 using CWM.Core.Models.Searches;
 using CWM.Database.Models;
@@ -58,7 +59,7 @@ namespace CWM.Database.Repositories
             return query;
         }
 
-        /*public async override Task<Appointment> InsertAsync(Appointment model)
+        public async override Task<Core.Models.Appointment> InsertAsync(Core.Models.Appointment model)
         {
             var entity = Mapper.Map<Appointment>(model);
 
@@ -77,9 +78,9 @@ namespace CWM.Database.Repositories
                 Vehicle = model.Vehicle?.Chassis.ToString(),
                 User = model.User?.ToString()
             };
-
-            return Mapper.Map<Appointment>(addedEntity.Entity);
-        }*/
+            
+            return Mapper.Map<Core.Models.Appointment>(addedEntity.Entity);
+        }
 
         /*public async override Task<Appointment> InsertAsync(Appointment insert)
         {

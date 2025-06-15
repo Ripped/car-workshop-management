@@ -17,13 +17,11 @@ class WorkOrderProvider extends BaseProvider<WorkOrder, WorkOrderSearch> {
 
     var url = "https://$baseUrl/WorkOrder/$endpointIzvjestajNarudzbe";
 
-    if (search != null) {
-      search.toJson().forEach((key, value) {
-        queryParameters.addAll(<String, String>{key: value});
-      });
+    search.toJson().forEach((key, value) {
+      queryParameters.addAll(<String, String>{key: value});
+    });
 
-      queryParameters.removeWhere((key, value) => value == "null");
-    }
+    queryParameters.removeWhere((key, value) => value == "null");
 
     var uri = Uri.https(
         baseUrl, 'WorkOrder/$endpointIzvjestajNarudzbe', queryParameters);
@@ -52,13 +50,11 @@ class WorkOrderProvider extends BaseProvider<WorkOrder, WorkOrderSearch> {
 
     var url = "https://$baseUrl/WorkOrder/$endpointIzvjestajNarudzbe";
 
-    if (search != null) {
-      search.toJson().forEach((key, value) {
-        queryParameters.addAll(<String, String>{key: value});
-      });
+    search.toJson().forEach((key, value) {
+      queryParameters.addAll(<String, String>{key: value});
+    });
 
-      queryParameters.removeWhere((key, value) => value == "null");
-    }
+    queryParameters.removeWhere((key, value) => value == "null");
 
     var uri = Uri.https(
         baseUrl, 'WorkOrder/$endpointIzvjestajNarudzbe', queryParameters);

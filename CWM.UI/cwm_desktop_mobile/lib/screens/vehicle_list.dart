@@ -1,12 +1,13 @@
 import 'package:advanced_datatable/datatable.dart';
+import 'package:cwm_desktop_mobile/screens/vehicle_details_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
+import 'package:cwm_desktop_mobile/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../data_table_sources/vehicle_list_data_table_source.dart';
 import '../providers/vehicle_provider.dart';
-import 'vehicle_history_list_screen.dart';
 
 class VehicleListScreen extends StatefulWidget {
   const VehicleListScreen({super.key});
@@ -34,13 +35,18 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
 
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
-            MasterScreen("Historija vozila", VehicleHistoryListScreen(id))));
+            MasterScreen("Detalji vozila", VehicleDetailsScreen(id))));
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Search(
+          "Dodaj novo vozilo",
+          () => _openDetails(null),
+          onSearch: (text) => vehicleListDataTableSource.filterData(text),
+        ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
@@ -50,10 +56,10 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
             source: vehicleListDataTableSource,
             rowsPerPage: 10,
             columns: const [
-              DataColumn(label: Text("Serial number")),
-              DataColumn(label: Text("Service performed")),
-              DataColumn(label: Text("Start date")),
-              DataColumn(label: Text("End date")),
+              DataColumn(label: Text("Sasija")),
+              DataColumn(label: Text("Marka vozila")),
+              DataColumn(label: Text("Model vozila")),
+              DataColumn(label: Text("Gorivo")),
             ],
           ),
         )

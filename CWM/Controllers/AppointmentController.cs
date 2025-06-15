@@ -21,6 +21,9 @@ namespace CWM.Controllers
 
         [HttpPost]
         public override async Task<Appointment> Insert([FromBody] AppointmentInsertUpdate insert)
-            => await EmailService.SendEmailMessage(Mapper.Map<Appointment>(insert));
+        {
+            await EmailService.SendEmailMessage(Mapper.Map<Appointment>(insert));
+            return await appointmentRepository.InsertAsync(Mapper.Map<Appointment>(insert));
+        }
     }
 }

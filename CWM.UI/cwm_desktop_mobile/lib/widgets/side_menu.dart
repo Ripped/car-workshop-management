@@ -6,10 +6,10 @@ import 'package:cwm_desktop_mobile/screens/dashboard_screen.dart';
 import 'package:cwm_desktop_mobile/screens/employee_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/part_rating_screen.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
-import 'package:cwm_desktop_mobile/screens/profile_screen.dart';
 import 'package:cwm_desktop_mobile/screens/report_screen.dart';
 import 'package:cwm_desktop_mobile/screens/settings_screen.dart';
 import 'package:cwm_desktop_mobile/screens/vehicle_list.dart';
+import 'package:cwm_desktop_mobile/screens/vehicle_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/work_order_list_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:flutter/material.dart';
@@ -74,22 +74,6 @@ class SideMenu extends StatelessWidget {
                     fontSize: 16),
               ),
             ]),
-            Padding(
-                padding: const EdgeInsets.all(10),
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor:
-                        WidgetStateProperty.all<Color>(Colors.green),
-                    foregroundColor: WidgetStateProperty.all(Colors.white),
-                  ),
-                  onPressed: () async {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context) =>
-                            const MasterScreen("Profil", ProfileScreen())));
-                  },
-                  child:
-                      const Text("Uredi profil", textAlign: TextAlign.center),
-                )),
           ],
         ));
   }
@@ -129,6 +113,8 @@ class SideMenu extends StatelessWidget {
               const VehicleListScreen(), true),
           _buildListTile(context, "Recenzije dijelova", Icons.date_range,
               const PartRatingScreen(), true),
+          _buildListTile(context, "Lista vozila", Icons.date_range,
+              const VehicleScreen(), true),
           SizedBox(height: spaceHeight),
           if (Authorization.roles.contains(Role.admin))
             _buildListTile(

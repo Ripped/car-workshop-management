@@ -314,7 +314,7 @@ class _VehicleServiceHistoryDetailsScreenScreen
               ));
   }
 
-  Widget _basicInfo(BuildContext context) {
+  /*Widget _basicInfo(BuildContext context) {
     return Card(
       elevation: 2,
       child: Column(
@@ -500,5 +500,5 @@ class _VehicleServiceHistoryDetailsScreenScreen
         ],
       ),
     );
-  }
+  }*/
 }

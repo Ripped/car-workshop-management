@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	<ErrorOnDuplicatePublishOutputFiles>false</ErrorOnDuplicatePublishOutputFiles>
     <InvariantGlobalization>false</InvariantGlobalization>
     <UserSecretsId>9537d356-a6ce-4e9d-af66-06dc4540c95b</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>

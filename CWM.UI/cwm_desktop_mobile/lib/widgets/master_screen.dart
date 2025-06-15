@@ -1,3 +1,4 @@
+import 'package:cwm_desktop_mobile/widgets/header.dart';
 import 'package:flutter/material.dart';
 
 import 'responsive.dart';
@@ -32,7 +33,8 @@ class _MasterScreenState extends State<MasterScreen> {
               flex: 5,
               child: Column(
                 children: [
-                  Expanded(
+                  Header(widget.title, _key),
+                  /*Expanded(
                     child: Padding(
                       padding: const EdgeInsets.all(10),
                       child: Row(
@@ -42,14 +44,10 @@ class _MasterScreenState extends State<MasterScreen> {
                                 onPressed: () =>
                                     _key.currentState!.openDrawer(),
                                 child: const Text("Open")),
-                          /*const Text("Pocetna"),
-                          const Icon(Icons.chat_bubble),
-                          const Icon(Icons.notifications),
-                          const Icon(Icons.person)*/
                         ],
                       ),
                     ),
-                  ),
+                  ),*/
                   Expanded(
                     flex: 10,
                     child: Padding(

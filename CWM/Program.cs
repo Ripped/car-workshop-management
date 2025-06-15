@@ -1,17 +1,12 @@
-using CWM;
 using CWM.Core.Interfaces.Repositories;
 using CWM.Core.Interfaces.Services;
 using CWM.Core.Models.Configurations;
-using CWM.Core.Models.Enums;
 using CWM.Database;
 using CWM.Database.Extensions;
 using CWM.Database.Repositories;
 using CWM.Extensions;
 using CWM.RabbitMQ;
 using CWM.Recommender;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);

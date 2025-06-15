@@ -16,6 +16,9 @@ Vehicle _$VehicleFromJson(Map<String, dynamic> json) => Vehicle(
       json['transmision'] as String,
       DateTime.parse(json['productionDate'] as String),
       json['fuel'] as String,
+      json['user'] == null
+          ? null
+          : User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$VehicleToJson(Vehicle instance) => <String, dynamic>{
@@ -28,4 +31,5 @@ Map<String, dynamic> _$VehicleToJson(Vehicle instance) => <String, dynamic>{
       'transmision': instance.transmision,
       'productionDate': instance.productionDate.toIso8601String(),
       'fuel': instance.fuel,
+      'user': instance.user,
     };

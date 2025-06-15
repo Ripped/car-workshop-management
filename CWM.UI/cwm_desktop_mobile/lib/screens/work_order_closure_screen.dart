@@ -50,6 +50,7 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
   var _users = PagedResult<User>();
   late int? _partWorkOrderId;
   var parts = <Part>[];
+  bool payment = false;
   Map<Part, bool> partsList = {};
   Map<dynamic, dynamic> mapOfPartWorkOrder = {};
   List<Map<dynamic, dynamic>> tempPartsWorkOrderList = [];
@@ -145,6 +146,7 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
 
       _initialValue = {
         "orderNumber": workOrder.orderNumber,
+        "total": workOrder.total.toString(),
         "serviceType": workOrder.servicePerformed.index,
         "startTime": workOrder.startTime,
         "endTime": workOrder.endTime,
@@ -439,6 +441,17 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                                         "${type.firstName} ${type.lastName}"),
                                   ))
                               .toList(),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: FormBuilderTextField(
+                          name: "total",
+                          decoration:
+                              const InputDecoration(labelText: "Cijena *"),
                         ),
                       ),
                     ),

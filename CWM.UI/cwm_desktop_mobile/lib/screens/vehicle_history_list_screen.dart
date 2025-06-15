@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../data_table_sources/vehicle_history_list_data_table_source.dart';
 import '../models/searches/vehicle_service_history_search.dart';
 import '../providers/vehicle_service_history_provider.dart';
-import '../widgets/search.dart';
 import 'vehicle_service_history_details_screen.dart';
 
 class VehicleHistoryListScreen extends StatefulWidget {
@@ -55,8 +54,6 @@ class _VehicleHistoryListScreenState extends State<VehicleHistoryListScreen> {
             source: vehicleServiceHistoryDataTableSource,
             rowsPerPage: 10,
             columns: const [
-              /*DataColumn(label: Text("Serial number")),
-              DataColumn(label: Text("Service performed")),*/
               DataColumn(label: Text("Start date")),
             ],
           ),
