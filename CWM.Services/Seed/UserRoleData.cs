@@ -23,31 +23,31 @@ namespace CWM.Database.Seed
                 new UserRole
                 {
                     Id = 2,
-                    UserId = 1,
-                    Role = Role.Employee
-                },
-                new UserRole
-                {
-                    Id = 3,
-                    UserId = 1,
-                    Role = Role.User
-                },
-                new UserRole
-                {
-                    Id = 4,
                     UserId = 2,
                     Role = Role.Employee
                 },
                 new UserRole
                 {
-                    Id = 5,
+                    Id = 3,
                     UserId = 3,
                     Role = Role.User
                 },
                 new UserRole
                 {
-                    Id = 6,
+                    Id = 4,
                     UserId = 4,
+                    Role = Role.Employee
+                },
+                new UserRole
+                {
+                    Id = 5,
+                    UserId = 5,
+                    Role = Role.User
+                },
+                new UserRole
+                {
+                    Id = 6,
+                    UserId = 6,
                     Role = Role.User
                 }
             );

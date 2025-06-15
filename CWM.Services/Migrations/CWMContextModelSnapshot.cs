@@ -804,7 +804,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 1,
                             PartId = 1,
-                            ServiceDate = new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1867),
+                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7253),
                             VehicleId = 1,
                             WorkOrderId = 1
                         },
@@ -812,7 +812,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 2,
                             PartId = 2,
-                            ServiceDate = new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1876),
+                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7258),
                             VehicleId = 2,
                             WorkOrderId = 2
                         },
@@ -820,7 +820,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 3,
                             PartId = 3,
-                            ServiceDate = new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1878),
+                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7260),
                             VehicleId = 3,
                             WorkOrderId = 3
                         },
@@ -828,7 +828,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 4,
                             PartId = 4,
-                            ServiceDate = new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1880),
+                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7262),
                             VehicleId = 4,
                             WorkOrderId = 4
                         },
@@ -836,7 +836,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 5,
                             PartId = 5,
-                            ServiceDate = new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1882),
+                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7264),
                             VehicleId = 5,
                             WorkOrderId = 5
                         },
@@ -844,7 +844,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 6,
                             PartId = 6,
-                            ServiceDate = new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1884),
+                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7272),
                             VehicleId = 6,
                             WorkOrderId = 6
                         });
@@ -917,8 +917,8 @@ namespace CWM.Database.Migrations
                             Gender = 0,
                             LastName = "Sendić",
                             Mobile = "062342376",
-                            Password = "Admin",
-                            Username = "Admin"
+                            Password = "test",
+                            Username = "admin"
                         },
                         new
                         {
@@ -931,7 +931,7 @@ namespace CWM.Database.Migrations
                             Gender = 1,
                             LastName = "Tufo",
                             Mobile = "062342376",
-                            Password = "Admin",
+                            Password = "test",
                             Username = "employee"
                         },
                         new
@@ -945,8 +945,8 @@ namespace CWM.Database.Migrations
                             Gender = 0,
                             LastName = "Tufo",
                             Mobile = "062342376",
-                            Password = "Admin",
-                            Username = "omer"
+                            Password = "test",
+                            Username = "user"
                         },
                         new
                         {
@@ -1128,31 +1128,31 @@ namespace CWM.Database.Migrations
                         {
                             Id = 2,
                             Role = 1,
-                            UserId = 1
+                            UserId = 2
                         },
                         new
                         {
                             Id = 3,
                             Role = 2,
-                            UserId = 1
+                            UserId = 3
                         },
                         new
                         {
                             Id = 4,
                             Role = 1,
-                            UserId = 2
+                            UserId = 4
                         },
                         new
                         {
                             Id = 5,
                             Role = 2,
-                            UserId = 3
+                            UserId = 5
                         },
                         new
                         {
                             Id = 6,
                             Role = 2,
-                            UserId = 4
+                            UserId = 6
                         });
                 });
 
@@ -1330,7 +1330,7 @@ namespace CWM.Database.Migrations
                             Id = 1,
                             Description = "",
                             EmployeeId = 1,
-                            ServiceDate = new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1679),
+                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7049),
                             ServiceType = 1,
                             Sugestions = "",
                             UserId = 1,
@@ -1341,7 +1341,7 @@ namespace CWM.Database.Migrations
                             Id = 2,
                             Description = "",
                             EmployeeId = 2,
-                            ServiceDate = new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1729),
+                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7107),
                             ServiceType = 0,
                             Sugestions = "",
                             UserId = 2,
@@ -1352,7 +1352,7 @@ namespace CWM.Database.Migrations
                             Id = 3,
                             Description = "",
                             EmployeeId = 3,
-                            ServiceDate = new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1732),
+                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7110),
                             ServiceType = 4,
                             Sugestions = "",
                             UserId = 3,
@@ -1363,7 +1363,7 @@ namespace CWM.Database.Migrations
                             Id = 4,
                             Description = "",
                             EmployeeId = 4,
-                            ServiceDate = new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1734),
+                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7113),
                             ServiceType = 5,
                             Sugestions = "",
                             UserId = 4,
@@ -1374,7 +1374,7 @@ namespace CWM.Database.Migrations
                             Id = 5,
                             Description = "",
                             EmployeeId = 5,
-                            ServiceDate = new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1737),
+                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7115),
                             ServiceType = 1,
                             Sugestions = "",
                             UserId = 5,
@@ -1385,7 +1385,7 @@ namespace CWM.Database.Migrations
                             Id = 6,
                             Description = "",
                             EmployeeId = 6,
-                            ServiceDate = new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1739),
+                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7118),
                             ServiceType = 0,
                             Sugestions = "",
                             UserId = 6,

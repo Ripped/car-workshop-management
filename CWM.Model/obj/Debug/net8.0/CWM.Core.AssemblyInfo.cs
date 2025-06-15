@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CWM.Core")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bb063239e09e1ac8c6f124a05d141d84cc454b15")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+77be0f2b637f57788ca920abcd82a1e786a70154")]
 [assembly: System.Reflection.AssemblyProductAttribute("CWM.Core")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CWM.Core")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

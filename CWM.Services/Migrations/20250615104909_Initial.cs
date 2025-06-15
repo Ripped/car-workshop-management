@@ -511,9 +511,9 @@ namespace CWM.Database.Migrations
                 columns: new[] { "Id", "BirthDate", "CitizenshipId", "CityId", "Email", "FirstName", "Gender", "Image", "LastName", "Mobile", "Password", "Username" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2001, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, "sendić@gmail.com", "Amir", 0, null, "Sendić", "062342376", "Admin", "Admin" },
-                    { 2, new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, "stufo@gmail.com", "Samra", 1, null, "Tufo", "062342376", "Admin", "employee" },
-                    { 3, new DateTime(1990, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, "tufo@gmail.com", "Omer", 0, null, "Tufo", "062342376", "Admin", "omer" },
+                    { 1, new DateTime(2001, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, 1, "sendić@gmail.com", "Amir", 0, null, "Sendić", "062342376", "test", "admin" },
+                    { 2, new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, 2, "stufo@gmail.com", "Samra", 1, null, "Tufo", "062342376", "test", "employee" },
+                    { 3, new DateTime(1990, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 3, 3, "tufo@gmail.com", "Omer", 0, null, "Tufo", "062342376", "test", "user" },
                     { 4, new DateTime(1975, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 4, 4, "kremić@gmail.com", "Merima", 1, null, "Kremić", "062342376", "Admin", "merima" },
                     { 5, new DateTime(2001, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 5, 5, "karić@gmail.com", "Damir", 0, null, "Kahvic", "062342376", "Admin", "dario" },
                     { 6, new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 6, 6, "babić@gmail.com", "Selmir", 1, null, "Babić", "062342376", "Admin", "selmir" }
@@ -562,11 +562,11 @@ namespace CWM.Database.Migrations
                 values: new object[,]
                 {
                     { 1, 0, 1 },
-                    { 2, 1, 1 },
-                    { 3, 2, 1 },
-                    { 4, 1, 2 },
-                    { 5, 2, 3 },
-                    { 6, 2, 4 }
+                    { 2, 1, 2 },
+                    { 3, 2, 3 },
+                    { 4, 1, 4 },
+                    { 5, 2, 5 },
+                    { 6, 2, 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -600,12 +600,12 @@ namespace CWM.Database.Migrations
                 columns: new[] { "Id", "Description", "EmployeeId", "ServiceDate", "ServiceType", "Sugestions", "UserId", "VehicleId" },
                 values: new object[,]
                 {
-                    { 1, "", 1, new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1679), 1, "", 1, 1 },
-                    { 2, "", 2, new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1729), 0, "", 2, 2 },
-                    { 3, "", 3, new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1732), 4, "", 3, 3 },
-                    { 4, "", 4, new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1734), 5, "", 4, 4 },
-                    { 5, "", 5, new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1737), 1, "", 5, 5 },
-                    { 6, "", 6, new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1739), 0, "", 6, 6 }
+                    { 1, "", 1, new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7049), 1, "", 1, 1 },
+                    { 2, "", 2, new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7107), 0, "", 2, 2 },
+                    { 3, "", 3, new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7110), 4, "", 3, 3 },
+                    { 4, "", 4, new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7113), 5, "", 4, 4 },
+                    { 5, "", 5, new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7115), 1, "", 5, 5 },
+                    { 6, "", 6, new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7118), 0, "", 6, 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -630,12 +630,12 @@ namespace CWM.Database.Migrations
                 columns: new[] { "Id", "PartId", "ServiceDate", "VehicleId", "WorkOrderId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1867), 1, 1 },
-                    { 2, 2, new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1876), 2, 2 },
-                    { 3, 3, new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1878), 3, 3 },
-                    { 4, 4, new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1880), 4, 4 },
-                    { 5, 5, new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1882), 5, 5 },
-                    { 6, 6, new DateTime(2025, 6, 14, 16, 57, 50, 985, DateTimeKind.Local).AddTicks(1884), 6, 6 }
+                    { 1, 1, new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7253), 1, 1 },
+                    { 2, 2, new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7258), 2, 2 },
+                    { 3, 3, new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7260), 3, 3 },
+                    { 4, 4, new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7262), 4, 4 },
+                    { 5, 5, new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7264), 5, 5 },
+                    { 6, 6, new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7272), 6, 6 }
                 });
 
             migrationBuilder.CreateIndex(

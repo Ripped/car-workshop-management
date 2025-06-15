@@ -25,8 +25,8 @@ namespace CWM.Database.Seed
                     CitizenshipId = 1,
                     Image = null,
                     Email = "sendić@gmail.com",
-                    Username = "Admin",
-                    Password = "Admin",
+                    Username = "admin",
+                    Password = "test",
                     Mobile = "062342376",
                 },
                 new User
@@ -41,7 +41,7 @@ namespace CWM.Database.Seed
                     Image = null,
                     Email = "stufo@gmail.com",
                     Username = "employee",
-                    Password = "Admin",
+                    Password = "test",
                     Mobile = "062342376",
                 },
                 new User
@@ -55,8 +55,8 @@ namespace CWM.Database.Seed
                     CitizenshipId = 3,
                     Image = null,
                     Email = "tufo@gmail.com",
-                    Username = "omer",
-                    Password = "Admin",
+                    Username = "user",
+                    Password = "test",
                     Mobile = "062342376",
                 },
                 new User

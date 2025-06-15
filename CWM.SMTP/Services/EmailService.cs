@@ -134,8 +134,19 @@ namespace CWM.SMTP.Services
             return reservation;
         }
 
-        public async Task SendEmailAsync(string email, string subject, string message)
+        public async Task SendEmailAsync(string email, string subject, Appointment appointment)
         {
+            var notification = new AppointmentNotifier
+            {
+                Description = appointment.Description,
+                StartDate = appointment.StartDate,
+                EndDate = appointment.EndDate,
+                Vehicle = appointment.Vehicle?.ToString(),
+                User = appointment.User?.ToString()
+            };
+
+            String message = notification.Description;
+
             var client = new SmtpClient("smtp.office365.com", 587)
             {
                 EnableSsl = true,
@@ -143,7 +154,7 @@ namespace CWM.SMTP.Services
                 Credentials = new NetworkCredential(EmailConfiguration.OutlookMail, EmailConfiguration.OutlookPass)
             };
 
-            await client.SendMailAsync(new MailMessage(from: EmailConfiguration.OutlookMail,to: email,subject,message));
+            await client.SendMailAsync(new MailMessage(from: EmailConfiguration.OutlookMail,to: email,subject, message));
         }
     }
 }

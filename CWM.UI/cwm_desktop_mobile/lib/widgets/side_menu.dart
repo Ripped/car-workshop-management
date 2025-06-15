@@ -94,10 +94,13 @@ class SideMenu extends StatelessWidget {
               Authorization.roles.contains(Role.admin))
             _buildListTile(context, "Nalozi", Icons.content_paste,
                 const WorkOrderListScreen(), true),
-          _buildListTile(context, "Dijelovi", Icons.data_array,
-              const PartListScreen(), true),
-          _buildListTile(
-              context, "Report", Icons.data_array, const ReportScreen(), true),
+          if (Authorization.roles.contains(Role.employee) ||
+              Authorization.roles.contains(Role.admin))
+            _buildListTile(context, "Dijelovi", Icons.data_array,
+                const PartListScreen(), true),
+          if (Authorization.roles.contains(Role.admin))
+            _buildListTile(context, "Report", Icons.data_array,
+                const ReportScreen(), true),
           _buildListTile(context, "Rezervacija termina", Icons.date_range,
               const MyWidget(), true),
           if (Authorization.roles.contains(Role.admin))
@@ -108,7 +111,6 @@ class SideMenu extends StatelessWidget {
           if (Authorization.roles.contains(Role.admin))
             _buildListTile(context, "Zaposlenici", Icons.date_range,
                 const EmployeeListScreen(), true),
-          //if (Authorization.roles.contains(Role.admin))
           _buildListTile(context, "Historija vozila", Icons.date_range,
               const VehicleListScreen(), true),
           _buildListTile(context, "Recenzije dijelova", Icons.date_range,
