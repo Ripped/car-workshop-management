@@ -1,0 +1,2 @@
+C:/Users/Lenovo/Documents/GitHub/car-workshop-management/CWM.UI/cwm_desktop_mobile/android/app/.cxx/RelWithDebInfo/662g6m6p/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/Lenovo/Documents/GitHub/car-workshop-management/CWM.UI/cwm_desktop_mobile/android/app/.cxx/RelWithDebInfo/662g6m6p/arm64-v8a/CMakeFiles/rebuild_cache.dir

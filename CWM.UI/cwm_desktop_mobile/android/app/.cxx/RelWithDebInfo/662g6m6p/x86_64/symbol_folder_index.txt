@@ -1,0 +1,1 @@
+C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM.UI\cwm_desktop_mobile\build\app\intermediates\cxx\RelWithDebInfo\662g6m6p\obj\x86_64
