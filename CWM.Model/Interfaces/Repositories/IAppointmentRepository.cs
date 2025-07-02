@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CWM.Core.Interfaces.Repositories
 {
     public interface IAppointmentRepository : IBaseRepository<Appointment, AppointmentSearch> {
-        new Task<Appointment> InsertAsync(Appointment model);
+        Task<Appointment> Update(int id, Appointment model);
     }
 }
 

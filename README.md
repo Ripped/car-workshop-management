@@ -27,7 +27,7 @@ Za praćenje i pregled transakcija potrebno se prijaviti na stripe račun korist
 - Password: rs2TestRs2Test
 
 ### Recommender sistem
-Funkcionalnost je dostupna korisnicima desktop aplikacije i predstavlja implementacijuContent-based filtering. ML algoritam radi na osnovu podataka prikupljenih od narudžbi klijenata, ocjene proizvoda i usluge će biti pohranjene te na osnovu ocjene klijentu će se preporučiti usluga ili proizvod slični onima kojima je dao dobru ocjenu.
+Funkcionalnost je dostupna korisnicima desktop aplikacije i predstavlja implementaciju Content-based filtering. ML algoritam radi na osnovu podataka prikupljenih od narudžbi klijenata, ocjene proizvoda i usluge će biti pohranjene te na osnovu ocjene klijentu će se preporučiti usluga ili proizvod slični onima kojima je dao dobru ocjenu.
 
 ### Rezervacija termina
 Kako bi rezervacija termina bila uspješna potrebno je odabrati datum te unijeti trazene podatke, nakon čega korisnik dobiva email ukoliko je rezervacija 

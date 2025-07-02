@@ -1,4 +1,4 @@
-@CWM.SMTP_HostAddress = http://localhost:5133
+@CWM.SMTP_HostAddress = http://localhost:5051
 
 GET {{CWM.SMTP_HostAddress}}/weatherforecast/
 Accept: application/json

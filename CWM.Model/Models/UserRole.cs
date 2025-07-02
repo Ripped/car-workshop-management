@@ -9,8 +9,6 @@ namespace CWM.Core.Models
 {
     public class UserRole : Base
     {
-        public int Id { get; set; }
-
         public User User { get; set; } = new();
 
         public Role Role { get; set; } = Role.Employee;

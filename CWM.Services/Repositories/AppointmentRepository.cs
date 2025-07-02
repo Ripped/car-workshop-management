@@ -1,25 +1,40 @@
 ﻿using AutoMapper;
 using CWM.Core.Interfaces.Repositories;
-using CWM.Core.Interfaces.Services;
 using CWM.Core.Models;
+using CWM.Core.Models.Configurations;
 using CWM.Core.Models.Searches;
-using CWM.Database.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Extensions.Options;
+using RabbitMQ.Client;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
-using static System.Formats.Asn1.AsnWriter;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Appointment = CWM.Database.Models.Appointment;
 
 namespace CWM.Database.Repositories
 {
     public class AppointmentRepository : BaseRepository<Appointment, Core.Models.Appointment, AppointmentSearch>, IAppointmentRepository
     {
-        public AppointmentRepository(CWMContext context, IMapper mapper) : base(context, mapper) { }
+        private readonly IModel _channel;
+        private readonly RabbitMQConfiguration RabbitMQConfiguration;
+        public AppointmentRepository(CWMContext context, IMapper mapper, IOptions<RabbitMQConfiguration> rabbitMQConfiguration) : base(context, mapper) {
+        RabbitMQConfiguration = rabbitMQConfiguration.Value;
+        var factory = new ConnectionFactory
+            {
+            HostName = RabbitMQConfiguration.Host,
+            UserName = RabbitMQConfiguration.User,
+            Password = RabbitMQConfiguration.Password,
+            Port = RabbitMQConfiguration.Port,
+
+        };
+            var connection = factory.CreateConnection();
+            _channel = connection.CreateModel();
+            _channel.QueueDeclare(queue: "reservationQueue",
+                                 durable: false,
+                                 exclusive: false,
+                                 autoDelete: false,
+                                 arguments: null);
+        }
         public override async Task<Core.Models.Appointment> GetAsync(int id)
         {
             var isNew = id == 0;
@@ -59,82 +74,52 @@ namespace CWM.Database.Repositories
             return query;
         }
 
-        public async override Task<Core.Models.Appointment> InsertAsync(Core.Models.Appointment model)
+        public async Task<Core.Models.Appointment> Update(int id, Core.Models.Appointment model)
         {
-            var entity = Mapper.Map<Appointment>(model);
+            var user = await Context.Users.SingleOrDefaultAsync(x => x.Id == model.User!.Id);
+            var vehicle = await Context.Vehicles.SingleOrDefaultAsync(x=> x.Id == model.Vehicle!.Id);
 
-            var addedEntity = await Context
-                .Set<Appointment>()
-                .AddAsync(entity);
-
-            await Context.SaveChangesAsync();
-
-            AppointmentNotifier reservationNotifier = new AppointmentNotifier()
+            AppointmentNotifier notifier = new AppointmentNotifier
             {
-                Id = model.Id,
                 Description = model.Description,
                 StartDate = model.StartDate,
                 EndDate = model.EndDate,
-                Vehicle = model.Vehicle?.Chassis.ToString(),
-                User = model.User?.ToString()
+                Vehicle = vehicle!.Chassis.ToString(),
+                UserName = $"{user!.FirstName}" + " " + $"{user!.LastName}",
+                Email = user!.Email
             };
+
+            if (model.AppointmentType!.Id == 2) { notifier.IsApproved = true; }
+            else if (model.AppointmentType!.Id == 3) { notifier.IsApproved = false; }
+
+            var emailmessage = $"";
+
+            if (notifier.IsApproved)
+            {
+                emailmessage = $"Poštovani/a, {notifier.UserName} {notifier.Email} " +
+                $"\n\nVaša rezervacija je uspješno potvrđena!" +
+                $"\nDatum: {notifier.StartDate.ToShortDateString()} " +
+                $"\nBroj sasije: {notifier.Vehicle} " +
+                $"\n\nMolimo Vas dođite na vrijeme na vaš termin. Ako se desi da ne možete doći, molimo vas da nas obavijestite što prije ili otkažete svoj termin." +
+                $"\n\nHvala vam na povjerenju i radujemo se što ćemo vam pružiti izvrsno iskustvo u našem servisu!";
+            }
+            else
+            {
+                emailmessage = $"Poštovani/a, {notifier.UserName} {notifier.Email}" +
+                $"\n\nVaša rezervacija je odbijena! {notifier.Email}" + 
+                $"\n\nMolimo vas rezervisite novi termin ili se javite na broj telefona za rezervaciju." +
+                $"\n\nHvala vam na povjerenju i radujemo se vasem javljanju za novi termin!";
+            }
+
+            var body = Encoding.UTF8.GetBytes(emailmessage);
+            _channel.BasicPublish(exchange: string.Empty,
+                                  routingKey: "reservationQueue",
+                                  basicProperties: null,
+                                  body: body);
             
-            return Mapper.Map<Core.Models.Appointment>(addedEntity.Entity);
+            await UpdateAsync(Mapper.Map<Core.Models.Appointment>(model, opt => opt.AfterMap((src, dest) => dest.Id = id)));
+
+            return Mapper.Map<Core.Models.Appointment>(model);
         }
-
-        /*public async override Task<Appointment> InsertAsync(Appointment insert)
-        {
-            var korisnik = await _korisniciService.GetById(insert.KorisnikId);
-
-            if (korisnik == null)
-                return null;
-
-            var usluga = await _uslugaService.GetById(insert.UslugaId);
-
-            if (usluga == null)
-                return null;
-
-            var uposlenik = await _uposlenikService.GetById(insert.UposlenikId);
-
-            if (uposlenik == null)
-                return null;
-
-            bool isUposlenikDostupan = await IsUposlenikDostupan(uposlenik.UposlenikId, insert.Datum, insert.Vrijeme);
-
-            if (!isUposlenikDostupan)
-                throw new UserException("Odabrani uposlenik " + uposlenik.Ime + uposlenik.Prezime + " nije dostupan.Molimo odaberite drugog uposlenika ili drugi termin.");
-
-            var rezervacija = new Appointment()
-            {
-                d
-                Datum = insert.Datum,
-                Vrijeme = insert.Vrijeme,
-                Status = insert.Status,
-                KorisnikId = korisnik.KorisniciId,
-                UposlenikId = uposlenik.UposlenikId,
-                UslugaId = usluga.UslugaId
-            };
-
-            await _dbContext.Rezervacija.AddAsync(rezervacija);
-
-            await _dbContext.SaveChangesAsync();
-
-            Model.ReservationNotifier reservationNotifier = new ReservationNotifier()
-            {
-                Id = rezervacija.RezervacijaId,
-                UposlenikIme = uposlenik.Ime,
-                UposlenikPrezime = uposlenik.Prezime,
-                UslugaNaziv = usluga.Naziv,
-                KorisnikIme = korisnik.Ime,
-                CijenaUsluge = usluga.Cijena,
-                Email = korisnik.Email,
-                Datum = rezervacija.Datum,
-                Vrijeme = rezervacija.Vrijeme
-            };
-
-            _messageProducer.SendingObject(reservationNotifier);
-
-            return _mapper.Map<Model.Rezervacija>(rezervacija);
-        }*/
     }
 }

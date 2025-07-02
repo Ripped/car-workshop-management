@@ -22,7 +22,7 @@ class ExpensesProvider extends BaseProvider<Expenses, ExpensesSearch> {
 
     queryParameters.removeWhere((key, value) => value == "null");
 
-    var uri = Uri.https(
+    var uri = Uri.http(
         baseUrl, 'Expenses/$endpointIzvjestajNarudzbe', queryParameters);
 
     var response = await http.get(uri, headers: createHeaders());

@@ -12,19 +12,19 @@ class AuthProvider with ChangeNotifier {
   AuthProvider() {
     /*_baseUrl = const String.fromEnvironment(
       "ApiUrl",
-      defaultValue: "https://localhost:50443/",
+      defaultValue: "http://localhost:50080/",
     );*/
 
     if (Platform.isWindows || Platform.isMacOS) {
       _baseUrl = const String.fromEnvironment(
         "ApiUrl",
-        defaultValue: "https://localhost:50443/",
+        defaultValue: "http://localhost:50080/",
       );
     }
     if (Platform.isAndroid || Platform.isIOS) {
       _baseUrl = const String.fromEnvironment(
         "ApiUrl",
-        defaultValue: "https://10.0.2.2:50443/",
+        defaultValue: "10.0.2.2:50080",
       );
     }
   }

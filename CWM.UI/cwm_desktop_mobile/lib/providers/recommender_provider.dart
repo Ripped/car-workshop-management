@@ -12,7 +12,7 @@ class RecommenderProvider extends BaseProvider<Part, PartSearch> {
 
   Future<List<dynamic>> getRecommendParts(int id) async {
     String endpointRecommender = "RecommendParts";
-    var uri = Uri.https(baseUrl, '$endpointRecommender/$id');
+    var uri = Uri.http(baseUrl, '$endpointRecommender/$id');
 
     var response = await http.get(uri, headers: createHeaders());
 

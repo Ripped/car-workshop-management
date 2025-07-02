@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace CWM.Core.Models
 {
-    public class AppointmentNotifier
+    public class AppointmentNotifier : Base
     {
-        public int Id { get; set; }
-
         public string Description { get; set; } = string.Empty;
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public bool IsApproved { get; set; }
         public String? Vehicle { get; set; } = string.Empty;
-        public String? User { get; set; } = string.Empty;
+        public String? UserName { get; set; } = string.Empty;
+        public String? Email { get; set; }
 
         public string ToJson()
         => JsonSerializer.Serialize(this, new JsonSerializerOptions() { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });

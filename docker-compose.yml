@@ -14,58 +14,73 @@ services:
     networks:
       - carworkshopmanagement2024
 
+  cwm-rabbitmq:
+    image: rabbitmq:3.8-management-alpine
+    hostname: cwm-rabbitmq
+    restart: unless-stopped
+    ports:
+      - 5672:5672  
+      - 8080:15672
+      - 15692:15692
+    expose:
+      - 5672
+      - 8080
+    environment:
+      - RABBITMQ_DEFAULT_USER=${RMQ_USER} 
+      - RABBITMQ_DEFAULT_PASS=${RMQ_PASSWORD} 
+    depends_on:
+      - cwm.api
+    networks:
+      - carworkshopmanagement2024
+    volumes:
+      - ./docker_data/rabbitmq_data:/var/lib/rabbitmq
+      - ./docker_data/rabbitmq_logs:/var/log/rabbitmq
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  cwm-smtp:
+    restart: unless-stopped
+    container_name: cwm-smtp
+    hostname: cwm-smtp
+    build: 
+      context: .
+      dockerfile: CWM.SMTP/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - RabbitMQ:Host=cwm-rabbitmq
+      - RabbitMQ:Port=${RMQ_PORT}
+      - RabbitMQ:User=${RMQ_USER}
+      - RabbitMQ:Password=${RMQ_PASSWORD}
+      - RABBITMQ_PORT=5672
+      - FromEmail=${FROM_EMAIL}
+      - SmtpPass=${SMTP_PASS}
+      - SmtpMail=${SMTP_USER}
+    depends_on:
+      cwm-rabbitmq:
+        condition: service_healthy
+    networks:
+      - carworkshopmanagement2024
+
   cwm.api:
     container_name: CWM.API
     build:
       context: .
       dockerfile: CWM/Dockerfile
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+;http://+
-      - ASPNETCORE_HTTPS_PORT=${API_HTTPS_PORT}
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=SwPass#*****
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/2024-27-12.pfx
-      - ConnectionStrings:DefaultConnection=Server=cwm.sql,1433;Database=${SQL_DATABASE};Trusted_Connection=False;Encrypt=False;User=${SQL_USER};Password=${SQL_PASSWORD};
-    volumes:
-      - ~/.aspnet/https:/https:ro
-    ports:
-      - ${API_PORT}:80
-      - ${API_HTTPS_PORT}:443
-    networks:
-      - carworkshopmanagement2024
-
-  cwm.rabbitmq:
-    container_name: CWM.RabbitMQ
-    image: rabbitmq:3.12.1-management
-    restart: unless-stopped
-    environment:
-      - RABBITMQ_DEFAULT_USER=${RMQ_USER}
-      - RABBITMQ_DEFAULT_PASS=${RMQ_PASSWORD}
-    ports:
-      - ${RMQ_PORT}:5672
-      - ${RMQ_ADMIN_PORT}:15672
-    networks:
-      - carworkshopmanagement2024
-
-  cwm.smtp:
-    container_name: CWM.SMTP
-    build:
-      context: .
-      dockerfile: CWM.SMTP/Dockerfile
-    environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - RabbitMQ:Host=hrms.rabbitmq
+      - ASPNETCORE_URLS=http://+
+      - ConnectionStrings:DefaultConnection=Server=cwm.sql,1433;Database=${SQL_DATABASE};Trusted_Connection=False;Encrypt=False;User=${SQL_USER};Password=${SQL_PASSWORD};
+      - RabbitMQ:Host=cwm-rabbitmq
       - RabbitMQ:Port=${RMQ_PORT}
       - RabbitMQ:User=${RMQ_USER}
       - RabbitMQ:Password=${RMQ_PASSWORD}
-      - MailSlurp:ApiKey=${MAILSLURP_API_KEY}
-      - MailSlurp:InboxId=${MAILSLURP_INBOX_ID}
-      - MailSlurp:SupportEmails=${MAILSLURP_SUPPORT_EMAILS}
     ports:
-      - ${SMTP_PORT}:80
-      - ${SMTP_HTTPS_PORT}:443
+      - ${API_PORT}:80
     depends_on:
-      - cwm.rabbitmq
+      - cwm.sql
     networks:
       - carworkshopmanagement2024
 

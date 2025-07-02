@@ -1,48 +1,36 @@
-using CWM.SMTP.Extensions;
-using CWM.SMTP.Interfaces;
+using CWM.SMTP;
 using CWM.SMTP.Models;
-using CWM.SMTP.Services;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.Configure<RabbitMQConfiguration>(builder.Configuration.GetSection("RabbitMQ"));
-builder.Services.Configure<MailSlurpConfiguration>(builder.Configuration.GetSection("MailSlurp"));
-
-builder.UseSerilog();
-builder.Services.AddSingleton<IEmailService, EmailService>();
+// Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.Configure<RabbitMQConfiguration>(builder.Configuration.GetSection("RabbitMQ"));
+builder.Services.Configure<EmailConfiguration>(builder.Configuration.GetSection("Email"));
+
+builder.Services.AddSingleton<IEmailConsumer, EmailConsumer>();
+builder.Services.AddSingleton<IEmailService, EmailService>();
+
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-builder.Services.AddSwaggerGen(c =>
-{
-    c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement()
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference{Type = ReferenceType.SecurityScheme, Id = "basicAuth"}
-            },
-            new string[]{}
-    } });
-
-});
 
 var app = builder.Build();
 
+app.Services.GetRequiredService<IEmailConsumer>();
+app.Services.GetRequiredService<IEmailService>();
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.Services.GetRequiredService<IEmailService>();
-
-builder.Services.AddEndpointsApiExplorer();
-
-app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

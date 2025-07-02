@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cwm_desktop_mobile/providers/appointment_type_provider.dart';
 import 'package:cwm_desktop_mobile/providers/appointment_provider.dart';
 import 'package:cwm_desktop_mobile/providers/auth_provider.dart';
@@ -27,7 +25,7 @@ import '.env';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  HttpOverrides.global = MyHttpOverrides();
+  //HttpOverrides.global = MyHttpOverrides();
 
   Stripe.publishableKey = stripePublishableKey;
   Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
@@ -74,11 +72,11 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHttpOverrides extends HttpOverrides {
+/*class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
       ..badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
   }
-}
+}*/

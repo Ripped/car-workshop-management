@@ -19,9 +19,9 @@ namespace CWM.Mappings
             .ForMember(x => x.AppointmentType, opt => opt.MapFrom(y => new AppointmentType { Id = y.AppointmentTypeId ?? 0 }))
             .ForMember(x => x.Vehicle, opt => opt.MapFrom(y => new Vehicle { Id = y.VehicleId ?? 0 }));
 
-            CreateMap<AppointmentInsertUpdate, AppointmentNotifier>()
-            .ForMember(x => x.User, opt => opt.MapFrom(y => new User { Id = y.UserId ?? 0 }))
-            .ForMember(x => x.Vehicle, opt => opt.MapFrom(y => new Vehicle { Id = y.VehicleId ?? 0 }));
+            /*CreateMap<AppointmentInsertUpdate, AppointmentNotifier>()
+            .ForMember(x => x.UserName, opt => opt.MapFrom(y => new User { Id = y.UserId ?? 0 }))
+            .ForMember(x => x.Vehicle, opt => opt.MapFrom(y => new Vehicle { Id = y.VehicleId ?? 0 }));*/
 
             CreateMap<AppointmentTypeInsertUpdate, AppointmentType>();
 
@@ -55,6 +55,10 @@ namespace CWM.Mappings
             CreateMap<UserInsertUpdate, User>()
             .ForMember(x => x.Citizenship, opt => opt.MapFrom(y => y.CountryId == null ? null : new Country { Id = y.CountryId ?? 0 }))
             .ForMember(x => x.City, opt => opt.MapFrom(y => y.CityId == null ? null : new City { Id = y.CityId ?? 0 }));
+
+            CreateMap<UserRatingInsertUpdate, UserRating>()
+            .ForMember(x => x.User, opt => opt.MapFrom(y => y.UserId == null ? null : new User { Id = y.UserId ?? 0 }))
+            .ForMember(x => x.Part, opt => opt.MapFrom(y => y.PartId == null ? null : new Part { Id = y.PartId ?? 0 }));
 
             CreateMap<EmployeeInsertUpdate, Employee>()
             .ForMember(x => x.Citizenship, opt => opt.MapFrom(y => y.CountryId == null ? null : new Country { Id = y.CountryId ?? 0 }))

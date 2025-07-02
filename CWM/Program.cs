@@ -5,15 +5,15 @@ using CWM.Database;
 using CWM.Database.Extensions;
 using CWM.Database.Repositories;
 using CWM.Extensions;
-using CWM.RabbitMQ;
 using CWM.Recommender;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using RabbitMQ.Client;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
-
 builder.Services.Configure<RabbitMQConfiguration>(builder.Configuration.GetSection("RabbitMQ"));
+
 // Add services to the container.
 builder.Services.AddTransient<ICityRepository, CityRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
@@ -29,7 +29,6 @@ builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddTransient<IPartWorkOrderRepository, PartWorkOrderRepository>();
 builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddScoped<IUserRatingRepository, UserRatingRepository>();
-builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IRecommendService, RecommendService>();
 builder.Services.AddScoped<IPaymentService, PaymentRepository>();
 builder.Services.AddTransient<IExpensesRepository, ExpensesRepository>();
@@ -68,6 +67,8 @@ builder.Services.AddSwaggerGen(c =>
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<CWMContext>(options => options.UseSqlServer(connectionString));
 
+var rabbitMqFactory = new ConnectionFactory() { HostName = builder.Configuration["RabbitMQ:HostName"] };
+builder.Services.AddSingleton(rabbitMqFactory);
 
 var app = builder.Build();
 
@@ -81,7 +82,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

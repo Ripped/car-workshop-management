@@ -4,7 +4,7 @@ namespace CWM.Models
 {
     public class UserRatingInsertUpdate
     {
-        double ProductRating { get; set; }
+        public double ProductRating { get; set; }
 
         [Required]
         public int? UserId { get; set; }

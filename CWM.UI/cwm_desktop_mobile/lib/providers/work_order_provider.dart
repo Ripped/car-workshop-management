@@ -15,7 +15,7 @@ class WorkOrderProvider extends BaseProvider<WorkOrder, WorkOrderSearch> {
     final Map<String, String> queryParameters = {};
     String endpointIzvjestajNarudzbe = "GetServiceReport";
 
-    var url = "https://$baseUrl/WorkOrder/$endpointIzvjestajNarudzbe";
+    var url = "http://$baseUrl/WorkOrder/$endpointIzvjestajNarudzbe";
 
     search.toJson().forEach((key, value) {
       queryParameters.addAll(<String, String>{key: value});

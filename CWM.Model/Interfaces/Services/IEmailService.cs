@@ -9,6 +9,6 @@ namespace CWM.Core.Interfaces.Services
 {
     public interface IEmailService
     {
-        Task<Appointment> SendEmailMessage(Appointment notifier);
+        Task<Appointment> SendEmail(User user, Appointment notifier);
     }
 }

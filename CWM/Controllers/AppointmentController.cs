@@ -14,16 +14,13 @@ namespace CWM.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AppointmentController(IMapper mapper, IAppointmentRepository appointmentRepository, IEmailService emailService) : 
+    public class AppointmentController(IMapper mapper, IAppointmentRepository appointmentRepository) : 
         BaseCrudController<Appointment, AppointmentSearch, AppointmentInsertUpdate, AppointmentInsertUpdate>(mapper, appointmentRepository)
     {
-        private readonly IEmailService EmailService = emailService;
 
-        [HttpPost]
-        public override async Task<Appointment> Insert([FromBody] AppointmentInsertUpdate insert)
-        {
-            await EmailService.SendEmailMessage(Mapper.Map<Appointment>(insert));
-            return await appointmentRepository.InsertAsync(Mapper.Map<Appointment>(insert));
-        }
+        [HttpPut("{id}")]
+        public override async Task<Appointment> Update(int id, [FromBody] AppointmentInsertUpdate update)
+           => await appointmentRepository.Update(id, Mapper.Map<Appointment>(update));
+        
     }
 }

@@ -16,18 +16,18 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   BaseProvider({String? altEndpoint}) {
     /*baseUrl = const String.fromEnvironment(
       "ApiUrl",
-      defaultValue: "localhost:50443",
+      defaultValue: "localhost:50080",
     );*/
 
     if (Platform.isWindows || Platform.isMacOS) {
       baseUrl = const String.fromEnvironment(
         "ApiUrl",
-        defaultValue: "localhost:50443",
+        defaultValue: "localhost:50080",
       );
     } else if (Platform.isAndroid || Platform.isIOS) {
       baseUrl = const String.fromEnvironment(
         "ApiUrl",
-        defaultValue: "10.0.2.2:50443",
+        defaultValue: "10.0.2.2:50080",
       );
     }
 
@@ -35,7 +35,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   }
 
   Future<T> get(int id) async {
-    var uri = Uri.https(baseUrl, '$endpoint/$id');
+    var uri = Uri.http(baseUrl, '$endpoint/$id');
 
     var response = await http.get(uri, headers: createHeaders());
 
@@ -58,7 +58,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
       queryParameters.removeWhere((key, value) => value == "null");
     }
 
-    var uri = Uri.https(baseUrl, endpoint, queryParameters);
+    var uri = Uri.http(baseUrl, endpoint, queryParameters);
 
     var response = await http.get(uri, headers: createHeaders());
 
@@ -83,7 +83,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   }
 
   Future<T> insert(dynamic request) async {
-    var uri = Uri.https(baseUrl, endpoint);
+    var uri = Uri.http(baseUrl, endpoint);
 
     var jsonRequest = jsonEncode(request, toEncodable: myDateSerializer);
 
@@ -99,7 +99,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   }
 
   Future<T> update(int id, dynamic request) async {
-    var uri = Uri.https(baseUrl, '$endpoint/$id');
+    var uri = Uri.http(baseUrl, '$endpoint/$id');
 
     var jsonRequest = jsonEncode(request, toEncodable: myDateSerializer);
 
@@ -115,7 +115,7 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   }
 
   Future<bool> delete(int id) async {
-    var uri = Uri.https(baseUrl, '$endpoint/$id');
+    var uri = Uri.http(baseUrl, '$endpoint/$id');
 
     var response = await http.delete(uri, headers: createHeaders());
 

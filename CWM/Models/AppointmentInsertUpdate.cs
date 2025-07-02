@@ -17,5 +17,6 @@ namespace CWM.Models
 
         [Required]
         public int? VehicleId { get; set; }
+
     }
 }
