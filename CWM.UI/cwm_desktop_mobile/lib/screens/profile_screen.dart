@@ -15,7 +15,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-//import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -324,7 +323,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             decoration: const InputDecoration(
                                                 labelText: "Email *"),
                                             validator:
-                                                FormBuilderValidators.required(
+                                                FormBuilderValidators.email(
                                                     errorText:
                                                         "Email je obavezan."),
                                           ),
@@ -409,6 +408,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                                 request);
 
                                                     if (context.mounted) {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          backgroundColor:
+                                                              Colors.green[800],
+                                                          showCloseIcon: false,
+                                                          duration: Durations
+                                                              .extralong4,
+                                                          content: const Text(
+                                                              "Podaci su spremljeni"),
+                                                        ),
+                                                      );
                                                       Navigator.of(context).pushReplacement(
                                                           MaterialPageRoute(
                                                               builder: (context) =>
@@ -419,118 +431,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   }
                                                 },
                                               ),
-                                              /*const SizedBox(height: 10),
-                                              ElevatedButton(
-                                                style: ButtonStyle(
-                                                  minimumSize:
-                                                      const WidgetStatePropertyAll(
-                                                          Size.fromHeight(50)),
-                                                  backgroundColor:
-                                                      WidgetStateProperty.all<
-                                                          Color>(Colors.red),
-                                                  foregroundColor:
-                                                      WidgetStateProperty.all(
-                                                          Colors.white),
-                                                ),
-                                                child: const Text("OBRIŠI"),
-                                                onPressed: () async {
-                                                  await _userProvider
-                                                      .delete(widget.id!);
-                                                  await _loadData(null);
-                                                  setState(() {});
-                                                  if (context.mounted) {
-                                                    Navigator.pop(context);
-                                                  }
-                                                },
-                                              ),*/
                                             ])),
                                       if (Responsive.isMobile(context))
-                                        Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                40, 0, 0, 20),
-                                            child: Row(children: <Widget>[
-                                              SizedBox(
-                                                width: 150,
-                                                height: 90,
-                                                child: ElevatedButton(
-                                                  style: ButtonStyle(
-                                                    minimumSize:
-                                                        const WidgetStatePropertyAll(
-                                                            Size.fromHeight(
-                                                                50)),
+                                        ElevatedButton(
+                                          style: ButtonStyle(
+                                            minimumSize:
+                                                const WidgetStatePropertyAll(
+                                                    Size.fromHeight(40)),
+                                            backgroundColor:
+                                                WidgetStateProperty.all<Color>(
+                                                    Colors.green),
+                                            foregroundColor:
+                                                WidgetStateProperty.all(
+                                                    Colors.white),
+                                          ),
+                                          onPressed: () async {
+                                            var isValid = _formKey.currentState
+                                                ?.saveAndValidate();
+
+                                            if (isValid!) {
+                                              var request = Map.from(
+                                                  _formKey.currentState!.value);
+
+                                              Authorization.userId == null
+                                                  ? await _userProvider
+                                                      .insert(request)
+                                                  : await _userProvider.update(
+                                                      Authorization.userId!,
+                                                      request);
+
+                                              if (context.mounted) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
                                                     backgroundColor:
-                                                        WidgetStateProperty.all<
-                                                                Color>(
-                                                            Colors.green),
-                                                    foregroundColor:
-                                                        WidgetStateProperty.all(
-                                                            Colors.white),
+                                                        Colors.green[800],
+                                                    showCloseIcon: false,
+                                                    duration:
+                                                        Durations.extralong4,
+                                                    content: const Text(
+                                                        "Podaci su spremljeni"),
                                                   ),
-                                                  child: const Text("SPREMI",
-                                                      textAlign:
-                                                          TextAlign.center),
-                                                  onPressed: () async {
-                                                    var isValid = _formKey
-                                                        .currentState
-                                                        ?.saveAndValidate();
-
-                                                    if (isValid!) {
-                                                      var request = Map.from(
-                                                          _formKey.currentState!
-                                                              .value);
-
-                                                      Authorization.userId ==
-                                                              null
-                                                          ? await _userProvider
-                                                              .insert(request)
-                                                          : await _userProvider
-                                                              .update(
-                                                                  Authorization
-                                                                      .userId!,
-                                                                  request);
-
-                                                      if (context.mounted) {
-                                                        Navigator.of(context).pushReplacement(
-                                                            MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    const MasterScreen(
-                                                                        "Profil",
-                                                                        ProfileScreen())));
-                                                      }
-                                                    }
-                                                  },
-                                                ),
-                                              ),
-                                              /*const SizedBox(width: 10),
-                                              SizedBox(
-                                                width: 150,
-                                                height: 90,
-                                                child: ElevatedButton(
-                                                  style: ButtonStyle(
-                                                    minimumSize:
-                                                        const WidgetStatePropertyAll(
-                                                            Size.fromHeight(
-                                                                40)),
-                                                    backgroundColor:
-                                                        WidgetStateProperty.all<
-                                                            Color>(Colors.red),
-                                                    foregroundColor:
-                                                        WidgetStateProperty.all(
-                                                            Colors.white),
-                                                  ),
-                                                  child: const Text("OBRIŠI"),
-                                                  onPressed: () async {
-                                                    await _employeeProvider
-                                                        .delete(widget.id!);
-                                                    await _loadData(null);
-                                                    setState(() {});
-                                                    if (context.mounted) {
-                                                      Navigator.pop(context);
-                                                    }
-                                                  },
-                                                ),
-                                              )*/
-                                            ])),
+                                                );
+                                                Navigator.of(context).pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            const MasterScreen(
+                                                                "Profil",
+                                                                ProfileScreen())));
+                                              }
+                                            }
+                                          },
+                                          child: const Text("SPREMI"),
+                                        ),
                                     ]),
                               ),
                             ])))
@@ -539,390 +492,4 @@ class _ProfileScreenState extends State<ProfileScreen> {
               )),
     );
   }
-
-  /*@override
-  Widget build(BuildContext context) {
-    if (isLoading) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    } else {
-      return SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(
-              height: 10.0,
-            ),
-            _buildProfilImage(context),
-            const SizedBox(height: 18.0),
-            Center(
-              child: Text(
-                '${korisnikResult.ime} ${korisnikResult.prezime}',
-                style: const TextStyle(
-                    fontSize: 19.0,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.black87),
-              ),
-            ),
-            Divider(
-              color: Colors.grey.withOpacity(0.0),
-              height: 25.0,
-            ),
-            Container(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Korisničko ime:',
-                        style: _labelStyle,
-                      ),
-                      Text(
-                        korisnikResult.korisnickoIme,
-                        style: _contentStyle,
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: Colors.grey[400],
-                    height: 25.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Email:',
-                        style: _labelStyle,
-                      ),
-                      Text(
-                        korisnikResult.email ?? "",
-                        style: _contentStyle,
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: Colors.grey[400],
-                    height: 25.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Kontakt telefon:',
-                        style: _labelStyle,
-                      ),
-                      Text(
-                        korisnikResult.brojTelefona ?? "",
-                        style: _contentStyle,
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: Colors.grey[400],
-                    height: 25.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Adresa:',
-                        style: _labelStyle,
-                      ),
-                      Text(
-                        korisnikResult.adresa ?? "",
-                        style: _contentStyle,
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: Colors.grey[400],
-                    height: 25.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Mjesto boravka:',
-                        style: _labelStyle,
-                      ),
-                      Text(
-                        korisnikResult.gradNaziv ?? "",
-                        style: _contentStyle,
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    color: Colors.grey[400],
-                    height: 25.0,
-                  ),
-                ],
-              ),
-            ),
-            _buildEditProfil(context),
-            _buildLogOut(context),
-          ],
-        ),
-      );
-    }
-  }*/
-
-  /*ListTile _buildLogOut(BuildContext context) {
-    return ListTile(
-      leading: const Icon(
-        Icons.logout,
-        size: 27.0,
-      ),
-      title: Text(
-        'Odjava',
-        style: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey[800]),
-      ),
-      trailing: const Icon(Icons.navigate_next),
-      onTap: () {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => const LoginScreen()),
-            (route) => false);
-      },
-    );
-  }
-
-  ListTile _buildEditProfil(BuildContext context) {
-    return ListTile(
-      leading: const Icon(
-        Icons.edit_note,
-        size: 27.0,
-      ),
-      title: Text(
-        'Uredi profil',
-        style: TextStyle(fontWeight: FontWeight.w500, color: Colors.grey[800]),
-      ),
-      trailing: const Icon(Icons.navigate_next),
-      onTap: () {
-        Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        ProfilEditScreen(korisnik: korisnikResult)))
-            .then((value) => fetchKorisnik());
-      },
-    );
-  }
-
-  Center _buildProfilImage(BuildContext context) {
-    return Center(
-      child: Stack(
-        alignment: Alignment.bottomRight,
-        children: [
-          Container(
-            width: 130,
-            height: 130,
-            decoration: BoxDecoration(
-              color: Colors.grey[350],
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: korisnikResult.slika != "" && korisnikResult.slika != null
-                ? GestureDetector(
-                    onTap: () {
-                      _deleteProfileImage(context);
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: Image(
-                        image: MemoryImage(
-                          base64Decode(korisnikResult.slika.toString()),
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )
-                : ClipRRect(
-                    borderRadius: BorderRadius.circular(100),
-                    child: const Image(
-                      image: AssetImage('assets/images/person_icon.png'),
-                    ),
-                  ),
-          ),
-          Positioned(
-            bottom: 0.0,
-            right: 0.0,
-            child: Container(
-              width: 40.0,
-              height: 40.0,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.white.withOpacity(0.8),
-              ),
-              child: IconButton(
-                onPressed: () async {
-                  try {
-                    await _getImage();
-
-                    if (_image != null) {
-                      KorisnikUpdateRequest request = KorisnikUpdateRequest(
-                          korisnikResult.ime,
-                          korisnikResult.prezime,
-                          korisnikResult.korisnickoIme,
-                          korisnikResult.email!,
-                          korisnikResult.adresa,
-                          korisnikResult.brojTelefona,
-                          korisnikResult.status,
-                          _base64Image,
-                          korisnikResult.gradId,
-                          "",
-                          "");
-
-                      await _korisnikProvider.update(
-                          korisnikResult.korisniciId, request);
-
-                      // ignore: use_build_context_synchronously
-                      showDialog(
-                          barrierDismissible: false,
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                                title: const Text('Poruka'),
-                                content: const Text(
-                                    'Profilna slika uspješno izmjenjena !.'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () async {
-                                      Navigator.of(context).pop();
-                                      var data = await _korisnikProvider
-                                          .getById(korisnikResult.korisniciId);
-
-                                      setState(() {
-                                        korisnikResult = data;
-                                      });
-                                    },
-                                    child: const Text('OK'),
-                                  ),
-                                ],
-                              ));
-                    }
-                  } on Exception catch (e) {
-                    // ignore: use_build_context_synchronously
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        title: const Text("Error"),
-                        content: Text(e.toString()),
-                        actions: [
-                          TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: const Text("OK"))
-                        ],
-                      ),
-                    );
-                  }
-                },
-                icon: const Icon(
-                  Icons.camera_alt,
-                  size: 27.0,
-                  color: Colors.black87,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future<dynamic> _deleteProfileImage(BuildContext context) {
-    return showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (BuildContext context) => AlertDialog(
-              title: const Text(
-                'Profilna slika',
-                textAlign: TextAlign.center,
-              ),
-              content: Image(
-                image: MemoryImage(
-                  base64Decode(korisnikResult.slika.toString()),
-                ),
-                fit: BoxFit.contain,
-              ),
-              actions: [
-                TextButton.icon(
-                  onPressed: () async {
-                    try {
-                      _base64Image = null;
-
-                      KorisnikUpdateRequest request = KorisnikUpdateRequest(
-                          korisnikResult.ime,
-                          korisnikResult.prezime,
-                          korisnikResult.korisnickoIme,
-                          korisnikResult.email!,
-                          korisnikResult.adresa,
-                          korisnikResult.brojTelefona,
-                          korisnikResult.status,
-                          _base64Image,
-                          korisnikResult.gradId,
-                          "",
-                          "");
-
-                      await _korisnikProvider.update(
-                          korisnikResult.korisniciId, request);
-
-                      var data = await _korisnikProvider
-                          .getById(korisnikResult.korisniciId);
-
-                      setState(() {
-                        korisnikResult = data;
-                      });
-
-                      // ignore: use_build_context_synchronously
-                      Navigator.of(context).pop();
-                    } on Exception catch (e) {
-                      // ignore: use_build_context_synchronously
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text("Error"),
-                          content: Text(e.toString()),
-                          actions: [
-                            TextButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: const Text("OK"))
-                          ],
-                        ),
-                      );
-                    }
-                  },
-                  style: TextButton.styleFrom(
-                      backgroundColor: Colors.grey[400],
-                      iconColor: Colors.black),
-                  icon: const Icon(Icons.delete_forever),
-                  label: const Text(
-                    'Ukloni sliku',
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.grey[400],
-                  ),
-                  child: const Text(
-                    'OK',
-                    style: TextStyle(
-                        color: Colors.black, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
-            ));
-  }*/
 }

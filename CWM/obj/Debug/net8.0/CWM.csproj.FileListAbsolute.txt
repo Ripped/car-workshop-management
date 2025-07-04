@@ -273,7 +273,6 @@ C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\obj\Debug\net8.0\CW
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\obj\Debug\net8.0\CWM.genruntimeconfig.cache
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\obj\Debug\net8.0\ref\CWM.dll
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\certificate.pfx
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\obj\Debug\net8.0\CWM.csproj.Up2Date
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\Lenovo\Documents\GitHub\car-workshop-management\CWM\bin\Debug\net8.0\Microsoft.Extensions.Configuration.Abstractions.dll

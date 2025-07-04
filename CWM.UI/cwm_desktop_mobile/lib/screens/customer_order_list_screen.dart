@@ -4,6 +4,7 @@ import 'package:cwm_desktop_mobile/providers/work_order_provider.dart';
 import 'package:cwm_desktop_mobile/screens/customer_order_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
+import 'package:cwm_desktop_mobile/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,22 +31,21 @@ class _CustomerOrderListScreenState extends State<CustomerOrderListScreen> {
   }
 
   void _openDetails(int? id) {
-    //if (Responsive.isMobile(context)) return;
-
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
-            MasterScreen("Detalji o dijelu", CustomerOrderScreen(id))));
+            MasterScreen("Detalji o narudzbi", CustomerOrderScreen(id))));
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        /*Search(
-          "Dodaj novi dio",
+        Search(
+          "Dodaj narudzbu",
           () => _openDetails(null),
-          onSearch: (text) => appointmentListDataTableSource.filterData(text),
-        ),*/
+          onSearch: (text) => workOrderListDataTableSource.filterData(text),
+          hideButton: true,
+        ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
@@ -53,7 +53,7 @@ class _CustomerOrderListScreenState extends State<CustomerOrderListScreen> {
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: workOrderListDataTableSource,
-            rowsPerPage: 10,
+            rowsPerPage: 7,
             columns: const [
               DataColumn(label: Text("Order number")),
               DataColumn(label: Text("Total for service")),

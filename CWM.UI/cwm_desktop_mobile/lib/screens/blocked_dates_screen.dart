@@ -160,7 +160,17 @@ class _BlockedDatesScreenState extends State<BlockedDatesScreen> {
               try {
                 await _appointmentBlockedProvider.delete(id);
                 appointmentBlockedDataTableSource.filterData(null);
-                if (context.mounted) Navigator.pop(context);
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red[800],
+                      showCloseIcon: false,
+                      duration: Durations.extralong4,
+                      content: const Text("Podaci su obrisani"),
+                    ),
+                  );
+                  Navigator.pop(context);
+                }
               } catch (error) {
                 showDialog(
                   context: context,
@@ -221,7 +231,17 @@ class _BlockedDatesScreenState extends State<BlockedDatesScreen> {
                   : await _appointmentBlockedProvider.update(id, request);
 
               appointmentBlockedDataTableSource.filterData(null);
-              if (context.mounted) Navigator.pop(context);
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Colors.green[800],
+                    showCloseIcon: false,
+                    duration: Durations.extralong4,
+                    content: const Text("Podaci su spremljeni"),
+                  ),
+                );
+                Navigator.pop(context);
+              }
             }
           },
         ),

@@ -9,6 +9,7 @@ import 'package:cwm_desktop_mobile/providers/part_work_order_provider.dart';
 import 'package:cwm_desktop_mobile/providers/user_provider.dart';
 import 'package:cwm_desktop_mobile/providers/user_rating_provider.dart';
 import 'package:cwm_desktop_mobile/utils/utils.dart';
+import 'package:cwm_desktop_mobile/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -70,8 +71,6 @@ class _PartRatingScreenState extends State<PartRatingScreen> {
   }
 
   void _openDialog(int? id) {
-    if (Responsive.isMobile(context)) return;
-
     showDialog(
       context: context,
       builder: (BuildContext context) => _buildDialog(context, id),
@@ -82,6 +81,12 @@ class _PartRatingScreenState extends State<PartRatingScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Search(
+          "Dodaj recenziju",
+          () => _openDialog(null),
+          onSearch: (text) => partWorkOrderDataTableSource.filterData(text),
+          hideButton: true,
+        ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
@@ -116,16 +121,21 @@ class _PartRatingScreenState extends State<PartRatingScreen> {
           ],
         ),
       ),
-      content: FormBuilder(
-        key: _formKey,
-        child: SizedBox(
-          height: 300,
-          child: Column(
-            children: [
-              Row(
+      content: SizedBox(
+        child: SingleChildScrollView(
+          child: FormBuilder(
+            key: _formKey,
+            child: SizedBox(
+              height: Responsive.isDesktop(context)
+                  ? 500
+                  : MediaQuery.of(context).size.height,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                    width: 500,
+                    width: Responsive.isDesktop(context)
+                        ? 500
+                        : MediaQuery.of(context).size.width,
                     child: FormBuilderTextField(
                       name: "productRating",
                       decoration: const InputDecoration(
@@ -138,14 +148,12 @@ class _PartRatingScreenState extends State<PartRatingScreen> {
                         }
                       },
                     ),
-                  )
-                ],
-              ),
-              Row(
-                children: [
+                  ),
                   const SizedBox(height: 20),
                   SizedBox(
-                    width: 500,
+                    width: Responsive.isDesktop(context)
+                        ? 500
+                        : MediaQuery.of(context).size.width,
                     child: FormBuilderDropdown(
                       enabled: false,
                       name: "userId",
@@ -162,13 +170,12 @@ class _PartRatingScreenState extends State<PartRatingScreen> {
                           .toList(),
                     ),
                   ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              Row(
-                children: [
+                  const SizedBox(width: 20),
+                  const SizedBox(height: 20),
                   SizedBox(
-                    width: 500,
+                    width: Responsive.isDesktop(context)
+                        ? 500
+                        : MediaQuery.of(context).size.width,
                     child: FormBuilderDropdown(
                       enabled: false,
                       name: "partId",
@@ -184,47 +191,100 @@ class _PartRatingScreenState extends State<PartRatingScreen> {
                           .toList(),
                     ),
                   ),
+                  const SizedBox(width: 20),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: const ButtonStyle(
+                          minimumSize:
+                              WidgetStatePropertyAll(Size.fromHeight(50))),
+                      child: const Text(
+                        "NAZAD",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ),
+                  if (Responsive.isDesktop(context)) const SizedBox(width: 20),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          minimumSize:
+                              const WidgetStatePropertyAll(Size.fromHeight(50)),
+                          backgroundColor:
+                              WidgetStateProperty.all<Color>(Colors.red)),
+                      child: const Text(
+                        "OBRIŠI",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      ),
+                      onPressed: () async {
+                        await _userRatingProvider.delete(id!);
+                        await _loadData(null);
+                        setState(() {});
+                        if (context.mounted) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Colors.red[800],
+                              showCloseIcon: false,
+                              duration: Durations.extralong4,
+                              content: const Text("Podaci su obrisani"),
+                            ),
+                          );
+                          Navigator.pop(context);
+                        }
+                        if (context.mounted) Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          minimumSize:
+                              const WidgetStatePropertyAll(Size.fromHeight(50)),
+                          backgroundColor:
+                              WidgetStateProperty.all<Color>(Colors.green)),
+                      child: const Text(
+                        "SPREMI",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      ),
+                      onPressed: () async {
+                        var isValid = _formKey.currentState?.saveAndValidate();
+
+                        if (isValid!) {
+                          var request = Map.from(_formKey.currentState!.value);
+
+                          id == null
+                              ? await _userRatingProvider.insert(request)
+                              : await _userRatingProvider.update(id, request);
+
+                          await _loadData(null);
+                          setState(() {});
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.green[800],
+                                showCloseIcon: false,
+                                duration: Durations.extralong4,
+                                content: const Text("Podaci su spremljeni"),
+                              ),
+                            );
+                            Navigator.pop(context);
+                          }
+                        }
+                      },
+                    ),
+                  ),
                 ],
               ),
-            ],
+            ),
           ),
         ),
       ),
-      actionsPadding: const EdgeInsets.all(20),
-      buttonPadding: const EdgeInsets.all(20),
-      actions: [
-        OutlinedButton(
-          style: const ButtonStyle(
-            padding: WidgetStatePropertyAll(
-              EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
-            ),
-          ),
-          child: const Text("NAZAD"),
-          onPressed: () => Navigator.pop(context),
-        ),
-        OutlinedButton(
-          style: const ButtonStyle(
-            padding: WidgetStatePropertyAll(
-              EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20),
-            ),
-          ),
-          child: const Text("SPREMI"),
-          onPressed: () async {
-            var isValid = _formKey.currentState?.saveAndValidate();
-
-            if (isValid!) {
-              var request = Map.from(_formKey.currentState!.value);
-
-              id == null
-                  ? await _userRatingProvider.insert(request)
-                  : await _userRatingProvider.update(id, request);
-
-              partWorkOrderDataTableSource.filterData(null);
-              if (context.mounted) Navigator.pop(context);
-            }
-          },
-        ),
-      ],
     );
   }
 }

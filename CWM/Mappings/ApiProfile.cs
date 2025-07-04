@@ -19,10 +19,6 @@ namespace CWM.Mappings
             .ForMember(x => x.AppointmentType, opt => opt.MapFrom(y => new AppointmentType { Id = y.AppointmentTypeId ?? 0 }))
             .ForMember(x => x.Vehicle, opt => opt.MapFrom(y => new Vehicle { Id = y.VehicleId ?? 0 }));
 
-            /*CreateMap<AppointmentInsertUpdate, AppointmentNotifier>()
-            .ForMember(x => x.UserName, opt => opt.MapFrom(y => new User { Id = y.UserId ?? 0 }))
-            .ForMember(x => x.Vehicle, opt => opt.MapFrom(y => new Vehicle { Id = y.VehicleId ?? 0 }));*/
-
             CreateMap<AppointmentTypeInsertUpdate, AppointmentType>();
 
             CreateMap<AppointmentBlockedInsertUpdate, AppointmentBlocked>();
@@ -65,7 +61,7 @@ namespace CWM.Mappings
             .ForMember(x => x.City, opt => opt.MapFrom(y => y.CityId == null ? null : new City { Id = y.CityId ?? 0 }));
 
             CreateMap<ExpensesInsertUpdate, Expenses>()
-            .ForMember(x => x.Employee, opt => opt.MapFrom(y => y.EmployeeId == null ? null : new Vehicle { Id = y.EmployeeId ?? 0 }));
+            .ForMember(x => x.Employee, opt => opt.MapFrom(y => y.EmployeeId == null ? null : new Employee { Id = y.EmployeeId ?? 0 }));
         }
     }
 }

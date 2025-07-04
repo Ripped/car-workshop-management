@@ -4,10 +4,9 @@ import 'package:cwm_desktop_mobile/providers/work_order_provider.dart';
 import 'package:cwm_desktop_mobile/screens/work_order_closure_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
+import 'package:cwm_desktop_mobile/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../widgets/search.dart';
 
 class WorkOrderListScreen extends StatefulWidget {
   const WorkOrderListScreen({super.key});
@@ -31,8 +30,6 @@ class _WorkOrderListScreenState extends State<WorkOrderListScreen> {
   }
 
   void _openDetails(int? id) {
-    //if (Responsive.isMobile(context)) return;
-
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
             MasterScreen("Detalji o nalogu", WorkOrderClosureScreen(id))));
@@ -42,6 +39,12 @@ class _WorkOrderListScreenState extends State<WorkOrderListScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Search(
+          "Dodaj nalog",
+          () => _openDetails(null),
+          onSearch: (text) => workOrderListDataTableSource.filterData(text),
+          hideButton: true,
+        ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
@@ -49,7 +52,7 @@ class _WorkOrderListScreenState extends State<WorkOrderListScreen> {
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: workOrderListDataTableSource,
-            rowsPerPage: 10,
+            rowsPerPage: 7,
             columns: const [
               DataColumn(label: Text("Serial number")),
               DataColumn(label: Text("Service performed")),

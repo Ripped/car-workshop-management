@@ -450,32 +450,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       const SizedBox(
                         height: 20.0,
                       ),
-                      /*IgnorePointer(
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Status',
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.black54),
-                              ),
-                              const SizedBox(height: 5.0),
-                              Switch(
-                                value: status,
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    status = newValue;
-                                  });
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),*/
                       const SizedBox(
                         height: 20.0,
                       ),

@@ -12,8 +12,8 @@ namespace CWM.Core.Models.Searches
         public string? ServiceName { get; set; }
         public string ? AppointmentId { get; set; }
         public int? UserId { get; set; }
+        public int? AppointmentTypeId { get; set; }
         public bool IncludeUser { get; set; }
-
         public bool IncludeAppointmentType { get; set; }
 
     }

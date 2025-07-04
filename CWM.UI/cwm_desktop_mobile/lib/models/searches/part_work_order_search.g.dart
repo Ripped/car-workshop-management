@@ -10,6 +10,7 @@ PartWorkOrderSearch _$PartWorkOrderSearchFromJson(Map<String, dynamic> json) =>
     PartWorkOrderSearch()
       ..page = (json['page'] as num).toInt()
       ..pageSize = (json['pageSize'] as num).toInt()
+      ..partName = json['partName'] as String?
       ..includeWorkOrder = json['includeWorkOrder'] as bool
       ..includePart = json['includePart'] as bool
       ..userId = (json['userId'] as num?)?.toInt()
@@ -24,6 +25,7 @@ Map<String, dynamic> _$PartWorkOrderSearchToJson(
     <String, dynamic>{
       'page': instance.page,
       'pageSize': instance.pageSize,
+      'partName': instance.partName,
       'includeWorkOrder': instance.includeWorkOrder,
       'includePart': instance.includePart,
       'userId': instance.userId,

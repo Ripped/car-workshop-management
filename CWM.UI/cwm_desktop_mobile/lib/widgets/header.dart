@@ -13,7 +13,6 @@ class Header extends StatefulWidget {
   final GlobalKey<ScaffoldState> _menuKey;
 
   const Header(this._title, this._menuKey, {super.key});
-
   @override
   State<Header> createState() => _HeaderState();
 }
@@ -37,7 +36,7 @@ class _HeaderState extends State<Header> {
               onPressed: () => widget._menuKey.currentState!.openDrawer(),
               child: const Icon(
                 Icons.menu,
-                color: Colors.grey,
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
             ),
           const SizedBox(width: 20),
@@ -47,8 +46,19 @@ class _HeaderState extends State<Header> {
               style: TextStyle(
                 fontSize: Responsive.isMobile(context) ? 18 : 24,
                 height: 1,
-                fontWeight: FontWeight.w100,
-                color: Colors.grey,
+                fontWeight: FontWeight.bold,
+                color: const Color.fromARGB(255, 0, 0, 0),
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () =>
+                Navigator.of(context).popUntil((route) => route.isFirst),
+            child: Text(
+              'NAZAD',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: Responsive.isMobile(context) ? 18 : 24,
               ),
             ),
           ),

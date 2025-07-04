@@ -4,6 +4,7 @@ import 'package:cwm_desktop_mobile/providers/appointment_provider.dart';
 import 'package:cwm_desktop_mobile/screens/work_order_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
+import 'package:cwm_desktop_mobile/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,22 +30,21 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
   }
 
   void _openDetails(int? id) {
-    //if (Responsive.isMobile(context)) return;
-
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) =>
-            MasterScreen("Detalji o dijelu", WorkOrderScreen(id))));
+            MasterScreen("Detalji o nalogu", WorkOrderScreen(id))));
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        /*Search(
-          "Dodaj novi dio",
+        Search(
+          "Dodaj nalog",
           () => _openDetails(null),
           onSearch: (text) => appointmentListDataTableSource.filterData(text),
-        ),*/
+          hideButton: true,
+        ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
@@ -52,7 +52,7 @@ class _AppointmentListScreenState extends State<AppointmentListScreen> {
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: appointmentListDataTableSource,
-            rowsPerPage: 10,
+            rowsPerPage: 7,
             columns: const [
               DataColumn(label: Text("Serial number")),
               DataColumn(label: Text("Start date")),

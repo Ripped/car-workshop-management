@@ -11,6 +11,7 @@ class WorkOrderSearch extends BaseSearch {
   bool includePayment = false;
   int? appointmentId;
   String? employeeUsername;
+  int? userId;
 
   WorkOrderSearch();
 

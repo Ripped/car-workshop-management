@@ -126,82 +126,85 @@ class _LoginScreen extends State<LoginScreen> {
   Widget _buildLoginForm(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10),
-      child: Column(
-        children: [
-          Image.asset("assets/images/logo.png", width: 250, height: 150),
-          if (Responsive.isMobile(context)) const SizedBox(height: 100),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                TextField(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset("assets/images/logo.png", width: 250, height: 150),
+            if (Responsive.isMobile(context)) const SizedBox(height: 100),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  TextField(
+                      decoration: InputDecoration(
+                          labelText: "Korisnicko ime*",
+                          prefixIcon: Icon(Icons.email),
+                          border: OutlineInputBorder(),
+                          errorText: isKorisnickoImeValid
+                              ? null
+                              : "Unesite ispravno korisnicko ime"),
+                      controller: _usernameController,
+                      obscureText: true,
+                      onChanged: (value) {
+                        bool isValid = Validators.validirajKorisnickoIme(value);
+                        setState(() {
+                          isKorisnickoImeValid = isValid;
+                        });
+                      }),
+                  const SizedBox(height: 20),
+                  TextField(
                     decoration: InputDecoration(
-                        labelText: "Korisnicko ime*",
-                        prefixIcon: Icon(Icons.email),
-                        border: OutlineInputBorder(),
-                        errorText: isKorisnickoImeValid
-                            ? null
-                            : "Unesite ispravno korisnicko ime"),
-                    controller: _usernameController,
+                      labelText: "Password*",
+                      prefixIcon: const Icon(Icons.password),
+                      border: const OutlineInputBorder(),
+                      errorText: isLozinkaValid
+                          ? null
+                          : 'Lozinka mora sadržavati minimalno 4 znaka!',
+                    ),
+                    controller: _passwordController,
+                    obscureText: true,
                     onChanged: (value) {
-                      bool isValid = Validators.validirajKorisnickoIme(value);
                       setState(() {
-                        isKorisnickoImeValid = isValid;
+                        if (value.length >= 4 && value.isNotEmpty) {
+                          isLozinkaValid = true;
+                        } else {
+                          isLozinkaValid = false;
+                        }
                       });
-                    }),
-                const SizedBox(height: 20),
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: "Password*",
-                    prefixIcon: const Icon(Icons.password),
-                    border: const OutlineInputBorder(),
-                    errorText: isLozinkaValid
-                        ? null
-                        : 'Lozinka mora sadržavati minimalno 4 znaka!',
+                    },
+                    onSubmitted: (value) => _loginSubmit(),
                   ),
-                  controller: _passwordController,
-                  obscureText: true,
-                  onChanged: (value) {
-                    setState(() {
-                      if (value.length >= 4 && value.isNotEmpty) {
-                        isLozinkaValid = true;
-                      } else {
-                        isLozinkaValid = false;
-                      }
-                    });
-                  },
-                  onSubmitted: (value) => _loginSubmit(),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          OutlinedButton(
-            style: const ButtonStyle(
-                padding: WidgetStatePropertyAll(
-                    EdgeInsets.only(left: 40, top: 20, right: 40, bottom: 20))),
-            onPressed: _loginSubmit,
-            child: const Text("PRIJAVA"),
-          ),
-          SizedBox(height: 20.0),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          const RegistrationScreen()));
-            },
-            style: ElevatedButton.styleFrom(
-                elevation: 0.0, backgroundColor: Colors.transparent),
-            child: const Text(
-              'Nemate račun? Registruj se!',
-              style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black54),
+            OutlinedButton(
+              style: const ButtonStyle(
+                  padding: WidgetStatePropertyAll(EdgeInsets.only(
+                      left: 40, top: 20, right: 40, bottom: 20))),
+              onPressed: _loginSubmit,
+              child: const Text("PRIJAVA"),
             ),
-          )
-        ],
+            SizedBox(height: 20.0),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            const RegistrationScreen()));
+              },
+              style: ElevatedButton.styleFrom(
+                  elevation: 0.0, backgroundColor: Colors.transparent),
+              child: const Text(
+                'Nemate račun? Registruj se!',
+                style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black54),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

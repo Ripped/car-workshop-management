@@ -50,7 +50,7 @@ namespace CWM.Database.Seed
                     Transmision = "Manual",
                     ProductionDate = new DateTime(2000, 11, 12),
                     Fuel = "Gasoline",
-                    UserId = 1
+                    UserId = 3
                 },
                 new Vehicle
                 {
@@ -63,7 +63,7 @@ namespace CWM.Database.Seed
                     Transmision = "Manual",
                     ProductionDate = new DateTime(2000, 11, 12),
                     Fuel = "Gasoline",
-                    UserId = 1
+                    UserId = 3
                 },
                 new Vehicle
                 {
@@ -90,6 +90,45 @@ namespace CWM.Database.Seed
                     ProductionDate = new DateTime(2000, 11, 12),
                     Fuel = "Gasoline",
                     UserId = 1
+                },
+                new Vehicle
+                {
+                    Id = 7,
+                    Chassis = "WVWZZZ6NZ1Y3125494",
+                    Brand = "Volkswagen",
+                    Model = "Polo",
+                    CubicCapacity = 1392,
+                    Kilowatts = 55,
+                    Transmision = "Manual",
+                    ProductionDate = new DateTime(2000, 11, 12),
+                    Fuel = "Gasoline",
+                    UserId = 3
+                },
+                new Vehicle
+                {
+                    Id = 8,
+                    Chassis = "WVWZZZ6NZ1Y1525494",
+                    Brand = "Volkswagen",
+                    Model = "Polo",
+                    CubicCapacity = 1392,
+                    Kilowatts = 55,
+                    Transmision = "Manual",
+                    ProductionDate = new DateTime(2000, 11, 12),
+                    Fuel = "Gasoline",
+                    UserId = 3
+                },
+                new Vehicle
+                {
+                    Id = 9,
+                    Chassis = "WVWZZZ6NZ1Y1255494",
+                    Brand = "Volkswagen",
+                    Model = "Polo",
+                    CubicCapacity = 1392,
+                    Kilowatts = 55,
+                    Transmision = "Manual",
+                    ProductionDate = new DateTime(2000, 11, 12),
+                    Fuel = "Gasoline",
+                    UserId = 3
                 }
             );
         }

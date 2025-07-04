@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:cwm_desktop_mobile/models/enums/role.dart';
 import 'package:cwm_desktop_mobile/providers/part_provider.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
+import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -195,6 +197,12 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                   child: Align(
                                     alignment: Alignment.bottomCenter,
                                     child: FormBuilderTextField(
+                                      enabled: Authorization.roles
+                                                  .contains(Role.admin) ||
+                                              Authorization.roles
+                                                  .contains(Role.admin)
+                                          ? true
+                                          : false,
                                       name: "price",
                                       decoration: const InputDecoration(
                                           labelText: "Cijena *"),
@@ -208,6 +216,12 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                   child: Align(
                                     alignment: Alignment.bottomCenter,
                                     child: FormBuilderTextField(
+                                      enabled: Authorization.roles
+                                                  .contains(Role.admin) ||
+                                              Authorization.roles
+                                                  .contains(Role.admin)
+                                          ? true
+                                          : false,
                                       name: "description",
                                       keyboardType: TextInputType.multiline,
                                       maxLines: 3,
@@ -223,6 +237,12 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                   child: Align(
                                     alignment: Alignment.bottomCenter,
                                     child: FormBuilderField(
+                                      enabled: Authorization.roles
+                                                  .contains(Role.admin) ||
+                                              Authorization.roles
+                                                  .contains(Role.admin)
+                                          ? true
+                                          : false,
                                       name: 'image',
                                       builder: ((field) {
                                         return InputDecorator(
@@ -275,6 +295,18 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                                       widget.id!, request);
 
                                               if (context.mounted) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    backgroundColor:
+                                                        Colors.green[800],
+                                                    showCloseIcon: false,
+                                                    duration:
+                                                        Durations.extralong4,
+                                                    content: const Text(
+                                                        "Podaci su spremljeni"),
+                                                  ),
+                                                );
                                                 Navigator.of(context).pushReplacement(
                                                     MaterialPageRoute(
                                                         builder: (context) =>
@@ -305,6 +337,18 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                             await _loadData(null);
                                             setState(() {});
                                             if (context.mounted) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  backgroundColor:
+                                                      Colors.red[800],
+                                                  showCloseIcon: false,
+                                                  duration:
+                                                      Durations.extralong4,
+                                                  content: const Text(
+                                                      "Podaci su obrisani"),
+                                                ),
+                                              );
                                               Navigator.pop(context);
                                             }
                                           },
@@ -349,6 +393,18 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                                             request);
 
                                                 if (context.mounted) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      backgroundColor:
+                                                          Colors.green[800],
+                                                      showCloseIcon: false,
+                                                      duration:
+                                                          Durations.extralong4,
+                                                      content: const Text(
+                                                          "Podaci su spremljeni"),
+                                                    ),
+                                                  );
                                                   Navigator.of(context).pushReplacement(
                                                       MaterialPageRoute(
                                                           builder: (context) =>
@@ -383,6 +439,18 @@ class _PartDetailsScreenState extends State<PartDetailsScreen> {
                                               await _loadData(null);
                                               setState(() {});
                                               if (context.mounted) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    backgroundColor:
+                                                        Colors.red[800],
+                                                    showCloseIcon: false,
+                                                    duration:
+                                                        Durations.extralong4,
+                                                    content: const Text(
+                                                        "Podaci su obrisani"),
+                                                  ),
+                                                );
                                                 Navigator.pop(context);
                                               }
                                             },

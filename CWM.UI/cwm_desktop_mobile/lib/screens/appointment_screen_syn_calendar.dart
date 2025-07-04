@@ -1,5 +1,8 @@
 import 'package:cwm_desktop_mobile/data_table_sources/appointment_data_table_source.dart';
+import 'package:cwm_desktop_mobile/models/searches/user_search.dart';
+import 'package:cwm_desktop_mobile/models/user.dart';
 import 'package:cwm_desktop_mobile/models/vehicle.dart';
+import 'package:cwm_desktop_mobile/providers/user_provider.dart';
 import 'package:cwm_desktop_mobile/providers/vehicle_provider.dart';
 import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
@@ -33,6 +36,7 @@ class _MyWidgetState extends State<MyWidget> {
   late AppointmentTypeProvider _appointmentTypeProvider;
   late AppointmentBlockedProvider _appointmentBlockedProvider;
   late VehicleProvider _vehicleProvider;
+  late UserProvider _userProvider;
 
   final _formKey = GlobalKey<FormBuilderState>();
   var _appointmentType = PagedResult<appointment_type.AppointmentType>();
@@ -40,6 +44,7 @@ class _MyWidgetState extends State<MyWidget> {
       PagedResult<appointment_blocked.AppointmentBlocked>();
   var _appointmentBlocked = <appointment_blocked.AppointmentBlocked>[];
   var _vehicle = PagedResult<Vehicle>();
+  var _user = PagedResult<User>();
 
   List<DateTime> blockedDates = <DateTime>[];
   DateTime startDate = DateTime.utc(2000, 12, 1);
@@ -54,24 +59,30 @@ class _MyWidgetState extends State<MyWidget> {
     _appointmentTypeProvider = context.read<AppointmentTypeProvider>();
     _appointmentBlockedProvider = context.read<AppointmentBlockedProvider>();
     _vehicleProvider = context.read<VehicleProvider>();
+    _userProvider = context.read<UserProvider>();
 
     _loadData(null, null);
   }
 
   Future _loadData(int? id, DateTime? selectedDate) async {
+    var userSearch = UserSearch();
+    userSearch.userId = Authorization.userId;
+
     var vehicleSearch = VehicleSearch();
     vehicleSearch.pageSize = 50;
     vehicleSearch.userId = Authorization.userId;
 
     _appointmentBlockedDates = await _appointmentBlockedProvider.getAll();
     _appointmentBlocked = _appointmentBlockedDates.result.cast();
-    _appointmentType = await _appointmentTypeProvider.getAll();
-    _vehicle = await _vehicleProvider.getAll(search: vehicleSearch);
 
     _blockDates();
     for (appointment_blocked.AppointmentBlocked i in _appointmentBlocked) {
       blockedDates.add(i.blockedDate);
     }
+
+    _appointmentType = await _appointmentTypeProvider.getAll();
+    _vehicle = await _vehicleProvider.getAll(search: vehicleSearch);
+    _user = await _userProvider.getAll(search: userSearch);
     if (id != null) {
       var event = await _appointmentProvider.get(id);
 
@@ -319,10 +330,16 @@ class _MyWidgetState extends State<MyWidget> {
               children: [
                 SizedBox(
                   width: 600,
-                  child: FormBuilderTextField(
+                  child: FormBuilderDropdown(
                     name: "userId",
                     enabled: false,
                     decoration: const InputDecoration(labelText: "Korisnik *"),
+                    items: _user.result
+                        .map((type) => DropdownMenuItem(
+                              value: type.id.toString(),
+                              child: Text("${type.firstName} ${type.lastName}"),
+                            ))
+                        .toList(),
                   ),
                 ),
                 const SizedBox(width: 20),
@@ -423,7 +440,17 @@ class _MyWidgetState extends State<MyWidget> {
                   await _appointmentProvider.delete(id!);
                   await _loadData(null, null);
                   setState(() {});
-                  if (context.mounted) Navigator.pop(context);
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.red[800],
+                        showCloseIcon: false,
+                        duration: Durations.extralong4,
+                        content: const Text("Podaci su obrisani"),
+                      ),
+                    );
+                    Navigator.pop(context);
+                  }
                 },
               ),
               OutlinedButton(
@@ -456,7 +483,17 @@ class _MyWidgetState extends State<MyWidget> {
 
                     await _loadData(null, null);
                     setState(() {});
-                    if (context.mounted) Navigator.pop(context);
+                    if (context.mounted) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.green[800],
+                          showCloseIcon: false,
+                          duration: Durations.extralong4,
+                          content: const Text("Podaci su spremljeni"),
+                        ),
+                      );
+                      Navigator.pop(context);
+                    }
                   }
                 },
               ),
@@ -488,15 +525,22 @@ class _MyWidgetState extends State<MyWidget> {
             child: SizedBox(
               height: MediaQuery.of(context).size.height,
               child: Column(
-                mainAxisSize: MainAxisSize.max,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width,
-                    child: FormBuilderTextField(
+                    child: FormBuilderDropdown(
                       name: "userId",
                       enabled: false,
                       decoration:
                           const InputDecoration(labelText: "Korisnik *"),
+                      items: _user.result
+                          .map((type) => DropdownMenuItem(
+                                value: type.id.toString(),
+                                child:
+                                    Text("${type.firstName} ${type.lastName}"),
+                              ))
+                          .toList(),
                     ),
                   ),
                   const SizedBox(width: 20),
@@ -599,7 +643,14 @@ class _MyWidgetState extends State<MyWidget> {
                         await _appointmentProvider.delete(id!);
                         await _loadData(null, null);
                         setState(() {});
-                        if (context.mounted) Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.red[800],
+                            showCloseIcon: false,
+                            duration: Durations.extralong4,
+                            content: const Text("Podaci su obrisani"),
+                          ),
+                        );
                       },
                     ),
                   ),
@@ -628,7 +679,17 @@ class _MyWidgetState extends State<MyWidget> {
 
                           await _loadData(null, null);
                           setState(() {});
-                          if (context.mounted) Navigator.pop(context);
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.green[800],
+                                showCloseIcon: false,
+                                duration: Durations.extralong4,
+                                content: const Text("Podaci su spremljeni"),
+                              ),
+                            );
+                            Navigator.pop(context);
+                          }
                         }
                       },
                     ),

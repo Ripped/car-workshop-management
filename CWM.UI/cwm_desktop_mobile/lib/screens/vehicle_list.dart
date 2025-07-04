@@ -44,6 +44,7 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
       children: [
         Search(
           "Dodaj novo vozilo",
+          hideSearch: false,
           () => _openDetails(null),
           onSearch: (text) => vehicleListDataTableSource.filterData(text),
         ),
@@ -54,7 +55,7 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: vehicleListDataTableSource,
-            rowsPerPage: 10,
+            rowsPerPage: 7,
             columns: const [
               DataColumn(label: Text("Sasija")),
               DataColumn(label: Text("Marka vozila")),

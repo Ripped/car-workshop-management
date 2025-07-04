@@ -49,8 +49,8 @@ class PartWorkOrderDataTableSource
   @override
   int get selectedRowCount => 0;
 
-  Future filterData(DateTime? date) async {
-    partWorkOrderSearch.serviceDate = date;
+  Future filterData(String? name) async {
+    partWorkOrderSearch.partName = name;
     setNextView();
   }
 }

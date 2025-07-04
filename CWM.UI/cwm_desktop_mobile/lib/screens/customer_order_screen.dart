@@ -169,7 +169,7 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                   width: 800,
                   height: 30,
                   child: Text(
-                    "Zatvaranje radnog naloga",
+                    "Pregled narudzbe/Placanje",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
@@ -489,12 +489,23 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                       style: ButtonStyle(
                         minimumSize:
                             const WidgetStatePropertyAll(Size.fromHeight(40)),
-                        backgroundColor:
-                            WidgetStateProperty.all<Color>(Colors.red),
+                        backgroundColor: workOrder.payment
+                            ? WidgetStateProperty.all<Color>(Colors.red)
+                            : WidgetStateProperty.all<Color>(Colors.green),
                         foregroundColor: WidgetStateProperty.all(Colors.white),
                       ),
                       onPressed: workOrder.payment
-                          ? null
+                          ? () async {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.red[800],
+                                  showCloseIcon: false,
+                                  duration: Durations.extralong4,
+                                  content: const Text("Nalog je vec placen"),
+                                ),
+                              );
+                              Navigator.of(context).pop();
+                            }
                           : () async {
                               var workOrderValue =
                                   await _updateValue(workOrder.id, true);
@@ -505,6 +516,14 @@ class _CustomerOrderScreenState extends State<CustomerOrderScreen> {
                               await _loadData(null);
                               setState(() {});
                               if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.green[800],
+                                    showCloseIcon: false,
+                                    duration: Durations.extralong4,
+                                    content: const Text("Uspjesno placeno"),
+                                  ),
+                                );
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                         builder: (context) =>

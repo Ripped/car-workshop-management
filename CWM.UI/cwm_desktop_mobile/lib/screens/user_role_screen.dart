@@ -176,7 +176,17 @@ class _UserRoleScreenState extends State<UserRoleScreen> {
               try {
                 await _userRoleProvider.delete(id);
                 userRoleDataTableSource.filterData(null);
-                if (context.mounted) Navigator.pop(context);
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red[800],
+                      showCloseIcon: false,
+                      duration: Durations.extralong4,
+                      content: const Text("Podaci su obrisani"),
+                    ),
+                  );
+                  Navigator.pop(context);
+                }
               } catch (error) {
                 showDialog(
                   context: context,
@@ -237,7 +247,17 @@ class _UserRoleScreenState extends State<UserRoleScreen> {
                   : await _userRoleProvider.update(id, request);
 
               userRoleDataTableSource.filterData(null);
-              if (context.mounted) Navigator.pop(context);
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Colors.green[800],
+                    showCloseIcon: false,
+                    duration: Durations.extralong4,
+                    content: const Text("Podaci su spremljeni"),
+                  ),
+                );
+                Navigator.pop(context);
+              }
             }
           },
         ),

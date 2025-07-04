@@ -2,6 +2,7 @@ import 'package:advanced_datatable/datatable.dart';
 import 'package:cwm_desktop_mobile/screens/employee_details_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
+import 'package:cwm_desktop_mobile/widgets/search.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -41,11 +42,11 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        /*Search(
-          "Dodaj novi dio",
+        Search(
+          "Dodaj uposlenika",
           () => _openDetails(null),
-          onSearch: (text) => appointmentListDataTableSource.filterData(text),
-        ),*/
+          onSearch: (text) => employeeListDataTableSource.filterData(text),
+        ),
         SizedBox(
           width: double.infinity,
           child: AdvancedPaginatedDataTable(
@@ -53,7 +54,7 @@ class _EmployeeListScreenState extends State<EmployeeListScreen> {
             addEmptyRows: false,
             showCheckboxColumn: false,
             source: employeeListDataTableSource,
-            rowsPerPage: 10,
+            rowsPerPage: 7,
             columns: const [
               DataColumn(label: Text("Ime")),
               DataColumn(label: Text("Prezime")),

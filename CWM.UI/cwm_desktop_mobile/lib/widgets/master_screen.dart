@@ -34,28 +34,11 @@ class _MasterScreenState extends State<MasterScreen> {
               child: Column(
                 children: [
                   Header(widget.title, _key),
-                  /*Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          if (!Responsive.isDesktop(context))
-                            ElevatedButton(
-                                onPressed: () =>
-                                    _key.currentState!.openDrawer(),
-                                child: const Text("Open")),
-                        ],
-                      ),
-                    ),
-                  ),*/
                   Expanded(
                     flex: 10,
                     child: Padding(
                         padding: const EdgeInsets.all(10), child: widget.child),
                   ),
-                  /*const Expanded(
-                    child: Text("© 2024 - CWM"),
-                  ),*/
                 ],
               ),
             )

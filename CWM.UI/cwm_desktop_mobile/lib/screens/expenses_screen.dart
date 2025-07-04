@@ -221,7 +221,17 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
               try {
                 await _expensesProvider.delete(id);
                 expensesDataTableSource.filterData(null);
-                if (context.mounted) Navigator.pop(context);
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red[800],
+                      showCloseIcon: false,
+                      duration: Durations.extralong4,
+                      content: const Text("Podaci su obrisani"),
+                    ),
+                  );
+                  Navigator.pop(context);
+                }
               } catch (error) {
                 showDialog(
                   context: context,
@@ -282,7 +292,17 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                   : await _expensesProvider.update(id, request);
 
               expensesDataTableSource.filterData(null);
-              if (context.mounted) Navigator.pop(context);
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Colors.green[800],
+                    showCloseIcon: false,
+                    duration: Durations.extralong4,
+                    content: const Text("Podaci su spremljeni"),
+                  ),
+                );
+                Navigator.pop(context);
+              }
             }
           },
         ),

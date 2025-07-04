@@ -5,9 +5,12 @@ import 'package:cwm_desktop_mobile/models/part.dart';
 import 'package:cwm_desktop_mobile/providers/recommender_provider.dart';
 import 'package:cwm_desktop_mobile/screens/appointment_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/appointment_screen_syn_calendar.dart';
+import 'package:cwm_desktop_mobile/screens/customer_order_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/employee_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/part_details_screen.dart';
+import 'package:cwm_desktop_mobile/screens/part_rating_screen.dart';
 import 'package:cwm_desktop_mobile/screens/vehicle_list.dart';
+import 'package:cwm_desktop_mobile/screens/vehicle_list_screen.dart';
 import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:cwm_desktop_mobile/widgets/responsive.dart';
 import 'package:flutter/material.dart';
@@ -56,11 +59,12 @@ class _DashboardScreen extends State<DashboardScreen> {
   Widget build(BuildContext context) {
     return Center(
       child: isLoading
-          ? Wrap(
-              alignment: WrapAlignment.spaceAround,
-              spacing: 40,
-              runSpacing: 60,
-              children: [
+          ? SingleChildScrollView(
+              child: Wrap(
+                  alignment: WrapAlignment.spaceAround,
+                  spacing: 40,
+                  runSpacing: 60,
+                  children: [
                   Card(
                       color: Colors.white,
                       child: SizedBox(
@@ -164,6 +168,85 @@ class _DashboardScreen extends State<DashboardScreen> {
                               ),
                             ),
                             const SizedBox(height: 10),
+                            const Text("Lista vozila"),
+                            const SizedBox(height: 10),
+                            ElevatedButton(
+                              child: const Text("OTVORI"),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MasterScreen("Lista vozila",
+                                                VehicleScreen())));
+                              },
+                            )
+                          ],
+                        ),
+                      )),
+                  Card(
+                      color: Colors.white,
+                      child: SizedBox(
+                        width: 200,
+                        height: 200,
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 10),
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                  ),
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: const SizedBox(
+                                width: 100,
+                                height: 100,
+                                child: Icon(
+                                  Icons.content_paste,
+                                  size: 40,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            const Text("Pregled narudzbi"),
+                            const SizedBox(height: 10),
+                            ElevatedButton(
+                              child: const Text("OTVORI"),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MasterScreen(
+                                                "Pregled narudzbi",
+                                                CustomerOrderListScreen())));
+                              },
+                            )
+                          ],
+                        ),
+                      )),
+                  Card(
+                      color: Colors.white,
+                      child: SizedBox(
+                        width: 200,
+                        height: 200,
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 10),
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                  ),
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: const SizedBox(
+                                width: 100,
+                                height: 100,
+                                child: Icon(
+                                  Icons.content_paste,
+                                  size: 40,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
                             const Text("Historija vozila"),
                             const SizedBox(height: 10),
                             ElevatedButton(
@@ -175,6 +258,46 @@ class _DashboardScreen extends State<DashboardScreen> {
                                             const MasterScreen(
                                                 "Historija vozila",
                                                 VehicleListScreen())));
+                              },
+                            )
+                          ],
+                        ),
+                      )),
+                  Card(
+                      color: Colors.white,
+                      child: SizedBox(
+                        width: 200,
+                        height: 200,
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 10),
+                            Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.grey,
+                                  ),
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: const SizedBox(
+                                width: 100,
+                                height: 100,
+                                child: Icon(
+                                  Icons.content_paste,
+                                  size: 40,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            const Text("Recenzija dijelova"),
+                            const SizedBox(height: 10),
+                            ElevatedButton(
+                              child: const Text("OTVORI"),
+                              onPressed: () {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MasterScreen(
+                                                "Recenzija dijelova",
+                                                PartRatingScreen())));
                               },
                             )
                           ],
@@ -220,47 +343,48 @@ class _DashboardScreen extends State<DashboardScreen> {
                             ],
                           ),
                         )),
-                  Card(
-                      color: Colors.white,
-                      child: SizedBox(
-                        width: 200,
-                        height: 200,
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 10),
-                            Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.grey,
+                  if (Authorization.roles.contains(Role.admin))
+                    Card(
+                        color: Colors.white,
+                        child: SizedBox(
+                          width: 200,
+                          height: 200,
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 10),
+                              Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.grey,
+                                    ),
+                                    borderRadius: BorderRadius.circular(50)),
+                                child: const SizedBox(
+                                  width: 100,
+                                  height: 100,
+                                  child: Icon(
+                                    Icons.content_paste,
+                                    size: 40,
                                   ),
-                                  borderRadius: BorderRadius.circular(50)),
-                              child: const SizedBox(
-                                width: 100,
-                                height: 100,
-                                child: Icon(
-                                  Icons.content_paste,
-                                  size: 40,
                                 ),
                               ),
-                            ),
-                            const SizedBox(height: 10),
-                            const Text("Pregled termina"),
-                            const SizedBox(height: 10),
-                            ElevatedButton(
-                              child: const Text("OTVORI"),
-                              onPressed: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MasterScreen(
-                                                "Pregled termina",
-                                                AppointmentListScreen())));
-                              },
-                            )
-                          ],
-                        ),
-                      )),
-                ])
+                              const SizedBox(height: 10),
+                              const Text("Pregled termina"),
+                              const SizedBox(height: 10),
+                              ElevatedButton(
+                                child: const Text("OTVORI"),
+                                onPressed: () {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const MasterScreen(
+                                                  "Pregled termina",
+                                                  AppointmentListScreen())));
+                                },
+                              )
+                            ],
+                          ),
+                        )),
+                ]))
           : SizedBox(
               height: Responsive.isDesktop(context)
                   ? 400

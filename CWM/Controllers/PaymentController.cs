@@ -24,7 +24,7 @@ namespace CWM.Controllers
         }
 
         [HttpPost("CreatePaymentIntent")]
-        public async Task<IntentResponse> CreatePaymentIntent(PaymentInsertUpdate request)
+        public async Task<IntentResponse> CreatePaymentIntent([FromBody] PaymentInsertUpdate request)
         {
             var intent = await _paymentService.CreatePaymentIntent(request);
             return await _paymentService.CreatePaymentIntent(request);

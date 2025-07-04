@@ -10,11 +10,6 @@ class AuthProvider with ChangeNotifier {
   final String _endpoint = "Login";
 
   AuthProvider() {
-    /*_baseUrl = const String.fromEnvironment(
-      "ApiUrl",
-      defaultValue: "http://localhost:50080/",
-    );*/
-
     if (Platform.isWindows || Platform.isMacOS) {
       _baseUrl = const String.fromEnvironment(
         "ApiUrl",
@@ -24,7 +19,7 @@ class AuthProvider with ChangeNotifier {
     if (Platform.isAndroid || Platform.isIOS) {
       _baseUrl = const String.fromEnvironment(
         "ApiUrl",
-        defaultValue: "10.0.2.2:50080",
+        defaultValue: "http://10.0.2.2:50080/",
       );
     }
   }

@@ -14,11 +14,6 @@ abstract class BaseProvider<T, TSearch extends BaseSearch> with ChangeNotifier {
   late String endpoint;
 
   BaseProvider({String? altEndpoint}) {
-    /*baseUrl = const String.fromEnvironment(
-      "ApiUrl",
-      defaultValue: "localhost:50080",
-    );*/
-
     if (Platform.isWindows || Platform.isMacOS) {
       baseUrl = const String.fromEnvironment(
         "ApiUrl",

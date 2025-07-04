@@ -1,8 +1,9 @@
+import 'package:cwm_desktop_mobile/models/enums/role.dart';
 import 'package:cwm_desktop_mobile/models/paged_result.dart';
 import 'package:cwm_desktop_mobile/models/user.dart';
 import 'package:cwm_desktop_mobile/providers/user_provider.dart';
 import 'package:cwm_desktop_mobile/providers/vehicle_provider.dart';
-import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
+import 'package:cwm_desktop_mobile/screens/vehicle_list.dart';
 import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -220,7 +221,12 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                   child: Align(
                                     alignment: Alignment.bottomCenter,
                                     child: FormBuilderDropdown(
-                                      enabled: false,
+                                      enabled: Authorization.roles
+                                                  .contains(Role.admin) ||
+                                              Authorization.roles
+                                                  .contains(Role.employee)
+                                          ? true
+                                          : false,
                                       name: "userId",
                                       decoration: const InputDecoration(
                                           labelText: "Korisnik"),
@@ -271,12 +277,24 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                                           widget.id!, request);
 
                                               if (context.mounted) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    backgroundColor:
+                                                        Colors.green[800],
+                                                    showCloseIcon: false,
+                                                    duration:
+                                                        Durations.extralong4,
+                                                    content: const Text(
+                                                        "Podaci su spremljeni"),
+                                                  ),
+                                                );
                                                 Navigator.of(context).pushReplacement(
                                                     MaterialPageRoute(
                                                         builder: (context) =>
                                                             const MasterScreen(
-                                                                "Uspolenici",
-                                                                PartListScreen())));
+                                                                "Vehicle",
+                                                                VehicleListScreen())));
                                               }
                                             }
                                           },
@@ -296,12 +314,60 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                           ),
                                           child: const Text("OBRIŠI"),
                                           onPressed: () async {
-                                            await _vehicleProvider
-                                                .delete(widget.id!);
-                                            await _loadData(null);
-                                            setState(() {});
-                                            if (context.mounted) {
-                                              Navigator.pop(context);
+                                            try {
+                                              await _vehicleProvider
+                                                  .delete(widget.id!);
+                                              await _loadData(null);
+                                              setState(() {});
+                                              if (context.mounted) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  SnackBar(
+                                                    backgroundColor:
+                                                        Colors.red[800],
+                                                    showCloseIcon: false,
+                                                    duration:
+                                                        Durations.extralong4,
+                                                    content: const Text(
+                                                        "Podaci su obrisani"),
+                                                  ),
+                                                );
+                                                Navigator.pop(context);
+                                              }
+                                            } catch (error) {
+                                              showDialog(
+                                                context: context,
+                                                builder: (context) {
+                                                  return AlertDialog(
+                                                    content: SizedBox(
+                                                      width: 400,
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          const Text(
+                                                            "* Ne možete obrisati ovo auto zato sto je povezano sa nekim nalogom ili terminom!.",
+                                                            style: TextStyle(
+                                                              color: Colors.red,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 10),
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: const Text(
+                                                                "OK"),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              );
                                             }
                                           },
                                         ),
@@ -345,12 +411,24 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                                             request);
 
                                                 if (context.mounted) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      backgroundColor:
+                                                          Colors.green[800],
+                                                      showCloseIcon: false,
+                                                      duration:
+                                                          Durations.extralong4,
+                                                      content: const Text(
+                                                          "Podaci su spremljeni"),
+                                                    ),
+                                                  );
                                                   Navigator.of(context).pushReplacement(
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               const MasterScreen(
-                                                                  "Uspolenici",
-                                                                  PartListScreen())));
+                                                                  "Vehicle",
+                                                                  VehicleListScreen())));
                                                 }
                                               }
                                             },
@@ -374,12 +452,61 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
                                             ),
                                             child: const Text("OBRIŠI"),
                                             onPressed: () async {
-                                              await _vehicleProvider
-                                                  .delete(widget.id!);
-                                              await _loadData(null);
-                                              setState(() {});
-                                              if (context.mounted) {
-                                                Navigator.pop(context);
+                                              try {
+                                                await _vehicleProvider
+                                                    .delete(widget.id!);
+                                                await _loadData(null);
+                                                setState(() {});
+                                                if (context.mounted) {
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    SnackBar(
+                                                      backgroundColor:
+                                                          Colors.red[800],
+                                                      showCloseIcon: false,
+                                                      duration:
+                                                          Durations.extralong4,
+                                                      content: const Text(
+                                                          "Podaci su obrisani"),
+                                                    ),
+                                                  );
+                                                  Navigator.pop(context);
+                                                }
+                                              } catch (error) {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AlertDialog(
+                                                      content: SizedBox(
+                                                        width: 400,
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          children: [
+                                                            const Text(
+                                                              "* Ne možete obrisati ovo auto zato sto je povezano sa nekim nalogom ili terminom!.",
+                                                              style: TextStyle(
+                                                                color:
+                                                                    Colors.red,
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                                height: 10),
+                                                            TextButton(
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                              child: const Text(
+                                                                  "OK"),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                );
                                               }
                                             },
                                           ),

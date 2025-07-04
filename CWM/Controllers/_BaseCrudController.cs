@@ -2,10 +2,12 @@
 using CWM.Core.Interfaces.Repositories;
 using CWM.Core.Models;
 using CWM.Core.Models.Searches;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CWM.Controllers
 {
+    [Authorize]
     public abstract class BaseCrudController<T, TSearch, TInsert, TUpdate> : BaseController<T, TSearch>
     where T : Base
     where TSearch : BaseSearch

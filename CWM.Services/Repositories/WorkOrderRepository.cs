@@ -51,6 +51,9 @@ namespace CWM.Database.Repositories
             if (search.AppointmentId > 0)
                 query = query.Where(x => x.Appointment!.Id == search.AppointmentId);
 
+            if (search.UserId > 0)
+                query = query.Where(x => x.User!.Id == search.UserId);
+
             if (search.IncludeVehicle)
                 query = query.Include(x => x.Vehicle);
 
@@ -100,7 +103,6 @@ namespace CWM.Database.Repositories
                 
                 foreach (var e in employees)
                 {
-                    //var listServiceTime = new List<Core.Models.ServiceTime>();
                     var t = item.ServiceReports.Where(x => x.Employee!.Id == e.Id).Select(y => y.ServicePerformed).Distinct().ToList();
                     foreach (var w in t)
                     {

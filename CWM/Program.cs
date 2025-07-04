@@ -1,3 +1,4 @@
+using CWM;
 using CWM.Core.Interfaces.Repositories;
 using CWM.Core.Interfaces.Services;
 using CWM.Core.Models.Configurations;
@@ -6,6 +7,7 @@ using CWM.Database.Extensions;
 using CWM.Database.Repositories;
 using CWM.Extensions;
 using CWM.Recommender;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using RabbitMQ.Client;
@@ -70,6 +72,9 @@ builder.Services.AddDbContext<CWMContext>(options => options.UseSqlServer(connec
 var rabbitMqFactory = new ConnectionFactory() { HostName = builder.Configuration["RabbitMQ:HostName"] };
 builder.Services.AddSingleton(rabbitMqFactory);
 
+builder.Services.AddAuthentication("BasicAuthentication")
+    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
 var app = builder.Build();
 
 app.Services.DatabaseMigrate();
@@ -82,7 +87,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

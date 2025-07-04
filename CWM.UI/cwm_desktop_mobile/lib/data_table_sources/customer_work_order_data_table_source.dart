@@ -30,7 +30,7 @@ class CustomerWorkOrderListDataTableSource
       workOrderSearch.employeeUsername = Authorization.username;
     }
     if (Authorization.roles.contains(Role.user)) {
-      workOrderSearch.employeeUsername = Authorization.username;
+      workOrderSearch.userId = Authorization.userId;
     }
 
     var workOrder = await _workOrderProvider.getAll(search: workOrderSearch);
@@ -49,12 +49,9 @@ class CustomerWorkOrderListDataTableSource
         DataCell(Text(currentRow.startTime.toString())),
         DataCell(
           SizedBox.expand(
-            // Use container to fill the background color
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 3),
               color: currentRow.payment ? Colors.green : Colors.red,
-
-              // Align text to middle
               child: Align(
                 alignment: Alignment.center,
                 child: Text(

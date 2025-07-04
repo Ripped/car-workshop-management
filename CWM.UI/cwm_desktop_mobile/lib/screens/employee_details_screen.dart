@@ -347,6 +347,19 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                                                 request);
 
                                                     if (context.mounted) {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          backgroundColor:
+                                                              Colors.green[800],
+                                                          showCloseIcon: false,
+                                                          duration: Durations
+                                                              .extralong4,
+                                                          content: const Text(
+                                                              "Podaci su spremljeni"),
+                                                        ),
+                                                      );
                                                       Navigator.of(context).pushReplacement(
                                                           MaterialPageRoute(
                                                               builder: (context) =>
@@ -377,6 +390,19 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                                   await _loadData(null);
                                                   setState(() {});
                                                   if (context.mounted) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        backgroundColor:
+                                                            Colors.red[800],
+                                                        showCloseIcon: false,
+                                                        duration: Durations
+                                                            .extralong4,
+                                                        content: const Text(
+                                                            "Podaci su obrisani"),
+                                                      ),
+                                                    );
                                                     Navigator.pop(context);
                                                   }
                                                 },
@@ -426,6 +452,21 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                                                   request);
 
                                                       if (context.mounted) {
+                                                        ScaffoldMessenger.of(
+                                                                context)
+                                                            .showSnackBar(
+                                                          SnackBar(
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .green[800],
+                                                            showCloseIcon:
+                                                                false,
+                                                            duration: Durations
+                                                                .extralong4,
+                                                            content: const Text(
+                                                                "Podaci su spremljeni"),
+                                                          ),
+                                                        );
                                                         Navigator.of(context).pushReplacement(
                                                             MaterialPageRoute(
                                                                 builder: (context) =>
@@ -461,6 +502,19 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen> {
                                                     await _loadData(null);
                                                     setState(() {});
                                                     if (context.mounted) {
+                                                      ScaffoldMessenger.of(
+                                                              context)
+                                                          .showSnackBar(
+                                                        SnackBar(
+                                                          backgroundColor:
+                                                              Colors.red[800],
+                                                          showCloseIcon: false,
+                                                          duration: Durations
+                                                              .extralong4,
+                                                          content: const Text(
+                                                              "Podaci su obrisani"),
+                                                        ),
+                                                      );
                                                       Navigator.pop(context);
                                                     }
                                                   },

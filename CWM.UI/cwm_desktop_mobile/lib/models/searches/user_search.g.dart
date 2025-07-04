@@ -9,11 +9,13 @@ part of 'user_search.dart';
 UserSearch _$UserSearchFromJson(Map<String, dynamic> json) => UserSearch()
   ..page = (json['page'] as num).toInt()
   ..pageSize = (json['pageSize'] as num).toInt()
-  ..name = json['name'] as String?;
+  ..name = json['name'] as String?
+  ..userId = (json['userId'] as num?)?.toInt();
 
 Map<String, dynamic> _$UserSearchToJson(UserSearch instance) =>
     <String, dynamic>{
       'page': instance.page,
       'pageSize': instance.pageSize,
       'name': instance.name,
+      'userId': instance.userId,
     };

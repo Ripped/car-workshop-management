@@ -169,27 +169,13 @@ class _ReportFinanceScreenState extends State<ReportFinanceScreen> {
                     crossAxisAlignment: pw.CrossAxisAlignment.stretch,
                     mainAxisAlignment: pw.MainAxisAlignment.start,
                     children: [
-                      /*pw.Text(
-                          DateFormat('MMMM d y').format(),
-                          style: pw.TextStyle(
-                            fontWeight: pw.FontWeight.bold,
-                          ),
-                        ),*/
-
                       pw.ListView.builder(
                         itemCount: 1,
                         itemBuilder: (context, index) {
-                          //var expensesInfo = reportResult!;
                           return pw.Column(
                             crossAxisAlignment: pw.CrossAxisAlignment.stretch,
                             mainAxisAlignment: pw.MainAxisAlignment.start,
                             children: [
-                              /*pw.Text(
-                          DateFormat('MMMM d y').format(),
-                          style: pw.TextStyle(
-                            fontWeight: pw.FontWeight.bold,
-                          ),
-                        ),*/
                               for (var item in reportResult!.reportExpenses!)
                                 pw.Container(
                                   margin: const pw.EdgeInsets.only(left: 70.0),
@@ -201,16 +187,6 @@ class _ReportFinanceScreenState extends State<ReportFinanceScreen> {
                                     crossAxisAlignment:
                                         pw.CrossAxisAlignment.start,
                                     children: [
-                                      /*pw.Expanded(
-                                  child: pw.Text(
-                                    item.servicePerformed.name,
-                                  ),
-                                ),*/
-                                      /*pw.Expanded(
-                                        child: pw.Text(
-                                          item.totalAmount.toString(),
-                                        ),
-                                      ),*/
                                       pw.Expanded(
                                         child: pw.Text(
                                           item.expensesType!.name,
@@ -220,14 +196,6 @@ class _ReportFinanceScreenState extends State<ReportFinanceScreen> {
                                         child: pw.Text(
                                             '${formatNumber(item.total)} KM'),
                                       ),
-                                      /*pw.Expanded(
-                                        child: pw.Text(
-                                          '${item.employee?.firstName} ${item.employee?.lastName}',
-                                        ),
-                                      ),*/
-                                      /*pw.Text(
-                                  '${formatNumber(item.totalTime)} H',
-                                ),*/
                                     ],
                                   ),
                                 ),
@@ -240,17 +208,7 @@ class _ReportFinanceScreenState extends State<ReportFinanceScreen> {
                               pw.Row(
                                 mainAxisAlignment:
                                     pw.MainAxisAlignment.spaceBetween,
-                                children: [
-                                  /*pw.Container(
-                                    child: pw.Text(
-                                      '${formatNumber(reportResult!.total)} KM',
-                                      textAlign: pw.TextAlign.right,
-                                      style: pw.TextStyle(
-                                        fontWeight: pw.FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),*/
-                                ],
+                                children: [],
                               ),
                               pw.SizedBox(height: 20.0),
                             ],
@@ -295,7 +253,6 @@ class _ReportFinanceScreenState extends State<ReportFinanceScreen> {
     final file = File(path);
     await file.writeAsBytes(await pdf.save());
 
-    // ignore: use_build_context_synchronously
     showDialog(
         barrierDismissible: false,
         context: context,
@@ -516,7 +473,6 @@ class _ReportFinanceScreenState extends State<ReportFinanceScreen> {
     );
 
     if (shouldOpen != null && shouldOpen) {
-      // If the user selected 'DA', then call the exportToPdf function
       onConfirm();
     }
   }
@@ -585,21 +541,8 @@ class _ReportFinanceScreenState extends State<ReportFinanceScreen> {
                                   Expanded(
                                     child: Text(
                                         style: const TextStyle(fontSize: 30.0),
-                                        //item.total!.toString(),
-                                        '${formatNumber(item.total)} KM'
-                                        //style: const TextStyle(fontSize: 18.0),
-                                        ),
+                                        '${formatNumber(item.total)} KM'),
                                   ),
-                                  /*Expanded(
-                                    child: Text(
-                                      '${item.employee.firstName} ${item.employee.lastName}',
-                                      style: const TextStyle(fontSize: 18.0),
-                                    ),
-                                  ),
-                                  Text(
-                                    '${formatNumber(item.totalTime)} H',
-                                    style: const TextStyle(fontSize: 18.0),
-                                  ),*/
                                 ],
                               ),
                             ),
@@ -612,28 +555,7 @@ class _ReportFinanceScreenState extends State<ReportFinanceScreen> {
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              /*Container(
-                                margin: const EdgeInsets.only(left: 110.0),
-                                child: Text(
-                                  'Ukupno za ${DateFormat('MMMM d y').format(workOrderInfo.workOrderDate)}:',
-                                  textAlign: TextAlign.right,
-                                  style: const TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),*/
-                              /*Container(
-                                margin: const EdgeInsets.only(right: 110.0),
-                                child: Text(
-                                  '${formatNumber(reportResult!.total)} H',
-                                  textAlign: TextAlign.right,
-                                  style: const TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),*/
-                            ],
+                            children: [],
                           ),
                           const SizedBox(
                             height: 30.0,
@@ -667,17 +589,7 @@ class _ReportFinanceScreenState extends State<ReportFinanceScreen> {
               ),
             ],
           ),
-        )
-
-        /*Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: items.map((item) {
-                return buildInfoItem(item.label, item.value);
-              }).toList(),
-            ),*/
-        //],
-        //),
-        );
+        ));
   }
 
   Widget buildInfoItem(String label, String value) {

@@ -23,7 +23,7 @@ class WorkOrderProvider extends BaseProvider<WorkOrder, WorkOrderSearch> {
 
     queryParameters.removeWhere((key, value) => value == "null");
 
-    var uri = Uri.https(
+    var uri = Uri.http(
         baseUrl, 'WorkOrder/$endpointIzvjestajNarudzbe', queryParameters);
 
     var response = await http.get(uri, headers: createHeaders());
@@ -35,8 +35,6 @@ class WorkOrderProvider extends BaseProvider<WorkOrder, WorkOrderSearch> {
         print("Neispravan format odgovora!");
         throw Exception('Neispravan format odgovora!');
       }
-
-      //ReportWorkOrder izvjestajNarudzbe = ReportWorkOrder.fromJson(data);
 
       return ReportWorkOrder.fromJson(data);
     } else {
@@ -48,15 +46,13 @@ class WorkOrderProvider extends BaseProvider<WorkOrder, WorkOrderSearch> {
     final Map<String, String> queryParameters = {};
     String endpointIzvjestajNarudzbe = "GetOrderReport";
 
-    var url = "https://$baseUrl/WorkOrder/$endpointIzvjestajNarudzbe";
-
     search.toJson().forEach((key, value) {
       queryParameters.addAll(<String, String>{key: value});
     });
 
     queryParameters.removeWhere((key, value) => value == "null");
 
-    var uri = Uri.https(
+    var uri = Uri.http(
         baseUrl, 'WorkOrder/$endpointIzvjestajNarudzbe', queryParameters);
 
     var response = await http.get(uri, headers: createHeaders());
@@ -68,8 +64,6 @@ class WorkOrderProvider extends BaseProvider<WorkOrder, WorkOrderSearch> {
         print("Neispravan format odgovora!");
         throw Exception('Neispravan format odgovora!');
       }
-
-      //ReportWorkOrder izvjestajNarudzbe = ReportWorkOrder.fromJson(data);
 
       return ReportWorkOrder.fromJson(data);
     } else {
@@ -100,7 +94,7 @@ class WorkOrderProvider extends BaseProvider<WorkOrder, WorkOrderSearch> {
   }
 
   Future<dynamic> _createPaymentIntent(int workOrderId, int totalAmount) async {
-    var uri = Uri.parse('https://$baseUrl/Payment/CreatePaymentIntent');
+    var uri = Uri.parse('http://$baseUrl/Payment/CreatePaymentIntent');
 
     final response = await http.post(uri,
         headers: createHeaders(),

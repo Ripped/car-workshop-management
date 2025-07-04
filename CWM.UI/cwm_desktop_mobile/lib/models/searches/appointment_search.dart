@@ -9,6 +9,7 @@ class AppointmentSearch extends BaseSearch {
   String? serviceName;
   String? appointmentId;
   int? userId;
+  int? appointmentTypeId;
   bool includeUser = false;
   bool includeAppointmentType = false;
 

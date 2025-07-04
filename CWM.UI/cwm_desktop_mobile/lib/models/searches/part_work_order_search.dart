@@ -6,6 +6,7 @@ part 'part_work_order_search.g.dart';
 
 @JsonSerializable()
 class PartWorkOrderSearch extends BaseSearch {
+  String? partName;
   bool includeWorkOrder = false;
   bool includePart = false;
   int? userId;

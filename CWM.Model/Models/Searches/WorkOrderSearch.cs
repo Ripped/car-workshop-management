@@ -15,5 +15,6 @@ namespace CWM.Core.Models.Searches
 
         public int? AppointmentId { get; set; }
         public string? EmployeeUsername { get; set; }
+        public int? UserId { get; set; }
     }
 }

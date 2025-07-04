@@ -17,7 +17,7 @@ namespace CWM.Controllers
     public class AppointmentController(IMapper mapper, IAppointmentRepository appointmentRepository) : 
         BaseCrudController<Appointment, AppointmentSearch, AppointmentInsertUpdate, AppointmentInsertUpdate>(mapper, appointmentRepository)
     {
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public override async Task<Appointment> Update(int id, [FromBody] AppointmentInsertUpdate update)
            => await appointmentRepository.Update(id, Mapper.Map<Appointment>(update));

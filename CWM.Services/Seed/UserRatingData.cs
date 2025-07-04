@@ -58,36 +58,36 @@ namespace CWM.Database.Seed
             {
                 Id = 7,
                 ProductRating = 4,
-                UserId = 1,
-                PartId = 1,
+                UserId = 3,
+                PartId = 10,
             },
             new UserRating
             {
                 Id = 8,
-                ProductRating = 4,
-                UserId = 1,
-                PartId = 1,
+                ProductRating = 3,
+                UserId = 3,
+                PartId = 2,
             },
             new UserRating
             {
                 Id = 9,
-                ProductRating = 4,
-                UserId = 1,
-                PartId = 1,
+                ProductRating = 1,
+                UserId = 3,
+                PartId = 9,
             },
             new UserRating
             {
                 Id = 10,
                 ProductRating = 4,
-                UserId = 1,
-                PartId = 1,
+                UserId = 3,
+                PartId = 11,
             },
             new UserRating
             {
                 Id = 11,
-                ProductRating = 4,
-                UserId = 1,
-                PartId = 1,
+                ProductRating = 5,
+                UserId = 3,
+                PartId = 12,
             }
         );
     }

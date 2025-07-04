@@ -127,7 +127,17 @@ class _CountryListScreenState extends State<CountryListScreen> {
               try {
                 await _countryProvider.delete(id);
                 countryDataTableSource.filterData(null);
-                if (context.mounted) Navigator.pop(context);
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      backgroundColor: Colors.red[800],
+                      showCloseIcon: false,
+                      duration: Durations.extralong4,
+                      content: const Text("Podaci su obrisani"),
+                    ),
+                  );
+                  Navigator.pop(context);
+                }
               } catch (error) {
                 showDialog(
                   context: context,
@@ -188,7 +198,17 @@ class _CountryListScreenState extends State<CountryListScreen> {
                   : await _countryProvider.update(id, request);
 
               countryDataTableSource.filterData(null);
-              if (context.mounted) Navigator.pop(context);
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Colors.green[800],
+                    showCloseIcon: false,
+                    duration: Durations.extralong4,
+                    content: const Text("Podaci su spremljeni"),
+                  ),
+                );
+                Navigator.pop(context);
+              }
             }
           },
         ),

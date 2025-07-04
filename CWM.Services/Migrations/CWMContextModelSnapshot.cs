@@ -804,7 +804,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 1,
                             PartId = 1,
-                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7253),
+                            ServiceDate = new DateTime(2025, 7, 4, 21, 2, 58, 354, DateTimeKind.Local).AddTicks(734),
                             VehicleId = 1,
                             WorkOrderId = 1
                         },
@@ -812,7 +812,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 2,
                             PartId = 2,
-                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7258),
+                            ServiceDate = new DateTime(2025, 7, 4, 21, 2, 58, 354, DateTimeKind.Local).AddTicks(739),
                             VehicleId = 2,
                             WorkOrderId = 2
                         },
@@ -820,7 +820,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 3,
                             PartId = 3,
-                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7260),
+                            ServiceDate = new DateTime(2025, 7, 4, 21, 2, 58, 354, DateTimeKind.Local).AddTicks(741),
                             VehicleId = 3,
                             WorkOrderId = 3
                         },
@@ -828,7 +828,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 4,
                             PartId = 4,
-                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7262),
+                            ServiceDate = new DateTime(2025, 7, 4, 21, 2, 58, 354, DateTimeKind.Local).AddTicks(743),
                             VehicleId = 4,
                             WorkOrderId = 4
                         },
@@ -836,7 +836,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 5,
                             PartId = 5,
-                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7264),
+                            ServiceDate = new DateTime(2025, 7, 4, 21, 2, 58, 354, DateTimeKind.Local).AddTicks(745),
                             VehicleId = 5,
                             WorkOrderId = 5
                         },
@@ -844,7 +844,7 @@ namespace CWM.Database.Migrations
                         {
                             Id = 6,
                             PartId = 6,
-                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7272),
+                            ServiceDate = new DateTime(2025, 7, 4, 21, 2, 58, 354, DateTimeKind.Local).AddTicks(747),
                             VehicleId = 6,
                             WorkOrderId = 6
                         });
@@ -912,7 +912,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(2001, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 1,
                             CityId = 1,
-                            Email = "sendić@gmail.com",
+                            Email = "rs2cwm@gmail.com",
                             FirstName = "Amir",
                             Gender = 0,
                             LastName = "Sendić",
@@ -926,7 +926,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(2000, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 2,
                             CityId = 2,
-                            Email = "stufo@gmail.com",
+                            Email = "rs2cwm@gmail.com",
                             FirstName = "Samra",
                             Gender = 1,
                             LastName = "Tufo",
@@ -940,7 +940,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(1990, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 3,
                             CityId = 3,
-                            Email = "tufo@gmail.com",
+                            Email = "rs2cwm@gmail.com",
                             FirstName = "Omer",
                             Gender = 0,
                             LastName = "Tufo",
@@ -954,7 +954,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(1975, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 4,
                             CityId = 4,
-                            Email = "kremić@gmail.com",
+                            Email = "rs2cwm@gmail.com",
                             FirstName = "Merima",
                             Gender = 1,
                             LastName = "Kremić",
@@ -968,7 +968,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(2001, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 5,
                             CityId = 5,
-                            Email = "karić@gmail.com",
+                            Email = "rs2cwm@gmail.com",
                             FirstName = "Damir",
                             Gender = 0,
                             LastName = "Kahvic",
@@ -982,7 +982,7 @@ namespace CWM.Database.Migrations
                             BirthDate = new DateTime(1994, 6, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CitizenshipId = 6,
                             CityId = 6,
-                            Email = "babić@gmail.com",
+                            Email = "rs2cwm@gmail.com",
                             FirstName = "Selmir",
                             Gender = 1,
                             LastName = "Babić",
@@ -1063,37 +1063,37 @@ namespace CWM.Database.Migrations
                         new
                         {
                             Id = 7,
-                            PartId = 1,
+                            PartId = 10,
                             ProductRating = 4.0,
-                            UserId = 1
+                            UserId = 3
                         },
                         new
                         {
                             Id = 8,
-                            PartId = 1,
-                            ProductRating = 4.0,
-                            UserId = 1
+                            PartId = 2,
+                            ProductRating = 3.0,
+                            UserId = 3
                         },
                         new
                         {
                             Id = 9,
-                            PartId = 1,
-                            ProductRating = 4.0,
-                            UserId = 1
+                            PartId = 9,
+                            ProductRating = 1.0,
+                            UserId = 3
                         },
                         new
                         {
                             Id = 10,
-                            PartId = 1,
+                            PartId = 11,
                             ProductRating = 4.0,
-                            UserId = 1
+                            UserId = 3
                         },
                         new
                         {
                             Id = 11,
-                            PartId = 1,
-                            ProductRating = 4.0,
-                            UserId = 1
+                            PartId = 12,
+                            ProductRating = 5.0,
+                            UserId = 3
                         });
                 });
 
@@ -1240,7 +1240,7 @@ namespace CWM.Database.Migrations
                             Model = "Polo",
                             ProductionDate = new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Transmision = "Manual",
-                            UserId = 1
+                            UserId = 3
                         },
                         new
                         {
@@ -1253,7 +1253,7 @@ namespace CWM.Database.Migrations
                             Model = "Polo",
                             ProductionDate = new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Transmision = "Manual",
-                            UserId = 1
+                            UserId = 3
                         },
                         new
                         {
@@ -1280,6 +1280,45 @@ namespace CWM.Database.Migrations
                             ProductionDate = new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Transmision = "Manual",
                             UserId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Brand = "Volkswagen",
+                            Chassis = "WVWZZZ6NZ1Y3125494",
+                            CubicCapacity = 1392,
+                            Fuel = "Gasoline",
+                            Kilowatts = 55,
+                            Model = "Polo",
+                            ProductionDate = new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Transmision = "Manual",
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Brand = "Volkswagen",
+                            Chassis = "WVWZZZ6NZ1Y1525494",
+                            CubicCapacity = 1392,
+                            Fuel = "Gasoline",
+                            Kilowatts = 55,
+                            Model = "Polo",
+                            ProductionDate = new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Transmision = "Manual",
+                            UserId = 3
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Brand = "Volkswagen",
+                            Chassis = "WVWZZZ6NZ1Y1255494",
+                            CubicCapacity = 1392,
+                            Fuel = "Gasoline",
+                            Kilowatts = 55,
+                            Model = "Polo",
+                            ProductionDate = new DateTime(2000, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Transmision = "Manual",
+                            UserId = 3
                         });
                 });
 
@@ -1328,31 +1367,31 @@ namespace CWM.Database.Migrations
                         new
                         {
                             Id = 1,
-                            Description = "",
+                            Description = "Pregled vozila, zamjena guma",
                             EmployeeId = 1,
-                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7049),
+                            ServiceDate = new DateTime(2025, 7, 4, 21, 2, 58, 354, DateTimeKind.Local).AddTicks(535),
                             ServiceType = 1,
-                            Sugestions = "",
+                            Sugestions = "Provjera klime",
                             UserId = 1,
                             VehicleId = 1
                         },
                         new
                         {
                             Id = 2,
-                            Description = "",
+                            Description = "Pregled vozila, zamjena guma",
                             EmployeeId = 2,
-                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7107),
+                            ServiceDate = new DateTime(2025, 7, 4, 21, 2, 58, 354, DateTimeKind.Local).AddTicks(589),
                             ServiceType = 0,
-                            Sugestions = "",
+                            Sugestions = "Provjera klime",
                             UserId = 2,
                             VehicleId = 2
                         },
                         new
                         {
                             Id = 3,
-                            Description = "",
+                            Description = "Pregled vozila, zamjena guma",
                             EmployeeId = 3,
-                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7110),
+                            ServiceDate = new DateTime(2025, 7, 4, 21, 2, 58, 354, DateTimeKind.Local).AddTicks(592),
                             ServiceType = 4,
                             Sugestions = "",
                             UserId = 3,
@@ -1361,35 +1400,35 @@ namespace CWM.Database.Migrations
                         new
                         {
                             Id = 4,
-                            Description = "",
-                            EmployeeId = 4,
-                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7113),
+                            Description = "Pregled vozila, zamjena guma",
+                            EmployeeId = 2,
+                            ServiceDate = new DateTime(2025, 7, 4, 21, 2, 58, 354, DateTimeKind.Local).AddTicks(595),
                             ServiceType = 5,
-                            Sugestions = "",
-                            UserId = 4,
-                            VehicleId = 4
+                            Sugestions = "Provjera klime",
+                            UserId = 3,
+                            VehicleId = 9
                         },
                         new
                         {
                             Id = 5,
-                            Description = "",
-                            EmployeeId = 5,
-                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7115),
+                            Description = "Pregled vozila, zamjena guma",
+                            EmployeeId = 3,
+                            ServiceDate = new DateTime(2025, 7, 4, 21, 2, 58, 354, DateTimeKind.Local).AddTicks(597),
                             ServiceType = 1,
-                            Sugestions = "",
-                            UserId = 5,
-                            VehicleId = 5
+                            Sugestions = "Provjera klime",
+                            UserId = 3,
+                            VehicleId = 7
                         },
                         new
                         {
                             Id = 6,
-                            Description = "",
-                            EmployeeId = 6,
-                            ServiceDate = new DateTime(2025, 6, 15, 12, 49, 9, 184, DateTimeKind.Local).AddTicks(7118),
+                            Description = "Pregled vozila, zamjena guma",
+                            EmployeeId = 1,
+                            ServiceDate = new DateTime(2025, 7, 4, 21, 2, 58, 354, DateTimeKind.Local).AddTicks(599),
                             ServiceType = 0,
-                            Sugestions = "",
-                            UserId = 6,
-                            VehicleId = 6
+                            Sugestions = "Provjera klime",
+                            UserId = 3,
+                            VehicleId = 8
                         });
                 });
 

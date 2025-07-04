@@ -10,6 +10,7 @@ import 'package:cwm_desktop_mobile/screens/appointment_type_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/blocked_dates_screen.dart';
 import 'package:cwm_desktop_mobile/screens/expenses_screen.dart';
 import 'package:cwm_desktop_mobile/screens/user_role_screen.dart';
+import 'package:cwm_desktop_mobile/screens/users_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -108,23 +109,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         _appointmentTypes.totalCount.toString(),
                         const AppointmentTypeListScreen(),
                       ),
+                      const SizedBox(height: 16),
                       _buildSettingsBoxContainer(
                         context,
                         "Blokiran datum",
                         _blockedDates.totalCount.toString(),
                         const BlockedDatesScreen(),
                       ),
+                      const SizedBox(height: 16),
                       _buildSettingsBoxContainer(
                         context,
                         "Utrosena sredstva",
                         _expenses.totalCount.toString(),
                         const ExpensesScreen(),
                       ),
+                      const SizedBox(height: 16),
                       _buildSettingsBoxContainer(
                         context,
                         "Korisnici uloge",
                         _userRoles.totalCount.toString(),
                         const UserRoleScreen(),
+                      ),
+                      const SizedBox(height: 16),
+                      _buildSettingsBoxContainer(
+                        context,
+                        "Korisnici",
+                        _userRoles.totalCount.toString(),
+                        const UsersScreen(),
                       ),
                     ],
                   );
@@ -160,17 +171,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           _blockedDates.totalCount.toString(),
                           const BlockedDatesScreen(),
                         ),
+                        const SizedBox(width: 16),
                         _buildSettingsBoxContainer(
                           context,
                           "Utrosena sredstva",
                           _expenses.totalCount.toString(),
                           const ExpensesScreen(),
                         ),
+                        const SizedBox(width: 16),
                         _buildSettingsBoxContainer(
                           context,
                           "Korisnici uloge",
                           _userRoles.totalCount.toString(),
                           const UserRoleScreen(),
+                        ),
+                        const SizedBox(width: 16),
+                        _buildSettingsBoxContainer(
+                          context,
+                          "Korisnici",
+                          _userRoles.totalCount.toString(),
+                          const UsersScreen(),
                         ),
                       ],
                     ),

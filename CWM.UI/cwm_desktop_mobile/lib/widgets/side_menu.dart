@@ -8,7 +8,7 @@ import 'package:cwm_desktop_mobile/screens/part_rating_screen.dart';
 import 'package:cwm_desktop_mobile/screens/parts_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/report_screen.dart';
 import 'package:cwm_desktop_mobile/screens/settings_screen.dart';
-import 'package:cwm_desktop_mobile/screens/vehicle_list.dart';
+import 'package:cwm_desktop_mobile/screens/vehicle_history_list.dart';
 import 'package:cwm_desktop_mobile/screens/vehicle_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/work_order_list_screen.dart';
 import 'package:cwm_desktop_mobile/widgets/master_screen.dart';
@@ -99,8 +99,8 @@ class SideMenu extends StatelessWidget {
             _buildListTile(context, "Dijelovi", Icons.data_array,
                 const PartListScreen(), true),
           if (Authorization.roles.contains(Role.admin))
-            _buildListTile(context, "Report", Icons.data_array,
-                const ReportScreen(), true),
+            _buildListTile(
+                context, "Report", Icons.report, const ReportScreen(), true),
           _buildListTile(context, "Rezervacija termina", Icons.date_range,
               const MyWidget(), true),
           if (Authorization.roles.contains(Role.admin))
@@ -109,13 +109,13 @@ class SideMenu extends StatelessWidget {
           _buildListTile(context, "Pregled narudzbi", Icons.date_range,
               const CustomerOrderListScreen(), true),
           if (Authorization.roles.contains(Role.admin))
-            _buildListTile(context, "Zaposlenici", Icons.date_range,
+            _buildListTile(context, "Zaposlenici", Icons.account_box_outlined,
                 const EmployeeListScreen(), true),
-          _buildListTile(context, "Historija vozila", Icons.date_range,
-              const VehicleListScreen(), true),
-          _buildListTile(context, "Recenzije dijelova", Icons.date_range,
-              const PartRatingScreen(), true),
-          _buildListTile(context, "Lista vozila", Icons.date_range,
+          _buildListTile(context, "Historija vozila", Icons.car_rental,
+              const VehicleHistoryListScreen(), true),
+          _buildListTile(context, "Recenzije dijelova",
+              Icons.book_online_outlined, const PartRatingScreen(), true),
+          _buildListTile(context, "Lista vozila", Icons.car_crash,
               const VehicleScreen(), true),
           SizedBox(height: spaceHeight),
           if (Authorization.roles.contains(Role.admin))

@@ -7,6 +7,7 @@ part 'user_search.g.dart';
 @JsonSerializable()
 class UserSearch extends BaseSearch {
   String? name;
+  int? userId;
 
   UserSearch();
 

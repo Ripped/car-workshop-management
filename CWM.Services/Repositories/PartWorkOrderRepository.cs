@@ -57,6 +57,9 @@ namespace CWM.Database.Repositories
             if (search.ServiceDate != null)
                 query = query.Where(x => x.ServiceDate == search.ServiceDate);
 
+            if (!string.IsNullOrWhiteSpace(search.PartName))
+                query = query.Where(x => x.Part!.PartName.ToLower().Contains(search.PartName.ToLower()));
+
             return query;
         }
     }

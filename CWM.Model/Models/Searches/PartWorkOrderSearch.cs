@@ -8,6 +8,7 @@ namespace CWM.Core.Models.Searches
 {
     public class PartWorkOrderSearch : BaseSearch
     {
+        public string? PartName { get; set; }
         public bool IncludeWorkOrder { get; set; }
         public bool IncludePart { get; set; }
         public int? UserId { get; set; }

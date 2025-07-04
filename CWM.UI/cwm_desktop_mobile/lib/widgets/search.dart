@@ -8,9 +8,13 @@ class Search extends StatelessWidget {
 
   final bool hideSearch;
   final Function(String)? onSearch;
+  final bool hideButton;
 
   const Search(this.buttonText, this.buttonOnPressed,
-      {this.hideSearch = false, this.onSearch, super.key});
+      {this.hideSearch = false,
+      this.hideButton = false,
+      this.onSearch,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class Search extends StatelessWidget {
       height: 50,
       margin: const EdgeInsets.only(bottom: 20),
       child: Row(children: [
-        if (!hideSearch)
+        if (Responsive.isDesktop(context))
           SizedBox(
             width: 300,
             child: TextField(
@@ -28,16 +32,22 @@ class Search extends StatelessWidget {
                 ),
                 onChanged: onSearch),
           ),
-        Expanded(
-          child: Container(),
-        ),
-        if (!Responsive.isMobile(context))
+        if (Responsive.isDesktop(context))
+          Expanded(
+            child: Container(),
+          ),
+        if (!hideButton)
           ElevatedButton.icon(
             icon: const Icon(Icons.add),
-            style: const ButtonStyle(
-              padding: WidgetStatePropertyAll(
-                  EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 20)),
-            ),
+            style: Responsive.isMobile(context)
+                ? ButtonStyle(
+                    padding: WidgetStatePropertyAll(EdgeInsets.only(
+                        left: 15, top: 15, right: 15, bottom: 15)),
+                  )
+                : ButtonStyle(
+                    padding: WidgetStatePropertyAll(EdgeInsets.only(
+                        left: 20, top: 20, right: 20, bottom: 20)),
+                  ),
             label: Text(buttonText),
             onPressed: buttonOnPressed,
           ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cwm_desktop_mobile/providers/appointment_type_provider.dart';
 import 'package:cwm_desktop_mobile/providers/appointment_provider.dart';
 import 'package:cwm_desktop_mobile/providers/auth_provider.dart';
@@ -30,8 +32,9 @@ void main() async {
   Stripe.publishableKey = stripePublishableKey;
   Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';
   Stripe.urlScheme = 'flutterstripe';
-
-  //await Stripe.instance.applySettings();
+  if (Platform.isAndroid || Platform.isIOS) {
+    await Stripe.instance.applySettings();
+  }
   runApp(
     MultiProvider(providers: [
       ChangeNotifierProvider(create: (_) => PartProvider()),
@@ -62,6 +65,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'CWM',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
@@ -71,12 +75,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-/*class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-}*/

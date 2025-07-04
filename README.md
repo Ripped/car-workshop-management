@@ -27,12 +27,12 @@ Za praćenje i pregled transakcija potrebno se prijaviti na stripe račun korist
 - Password: rs2TestRs2Test
 
 ### Recommender sistem
-Funkcionalnost je dostupna korisnicima desktop aplikacije i predstavlja implementaciju Content-based filtering. ML algoritam radi na osnovu podataka prikupljenih od narudžbi klijenata, ocjene proizvoda i usluge će biti pohranjene te na osnovu ocjene klijentu će se preporučiti usluga ili proizvod slični onima kojima je dao dobru ocjenu.
+Funkcionalnost je dostupna korisnicima desktop i mobile aplikacije i predstavlja implementaciju Content-based filtering. ML algoritam radi na osnovu podataka prikupljenih od narudžbi klijenata, ocjene proizvoda i usluge će biti pohranjene te na osnovu ocjene klijentu će se preporučiti usluga ili proizvod slični onima kojima je dao dobru ocjenu.
 
 ### Rezervacija termina
-Kako bi rezervacija termina bila uspješna potrebno je odabrati datum te unijeti trazene podatke, nakon čega korisnik dobiva email ukoliko je rezervacija 
-uspješna.
+Kako bi rezervacija termina bila uspješna potrebno je odabrati datum te unijeti trazene podatke, zatim termin mora biti odobren ili odbijen nakon čega korisnik dobiva email ukoliko je rezervacija uspješna ili odbijena.
 
 ### Email za provjeru rada mikroservisa i slanja e-maila korisniku 
-- Email: car_workshop_management@outlook.com
+Za pregled poslanih email poruka ulogovati se na rs2cwm@gmail.com
+- Email: rs2cwm@gmail.com
 - Lozinka: rs2TestRs2Test

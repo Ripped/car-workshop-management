@@ -39,27 +39,32 @@ class _VehicleScreenState extends State<VehicleScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Search("Dodaj vozilo", () => _openDetails(null),
-            onSearch: (text) => vehicleListDataTableSource.filterData(text)),
-        SizedBox(
-          width: double.infinity,
-          child: AdvancedPaginatedDataTable(
-            showHorizontalScrollbarAlways: Responsive.isMobile(context),
-            addEmptyRows: false,
-            showCheckboxColumn: false,
-            source: vehicleListDataTableSource,
-            rowsPerPage: 7,
-            columns: const [
-              DataColumn(label: Text("Sasija")),
-              DataColumn(label: Text("Marka vozila")),
-              DataColumn(label: Text("Model vozila")),
-              DataColumn(label: Text("Gorivo")),
-            ],
-          ),
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(''),
         ),
-      ],
-    );
+        body: Column(
+          children: [
+            Search("Dodaj vozilo", () => _openDetails(null),
+                onSearch: (text) =>
+                    vehicleListDataTableSource.filterData(text)),
+            SizedBox(
+              width: double.infinity,
+              child: AdvancedPaginatedDataTable(
+                showHorizontalScrollbarAlways: Responsive.isMobile(context),
+                addEmptyRows: false,
+                showCheckboxColumn: false,
+                source: vehicleListDataTableSource,
+                rowsPerPage: 7,
+                columns: const [
+                  DataColumn(label: Text("Sasija")),
+                  DataColumn(label: Text("Marka vozila")),
+                  DataColumn(label: Text("Model vozila")),
+                  DataColumn(label: Text("Gorivo")),
+                ],
+              ),
+            ),
+          ],
+        ));
   }
 }

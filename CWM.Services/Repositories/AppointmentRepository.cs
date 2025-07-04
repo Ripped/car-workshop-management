@@ -6,9 +6,7 @@ using CWM.Core.Models.Searches;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
-using System.Runtime.InteropServices;
 using System.Text;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using Appointment = CWM.Database.Models.Appointment;
 
 namespace CWM.Database.Repositories
@@ -66,6 +64,9 @@ namespace CWM.Database.Repositories
 
             if (search.UserId > 0)
                 query = query.Where(x => x.User!.Id == search.UserId);
+
+            if (search.AppointmentTypeId > 0)
+                query = query.Where(x => x.AppointmentType!.Id != search.AppointmentTypeId);
 
             if (search.IncludeAppointmentType)
                 query = query.Include(x => x.AppointmentType);

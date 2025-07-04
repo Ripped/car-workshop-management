@@ -213,7 +213,7 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
               SizedBox(
                 height: Responsive.isDesktop(context)
                     ? (MediaQuery.of(context).size.width / 2.8)
-                    : (MediaQuery.of(context).size.height / 1.5),
+                    : (MediaQuery.of(context).size.height / 1.4),
                 child: GridView.count(
                   crossAxisCount: Responsive.isDesktop(context)
                       ? 3
@@ -482,73 +482,146 @@ class _WorkOrderClosureScreen extends State<WorkOrderClosureScreen> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: ElevatedButton(
-                        child: const Text("Dodaj dijelove"),
-                        onPressed: () {
-                          _openDialog(widget.id);
-                        },
+                    if (Responsive.isDesktop(context))
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: ElevatedButton(
+                          child: const Text("Dodaj dijelove"),
+                          onPressed: () {
+                            _openDialog(widget.id);
+                          },
+                        ),
                       ),
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.all(0),
-                        child: Column(children: <Widget>[
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              minimumSize: const WidgetStatePropertyAll(
-                                  Size.fromHeight(45)),
-                              backgroundColor:
-                                  WidgetStateProperty.all<Color>(Colors.green),
-                              foregroundColor:
-                                  WidgetStateProperty.all(Colors.white),
-                            ),
-                            child: const Text("SPREMI",
-                                textAlign: TextAlign.center),
-                            onPressed: () async {
-                              var isValid =
-                                  _formKey.currentState?.saveAndValidate();
+                    if (Responsive.isDesktop(context))
+                      Padding(
+                          padding: const EdgeInsets.all(0),
+                          child: Column(children: <Widget>[
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                minimumSize: const WidgetStatePropertyAll(
+                                    Size.fromHeight(45)),
+                                backgroundColor: WidgetStateProperty.all<Color>(
+                                    Colors.green),
+                                foregroundColor:
+                                    WidgetStateProperty.all(Colors.white),
+                              ),
+                              child: const Text("SPREMI",
+                                  textAlign: TextAlign.center),
+                              onPressed: () async {
+                                var isValid =
+                                    _formKey.currentState?.saveAndValidate();
 
-                              if (isValid!) {
-                                var request =
-                                    Map.from(_formKey.currentState!.value);
-                                _addParts();
-                                if (widget.id != null) {
-                                  await _workOrderProvider.update(
-                                      widget.id!, request);
+                                if (isValid!) {
+                                  var request =
+                                      Map.from(_formKey.currentState!.value);
+                                  _addParts();
+                                  if (widget.id != null) {
+                                    await _workOrderProvider.update(
+                                        widget.id!, request);
+                                  }
+
+                                  if (context.mounted) {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const MasterScreen("Nalozi",
+                                                    WorkOrderListScreen())));
+                                  }
                                 }
-
+                              },
+                            ),
+                            const SizedBox(height: 5),
+                            ElevatedButton(
+                              style: ButtonStyle(
+                                minimumSize: const WidgetStatePropertyAll(
+                                    Size.fromHeight(45)),
+                                backgroundColor:
+                                    WidgetStateProperty.all<Color>(Colors.red),
+                                foregroundColor:
+                                    WidgetStateProperty.all(Colors.white),
+                              ),
+                              child: const Text("OBRIŠI"),
+                              onPressed: () async {
+                                await _workOrderProvider.delete(widget.id!);
+                                await _loadData(null);
+                                setState(() {});
                                 if (context.mounted) {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const MasterScreen("Nalozi",
-                                                  WorkOrderListScreen())));
+                                  Navigator.pop(context);
                                 }
-                              }
-                            },
-                          ),
-                          const SizedBox(height: 5),
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              minimumSize: const WidgetStatePropertyAll(
-                                  Size.fromHeight(45)),
-                              backgroundColor:
-                                  WidgetStateProperty.all<Color>(Colors.red),
-                              foregroundColor:
-                                  WidgetStateProperty.all(Colors.white),
+                              },
                             ),
-                            child: const Text("OBRIŠI"),
-                            onPressed: () async {
-                              await _workOrderProvider.delete(widget.id!);
-                              await _loadData(null);
-                              setState(() {});
-                              if (context.mounted) {
-                                Navigator.pop(context);
-                              }
-                            },
+                          ])),
+                    if (Responsive.isMobile(context))
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                            minimumSize:
+                                WidgetStatePropertyAll(Size.fromHeight(50)),
                           ),
-                        ])),
+                          child: const Text("Dodaj dijelove"),
+                          onPressed: () {
+                            _openDialog(widget.id);
+                          },
+                        ),
+                      ),
+                    if (Responsive.isMobile(context))
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: //Column(children: <Widget>[
+                            ElevatedButton(
+                          style: ButtonStyle(
+                              minimumSize:
+                                  WidgetStatePropertyAll(Size.fromHeight(50)),
+                              backgroundColor:
+                                  WidgetStateProperty.all<Color>(Colors.green)),
+                          child:
+                              const Text("SPREMI", textAlign: TextAlign.center),
+                          onPressed: () async {
+                            var isValid =
+                                _formKey.currentState?.saveAndValidate();
+
+                            if (isValid!) {
+                              var request =
+                                  Map.from(_formKey.currentState!.value);
+                              _addParts();
+                              if (widget.id != null) {
+                                await _workOrderProvider.update(
+                                    widget.id!, request);
+                              }
+
+                              if (context.mounted) {
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MasterScreen("Nalozi",
+                                                WorkOrderListScreen())));
+                              }
+                            }
+                          },
+                        ),
+                      ),
+                    if (Responsive.isMobile(context))
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              minimumSize:
+                                  WidgetStatePropertyAll(Size.fromHeight(50)),
+                              backgroundColor:
+                                  WidgetStateProperty.all<Color>(Colors.red)),
+                          child: const Text("OBRIŠI"),
+                          onPressed: () async {
+                            await _workOrderProvider.delete(widget.id!);
+                            await _loadData(null);
+                            setState(() {});
+                            if (context.mounted) {
+                              Navigator.pop(context);
+                            }
+                          },
+                        ),
+                        //])
+                      ),
                   ],
                 ),
               ),

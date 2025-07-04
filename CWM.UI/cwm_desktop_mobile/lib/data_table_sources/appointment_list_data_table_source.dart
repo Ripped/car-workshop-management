@@ -24,6 +24,7 @@ class AppointmentListDataTableSource
     appointmentSearch.page = page + 1;
     appointmentSearch.pageSize = pageRequest.pageSize;
     appointmentSearch.includeAppointmentType = true;
+    appointmentSearch.appointmentTypeId = 2;
 
     var appointment =
         await _appointmentProvider.getAll(search: appointmentSearch);

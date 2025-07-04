@@ -145,7 +145,7 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                             child: SizedBox(
                               width: (MediaQuery.of(context).size.width),
                               height: 30,
-                              child: const Text(
+                              child: Text(
                                 "Kreiranje radnog naloga",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -442,7 +442,7 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(0),
+                                      padding: const EdgeInsets.all(10),
                                       child: ElevatedButton(
                                         style: ButtonStyle(
                                             minimumSize:
@@ -481,6 +481,18 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                                         workOrderId!, request);
 
                                             if (context.mounted) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  backgroundColor:
+                                                      Colors.green[800],
+                                                  showCloseIcon: false,
+                                                  duration:
+                                                      Durations.extralong4,
+                                                  content: const Text(
+                                                      "Termin je potvrdjen!"),
+                                                ),
+                                              );
                                               Navigator.of(context).pushReplacement(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
@@ -514,6 +526,18 @@ class _WorkOrderScreen extends State<WorkOrderScreen> {
                                                 widget.id!, newAppointment);
 
                                             if (context.mounted) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  backgroundColor:
+                                                      Colors.red[800],
+                                                  showCloseIcon: false,
+                                                  duration:
+                                                      Durations.extralong4,
+                                                  content: const Text(
+                                                      "Termin odbijen"),
+                                                ),
+                                              );
                                               Navigator.of(context).pushReplacement(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
