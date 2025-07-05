@@ -29,6 +29,8 @@ Za praćenje i pregled transakcija potrebno se prijaviti na stripe račun korist
 ### Recommender sistem
 Funkcionalnost je dostupna korisnicima desktop i mobile aplikacije i predstavlja implementaciju Content-based filtering. ML algoritam radi na osnovu podataka prikupljenih od narudžbi klijenata, ocjene proizvoda i usluge će biti pohranjene te na osnovu ocjene klijentu će se preporučiti usluga ili proizvod slični onima kojima je dao dobru ocjenu.
 
+### Obavijesti
+Obavijesti se prikazuju ako nema recommended proizvoda za korisnika, uposlenik uvijek ima pregled obavijestima. Korisnik moze pregledati obavijesti u gornjem desnom uglu ekrana.
 ### Rezervacija termina
 Kako bi rezervacija termina bila uspješna potrebno je odabrati datum te unijeti trazene podatke, zatim termin mora biti odobren ili odbijen nakon čega korisnik dobiva email ukoliko je rezervacija uspješna ili odbijena.
 
