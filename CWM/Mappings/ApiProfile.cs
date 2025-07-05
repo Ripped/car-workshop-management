@@ -62,6 +62,9 @@ namespace CWM.Mappings
 
             CreateMap<ExpensesInsertUpdate, Expenses>()
             .ForMember(x => x.Employee, opt => opt.MapFrom(y => y.EmployeeId == null ? null : new Employee { Id = y.EmployeeId ?? 0 }));
+
+            CreateMap<NotificationInsertUpdate, Notification>()
+            .ForMember(x => x.User, opt => opt.MapFrom(y => y.UserId == null ? null : new User { Id = y.UserId ?? 0 }));
         }
     }
 }

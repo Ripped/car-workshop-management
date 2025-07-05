@@ -4,6 +4,7 @@ import 'package:cwm_desktop_mobile/providers/appointment_type_provider.dart';
 import 'package:cwm_desktop_mobile/providers/appointment_provider.dart';
 import 'package:cwm_desktop_mobile/providers/auth_provider.dart';
 import 'package:cwm_desktop_mobile/providers/expenses_provider.dart';
+import 'package:cwm_desktop_mobile/providers/notification_provider.dart';
 import 'package:cwm_desktop_mobile/providers/part_provider.dart';
 import 'package:cwm_desktop_mobile/providers/recommender_provider.dart';
 import 'package:cwm_desktop_mobile/providers/user_rating_provider.dart';
@@ -54,6 +55,7 @@ void main() async {
       ChangeNotifierProvider(create: (_) => RecommenderProvider()),
       ChangeNotifierProvider(create: (_) => UserRatingProvider()),
       ChangeNotifierProvider(create: (_) => UserRoleProvider()),
+      ChangeNotifierProvider(create: (_) => NotificationProvider()),
     ], child: const MyApp()),
   );
 }

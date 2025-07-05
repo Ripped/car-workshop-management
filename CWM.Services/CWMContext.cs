@@ -28,6 +28,7 @@ namespace CWM.Database
         public DbSet<PartWorkOrder> PartWorkOrder { get; set; }
         public DbSet<UserRating> UserRatings { get; set; }
         public DbSet<Expenses> Expenses { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         public CWMContext() { }
 
@@ -36,7 +37,7 @@ namespace CWM.Database
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseSqlServer("Server=localhost; Database=190011; Trusted_Connection=True; Encrypt=False; User ID=sa; Password=QWElkj132!;");
+                optionsBuilder.UseSqlServer("Server=localhost; Database=IB190011; Trusted_Connection=True; Encrypt=False; User ID=sa; Password=QWElkj132!;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -58,6 +59,7 @@ namespace CWM.Database
             modelBuilder.Entity<PartWorkOrder>().SeedData();
             modelBuilder.Entity<UserRating>().SeedData();
             modelBuilder.Entity<Expenses>().SeedData();
+            modelBuilder.Entity<Notification>().SeedData();
         }
     }
 }

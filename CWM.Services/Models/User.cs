@@ -41,5 +41,6 @@ namespace CWM.Database.Models
         public virtual ICollection<UserRole> Roles { get; set; } = new List<UserRole>();
         public virtual ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
         public virtual ICollection<WorkOrder> WorkOrders { get; set; } = new List<WorkOrder>();
+        public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
     }
 }

@@ -1,18 +1,23 @@
 import 'package:cwm_desktop_mobile/models/appointment_blocked.dart';
 import 'package:cwm_desktop_mobile/models/appointment_type.dart';
 import 'package:cwm_desktop_mobile/models/expenses.dart';
+import 'package:cwm_desktop_mobile/models/user.dart';
 import 'package:cwm_desktop_mobile/models/user_role.dart';
 import 'package:cwm_desktop_mobile/providers/appointment_blocked_provider.dart';
 import 'package:cwm_desktop_mobile/providers/appointment_type_provider.dart';
 import 'package:cwm_desktop_mobile/providers/expenses_provider.dart';
+import 'package:cwm_desktop_mobile/providers/notification_provider.dart';
+import 'package:cwm_desktop_mobile/providers/user_provider.dart';
 import 'package:cwm_desktop_mobile/providers/user_role_provider.dart';
 import 'package:cwm_desktop_mobile/screens/appointment_type_list_screen.dart';
 import 'package:cwm_desktop_mobile/screens/blocked_dates_screen.dart';
 import 'package:cwm_desktop_mobile/screens/expenses_screen.dart';
+import 'package:cwm_desktop_mobile/screens/notification_screen.dart';
 import 'package:cwm_desktop_mobile/screens/user_role_screen.dart';
 import 'package:cwm_desktop_mobile/screens/users_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cwm_desktop_mobile/models/notification.dart' as notification;
 
 import '../models/city.dart';
 import '../models/country.dart';
@@ -38,6 +43,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   late AppointmentBlockedProvider _appointmentBlockedProvider;
   late ExpensesProvider _expensesProvider;
   late UserRoleProvider _userRoleProvider;
+  late UserProvider _userProvider;
+  late NotificationProvider _notificationProvider;
 
   late var _cities = PagedResult<City>();
   var _countries = PagedResult<Country>();
@@ -45,6 +52,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   var _blockedDates = PagedResult<AppointmentBlocked>();
   var _expenses = PagedResult<Expenses>();
   var _userRoles = PagedResult<UserRole>();
+  var _users = PagedResult<User>();
+  var _notifications = PagedResult<notification.Notification>();
 
   @override
   void initState() {
@@ -56,6 +65,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _appointmentBlockedProvider = context.read<AppointmentBlockedProvider>();
     _expensesProvider = context.read<ExpensesProvider>();
     _userRoleProvider = context.read<UserRoleProvider>();
+    _userProvider = context.read<UserProvider>();
+    _notificationProvider = context.read<NotificationProvider>();
 
     _loadData(null);
   }
@@ -67,6 +78,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _blockedDates = await _appointmentBlockedProvider.getAll();
     _expenses = await _expensesProvider.getAll();
     _userRoles = await _userRoleProvider.getAll();
+    _users = await _userProvider.getAll();
+    _notifications = await _notificationProvider.getAll();
   }
 
   @override
@@ -134,8 +147,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       _buildSettingsBoxContainer(
                         context,
                         "Korisnici",
-                        _userRoles.totalCount.toString(),
+                        _users.totalCount.toString(),
                         const UsersScreen(),
+                      ),
+                      const SizedBox(height: 16),
+                      _buildSettingsBoxContainer(
+                        context,
+                        "Obavijesti",
+                        _userRoles.totalCount.toString(),
+                        const NotificationScreen(),
                       ),
                     ],
                   );
@@ -150,47 +170,54 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           _cities.totalCount.toString(),
                           const CityListScreen(),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 5),
                         _buildSettingsBoxContainer(
                           context,
                           "Države",
                           _countries.totalCount.toString(),
                           const CountryListScreen(),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 5),
                         _buildSettingsBoxContainer(
                           context,
                           "Vrsta termina",
                           _appointmentTypes.totalCount.toString(),
                           const AppointmentTypeListScreen(),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 5),
                         _buildSettingsBoxContainer(
                           context,
                           "Blokiran datum",
                           _blockedDates.totalCount.toString(),
                           const BlockedDatesScreen(),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 5),
                         _buildSettingsBoxContainer(
                           context,
                           "Utrosena sredstva",
                           _expenses.totalCount.toString(),
                           const ExpensesScreen(),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 5),
                         _buildSettingsBoxContainer(
                           context,
                           "Korisnici uloge",
                           _userRoles.totalCount.toString(),
                           const UserRoleScreen(),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 5),
                         _buildSettingsBoxContainer(
                           context,
                           "Korisnici",
-                          _userRoles.totalCount.toString(),
+                          _users.totalCount.toString(),
                           const UsersScreen(),
+                        ),
+                        const SizedBox(width: 5),
+                        _buildSettingsBoxContainer(
+                          context,
+                          "Obavijesti",
+                          _notifications.totalCount.toString(),
+                          const NotificationScreen(),
                         ),
                       ],
                     ),
@@ -212,7 +239,7 @@ Container _buildSettingsBoxContainer(
   Widget screen,
 ) {
   return Container(
-    width: 200,
+    width: 190,
     padding: const EdgeInsets.all(16.0),
     decoration: BoxDecoration(
       border: Border.all(color: Colors.black, width: 1.0),

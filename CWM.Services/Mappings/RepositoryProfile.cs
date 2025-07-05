@@ -103,6 +103,11 @@ namespace CWM.Database.Mappings
             CreateMap<Core.Models.Expenses, Expenses>()
             .ForMember(x => x.EmployeeId, opt => opt.MapFrom((src, dest) => src.Employee?.Id))
             .ForMember(x => x.Employee, opt => opt.Ignore());
+
+            CreateMap<Notification, Core.Models.Notification>();
+            CreateMap<Core.Models.Notification, Notification>()
+            .ForMember(x => x.UserId, opt => opt.MapFrom((src, dest) => src.User?.Id))
+            .ForMember(x => x.User, opt => opt.Ignore());
         }
     }
 }

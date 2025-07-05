@@ -1,4 +1,5 @@
 import 'package:cwm_desktop_mobile/models/enums/role.dart';
+import 'package:cwm_desktop_mobile/screens/notification_screen.dart';
 import 'package:cwm_desktop_mobile/screens/profile_screen.dart';
 import 'package:cwm_desktop_mobile/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +90,17 @@ class _HeaderState extends State<Header> {
                       },
                     ),
                   ),
+                PopupMenuItem(
+                  child: ListTile(
+                    leading: const Icon(Icons.notifications),
+                    title: const Text("Obavijesti"),
+                    onTap: () {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const MasterScreen(
+                              "Obavijesti", NotificationScreen())));
+                    },
+                  ),
+                ),
                 PopupMenuItem(
                   child: ListTile(
                     leading: const Icon(Icons.person),
